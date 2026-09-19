@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carbyn vs Digital Work Instruction Giants (Dozuki, Poka, Tulip, Manual.to)</title>
+<meta name="description" content="Why the Future of Frontline Work is Audio-First (No-HUD), Not Screen-First. Competitive teardown, 5-way matrix, audio-first simulator, and Trojan Horse API architecture." />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy:   { 900: '#0B1120', 800: '#0F172A', 700: '#1E293B', 600: '#334155', 500: '#475569' },
+        coral:  { DEFAULT: '#E8706E', 400: '#F08A88', 500: '#E8706E', 600: '#D15personal' },
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'SF Pro Text', 'Segoe UI', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  :root{
+    --navy-900:#0B1120; --navy-800:#0F172A; --card:#1E293B; --line:#334155; --coral:#E8706E;
+  }
+  html,body{background:var(--navy-900);}
+  body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-0.011em;}
+  ::selection{background:rgba(232,112,110,.35);color:#fff;}
+
+  /* Scrollbars */
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-track{background:#0B1120;}
+  ::-webkit-scrollbar-thumb{background:#334155;border-radius:8px;border:2px solid #0B1120;}
+  ::-webkit-scrollbar-thumb:hover{background:#475569;}
+
+  .glass{
+    background:linear-gradient(160deg, rgba(30,41,59,.92) 0%, rgba(15,23,42,.88) 100%);
+    border:1px solid #334155;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+  }
+  .glass-soft{
+    background:rgba(30,41,59,.55);
+    border:1px solid rgba(51,65,85,.9);
+  }
+  .glow-coral{box-shadow:0 0 0 1px rgba(232,112,110,.35), 0 18px 60px -20px rgba(232,112,110,.55);}
+  .hairline{border-color:#334155;}
+
+  .grid-bg{
+    background-image:
+      radial-gradient(900px 480px at 12% -10%, rgba(232,112,110,.16), transparent 60%),
+      radial-gradient(760px 420px at 88% 0%, rgba(56,189,248,.10), transparent 60%),
+      linear-gradient(to right, rgba(51,65,85,.28) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(51,65,85,.28) 1px, transparent 1px);
+    background-size:auto,auto,56px 56px,56px 56px;
+  }
+
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* Soundwave */
+  .wave{display:flex;align-items:center;gap:3px;height:28px;}
+  .wave span{
+    display:block;width:3px;border-radius:99px;background:var(--coral);opacity:.55;height:6px;
+    animation:bounce 1.15s ease-in-out infinite;
+  }
+  .wave.lg{height:56px;gap:4px;}
+  .wave.lg span{width:4px;}
+  .wave.idle span{animation-play-state:paused;height:5px;opacity:.28;}
+  @keyframes bounce{
+    0%,100%{height:5px;opacity:.35;}
+    50%{height:100%;opacity:1;}
+  }
+
+  .pulse-ring::after{
+    content:"";position:absolute;inset:-6px;border-radius:inherit;border:1px solid rgba(232,112,110,.45);
+    animation:ring 2.4s ease-out infinite;
+  }
+  @keyframes ring{0%{opacity:.85;transform:scale(.97)}70%{opacity:0;transform:scale(1.06)}100%{opacity:0}}
+
+  /* Flow packets */
+  .flowline{position:relative;overflow:hidden;}
+  .flowline .packet{
+    position:absolute;top:50%;left:0;width:7px;height:7px;margin-top:-3.5px;border-radius:99px;background:var(--coral);
+    box-shadow:0 0 12px 2px rgba(232,112,110,.8);
+    animation:travel 2.6s linear infinite;
+  }
+  @keyframes travel{0%{left:-4%;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:102%;opacity:0}}
+  .flowline.vert .packet{top:0;left:50%;margin-left:-3.5px;margin-top:0;animation:travelv 2.6s linear infinite;}
+  @keyframes travelv{0%{top:-4%;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:102%;opacity:0}}
+
+  /* Matrix table */
+  .mx th, .mx td{border-bottom:1px solid rgba(51,65,85,.75);}
+  .mx tbody tr:hover td{background:rgba(51,65,85,.22);}
+  .mx .col-carbyn{background:rgba(232,112,110,.07);}
+  .mx tbody tr:hover td.col-carbyn{background:rgba(232,112,110,.14);}
+  .sticky-col{position:sticky;left:0;z-index:5;background:#0F172A;}
+  .mx tbody tr:hover .sticky-col{background:#16213a;}
+
+  .tabbtn{transition:all .18s ease;}
+  .tabbtn[aria-selected="true"]{background:var(--coral);color:#0B1120;border-color:var(--coral);box-shadow:0 10px 30px -12px rgba(232,112,110,.9);}
+
+  .bar{transition:width 1s cubic-bezier(.2,.7,.2,1);}
+
+  dialog::backdrop{background:rgba(5,9,18,.82);backdrop-filter:blur(6px);}
+  dialog{padding:0;border:none;background:transparent;color:inherit;max-width:100%;}
+  .tline{animation:fadeUp .45s ease both;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .siren{animation:siren 1s ease-in-out infinite;}
+  @keyframes siren{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.55)}50%{box-shadow:0 0 0 14px rgba(239,68,68,0)}}
+
+  .kbd{font-family:'JetBrains Mono',monospace;font-size:10px;border:1px solid #334155;border-bottom-width:2px;border-radius:5px;padding:1px 5px;color:#94A3B8;background:#0B1120;}
+  .no-scrollbar::-webkit-scrollbar{height:6px}
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body class="bg-navy-900 text-slate-300 antialiased">
+
+<!-- scroll progress -->
+<div class="fixed top-0 left-0 right-0 h-[2px] z-[60] bg-transparent">
+  <div id="progress" class="h-full bg-coral transition-[width] duration-150" style="width:0%"></div>
+</div>
+
+<!-- ======================= NAV ======================= -->
+<header class="sticky top-0 z-50 border-b border-navy-600/70 bg-navy-900/85 backdrop-blur-xl">
+  <div class="max-w-[1400px] mx-auto px-5 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <a href="#top" class="flex items-center gap-3 shrink-0 group">
+      <span class="relative grid place-items-center w-9 h-9 rounded-xl bg-coral/15 border border-coral/40 pulse-ring">
+        <i class="fa-solid fa-waveform-lines text-coral text-sm"></i>
+      </span>
+      <span class="leading-tight">
+        <span class="block text-white font-bold tracking-tight text-[15px]">CARBYN</span>
+        <span class="block text-[10px] uppercase tracking-[0.22em] text-slate-500">Competitive Teardown</span>
+      </span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-1" id="navlinks">
+      <a href="#dilemma"  class="navlink px-3 py-2 text-[13px] font-medium text-slate-400 hover:text-white rounded-lg hover:bg-navy-700/60 transition">01 The Dilemma</a>
+      <a href="#matrix"   class="navlink px-3 py-2 text-[13px] font-medium text-slate-400 hover:text-white rounded-lg hover:bg-navy-700/60 transition">02 5-Way Matrix</a>
+      <a href="#wow"      class="navlink px-3 py-2 text-[13px] font-medium text-slate-400 hover:text-white rounded-lg hover:bg-navy-700/60 transition">03 Audio Simulator</a>
+      <a href="#arch"     class="navlink px-3 py-2 text-[13px] font-medium text-slate-400 hover:text-white rounded-lg hover:bg-navy-700/60 transition">04 Trojan Horse API</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <span class="hidden md:inline-flex items-center gap-2 text-[11px] mono text-slate-500 border border-navy-600 rounded-lg px-2.5 py-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> v1.0 / Sep 2026
+      </span>
+      <a href="#wow" class="inline-flex items-center gap-2 bg-coral hover:bg-coral-400 text-navy-900 font-semibold text-[13px] px-4 py-2 rounded-lg transition glow-coral">
+        <i class="fa-solid fa-headphones-simple"></i> Run Simulator
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= HERO ======================= -->
+<section id="top" class="grid-bg border-b border-navy-600/60">
+  <div class="max-w-[1400px] mx-auto px-5 lg:px-8 pt-16 pb-14 lg:pt-24 lg:pb-20">
+    <div class="flex flex-wrap items-center gap-2 mb-7">
+      <span class="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-coral bg-coral/10 border border-coral/30 rounded-full px-3 py-1.5">
+        <i class="fa-solid fa-bolt"></i> Category Teardown
+      </span>
+      <span class="inline-flex items-center gap-2 text-[11px] font-medium text-slate-400 bg-navy-700/60 border border-navy-600 rounded-full px-3 py-1.5">
+        Connected Worker / Digital Work Instructions
+      </span>
+      <span class="inline-flex items-center gap-2 text-[11px] font-medium text-slate-400 bg-navy-700/60 border border-navy-600 rounded-full px-3 py-1.5">
+        <i class="fa-regular fa-eye-slash"></i> No AR. No HUD. Audio + Camera only.
+      </span>
+    </div>
+
+    <h1 class="text-white font-black tracking-[-0.03em] text-[2.1rem] sm:text-5xl lg:text-[4.1rem] leading-[1.04] max-w-5xl">
+      Carbyn vs Digital Work Instruction Giants
+      <span class="block text-slate-500 font-bold text-[1.4rem] sm:text-3xl lg:text-4xl mt-3 tracking-[-0.02em]">
+        Dozuki <span class="text-navy-600">/</span> Poka <span class="text-navy-600">/</span> Tulip <span class="text-navy-600">/</span> Manual.to
+      </span>
+    </h1>
+
+    <p class="mt-6 text-lg lg:text-xl text-slate-400 max-w-3xl leading-relaxed">
+      Why the future of frontline work is <span class="text-coral font-semibold">audio-first (no-HUD)</span>, not screen-first.
+      Every incumbent in this category solved <em class="text-slate-300 not-italic font-medium">content</em>. None of them solved the
+      <em class="text-slate-300 not-italic font-medium">hands</em>.
+    </p>
+
+    <div class="mt-10 grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+      <div class="glass rounded-2xl p-5 reveal">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold">Category TAM 2030</span>
+          <i class="fa-solid fa-chart-line text-slate-600"></i>
+        </div>
+        <div class="mt-3 text-3xl lg:text-4xl font-black text-white tracking-tight">$20B<span class="text-coral">+</span></div>
+        <div class="mt-1.5 text-[11px] text-slate-500">Connected worker software <span class="mono text-amber-400/80">[ESTIMATE]</span></div>
+      </div>
+      <div class="glass rounded-2xl p-5 reveal">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold">Avg. Wrench Time</span>
+          <i class="fa-solid fa-screwdriver-wrench text-slate-600"></i>
+        </div>
+        <div class="mt-3 text-3xl lg:text-4xl font-black text-white tracking-tight">25<span class="text-slate-600 text-2xl">-</span>35<span class="text-coral">%</span></div>
+        <div class="mt-1.5 text-[11px] text-slate-500">Of a technician shift <span class="mono text-amber-400/80">[ESTIMATE]</span></div>
+      </div>
+      <div class="glass rounded-2xl p-5 reveal">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold">Lost To Search + Admin</span>
+          <i class="fa-regular fa-clock text-slate-600"></i>
+        </div>
+        <div class="mt-3 text-3xl lg:text-4xl font-black text-white tracking-tight">~3.2<span class="text-slate-500 text-xl font-bold ml-1">hrs</span></div>
+        <div class="mt-1.5 text-[11px] text-slate-500">Per tech, per shift <span class="mono text-amber-400/80">[ESTIMATE]</span></div>
+      </div>
+      <div class="glass rounded-2xl p-5 reveal glow-coral">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] uppercase tracking-[0.16em] text-coral font-semibold">Carbyn Screens Required</span>
+          <i class="fa-solid fa-microphone-lines text-coral"></i>
+        </div>
+        <div class="mt-3 text-3xl lg:text-4xl font-black text-white tracking-tight">ZERO</div>
+        <div class="mt-1.5 text-[11px] text-slate-400">Audio in, audio out, camera sees <span class="mono text-emerald-400/80">[CONFIRMED]</span></div>
+      </div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-slate-500">
+      <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle text-[6px] text-coral"></i> Pricing figures below are public list or reported ranges, not negotiated contracts.</span>
+      <span class="inline-flex items-center gap-2"><i class="fa-solid fa-circle text-[6px] text-slate-600"></i> Tap any card, tab, or row to explore.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SECTION 1 ======================= -->
+<section id="dilemma" class="max-w-[1400px] mx-auto px-5 lg:px-8 py-16 lg:py-24">
+  <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+    <div class="max-w-3xl">
+      <div class="mono text-coral text-[12px] font-semibold tracking-[0.2em] mb-3">SECTION 01</div>
+      <h2 class="text-white font-extrabold text-3xl lg:text-[2.6rem] tracking-[-0.025em] leading-tight">The $20B Connected-Worker Dilemma</h2>
+      <p class="mt-4 text-slate-400 text-base lg:text-lg leading-relaxed">
+        The category raised, scaled, and priced itself around one assumption: that a worker will stop, find a screen, and read.
+        The buyer pays per station, per seat, or per site. The technician pays with their hands.
+      </p>
+    </div>
+    <div class="glass-soft rounded-xl px-5 py-4 lg:min-w-[280px]">
+      <div class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold">The structural gap</div>
+      <div class="mt-2 text-white font-semibold text-[15px] leading-snug">Content is solved.<br/>Retrieval at the asset is not.</div>
+    </div>
+  </div>
+
+  <!-- pricing cards -->
+  <div class="grid md:grid-cols-2 xl:grid-cols-5 gap-4">
+    <!-- Dozuki -->
+    <article class="glass rounded-2xl p-5 reveal hover:-translate-y-1 transition-transform duration-300">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-white font-bold text-lg tracking-tight">Dozuki</h3>
+          <div class="text-[11px] text-slate-500 mt-0.5">SOP authoring + tribal knowledge capture</div>
+        </div>
+        <span class="grid place-items-center w-9 h-9 rounded-lg bg-navy-700 border border-navy-600"><i class="fa-solid fa-book text-slate-400"></i></span>
+      </div>
+      <div class="mt-5 pt-4 border-t border-navy-600">
+        <div class="text-2xl font-black text-white">$850<span class="text-sm font-semibold text-slate-500">/mo</span></div>
+        <div class="text-[11px] text-slate-500 mt-1">Entry tier, billed annually <span class="mono text-amber-400/80">[ESTIMATE]</span></div>
+      </div>
+      <ul class="mt-4 space-y-2 text-[12.5px] text-slate-400">
+        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400/80 mt-0.5 text-[11px]"></i> Best-in-class step authoring and versioning</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Requires a tablet in hand to consume</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Authoring backlog grows faster than the team</li>
+      </ul>
+    </article>
+
+    <!-- Poka -->
+    <article class="glass rounded-2xl p-5 reveal hover:-translate-y-1 transition-transform duration-300">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-white font-bold text-lg tracking-tight">Poka</h3>
+          <div class="text-[11px] text-slate-500 mt-0.5">Factory social learning (IFS-owned)</div>
+        </div>
+        <span class="grid place-items-center w-9 h-9 rounded-lg bg-navy-700 border border-navy-600"><i class="fa-solid fa-graduation-cap text-slate-400"></i></span>
+      </div>
+      <div class="mt-5 pt-4 border-t border-navy-600">
+        <div class="text-2xl font-black text-white">$15K<span class="text-sm font-semibold text-slate-500">/yr +</span></div>
+        <div class="text-[11px] text-slate-500 mt-1">Quote-based, scales per plant <span class="mono text-amber-400/80">[ESTIMATE]</span></div>
+      </div>
+      <ul class="mt-4 space-y-2 text-[12.5px] text-slate-400">
+        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400/80 mt-0.5 text-[11px]"></i> Strong skills matrix and peer video culture</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Video means watch first, work second</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Enterprise rollout cycle, plant by plant</li>
+      </ul>
+    </article>
+
+    <!-- Tulip -->
+    <article class="glass rounded-2xl p-5 reveal hover:-translate-y-1 transition-transform duration-300">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-white font-bold text-lg tracking-tight">Tulip</h3>
+          <div class="text-[11px] text-slate-500 mt-0.5">Frontline ops app platform + IoT</div>
+        </div>
+        <span class="grid place-items-center w-9 h-9 rounded-lg bg-navy-700 border border-navy-600"><i class="fa-solid fa-diagram-project text-slate-400"></i></span>
+      </div>
+      <div class="mt-5 pt-4 border-t border-navy-600">
+        <div class="text-2xl font-black text-white">$100<span class="text-sm font-semibold text-slate-500">/stn/mo</span></div>
+        <div class="text-[11px] text-slate-500 mt-1">Plus platform fee and gateways <span class="mono text-amber-400/80">[ESTIMATE]</span></div>
+      </div>
+      <ul class="mt-4 space-y-2 text-[12.5px] text-slate-400">
+        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400/80 mt-0.5 text-[11px]"></i> Deepest API, connectors, and app builder</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Station-bound by design (fixed benches)</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Needs an internal builder to stay alive</li>
+      </ul>
+    </article>
+
+    <!-- Manual.to -->
+    <article class="glass rounded-2xl p-5 reveal hover:-translate-y-1 transition-transform duration-300">
+      <div class="flex items-start justify-between">
+        <div>
+          <h3 class="text-white font-bold text-lg tracking-tight">Manual.to</h3>
+          <div class="text-[11px] text-slate-500 mt-0.5">Lightweight mobile instruction sharing</div>
+        </div>
+        <span class="grid place-items-center w-9 h-9 rounded-lg bg-navy-700 border border-navy-600"><i class="fa-solid fa-mobile-screen text-slate-400"></i></span>
+      </div>
+      <div class="mt-5 pt-4 border-t border-navy-600">
+        <div class="text-2xl font-black text-white">$5<span class="text-sm font-semibold text-slate-500">-</span>10<span class="text-sm font-semibold text-slate-500">/user/mo</span></div>
+        <div class="text-[11px] text-slate-500 mt-1">Self-serve tiers <span class="mono text-amber-400/80">[ESTIMATE]</span></div>
+      </div>
+      <ul class="mt-4 space-y-2 text-[12.5px] text-slate-400">
+        <li class="flex gap-2"><i class="fa-solid fa-check text-emerald-400/80 mt-0.5 text-[11px]"></i> Cheapest path to a shareable manual</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Thin on CMMS or ERP write-back</li>
+        <li class="flex gap-2"><i class="fa-solid fa-xmark text-red-400/80 mt-0.5 text-[11px]"></i> Still a phone the tech must pull out</li>
+      </ul>
+    </article>
+
+    <!-- Carbyn -->
+    <article class="glass rounded-2xl p-5 reveal glow-coral border-coral/40 hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden">
+      <div class="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-coral/20 blur-2xl"></div>
+      <div class="flex items-start justify-between relative">
+        <div>
+          <h3 class="text-white font-bold text-lg tracking-tight">Carbyn</h3>
+          <div class="text-[11px] text-coral/90 mt-0.5 font-medium">Audio-first field intelligence</div>
+        </div>
+        <span class="grid place-items-center w-9 h-9 rounded-lg bg-coral/15 border border-coral/40"><i class="fa-solid fa-microphone-lines text-coral"></i></span>
+      </div>
+      <div class="mt-5 pt-4 border-t border-coral/25 relative">
+        <div class="text-2xl font-black text-white">~$20K<span class="text-sm font-semibold text-slate-400">/yr ACV</span></div>
+        <div class="text-[11px] text-slate-400 mt-1">Per crew, hardware included <span class="mono text-emerald-400/80">[CONFIRMED]</span></div>
+      </div>
+      <ul class="mt-4 space-y-2 text-[12.5px] text-slate-300 relative">
+        <li class="flex gap-2"><i class="fa-solid fa-check text-coral mt-0.5 text-[11px]"></i> Zero authoring: the veteran talks, the system writes</li>
+        <li class="flex gap-2"><i class="fa-solid fa-check text-coral mt-0.5 text-[11px]"></i> Hands stay on the wrench, eyes stay on the hazard</li>
+        <li class="flex gap-2"><i class="fa-solid fa-check text-coral mt-0.5 text-[11px]"></i> Writes back to whatever CMMS is already installed</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- The Screen-Bound Trap -->
+  <div class="mt-12 grid lg:grid-cols-12 gap-4">
+    <div class="lg:col-span-7 glass rounded-2xl p-6 lg:p-8 reveal">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="grid place-items-center w-9 h-9 rounded-lg bg-red-500/10 border border-red-500/30"><i class="fa-solid fa-triangle-exclamation text-red-400"></i></span>
+        <h3 class="text-white font-bold text-xl tracking-tight">The Screen-Bound Trap</h3>
+      </div>
+      <p class="text-slate-400 text-[14px] leading-relaxed">
+        Every screen-first tool assumes an interaction that the physical job forbids. The failure is not the software quality. It is the posture the software demands.
+      </p>
+
+      <div class="mt-6 space-y-3">
+        <div class="glass-soft rounded-xl p-4 flex gap-4 items-start">
+          <span class="grid place-items-center w-10 h-10 shrink-0 rounded-lg bg-navy-700 border border-navy-600"><i class="fa-solid fa-hand-dots text-amber-400"></i></span>
+          <div>
+            <div class="text-white font-semibold text-[14.5px]">Greasy gloves, dead glass</div>
+            <p class="text-[13px] text-slate-400 mt-1 leading-relaxed">
+              Nitrile plus hydraulic oil equals a capacitive screen that ignores you. The real workflow becomes: strip glove, wipe hand, tap, re-glove. Four actions to read one torque spec. Most techs stop opening the app by week three.
+            </p>
+          </div>
+        </div>
+        <div class="glass-soft rounded-xl p-4 flex gap-4 items-start">
+          <span class="grid place-items-center w-10 h-10 shrink-0 rounded-lg bg-navy-700 border border-navy-600"><i class="fa-solid fa-eye-low-vision text-amber-400"></i></span>
+          <div>
+            <div class="text-white font-semibold text-[14.5px]">Line-of-sight hazard</div>
+            <p class="text-[13px] text-slate-400 mt-1 leading-relaxed">
+              Eyes down on a tablet next to live 480V, a pinch point, or a moving conveyor is an incident report waiting to be written. AR headsets make this worse, not better: an overlay in the visual field is an occlusion in a hazard zone. Carbyn ships no HUD on purpose.
+            </p>
+          </div>
+        </div>
+        <div class="glass-soft rounded-xl p-4 flex gap-4 items-start">
+          <span class="grid place-items-center w-10 h-10 shrink-0 rounded-lg bg-navy-700 border border-navy-600"><i class="fa-solid fa-stopwatch text-amber-400"></i></span>
+          <div>
+            <div class="text-white font-semibold text-[14.5px]">Wrench time death by a thousand taps</div>
+            <p class="text-[13px] text-slate-400 mt-1 leading-relaxed">
+              Walk to the kiosk, log in, search, scroll, walk back, forget step 6, walk again. Then close the work order at shift end from memory, badly. The SOP was perfect. The retrieval cost ate the day.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- wrench time bar -->
+    <div class="lg:col-span-5 glass rounded-2xl p-6 lg:p-8 reveal flex flex-col">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h3 class="text-white font-bold text-xl tracking-tight">Where the shift actually goes</h3>
+          <p class="text-[12px] text-slate-500 mt-1">8-hour maintenance shift, per technician <span class="mono text-amber-400/80">[ESTIMATE]</span></p>
+        </div>
+        <div class="flex rounded-lg border border-navy-600 overflow-hidden text-[11px] font-semibold shrink-0">
+          <button id="shiftToday" class="px-3 py-1.5 bg-coral text-navy-900">Today</button>
+          <button id="shiftCarbyn" class="px-3 py-1.5 text-slate-400 hover:text-white">With Carbyn</button>
+        </div>
+      </div>
+
+      <div id="shiftBars" class="mt-7 space-y-4 flex-1"></div>
+
+      <div class="mt-6 pt-5 border-t border-navy-600 flex items-end justify-between">
+        <div>
+          <div class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold">Wrench time</div>
+          <div id="wrenchBig" class="text-4xl font-black text-white mt-1">27%</div>
+        </div>
+        <div id="wrenchDelta" class="text-right text-[12px] text-slate-500 max-w-[190px] leading-snug">
+          Baseline. Search, walking, and end-of-shift paperwork consume the rest.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SECTION 2 ======================= -->
+<section id="matrix" class="border-y border-navy-600/60 bg-navy-800/40">
+  <div class="max-w-[1400px] mx-auto px-5 lg:px-8 py-16 lg:py-24">
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8">
+      <div class="max-w-3xl">
+        <div class="mono text-coral text-[12px] font-semibold tracking-[0.2em] mb-3">SECTION 02</div>
+        <h2 class="text-white font-extrabold text-3xl lg:text-[2.6rem] tracking-[-0.025em] leading-tight">Interactive 5-Way Comparison Matrix</h2>
+        <p class="mt-4 text-slate-400 text-base lg:text-lg leading-relaxed">
+          Filter by what the buyer actually argues about in the room. Green means the vendor wins that line. Red means it is a structural miss, not a roadmap item.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 text-[11px] text-slate-500">
+        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Strength</span>
+        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Partial</span>
+        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-400"></span> Gap</span>
+      </div>
+    </div>
+
+    <!-- tabs -->
+    <div role="tablist" aria-label="Matrix filters" class="flex flex-wrap gap-2 mb-5">
+      <button role="tab" aria-selected="true"  data-filter="all"      class="tabbtn border border-navy-600 text-slate-300 bg-navy-700/60 rounded-lg px-4 py-2.5 text-[13px] font-semibold">
+        <i class="fa-solid fa-layer-group mr-1.5 opacity-70"></i> All Metrics <span class="opacity-60 mono text-[11px]" data-count="all"></span>
+      </button>
+      <button role="tab" aria-selected="false" data-filter="pricing"  class="tabbtn border border-navy-600 text-slate-300 bg-navy-700/60 rounded-lg px-4 py-2.5 text-[13px] font-semibold">
+        <i class="fa-solid fa-sack-dollar mr-1.5 opacity-70"></i> Pricing &amp; ROI <span class="opacity-60 mono text-[11px]" data-count="pricing"></span>
+      </button>
+      <button role="tab" aria-selected="false" data-filter="api"      class="tabbtn border border-navy-600 text-slate-300 bg-navy-700/60 rounded-lg px-4 py-2.5 text-[13px] font-semibold">
+        <i class="fa-solid fa-plug-circle-bolt mr-1.5 opacity-70"></i> API &amp; Ecosystem <span class="opacity-60 mono text-[11px]" data-count="api"></span>
+      </button>
+      <button role="tab" aria-selected="false" data-filter="hardware" class="tabbtn border border-navy-600 text-slate-300 bg-navy-700/60 rounded-lg px-4 py-2.5 text-[13px] font-semibold">
+        <i class="fa-solid fa-helmet-safety mr-1.5 opacity-70"></i> Hardware &amp; Friction <span class="opacity-60 mono text-[11px]" data-count="hardware"></span>
+      </button>
+    </div>
+
+    <div class="glass rounded-2xl overflow-hidden">
+      <div class="overflow-x-auto no-scrollbar">
+        <table class="mx w-full min-w-[1080px] text-left border-collapse">
+          <thead>
+            <tr class="bg-navy-900/80">
+              <th class="sticky-col text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold px-5 py-4 w-[230px] border-r border-navy-600">Metric</th>
+              <th class="px-4 py-3 w-[190px]">
+                <div class="text-white font-bold text-[14px]">Dozuki</div>
+                <div class="text-[10.5px] text-slate-500 font-normal mt-0.5">SOP authoring</div>
+              </th>
+              <th class="px-4 py-3 w-[190px]">
+                <div class="text-white font-bold text-[14px]">Poka</div>
+                <div class="text-[10.5px] text-slate-500 font-normal mt-0.5">Social learning</div>
+              </th>
+              <th class="px-4 py-3 w-[190px]">
+                <div class="text-white font-bold text-[14px]">Tulip</div>
+                <div class="text-[10.5px] text-slate-500 font-normal mt-0.5">Ops app platform</div>
+              </th>
+              <th class="px-4 py-3 w-[190px]">
+                <div class="text-white font-bold text-[14px]">Manual.to</div>
+                <div class="text-[10.5px] text-slate-500 font-normal mt-0.5">Lightweight docs</div>
+              </th>
+              <th class="px-4 py-3 w-[210px] col-carbyn border-x border-coral/30">
+                <div class="text-coral font-bold text-[14px] flex items-center gap-2">Carbyn <i class="fa-solid fa-waveform-lines text-[11px]"></i></div>
+                <div class="text-[10.5px] text-coral/70 font-normal mt-0.5">Audio-first, no HUD</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="matrixBody" class="text-[13px] align-top"></tbody>
+        </table>
+      </div>
+      <div class="px-5 py-3.5 bg-navy-900/60 border-t border-navy-600 flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-500">
+        <span><i class="fa-solid fa-circle-info mr-1.5"></i> Competitor figures are public list pricing or reported ranges. Carbyn figures come from signed pilot terms.</span>
+        <span class="mono">rows: <span id="rowCount">0</span></span>
+      </div>
+    </div>
+  </div>
+</section>
