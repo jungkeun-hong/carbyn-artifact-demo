@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>CARBYN · Expansion Map</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#050608;font-family:Inter,Arial,sans-serif;color:#F5F5F3}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;margin:0 auto 40px;background:url(assets/bg_cover.jpg) center/cover}
+.slide::before{content:'';position:absolute;inset:0;background:rgba(8,9,12,0.62)}
+.in{position:absolute;inset:0;padding:84px 96px}
+.logo{position:absolute;top:70px;right:96px;height:34px}
+.eyebrow{font-size:20px;letter-spacing:.22em;color:#FFCD11;font-weight:700}
+h1{font-size:60px;font-weight:800;line-height:1.08;margin-top:16px;letter-spacing:-.01em}
+h1 .g{color:#FFCD11}
+.foot{position:absolute;left:96px;bottom:44px;font-size:17px;color:#9A9A94}
+.glass{background:rgba(18,20,25,.68);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.14);border-radius:24px}
+.stage{display:flex;gap:22px;align-items:center;padding:26px 30px;margin-bottom:22px}
+.tag{font-size:16px;font-weight:800;letter-spacing:.18em;padding:8px 14px;border-radius:999px;white-space:nowrap}
+.t1{background:#FFCD11;color:#111}.t2{background:rgba(255,205,17,.22);color:#FFCD11;border:1px solid #FFCD11}.t3{background:rgba(255,255,255,.08);color:#E5E5E0;border:1px solid rgba(255,255,255,.35)}
+.stage h3{font-size:30px;font-weight:700}
+.stage p{font-size:20px;color:#BDBDB7;margin-top:6px}
+.step h3{font-size:36px;font-weight:800;margin-top:14px}
+.step p{font-size:21px;color:#C9C9C3;margin-top:10px;line-height:1.4}
+.bn{position:absolute;right:28px;bottom:6px;font-size:130px;font-weight:800;color:rgba(255,255,255,.07);line-height:1}
+.step .num{font-size:18px;font-weight:800;letter-spacing:.18em}
+</style></head><body>
+
+<!-- SLIDE 1: MARKET -->
+<section class="slide"><div class="in">
+<img class="logo" src="assets/carbyn_logo.png">
+<div class="eyebrow">MARKET</div>
+<h1>Start in maintenance.<br><span class="g">Expand to every field report.</span></h1>
+
+<svg width="980" height="712" viewBox="0 0 1100 800" style="position:absolute;left:70px;top:300px">
+ <defs><radialGradient id="g1"><stop offset="0" stop-color="#FFCD11" stop-opacity=".95"/><stop offset="1" stop-color="#FFB300" stop-opacity=".85"/></radialGradient></defs>
+ <circle cx="550" cy="400" r="370" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.30)" stroke-width="2" stroke-dasharray="6 8"/>
+ <circle cx="550" cy="400" r="250" fill="rgba(255,205,17,0.09)" stroke="#FFCD11" stroke-opacity=".7" stroke-width="2"/>
+ <circle cx="550" cy="400" r="108" fill="url(#g1)"/>
+ <text x="550" y="390" text-anchor="middle" font-size="26" font-weight="800" fill="#111">Industrial</text>
+ <text x="550" y="422" text-anchor="middle" font-size="26" font-weight="800" fill="#111">Maintenance</text>
+ <text x="550" y="200" text-anchor="middle" font-size="24" font-weight="700" fill="#FFCD11">Inspection &amp; Claims</text>
+ <g font-size="20" fill="#F0F0EC" text-anchor="middle">
+  <text x="375" y="407">Adjusters</text>
+  <text x="727" y="407">Inspectors</text>
+  <text x="550" y="590">Auto appraisers</text>
+ </g>
+ <text x="550" y="78" text-anchor="middle" font-size="24" font-weight="700" fill="#E5E5E0">Field Documentation</text>
+ <g font-size="21" font-weight="600" fill="#D8D8D2" text-anchor="middle">
+  <text x="245" y="215">Trades</text>
+  <text x="855" y="215">Construction</text>
+  <text x="225" y="600">Fleet</text>
+  <text x="875" y="600">Utilities</text>
+  <text x="550" y="715">Property &amp; Environmental</text>
+ </g>
+</svg>
+
+<div style="position:absolute;right:96px;top:400px;width:720px">
+ <div class="glass stage"><span class="tag t1">NOW</span><div><h3>Plant &amp; facility maintenance</h3><p>B2B pilots · techs on the floor</p></div></div>
+ <div class="glass stage"><span class="tag t2">NEXT</span><div><h3>Inspection &amp; claims</h3><p>Report-heavy · self-paying pros</p></div></div>
+ <div class="glass stage"><span class="tag t3">THEN</span><div><h3>Every field report</h3><p>Trades · construction · fleet · utilities</p></div></div>
+</div>
+<div class="foot" style="left:auto;right:96px;">73 US field segments mapped · Carbyn segment census, Oct 2026</div>
+</div></section>
+
+<!-- SLIDE 2: PRODUCT -->
+<section class="slide"><div class="in">
+<img class="logo" src="assets/carbyn_logo.png">
+<div class="eyebrow">PRODUCT</div>
+<h1>From voice-to-doc <span class="g">to a spatial field agent.</span></h1>
+
+<div style="position:absolute;left:96px;right:96px;top:340px;height:540px;display:grid;grid-template-columns:repeat(4,1fr);gap:26px;align-items:end">
+ <div class="glass step" style="height:300px;padding:32px;position:relative;border-color:#FFCD11;background:linear-gradient(160deg,rgba(255,205,17,.20),rgba(18,20,25,.75))">
+  <span class="tag t1">NOW</span><h3>Voice → Doc</h3><p>Talk the job.<br>Your form, filled.</p><div class="bn">01</div></div>
+ <div class="glass step" style="height:380px;padding:32px;position:relative">
+  <span class="tag t2">NEXT</span><h3>Vision</h3><p>Photos become findings.<br>Defects tagged, measured.</p><div class="bn">02</div></div>
+ <div class="glass step" style="height:460px;padding:32px;position:relative">
+  <span class="tag t3">THEN</span><h3>Spatial</h3><p>Every note pinned to<br>the asset and the room.<br>Site memory in 3D.</p><div class="bn">03</div></div>
+ <div class="glass step" style="height:540px;padding:32px;position:relative">
+  <span class="tag t3">THEN</span><h3>Agent</h3><p>Opens the work order.<br>Files the claim.<br>Flags what's next.</p><div class="bn">04</div></div>
+</div>
+
+<svg width="1728" height="80" style="position:absolute;left:96px;top:900px">
+ <defs><linearGradient id="ar" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1700" y2="0"><stop offset="0" stop-color="#FFCD11"/><stop offset="1" stop-color="#9A9A94"/></linearGradient></defs>
+ <rect x="0" y="33" width="1700" height="4" rx="2" fill="url(#ar)"/>
+ <polygon points="1698,23 1728,35 1698,47" fill="#9A9A94"/>
+ <text x="0" y="20" font-size="20" fill="#FFCD11" font-weight="700">Phone</text>
+ <text x="1728" y="20" font-size="20" fill="#E5E5E0" font-weight="700" text-anchor="end">Hands-free on glasses</text>
+ <text x="864" y="72" font-size="19" fill="#A8A8A2" text-anchor="middle">Every report trains the next: field data compounds into the moat</text>
+</svg>
+</div></section>
+</body></html>
