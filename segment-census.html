@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARBYN · B2C Feedback Loop GTM Deep Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Quantico:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  @page { size: 1920px 1080px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #060608;
+    color: #F5F5F3;
+    font-family: 'Helvetica Now Display', 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+
+  body.web-mode {
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+  }
+
+  .slide-viewport {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    position: relative;
+    overflow: hidden;
+    background: #060608;
+  }
+
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    transform-origin: center center;
+    background-color: #0B0B0D;
+    background-size: 1920px 1080px;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #F5F5F3;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.75);
+  }
+
+  /* Atmospheric Dark Overlay over full-bleed industrial photos */
+  .slide-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 9, 12, 0.78) 0%,
+      rgba(8, 9, 12, 0.62) 45%,
+      rgba(8, 9, 12, 0.84) 100%
+    );
+    z-index: 1;
+  }
+
+  /* Optional 48px G01 Grid Overlay (Toggle with 'G') */
+  body.show-grid .slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  /* G01 Master Frame: x96 to x1824 (W1728), top y72 to bottom y932 */
+  .pad {
+    position: absolute;
+    left: 96px;
+    top: 72px;
+    width: 1728px;
+    bottom: 148px;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+  }
+
+  /* G01 Header Row: Clean Section Label on Left + White CARBYN Logo on Right (x1824) */
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 42px;
+    margin-bottom: 28px;
+    flex-shrink: 0;
+  }
+
+  .label {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #B4B4AE;
+  }
+
+  .brand-logo {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  /* 01 Lead Message (64/76px) & 02 Supporting Message (30/38px) */
+  h1 {
+    font-size: 62px;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #F5F5F3;
+    margin-bottom: 14px;
+  }
+  h1 .hl {
+    color: #FFCD11;
+  }
+
+  .sub {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.32;
+    color: #B8B8B2;
+    max-width: 1620px;
+    margin-bottom: 34px;
+    flex-shrink: 0;
+  }
+
+  /* Frosted Glass Panel System (matches img_eaf02f769eaa / img_05b182ab6c00 / img_74f56a99ae24) */
+  .card {
+    background: rgba(18, 20, 25, 0.68);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 24px;
+    padding: 36px 40px;
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    display: flex;
+    flex-direction: column;
+    color: #F5F5F3;
+  }
+  .card.gold {
+    background: linear-gradient(155deg, rgba(255, 205, 17, 0.16) 0%, rgba(18, 20, 25, 0.78) 100%);
+    border: 1.5px solid rgba(255, 205, 17, 0.52);
+  }
+
+  /* Pill / Kicker inside Card */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #D0D0CA;
+    margin-bottom: 22px;
+  }
+  .card.gold .pill {
+    background: rgba(255, 205, 17, 0.18);
+    border-color: rgba(255, 205, 17, 0.48);
+    color: #FFCD11;
+  }
+
+  .kicker {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #A8A8A2;
+    margin-bottom: 14px;
+  }
+  .card.gold .kicker {
+    color: #FFCD11;
+  }
+
+  /* Big Hero Stat Numbers (matches 41%, 2.1M, <35% in img_05b182ab6c00) */
+  .big-num {
+    font-size: 86px;
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    color: #F5F5F3;
+    margin-bottom: 18px;
+  }
+  .card.gold .big-num, .big-num.hl {
+    color: #FFCD11;
+  }
+
+  /* Card Title (36-40px) */
+  .card h2 {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+    color: #F5F5F3;
+    margin-bottom: 16px;
+  }
+
+  /* Card Body Copy & Bullets (25-27px - bold and readable!) */
+  .card p {
+    font-size: 25px;
+    line-height: 1.48;
+    font-weight: 400;
+    color: #D4D4CE;
+  }
+
+  .card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card ul li {
+    font-size: 24px;
+    line-height: 1.46;
+    font-weight: 400;
+    color: #D4D4CE;
+    padding-left: 24px;
+    position: relative;
+  }
+  .card ul li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FFCD11;
+    position: absolute;
+    left: 0;
+    top: 13px;
+  }
+  .card ul li b, .card p b {
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  /* Inner Bottom Sub-Panel (matches bottom nested box in img_74f56a99ae24) */
+  .sub-box {
+    margin-top: auto;
+    padding: 20px 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 22px;
+    line-height: 1.42;
+    color: #C8C8C2;
+  }
+  .card.gold .sub-box {
+    background: rgba(0, 0, 0, 0.28);
+    border-color: rgba(255, 205, 17, 0.30);
+    color: #F0F0EC;
+  }
+
+  /* Pure Editorial Sunset Message (~2/3 of 64px H1 = 42px, NO border-left, NO box, NO icon!) */
+  .sunset-msg {
+    margin-top: 32px;
+    font-size: 42px;
+    line-height: 1.26;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    color: #F5F5F3;
+  }
+  .sunset-msg .hl {
+    color: #FFCD11;
+  }
+
+  /* Dark Frosted Table */
+  table.mx {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table.mx th {
+    text-align: left;
+    padding: 16px 22px;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #A8A8A2;
+    border-bottom: 1px solid rgba(255,255,255,0.24);
+  }
+  table.mx td {
+    padding: 22px 22px;
+    font-size: 24px;
+    line-height: 1.40;
+    color: #D8D8D2;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    vertical-align: middle;
+  }
+  table.mx tr.us td {
+    background: rgba(255, 205, 17, 0.14);
+    color: #FFFFFF;
+    border-top: 1.5px solid rgba(255, 205, 17, 0.55);
+    border-bottom: 1.5px solid rgba(255, 205, 17, 0.55);
+  }
+
+  /* G01 Footer Rule (y977) + Footer Text (y994) */
+  .ftr-rule {
+    position: absolute;
+    left: 96px;
+    top: 977px;
+    width: 1728px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.20);
+    z-index: 5;
+  }
+  .ftr {
+    position: absolute;
+    left: 96px;
+    top: 994px;
+    width: 1728px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    color: #9A9A94;
+    z-index: 5;
+  }
+  .ftr .pnum {
+    font-weight: 500;
+    color: #D0D0CA;
+  }
+
+  /* Floating Web Deck HUD Controls */
+  .deck-hud {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(18, 18, 20, 0.90);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    padding: 8px 16px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 999;
+    font-size: 13px;
+    color: #E5E5E0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+  }
+  .deck-hud button {
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .deck-hud button:hover {
+    background: #FFCD11;
+    color: #000;
+    border-color: #FFCD11;
+  }
+
+  @media print {
+    body.web-mode { scroll-snap-type: none; }
+    .slide-viewport { width: 1920px; height: 1080px; page-break-after: always; }
+    .slide { transform: none !important; box-shadow: none; }
+    .deck-hud { display: none !important; }
+  }
+</style>
+
+<style>
+  table.mx.sm th { padding: 12px 16px; font-size: 15px; }
+  table.mx.sm td { padding: 10px 16px; font-size: 20.5px; line-height: 1.32; }
+  table.mx.sm th { padding: 9px 14px !important; }
+  table.mx.xs th { padding: 10px 14px; font-size: 14px; }
+  table.mx.xxs th { padding: 6px 12px; font-size: 13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#A8A8A2; border-bottom:1px solid rgba(255,255,255,0.24); text-align:left; }
+  table.mx.xxs td { padding: 4px 12px; font-size: 16px; line-height: 1.25; color:#D8D8D2; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .dd .q { font-size: 21px !important; margin-bottom: 12px !important; }
+  .dd table.mx.xs td { font-size: 18px !important; padding: 8px 14px !important; line-height:1.32 !important; }
+  .dd .card.tight p { font-size: 20px !important; }
+  .dd table.mx { height: 100%; }
+  .dd .q { font-size: 23px !important; }
+  table.mx.xs td { padding: 8px 14px; font-size: 19px; line-height: 1.3; }
+  table.mx.xs th { padding: 7px 12px !important; }
+  .tag { padding: 3px 12px !important; font-size: 15px !important; }
+  table.mx { height: 100%; }
+  table.mx.sm th, table.mx.xs th { font-size: 15px !important; }
+  h1 { font-size: 58px !important; margin-bottom: 10px !important; }
+  .sub { font-size: 27px !important; margin-bottom: 24px !important; }
+  .header-row { margin-bottom: 18px !important; }
+  .card.tight p, .card.tight li { font-size: 23px !important; line-height: 1.42 !important; }
+  .card.tight h2 { font-size: 31px !important; }
+  .card.tight { padding: 26px 30px !important; }
+  .sunset-msg { margin-top: 22px !important; font-size: 40px !important; }
+  .src { font-size: 15px !important; }
+  .q { font-size: 23px !important; margin-bottom: 18px !important; }
+  .q span { font-size: 16px !important; }
+  .hook { font-size: 32px !important; }
+  .sub-box { font-size: 21px !important; padding: 16px 20px !important; }
+  .q { font-size: 22px; line-height: 1.42; color: #F0F0EC; font-style: italic; padding-left: 18px; border-left: 3px solid rgba(255,205,17,0.6); margin-bottom: 14px; }
+  .q span { display:block; font-style: normal; font-size: 15px; color: #9A9A94; margin-top: 4px; }
+  .tag { display:inline-block; padding: 3px 12px; border-radius: 999px; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; }
+  .t-go { background: rgba(255,205,17,0.22); color: #FFCD11; border: 1px solid rgba(255,205,17,0.5); }
+  .t-next { background: rgba(255,255,255,0.10); color: #E0E0DA; border: 1px solid rgba(255,255,255,0.22); }
+  .t-no { background: rgba(239,68,68,0.16); color: #FCA5A5; border: 1px solid rgba(239,68,68,0.45); }
+  .src { font-size: 15px; color: #8E8E88; line-height: 1.4; margin-top: 10px; }
+  .src a, .card a { color: #C9C9C3; }
+  .hook { font-size: 30px; font-weight: 600; line-height: 1.25; color: #FFFFFF; margin: 6px 0 14px; letter-spacing: -0.01em; }
+  .step { font-size: 15px; font-weight: 700; letter-spacing: 0.08em; color: #FFCD11; margin-bottom: 8px; }
+  .card.tight { padding: 26px 30px; }
+  .card.tight h2 { font-size: 28px; margin-bottom: 10px; }
+  .card.tight p, .card.tight li { font-size: 21px !important; line-height: 1.42 !important; }
+  .card.tight ul { gap: 9px; }
+  .card.tight ul li::before { top: 11px; }
+  .big .card.tight li, .big .card.tight p { font-size: 26px !important; line-height: 1.45 !important; }
+  .big .card.tight ul { gap: 14px !important; }
+  .big .q { font-size: 25px !important; margin-bottom: 22px !important; }
+  .big .card.tight h2 { font-size: 34px !important; }
+</style>
+
+</head>
+<body class="web-mode">
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">00 · SEGMENT CENSUS · EXECUTIVE SUMMARY</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>73개 세그먼트 전수조사 결론: 문서 고통이 가장 큰 건 <span class="hl">"보고서가 곧 상품"인 1099 전문가</span>다.</h1>
+    <p class="sub">손해사정사, 감정평가사, 탐정, 인스펙터는 하루 2~5시간을 문서에 쓰고 툴을 본인 카드로 산다. 단, 포맷이 잠긴 곳은 피한다.</p>
+    <div class="big" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:24px;flex:1;">
+ <div class="card gold tight"><div class="kicker">발견 1 · 고통의 크기</div><h2>트레이드 30~60분 vs 1099 전문가 120~300분/일</h2><ul><li>IA/CAT 손해사정사 180~300분, 탐정 120~240분, 감정평가사 120~240분</li><li>HVAC·배관·전기 서비스 테크는 30~60분이고 회사가 결제</li></ul></div>
+ <div class="card tight"><div class="kicker">발견 2 · 포맷 락인</div><h2>고통이 커도 포맷이 잠기면 못 들어간다</h2><ul><li>Xactimate 견적, UAD 3.6 감정서, CCC 차량견적, 정부 퍼밋 시스템</li><li>들어갈 수 있는 건 "서술 + 사진 캡션" 부분</li></ul></div>
+ <div class="card tight"><div class="kicker">발견 3 · AI 경쟁</div><h2>고통 큰 버티컬엔 이미 전용 AI 2~6개</h2><ul><li>ValueMate(감정), PIwitness(탐정), XactAI(손해사정), Serv AI(방역), Wrench Voice(정비)</li><li>Carbyn 각도: "어떤 양식이든 하나의 앱"</li></ul></div>
+ <div class="card gold tight"><div class="kicker">제안 · 3개 테스트 셀</div><ul><li><b>셀 1:</b> IA/CAT 손해사정사, 서술 리포트 + 사진 라벨링</li><li><b>셀 2:</b> 오너 운영 트레이드 (리모델러·핸디맨·굴뚝·모바일 RV), 집주인 리포트</li><li><b>셀 3:</b> 탐정, 감시 리포트 (와일드카드)</li></ul></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">1 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">01 · CENSUS MAP · 전체 세그먼트</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>6개 클러스터, <span class="hl">73개 세그먼트</span>. 노란색은 점수 상위 12.</h1>
+    <p class="sub">지난 v2의 8개(주거 트레이드·건설)에서 차량, 보험·검사, 유틸리티, 환경·부동산까지 확장.</p>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;flex:1;"><div class="card tight" style="padding:18px 20px !important;"><div class="kicker">트레이드 · 13</div><ul style="gap:4px;"><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Handyman</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Chimney sweep / septic service</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Plumber</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Roofer / roofing estimator</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Water/fire restoration tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">HVAC service tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Appliance repair tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Commercial janitorial supervisor</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Locksmith</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Electrician</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Pool service tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Landscaping / irrigation tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Garage door tech</li></ul></div><div class="card tight" style="padding:18px 20px !important;"><div class="kicker">건설·시설 · 17</div><ul style="gap:4px;"><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Facility maintenance vendor for r…</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Site safety manager</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Residential remodeler / small bui…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Electrical sub foreman</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Assistant super / field engineer</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">QA/QC manager</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Hospital facilities tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Plant maintenance tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">GC superintendent</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Mechanical/plumbing sub foreman</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Framing/drywall foreman</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Apartment maintenance tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Commercial building engineer</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Hotel engineering tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Concrete foreman</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">School district maintenance</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Heavy civil foreman</li></ul></div><div class="card tight" style="padding:18px 20px !important;"><div class="kicker">차량·운송 · 10</div><ul style="gap:4px;"><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>RV / marine tech</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Insurance auto damage appraiser</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Aviation A&amp;P mechanic</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Truck driver DVIR</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Auto mechanic, independent shop</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Ag / construction equipment deale…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Collision/auto body tech + estima…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Heavy-duty diesel / fleet tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Dealership service tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Tire / quick lube tech</li></ul></div><div class="card tight" style="padding:18px 20px !important;"><div class="kicker">보험·검사 · 11</div><ul style="gap:4px;"><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Independent adjuster / CAT adjust…</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Public adjuster</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Home inspector</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Backflow prevention tester</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Commissioning agent</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Fire &amp; life safety ITM tech</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Property insurance staff field ad…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Commercial property condition ass…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Insurance loss control / underwri…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Municipal building / code inspect…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Special inspector / materials tes…</li></ul></div><div class="card tight" style="padding:18px 20px !important;"><div class="kicker">유틸리티·에너지 · 10</div><ul style="gap:4px;"><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Telecom / fiber / cable install t…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">OEM field service engineer</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Well site supervisor / company man</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Wind turbine technician</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Water / wastewater treatment plan…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Utility lineworker</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Solar installer</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Oil &amp; gas pumper / lease operator</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Solar O&amp;M technician</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Elevator mechanic</li></ul></div><div class="card tight" style="padding:18px 20px !important;"><div class="kicker">환경·부동산·서비스 · 12</div><ul style="gap:4px;"><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Private investigators / process s…</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Residential real estate appraiser</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Asbestos / lead / mold inspector-…</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Consulting arborist</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;"><b style=color:#FFCD11>Pest control technician</b></li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Property manager / leasing agent</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">HOA / community association manag…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Phase I ESA field assessor / Envi…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">SWPPP stormwater inspector</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Health inspector / food safety au…</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Land surveyor field crew</li><li style="font-size:16.5px !important;line-height:1.28 !important;padding-left:16px !important;">Home health aides and visiting nu…</li></ul></div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">2 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">01 · ARCHETYPES · 세 가지 유형</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>73개는 결국 <span class="hl">세 유형</span>. 누가 돈 내고, 문서가 무엇이냐로 갈린다.</h1>
+    <p class="sub">유형마다 진입 방식이 다르다: PLG 직판 / PLG + 집주인 확산 / B2B 트랙.</p>
+    <div class="big" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;">
+ <div class="card gold tight"><div class="pill">A · 보고서가 곧 상품 (1099 전문가)</div><h2>하루 120~300분, 본인 결제</h2><ul><li>손해사정사(독립·퍼블릭), 감정평가사, 탐정, 홈·곰팡이 인스펙터, 수목 진단</li><li>리포트 품질 = 수입. 건당 보수라 문서 시간이 곧 손실</li><li>리스크: 버티컬 AI, 잠긴 포맷</li></ul><div class="sub-box"><b>진입:</b> 서술·사진 캡션 영역만, 기존 시스템 옆에서</div></div>
+ <div class="card gold tight"><div class="pill">B · 오너 운영 트레이드</div><h2>하루 30~90분, 본인 결제</h2><ul><li>리모델러, 핸디맨, 굴뚝·정화조, 모바일 RV·선박, 시설 유지보수 벤더, 역류 테스터</li><li>포맷 자유. 결과물이 집주인·고객에게 감</li><li>리스크: 고통 강도가 A보다 낮음</li></ul><div class="sub-box"><b>진입:</b> 집주인 리포트 링크로 확산 (CompanyCam 패턴)</div></div>
+ <div class="card tight"><div class="pill">C · 회사 결제 현장직</div><h2>하루 30~120분, 회사 결제</h2><ul><li>고용 HVAC·배관·전기 테크, GC 슈퍼, 하도급 포맨, 정비, 시설, 유틸리티, 항공</li><li>FSM·CMMS·Procore에 문서 흐름이 잠김</li><li>테크는 카드를 안 긁는다 (UpKeep)</li></ul><div class="sub-box"><b>진입:</b> B2B 파일럿 트랙 (JW·UCSF 등)</div></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">3 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">02 · WHERE TO PLAY · 문서 부담 × 포맷 자유도</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>노릴 곳: <span class="hl">문서 시간이 길고, 우리 양식이 그대로 결과물이 되는 곳</span>.</h1>
+    <p class="sub">막대 = 하루 문서 시간(분), 노랑 = 본인 결제, 회색 = 회사 결제. 포맷 자유도는 판단값 [INFERENCE].</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;"><div class="card tight"><div class="kicker">포맷 잠김 · 7</div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Public adjuster</span><span style="color:#A8A8A2">180분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:69%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Residential real estate appra…</span><span style="color:#A8A8A2">180분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:69%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Insurance auto damage apprais…</span><span style="color:#A8A8A2">165분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:63%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Pest control technician</span><span style="color:#A8A8A2">120분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:46%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Backflow prevention tester</span><span style="color:#A8A8A2">82분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:31%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Auto mechanic, independent sh…</span><span style="color:#A8A8A2">65분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:25%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>GC superintendent</span><span style="color:#A8A8A2">45분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:17%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div class="sub-box" style="margin-top:auto;">Xactimate · UAD · CCC · 주 양식: 서술·사진 캡션만</div></div><div class="card tight"><div class="kicker">반구조 · 11</div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Independent adjuster / CAT ad…</span><span style="color:#A8A8A2">240분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:92%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Commissioning agent</span><span style="color:#A8A8A2">180분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:69%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Asbestos / lead / mold inspec…</span><span style="color:#A8A8A2">135분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:51%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Home inspector</span><span style="color:#A8A8A2">120분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:46%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Consulting arborist</span><span style="color:#A8A8A2">82분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:31%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Property manager / leasing ag…</span><span style="color:#A8A8A2">75분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:28%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Electrical sub foreman</span><span style="color:#A8A8A2">65분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:25%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Facility maintenance vendor f…</span><span style="color:#A8A8A2">45분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:17%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Telecom / fiber / cable insta…</span><span style="color:#A8A8A2">45분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:17%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>HVAC service tech</span><span style="color:#A8A8A2">45분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:17%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Solar installer</span><span style="color:#A8A8A2">45분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:17%;height:10px;border-radius:6px;background:#6B7280;"></div></div></div><div class="sub-box" style="margin-top:auto;">템플릿 업로드로 대체 가능</div></div><div class="card gold tight"><div class="kicker">포맷 자유 · 5</div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Private investigators / proce…</span><span style="color:#A8A8A2">180분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:69%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Chimney sweep / septic service</span><span style="color:#A8A8A2">82분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:31%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>RV / marine tech</span><span style="color:#A8A8A2">60분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:23%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Handyman</span><span style="color:#A8A8A2">45분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:17%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div style="margin-bottom:9px;"><div style="display:flex;justify-content:space-between;font-size:17.5px;color:#F0F0EC;margin-bottom:4px;"><span>Residential remodeler / small…</span><span style="color:#A8A8A2">45분</span></div><div style="height:10px;border-radius:6px;background:rgba(255,255,255,0.08);"><div style="width:17%;height:10px;border-radius:6px;background:#FFCD11;"></div></div></div><div class="sub-box" style="margin-top:auto;">우리 양식이 그대로 결과물</div></div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">4 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">02 · SCORING · 1-19 / 73</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>점수 = 문서 부담 × <span class="hl">본인 결제</span> × AI 공백 × 규모 × 음성 적합.</h1>
+    <p class="sub">하루 문서 시간은 중간값 기준. 노란 줄 = 상위 12. 산식은 Appendix.</p>
+    <div class="card" style="flex:1;padding:12px 20px;"><table class="mx xxs"><thead><tr><th style="width:4%">#</th><th style="width:36%">세그먼트</th><th style="width:13%">클러스터</th><th style="width:13%">하루 문서(분)</th><th style="width:8%">결제</th><th style="width:8%">AI 경쟁</th><th style="width:8%">인원</th><th style="width:10%">점수</th></tr></thead><tbody><tr class="us"><td>1</td><td><b>Private investigators / process servers (surveillan…</b></td><td>환경·부동산·서비스</td><td>120-240 (PIs)</td><td>본인</td><td>3</td><td>35K</td><td><b>4.25</b></td></tr><tr class="us"><td>2</td><td><b>Independent adjuster (IA) / CAT adjuster (1099, Xac…</b></td><td>보험·검사</td><td>180-300 (often…</td><td>본인</td><td>6</td><td>80K</td><td><b>4.10</b></td></tr><tr class="us"><td>3</td><td><b>Public adjuster</b></td><td>보험·검사</td><td>120-240*</td><td>본인</td><td>4</td><td>20K</td><td><b>4.10</b></td></tr><tr class="us"><td>4</td><td><b>Residential real estate appraiser (field inspection…</b></td><td>환경·부동산·서비스</td><td>120-240*</td><td>본인</td><td>3</td><td>70K</td><td><b>4.10</b></td></tr><tr class="us"><td>5</td><td><b>RV / marine tech</b></td><td>차량·운송</td><td>30-90*</td><td>본인</td><td>2</td><td>45K</td><td><b>3.95</b></td></tr><tr class="us"><td>6</td><td><b>Asbestos / lead / mold inspector-assessor</b></td><td>환경·부동산·서비스</td><td>90-180*</td><td>본인</td><td>3</td><td>30K</td><td><b>3.95</b></td></tr><tr class="us"><td>7</td><td><b>Insurance auto damage appraiser (field, often 1099)</b></td><td>차량·운송</td><td>90-240*</td><td>본인</td><td>5</td><td>12K</td><td><b>3.80</b></td></tr><tr class="us"><td>8</td><td><b>Home inspector (Spectora/HomeGauge, state SOP)</b></td><td>보험·검사</td><td>60-180</td><td>본인</td><td>5</td><td>35K</td><td><b>3.80</b></td></tr><tr class="us"><td>9</td><td><b>Consulting arborist (ISA TRAQ tree risk assessment)</b></td><td>환경·부동산·서비스</td><td>45-120*</td><td>본인</td><td>3</td><td>45K</td><td><b>3.80</b></td></tr><tr class="us"><td>10</td><td><b>Handyman</b></td><td>트레이드</td><td>30-60*</td><td>본인</td><td>3</td><td>1.5M</td><td><b>3.80</b></td></tr><tr class="us"><td>11</td><td><b>Facility maintenance vendor for retail/restaurant (…</b></td><td>건설·시설</td><td>30-60*</td><td>본인</td><td>2</td><td>175K</td><td><b>3.80</b></td></tr><tr class="us"><td>12</td><td><b>Pest control technician (service tickets, PUR, NPMA…</b></td><td>환경·부동산·서비스</td><td>90-150 (Serv AI…</td><td>회사</td><td>3</td><td>100K</td><td><b>3.75</b></td></tr><tr class=""><td>13</td><td><b>Backflow prevention tester (state test forms)</b></td><td>보험·검사</td><td>45-120*</td><td>본인</td><td>4</td><td>45K</td><td><b>3.65</b></td></tr><tr class=""><td>14</td><td><b>Chimney sweep / septic service</b></td><td>트레이드</td><td>45-120*</td><td>본인</td><td>3</td><td>18K</td><td><b>3.65</b></td></tr><tr class=""><td>15</td><td><b>Commissioning agent (Cx issues log, functional test…</b></td><td>보험·검사</td><td>120-240*</td><td>회사</td><td>5</td><td>12K</td><td><b>3.60</b></td></tr><tr class=""><td>16</td><td><b>Property manager / leasing agent (move-in, move-out…</b></td><td>환경·부동산·서비스</td><td>30-120*</td><td>회사</td><td>3</td><td>300K</td><td><b>3.60</b></td></tr><tr class=""><td>17</td><td><b>HOA / community association manager (site inspectio…</b></td><td>환경·부동산·서비스</td><td>60-120*</td><td>회사</td><td>2</td><td>125K</td><td><b>3.60</b></td></tr><tr class=""><td>18</td><td><b>Phase I ESA field assessor / Environmental Professi…</b></td><td>환경·부동산·서비스</td><td>120-240*</td><td>회사</td><td>3</td><td>14K</td><td><b>3.45</b></td></tr><tr class=""><td>19</td><td><b>Aviation A&amp;P mechanic</b></td><td>차량·운송</td><td>45-120*</td><td>회사</td><td>4</td><td>140K</td><td><b>3.30</b></td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">5 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">02 · SCORING · 20-38 / 73</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>20~38위: <span class="hl">회사 결제 + 시스템 락인</span>이 공통 감점 요인.</h1>
+    <p class="sub">하루 문서 시간은 중간값 기준. 노란 줄 = 상위 12. 산식은 Appendix.</p>
+    <div class="card" style="flex:1;padding:12px 20px;"><table class="mx xxs"><thead><tr><th style="width:4%">#</th><th style="width:36%">세그먼트</th><th style="width:13%">클러스터</th><th style="width:13%">하루 문서(분)</th><th style="width:8%">결제</th><th style="width:8%">AI 경쟁</th><th style="width:8%">인원</th><th style="width:10%">점수</th></tr></thead><tbody><tr class=""><td>20</td><td><b>SWPPP stormwater inspector (CGP weekly + post-rain)</b></td><td>환경·부동산·서비스</td><td>90-180*</td><td>회사</td><td>4</td><td>28K</td><td><b>3.30</b></td></tr><tr class=""><td>21</td><td><b>Site safety manager (JHA, toolbox, OSHA 300/301)</b></td><td>건설·시설</td><td>60-120*</td><td>회사</td><td>3</td><td>115K</td><td><b>3.25</b></td></tr><tr class=""><td>22</td><td><b>Truck driver DVIR</b></td><td>차량·운송</td><td>10-30*</td><td>본인</td><td>3</td><td>2.0M</td><td><b>3.20</b></td></tr><tr class=""><td>23</td><td><b>Telecom / fiber / cable install tech (incl. 1099 su…</b></td><td>유틸리티·에너지</td><td>30-60*</td><td>본인</td><td>4</td><td>115K</td><td><b>3.20</b></td></tr><tr class=""><td>24</td><td><b>OEM field service engineer (medical / industrial /…</b></td><td>유틸리티·에너지</td><td>45-90*</td><td>혼합</td><td>4</td><td>45K</td><td><b>3.15</b></td></tr><tr class=""><td>25</td><td><b>Fire &amp; life safety ITM tech (NFPA 25, 72, 10, 96)</b></td><td>보험·검사</td><td>60-150*</td><td>회사</td><td>5</td><td>60K</td><td><b>3.15</b></td></tr><tr class=""><td>26</td><td><b>Property insurance staff field adjuster</b></td><td>보험·검사</td><td>120-240*</td><td>회사</td><td>6</td><td>300K</td><td><b>3.10</b></td></tr><tr class=""><td>27</td><td><b>Residential remodeler / small builder</b></td><td>건설·시설</td><td>30-60*</td><td>본인</td><td>3</td><td>225K</td><td><b>3.05</b></td></tr><tr class=""><td>28</td><td><b>Well site supervisor / company man (drilling, compl…</b></td><td>유틸리티·에너지</td><td>60-120*</td><td>혼합</td><td>4</td><td>18K</td><td><b>3.00</b></td></tr><tr class=""><td>29</td><td><b>Plumber (service)</b></td><td>트레이드</td><td>30-60*</td><td>회사</td><td>4</td><td>241K</td><td><b>3.00</b></td></tr><tr class=""><td>30</td><td><b>Auto mechanic, independent shop</b></td><td>차량·운송</td><td>40-90*</td><td>회사</td><td>5</td><td>400K</td><td><b>2.95</b></td></tr><tr class=""><td>31</td><td><b>Ag / construction equipment dealer field tech</b></td><td>차량·운송</td><td>30-90*</td><td>회사</td><td>3</td><td>190K</td><td><b>2.95</b></td></tr><tr class=""><td>32</td><td><b>Roofer / roofing estimator</b></td><td>트레이드</td><td>60-120*</td><td>회사</td><td>4</td><td>69K</td><td><b>2.95</b></td></tr><tr class=""><td>33</td><td><b>Water/fire restoration tech</b></td><td>트레이드</td><td>60-120*</td><td>회사</td><td>4</td><td>85K</td><td><b>2.95</b></td></tr><tr class=""><td>34</td><td><b>HVAC service tech</b></td><td>트레이드</td><td>30-60*</td><td>회사</td><td>6</td><td>209K</td><td><b>2.85</b></td></tr><tr class=""><td>35</td><td><b>Appliance repair tech</b></td><td>트레이드</td><td>30-60*</td><td>회사</td><td>2</td><td>40K</td><td><b>2.85</b></td></tr><tr class=""><td>36</td><td><b>Collision/auto body tech + estimator</b></td><td>차량·운송</td><td>60-180 estimato…</td><td>회사</td><td>4</td><td>155K</td><td><b>2.80</b></td></tr><tr class=""><td>37</td><td><b>Heavy-duty diesel / fleet tech</b></td><td>차량·운송</td><td>45-120*</td><td>회사</td><td>4</td><td>290K</td><td><b>2.80</b></td></tr><tr class=""><td>38</td><td><b>Health inspector / food safety auditor (third-party…</b></td><td>환경·부동산·서비스</td><td>90-180*</td><td>회사</td><td>2</td><td>20K</td><td><b>2.80</b></td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">6 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">02 · SCORING · 39-57 / 73</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>39~57위: <span class="hl">회사 결제 + 시스템 락인</span>이 공통 감점 요인.</h1>
+    <p class="sub">하루 문서 시간은 중간값 기준. 노란 줄 = 상위 12. 산식은 Appendix.</p>
+    <div class="card" style="flex:1;padding:12px 20px;"><table class="mx xxs"><thead><tr><th style="width:4%">#</th><th style="width:36%">세그먼트</th><th style="width:13%">클러스터</th><th style="width:13%">하루 문서(분)</th><th style="width:8%">결제</th><th style="width:8%">AI 경쟁</th><th style="width:8%">인원</th><th style="width:10%">점수</th></tr></thead><tbody><tr class=""><td>39</td><td><b>Commercial janitorial supervisor</b></td><td>트레이드</td><td>30-90*</td><td>회사</td><td>3</td><td>2.3M</td><td><b>2.80</b></td></tr><tr class=""><td>40</td><td><b>Electrical sub foreman (T&amp;M, daily report)</b></td><td>건설·시설</td><td>60-70 (vendor:…</td><td>회사</td><td>3</td><td>80K</td><td><b>2.80</b></td></tr><tr class=""><td>41</td><td><b>Locksmith</b></td><td>트레이드</td><td>15-40*</td><td>본인</td><td>0</td><td>18K</td><td><b>2.75</b></td></tr><tr class=""><td>42</td><td><b>Wind turbine technician</b></td><td>유틸리티·에너지</td><td>30-60*</td><td>회사</td><td>4</td><td>12K</td><td><b>2.70</b></td></tr><tr class=""><td>43</td><td><b>Water / wastewater treatment plant operator</b></td><td>유틸리티·에너지</td><td>30-60*</td><td>혼합</td><td>4</td><td>120K</td><td><b>2.70</b></td></tr><tr class=""><td>44</td><td><b>Commercial property condition assessor (ASTM E2018…</b></td><td>보험·검사</td><td>180-300*</td><td>회사</td><td>4</td><td>6K</td><td><b>2.65</b></td></tr><tr class=""><td>45</td><td><b>Electrician (service)</b></td><td>트레이드</td><td>30-60*</td><td>회사</td><td>4</td><td>381K</td><td><b>2.65</b></td></tr><tr class=""><td>46</td><td><b>Assistant super / field engineer</b></td><td>건설·시설</td><td>45-90*</td><td>회사</td><td>3</td><td>115K</td><td><b>2.65</b></td></tr><tr class=""><td>47</td><td><b>QA/QC manager (ITPs, NCRs)</b></td><td>건설·시설</td><td>60-120*</td><td>회사</td><td>3</td><td>35K</td><td><b>2.65</b></td></tr><tr class=""><td>48</td><td><b>Hospital facilities tech (EOC rounds, life safety l…</b></td><td>건설·시설</td><td>45-90*</td><td>회사</td><td>2</td><td>70K</td><td><b>2.65</b></td></tr><tr class=""><td>49</td><td><b>Plant maintenance tech (PM WOs)</b></td><td>건설·시설</td><td>30-60*</td><td>회사</td><td>4</td><td>450K</td><td><b>2.65</b></td></tr><tr class=""><td>50</td><td><b>Pool service tech</b></td><td>트레이드</td><td>20-45*</td><td>회사</td><td>2</td><td>42K</td><td><b>2.55</b></td></tr><tr class=""><td>51</td><td><b>Dealership service tech (warranty 3C story)</b></td><td>차량·운송</td><td>30 (AutoSuccess…</td><td>회사</td><td>4</td><td>270K</td><td><b>2.50</b></td></tr><tr class=""><td>52</td><td><b>Utility lineworker (distribution/transmission, IOU,…</b></td><td>유틸리티·에너지</td><td>25-45*</td><td>회사</td><td>4</td><td>122K</td><td><b>2.50</b></td></tr><tr class=""><td>53</td><td><b>Insurance loss control / underwriting field inspect…</b></td><td>보험·검사</td><td>90-180*</td><td>회사</td><td>5</td><td>22K</td><td><b>2.50</b></td></tr><tr class=""><td>54</td><td><b>Municipal building / code inspector</b></td><td>보험·검사</td><td>60-120*</td><td>회사</td><td>4</td><td>140K</td><td><b>2.50</b></td></tr><tr class=""><td>55</td><td><b>GC superintendent (daily log)</b></td><td>건설·시설</td><td>30-60*</td><td>회사</td><td>5</td><td>200K</td><td><b>2.50</b></td></tr><tr class=""><td>56</td><td><b>Mechanical/plumbing sub foreman</b></td><td>건설·시설</td><td>45-70*</td><td>회사</td><td>3</td><td>70K</td><td><b>2.50</b></td></tr><tr class=""><td>57</td><td><b>Framing/drywall foreman</b></td><td>건설·시설</td><td>15-30*</td><td>회사</td><td>0</td><td>55K</td><td><b>2.50</b></td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">7 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">02 · SCORING · 58-73 / 73</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>58~73위: <span class="hl">회사 결제 + 시스템 락인</span>이 공통 감점 요인.</h1>
+    <p class="sub">하루 문서 시간은 중간값 기준. 노란 줄 = 상위 12. 산식은 Appendix.</p>
+    <div class="card" style="flex:1;padding:12px 20px;"><table class="mx xxs"><thead><tr><th style="width:4%">#</th><th style="width:36%">세그먼트</th><th style="width:13%">클러스터</th><th style="width:13%">하루 문서(분)</th><th style="width:8%">결제</th><th style="width:8%">AI 경쟁</th><th style="width:8%">인원</th><th style="width:10%">점수</th></tr></thead><tbody><tr class=""><td>58</td><td><b>Apartment maintenance tech (WOs, make-ready)</b></td><td>건설·시설</td><td>30-60*</td><td>회사</td><td>2</td><td>250K</td><td><b>2.50</b></td></tr><tr class=""><td>59</td><td><b>Commercial building engineer (rounds/chiller logs)</b></td><td>건설·시설</td><td>40-80*</td><td>회사</td><td>3</td><td>55K</td><td><b>2.50</b></td></tr><tr class=""><td>60</td><td><b>Solar installer (residential/commercial PV)</b></td><td>유틸리티·에너지</td><td>30-60*</td><td>혼합</td><td>4</td><td>25K</td><td><b>2.40</b></td></tr><tr class=""><td>61</td><td><b>Oil &amp; gas pumper / lease operator</b></td><td>유틸리티·에너지</td><td>30-60*</td><td>혼합</td><td>5</td><td>12K</td><td><b>2.40</b></td></tr><tr class=""><td>62</td><td><b>Solar O&amp;M technician (utility-scale/C&amp;I site inspec…</b></td><td>유틸리티·에너지</td><td>45-90*</td><td>회사</td><td>3</td><td>12K</td><td><b>2.35</b></td></tr><tr class=""><td>63</td><td><b>Special inspector / materials testing (IBC Ch.17 da…</b></td><td>보험·검사</td><td>45-90*</td><td>회사</td><td>3</td><td>30K</td><td><b>2.35</b></td></tr><tr class=""><td>64</td><td><b>Land surveyor field crew (party chief field notes)</b></td><td>환경·부동산·서비스</td><td>20-60*</td><td>회사</td><td>1</td><td>50K</td><td><b>2.35</b></td></tr><tr class=""><td>65</td><td><b>Home health aides and visiting nurses (visit notes,…</b></td><td>환경·부동산·서비스</td><td>50 (mean, obser…</td><td>회사</td><td>1</td><td>4.0M</td><td><b>2.35</b></td></tr><tr class=""><td>66</td><td><b>Hotel engineering tech</b></td><td>건설·시설</td><td>30-45*</td><td>회사</td><td>2</td><td>80K</td><td><b>2.35</b></td></tr><tr class=""><td>67</td><td><b>Tire / quick lube tech</b></td><td>차량·운송</td><td>20-60*</td><td>회사</td><td>2</td><td>105K</td><td><b>2.20</b></td></tr><tr class=""><td>68</td><td><b>Landscaping / irrigation tech</b></td><td>트레이드</td><td>15-45*</td><td>회사</td><td>3</td><td>975K</td><td><b>2.20</b></td></tr><tr class=""><td>69</td><td><b>Concrete foreman (pour logs)</b></td><td>건설·시설</td><td>25-45*</td><td>회사</td><td>2</td><td>30K</td><td><b>2.20</b></td></tr><tr class=""><td>70</td><td><b>School district maintenance</b></td><td>건설·시설</td><td>20-40*</td><td>회사</td><td>1</td><td>140K</td><td><b>2.20</b></td></tr><tr class=""><td>71</td><td><b>Elevator mechanic (installer/repairer)</b></td><td>유틸리티·에너지</td><td>30-60*</td><td>회사</td><td>3</td><td>24K</td><td><b>2.05</b></td></tr><tr class=""><td>72</td><td><b>Garage door tech</b></td><td>트레이드</td><td>25-50*</td><td>회사</td><td>3</td><td>25K</td><td><b>2.05</b></td></tr><tr class=""><td>73</td><td><b>Heavy civil foreman (equipment hours, daily)</b></td><td>건설·시설</td><td>15-30</td><td>회사</td><td>3</td><td>60K</td><td><b>1.90</b></td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">8 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 트레이드 (1/3)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>트레이드: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Handyman</b><br><span style="font-size:15px;color:#9A9A94">#10 · 1.5M명</span></td><td style="font-size:17px;line-height:1.35">Estimate / punch list walkthrough <span style="color:#9A9A94">(2-4 per day, 10-20*분)</span><br>Job completion summary w/ before-after phot… <span style="color:#9A9A94">(2-5 per day, 5-10*분)</span></td><td>30-60*</td><td style="font-size:17px">Jobber AI Voice (quotes), CompanyCam Walkthrough Note, Jois…</td></tr><tr class=""><td><b style="font-size:19px">Chimney sweep / septic service</b><br><span style="font-size:15px;color:#9A9A94">#14 · 18K명</span></td><td style="font-size:17px;line-height:1.35">NFPA 211 Level 1/2 chimney inspection repor… <span style="color:#9A9A94">(2-4 per day in fall…, 20-30 handwri…분)</span><br>Septic pumping / inspection report <span style="color:#9A9A94">(2-5 per day, 10-20*분)</span></td><td>45-120*</td><td style="font-size:17px">FlueReport, ProField ($19.99/mo AI reports), ReportWalk (vo…</td></tr><tr class=""><td><b style="font-size:19px">Plumber</b><br><span style="font-size:15px;color:#9A9A94">#29 · 241K명</span></td><td style="font-size:17px;line-height:1.35">Job ticket / invoice with parts used <span style="color:#9A9A94">(3-6 per day, 5-10*분)</span><br>Camera inspection / sewer scope report <span style="color:#9A9A94">(0-2 per day, 10-20*분)</span><br>Estimate / options <span style="color:#9A9A94">(1-3 per day, 5-15*분)</span></td><td>30-60*</td><td style="font-size:17px">Onsite, Jobber AI Voice (quotes), ServiceTitan Atlas, Compa…</td></tr><tr class=""><td><b style="font-size:19px">Roofer / roofing estimator</b><br><span style="font-size:15px;color:#9A9A94">#32 · 69K명</span></td><td style="font-size:17px;line-height:1.35">Roof inspection report (20-40 photos, slope… <span style="color:#9A9A94">(2-5 per day, 20-40*분)</span><br>Estimate / supplement <span style="color:#9A9A94">(1-3 per day, 20-60*분)</span><br>Job completion / install photo report <span style="color:#9A9A94">(1 per job, 10-15*분)</span></td><td>60-120*</td><td style="font-size:17px">CompanyCam Walkthrough Note / AI, LossNarrative, Roofr AI,…</td></tr><tr class=""><td><b style="font-size:19px">Water/fire restoration tech</b><br><span style="font-size:15px;color:#9A9A94">#33 · 85K명</span></td><td style="font-size:17px;line-height:1.35">Daily dry log / moisture map / psychrometri… <span style="color:#9A9A94">(each monitoring vis…, 15-30*분)</span><br>Initial loss assessment / scope notes + pho… <span style="color:#9A9A94">(1-2 per day, 30-60*분)</span><br>Equipment log / contents inventory <span style="color:#9A9A94">(per job, 10-30*분)</span></td><td>60-120*</td><td style="font-size:17px">Encircle AI (video summaries, Hydro OCR, Scope), DocuSketch…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">9 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 트레이드 (2/3)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>트레이드: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">HVAC service tech</b><br><span style="font-size:15px;color:#9A9A94">#34 · 209K명</span></td><td style="font-size:17px;line-height:1.35">Service ticket / job notes <span style="color:#9A9A94">(3-6 per day, 5-10 each*분)</span><br>Maintenance checklist / readings (delta-T,… <span style="color:#9A9A94">(1-4 per day, 5-8*분)</span><br>Repair estimate / option sheet <span style="color:#9A9A94">(1-3 per day, 5-15*분)</span></td><td>30-60*</td><td style="font-size:17px">ServiceScribe, FixAIR, JobScribe, Onsite, ServiceTitan Atla…</td></tr><tr class=""><td><b style="font-size:19px">Appliance repair tech</b><br><span style="font-size:15px;color:#9A9A94">#35 · 40K명</span></td><td style="font-size:17px;line-height:1.35">Work order notes (complaint, fault code, di… <span style="color:#9A9A94">(5-8 per day, 3-8*분)</span><br>Warranty claim submission with photos/model… <span style="color:#9A9A94">(2-5 per day, 5-15*분)</span></td><td>30-60*</td><td style="font-size:17px">WorkReceipt, Onsite</td></tr><tr class=""><td><b style="font-size:19px">Commercial janitorial supervisor</b><br><span style="font-size:15px;color:#9A9A94">#39 · 2.3M명</span></td><td style="font-size:17px;line-height:1.35">Site quality inspection checklist (ISSA/APP… <span style="color:#9A9A94">(3-8 per shift, 5-15*분)</span><br>Corrective action / incident report <span style="color:#9A9A94">(1-3 per shift, 5*분)</span></td><td>30-90*</td><td style="font-size:17px">OrangeQC, InspectWrk (voice notes), Swept</td></tr><tr class=""><td><b style="font-size:19px">Locksmith</b><br><span style="font-size:15px;color:#9A9A94">#41 · 18K명</span></td><td style="font-size:17px;line-height:1.35">Job ticket / invoice <span style="color:#9A9A94">(4-10 per day, 2-5*분)</span><br>Key/master-key schedule, access control rec… <span style="color:#9A9A94">(weekly, 15-60*분)</span></td><td>15-40*</td><td style="font-size:17px">없음</td></tr><tr class=""><td><b style="font-size:19px">Electrician</b><br><span style="font-size:15px;color:#9A9A94">#45 · 381K명</span></td><td style="font-size:17px;line-height:1.35">Service ticket / invoice <span style="color:#9A9A94">(2-5 per day, 5-10*분)</span><br>Panel / safety inspection report with photos <span style="color:#9A9A94">(0-2 per day, 10-20*분)</span><br>Estimate / quote <span style="color:#9A9A94">(1-3 per day, 10-20*분)</span></td><td>30-60*</td><td style="font-size:17px">Onsite, Benetics (EU), Jobber AI Voice, CompanyCam Walkthro…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">10 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 트레이드 (3/3)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>트레이드: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Pool service tech</b><br><span style="font-size:15px;color:#9A9A94">#50 · 42K명</span></td><td style="font-size:17px;line-height:1.35">Chemical readings / dosage log per stop <span style="color:#9A9A94">(10-20 stops per day, 1-3 each*분)</span><br>Service email / proof-of-service with photos <span style="color:#9A9A94">(per stop, 1-2*분)</span><br>Repair quote / equipment issue note <span style="color:#9A9A94">(1-3 per day, 5-10*분)</span></td><td>20-45*</td><td style="font-size:17px">Skimmer (dosing calculator, LaMotte sync), Pool Brain</td></tr><tr class=""><td><b style="font-size:19px">Landscaping / irrigation tech</b><br><span style="font-size:15px;color:#9A9A94">#68 · 975K명</span></td><td style="font-size:17px;line-height:1.35">Irrigation inspection / zone audit report <span style="color:#9A9A94">(2-5 per day (irriga…, 10-20*분)</span><br>Crew visit notes / property walk report <span style="color:#9A9A94">(daily, 5-15*분)</span><br>Pesticide application record <span style="color:#9A9A94">(per application, 5*분)</span></td><td>15-45*</td><td style="font-size:17px">Aspire/ServiceTitan AI, Jobber AI Voice, LMN</td></tr><tr class=""><td><b style="font-size:19px">Garage door tech</b><br><span style="font-size:15px;color:#9A9A94">#72 · 25K명</span></td><td style="font-size:17px;line-height:1.35">Service ticket / safety inspection (springs… <span style="color:#9A9A94">(4-8 per day, 3-8*분)</span><br>Repair/replace quote with options <span style="color:#9A9A94">(2-4 per day, 5-10*분)</span></td><td>25-50*</td><td style="font-size:17px">Onsite, ServiceTitan Atlas, Jobber AI Voice</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">11 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 건설·시설 (1/3)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>건설·시설: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Facility maintenance vendor for retail/…</b><br><span style="font-size:15px;color:#9A9A94">#11 · 175K명</span></td><td style="font-size:17px;line-height:1.35">WO notes (found / did / recommend) + before… <span style="color:#9A9A94">(3-6 per day, 5-10 each분)</span><br>Check-in/out + root cause/resolution codes <span style="color:#9A9A94">(per visit, 2-3분)</span><br>Quote / NTE increase request <span style="color:#9A9A94">(weekly, 15-30분)</span></td><td>30-60*</td><td style="font-size:17px">ServiceChannel native, ServiceScribe/FixAIR (HVAC)</td></tr><tr class=""><td><b style="font-size:19px">Site safety manager</b><br><span style="font-size:15px;color:#9A9A94">#21 · 115K명</span></td><td style="font-size:17px;line-height:1.35">JHA / pre-task plan review <span style="color:#9A9A94">(every shift, 10-30분)</span><br>Toolbox talk record <span style="color:#9A9A94">(weekly, 15분)</span><br>Incident report (OSHA 301) <span style="color:#9A9A94">(ad hoc, 45-90*분)</span></td><td>60-120*</td><td style="font-size:17px">SafetyCulture AI, Procore, Mitti</td></tr><tr class=""><td><b style="font-size:19px">Residential remodeler / small builder</b><br><span style="font-size:15px;color:#9A9A94">#27 · 225K명</span></td><td style="font-size:17px;line-height:1.35">Client update with photos <span style="color:#9A9A94">(weekly to daily, 15-30분)</span><br>Daily log <span style="color:#9A9A94">(daily, 10-20분)</span><br>Change order / punch list <span style="color:#9A9A94">(weekly, 20-40분)</span></td><td>30-60*</td><td style="font-size:17px">CompanyCam AI (Crew $119+), Buildertrend AI, JobTread</td></tr><tr class=""><td><b style="font-size:19px">Electrical sub foreman</b><br><span style="font-size:15px;color:#9A9A94">#40 · 80K명</span></td><td style="font-size:17px;line-height:1.35">Daily report <span style="color:#9A9A94">(daily, 15-30분)</span><br>T&amp;M ticket <span style="color:#9A9A94">(0-3 per day, 10-20 each분)</span><br>Change order backup <span style="color:#9A9A94">(weekly, 30+분)</span></td><td>60-70 (vendor: 5-8…</td><td style="font-size:17px">Fieldwire Field Intelligence, Raken AI summary, Rhumbix</td></tr><tr class=""><td><b style="font-size:19px">Assistant super / field engineer</b><br><span style="font-size:15px;color:#9A9A94">#46 · 115K명</span></td><td style="font-size:17px;line-height:1.35">Daily log (delegated by super) <span style="color:#9A9A94">(daily, 20-40*분)</span><br>RFI drafts / field observations <span style="color:#9A9A94">(2-5 per week, 15-30 each*분)</span><br>Punch / QC walk notes <span style="color:#9A9A94">(weekly, 30-60*분)</span></td><td>45-90*</td><td style="font-size:17px">Procore agents, Hardline (RFIs, minutes), Trunk Tools</td></tr><tr class=""><td><b style="font-size:19px">QA/QC manager</b><br><span style="font-size:15px;color:#9A9A94">#47 · 35K명</span></td><td style="font-size:17px;line-height:1.35">Inspection checklist / test record <span style="color:#9A9A94">(daily, 20-60*분)</span><br>NCR <span style="color:#9A9A94">(weekly, 30-60*분)</span></td><td>60-120*</td><td style="font-size:17px">Procore, ReportWalk, SafetyCulture</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">12 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 건설·시설 (2/3)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>건설·시설: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Hospital facilities tech</b><br><span style="font-size:15px;color:#9A9A94">#48 · 70K명</span></td><td style="font-size:17px;line-height:1.35">Life safety inspection logs (extinguishers… <span style="color:#9A9A94">(daily-weekly, 30-60*분)</span><br>EOC rounds findings <span style="color:#9A9A94">(every other week (e…, 60-120분)</span></td><td>45-90*</td><td style="font-size:17px">Tracers with AMP, enterprise CMMS</td></tr><tr class=""><td><b style="font-size:19px">Plant maintenance tech</b><br><span style="font-size:15px;color:#9A9A94">#49 · 450K명</span></td><td style="font-size:17px;line-height:1.35">PM / corrective WO close notes <span style="color:#9A9A94">(3-8 per shift, 5-10 each분)</span><br>Shift handover log <span style="color:#9A9A94">(per shift, 10-15분)</span><br>LOTO / downtime report <span style="color:#9A9A94">(ad hoc, 15-30분)</span></td><td>30-60*</td><td style="font-size:17px">MaintainX Assist, Limble AI, UpKeep, Fiix</td></tr><tr class=""><td><b style="font-size:19px">GC superintendent</b><br><span style="font-size:15px;color:#9A9A94">#55 · 200K명</span></td><td style="font-size:17px;line-height:1.35">Daily log <span style="color:#9A9A94">(daily, 20-45*분)</span><br>Punch list <span style="color:#9A9A94">(closeout, weekly in…, 30-120 per wa…분)</span><br>Safety/toolbox sign-off <span style="color:#9A9A94">(weekly, 10-15*분)</span></td><td>30-60*</td><td style="font-size:17px">Procore Daily Log Agent, Hardline, BuildLog, Daily Report (…</td></tr><tr class=""><td><b style="font-size:19px">Mechanical/plumbing sub foreman</b><br><span style="font-size:15px;color:#9A9A94">#56 · 70K명</span></td><td style="font-size:17px;line-height:1.35">Daily report <span style="color:#9A9A94">(daily, 15-30분)</span><br>T&amp;M ticket <span style="color:#9A9A94">(0-3 per day, 10-20 each분)</span><br>Pressure/test reports <span style="color:#9A9A94">(per system, 15-30*분)</span></td><td>45-70*</td><td style="font-size:17px">Fieldwire, Raken, Procore agents</td></tr><tr class=""><td><b style="font-size:19px">Framing/drywall foreman</b><br><span style="font-size:15px;color:#9A9A94">#57 · 55K명</span></td><td style="font-size:17px;line-height:1.35">Daily report <span style="color:#9A9A94">(daily, 10-20*분)</span><br>T&amp;M / backcharge dispute photos <span style="color:#9A9A94">(weekly, 15-30*분)</span></td><td>15-30*</td><td style="font-size:17px">없음</td></tr><tr class=""><td><b style="font-size:19px">Apartment maintenance tech</b><br><span style="font-size:15px;color:#9A9A94">#58 · 250K명</span></td><td style="font-size:17px;line-height:1.35">Work order close-out notes <span style="color:#9A9A94">(5-15 per day, 2-5 each분)</span><br>Make-ready/turn checklist <span style="color:#9A9A94">(weekly per unit, 15-30분)</span></td><td>30-60*</td><td style="font-size:17px">AppFolio Realm-X Maintenance Performer, Yardi</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">13 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 건설·시설 (3/3)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>건설·시설: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Commercial building engineer</b><br><span style="font-size:15px;color:#9A9A94">#59 · 55K명</span></td><td style="font-size:17px;line-height:1.35">Rounds log (chiller/boiler readings) <span style="color:#9A9A94">(1-3 per shift, 20-60분)</span><br>Tenant WO notes <span style="color:#9A9A94">(several per day, 3-5분)</span><br>LOTO record <span style="color:#9A9A94">(ad hoc, 10-15분)</span></td><td>40-80*</td><td style="font-size:17px">Pocket Engineer, Building Engines, Mitti</td></tr><tr class=""><td><b style="font-size:19px">Hotel engineering tech</b><br><span style="font-size:15px;color:#9A9A94">#66 · 80K명</span></td><td style="font-size:17px;line-height:1.35">Guest-room WO close <span style="color:#9A9A94">(10-20 per day, 1-3 each분)</span><br>PM / room PM checklist <span style="color:#9A9A94">(daily, 15-30분)</span></td><td>30-45*</td><td style="font-size:17px">Alice/Actabl, Quore</td></tr><tr class=""><td><b style="font-size:19px">Concrete foreman</b><br><span style="font-size:15px;color:#9A9A94">#69 · 30K명</span></td><td style="font-size:17px;line-height:1.35">Pour log (yards, slump, temp, truck tickets… <span style="color:#9A9A94">(per pour, several p…, 15-30*분)</span><br>Daily report + timecard <span style="color:#9A9A94">(daily, 10-20분)</span></td><td>25-45*</td><td style="font-size:17px">HCSS, Raken</td></tr><tr class=""><td><b style="font-size:19px">School district maintenance</b><br><span style="font-size:15px;color:#9A9A94">#70 · 140K명</span></td><td style="font-size:17px;line-height:1.35">Work order close <span style="color:#9A9A94">(4-10 per day, 2-5 each분)</span><br>Playground/AHERA/fire inspections <span style="color:#9A9A94">(monthly-annual, 30-60분)</span></td><td>20-40*</td><td style="font-size:17px">Brightly (Siemens)</td></tr><tr class=""><td><b style="font-size:19px">Heavy civil foreman</b><br><span style="font-size:15px;color:#9A9A94">#73 · 60K명</span></td><td style="font-size:17px;line-height:1.35">Daily timecard (crew, equipment hours, quan… <span style="color:#9A9A94">(daily, 10 or less wi…분)</span><br>Daily diary <span style="color:#9A9A94">(daily, 5-15분)</span></td><td>15-30</td><td style="font-size:17px">HCSS, BuildLog (civil), B2W</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">14 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 차량·운송 (1/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>차량·운송: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class="us"><td><b style="font-size:19px">RV / marine tech</b><br><span style="font-size:15px;color:#9A9A94">#5 · 45K명</span></td><td style="font-size:17px;line-height:1.35">Work order notes + photo inspection <span style="color:#9A9A94">(2-5 per day, 5-15*분)</span><br>Pre-purchase / condition inspection report <span style="color:#9A9A94">(weekly, 30-90*분)</span></td><td>30-90*</td><td style="font-size:17px">Jobber AI, Housecall Pro AI</td></tr><tr class="us"><td><b style="font-size:19px">Insurance auto damage appraiser</b><br><span style="font-size:15px;color:#9A9A94">#7 · 12K명</span></td><td style="font-size:17px;line-height:1.35">Field inspection photo set + damage notes <span style="color:#9A9A94">(4-10 per day, 15-30*분)</span><br>Estimate + narrative report <span style="color:#9A9A94">(4-10 per day, 20-45*분)</span></td><td>90-240*</td><td style="font-size:17px">Tractable, CCC AI photo estimating, Mitchell, Snapsheet, Cl…</td></tr><tr class=""><td><b style="font-size:19px">Aviation A&amp;P mechanic</b><br><span style="font-size:15px;color:#9A9A94">#19 · 140K명</span></td><td style="font-size:17px;line-height:1.35">Logbook / maintenance record entry <span style="color:#9A9A94">(2-6 per day, 10-30*분)</span><br>Discrepancy write-ups / squawk list <span style="color:#9A9A94">(3-10 per day, 3-10*분)</span><br>Annual/100-hr return-to-service write-up <span style="color:#9A9A94">(0-1 per day, 30-60분)</span></td><td>45-120*</td><td style="font-size:17px">Cloudline, AOGcore, Veryon AI, Quantum MX auto-logbook</td></tr><tr class=""><td><b style="font-size:19px">Truck driver DVIR</b><br><span style="font-size:15px;color:#9A9A94">#22 · 2.0M명</span></td><td style="font-size:17px;line-height:1.35">Pre-trip / post-trip DVIR <span style="color:#9A9A94">(1-2 per day, 5-15*분)</span><br>Damage/incident report with photos <span style="color:#9A9A94">(occasional, 10-20*분)</span></td><td>10-30*</td><td style="font-size:17px">Motive AI, Samsara AI, Whip Around</td></tr><tr class=""><td><b style="font-size:19px">Auto mechanic, independent shop</b><br><span style="font-size:15px;color:#9A9A94">#30 · 400K명</span></td><td style="font-size:17px;line-height:1.35">Repair order 3C notes (concern/cause/correc… <span style="color:#9A9A94">(5-6 per day, 5-10분)</span><br>Digital vehicle inspection (DVI) with photos <span style="color:#9A9A94">(4-8 per day, 5-10*분)</span></td><td>40-90*</td><td style="font-size:17px">Wrench Voice, Tekmetric AI, Shopmonkey AI, AutoVitals AI, B…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">15 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 차량·운송 (2/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>차량·운송: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Ag / construction equipment dealer fiel…</b><br><span style="font-size:15px;color:#9A9A94">#31 · 190K명</span></td><td style="font-size:17px;line-height:1.35">Field service report (FSR) <span style="color:#9A9A94">(1-3 per day, 15-30*분)</span><br>Inspection / PM checklist with photos <span style="color:#9A9A94">(1-3 per day, 10-20*분)</span></td><td>30-90*</td><td style="font-size:17px">VitalEdge AI, Salesforce Field Service Einstein, Aquant</td></tr><tr class=""><td><b style="font-size:19px">Collision/auto body tech + estimator</b><br><span style="font-size:15px;color:#9A9A94">#36 · 155K명</span></td><td style="font-size:17px;line-height:1.35">Estimate / supplement with photo set <span style="color:#9A9A94">(3-8 per day (estima…, 20-60*분)</span><br>Tech repair notes, pre/post scan docs <span style="color:#9A9A94">(3-6 per day, 5-10*분)</span></td><td>60-180 estimators,…</td><td style="font-size:17px">CCC AI / Estimate-STP, Mitchell Intelligent Estimating, Tra…</td></tr><tr class=""><td><b style="font-size:19px">Heavy-duty diesel / fleet tech</b><br><span style="font-size:15px;color:#9A9A94">#37 · 290K명</span></td><td style="font-size:17px;line-height:1.35">PM inspection checklist + work order notes <span style="color:#9A9A94">(3-6 per day, 10-20*분)</span><br>DOT annual inspection report <span style="color:#9A9A94">(0-2 per day, 20-40*분)</span><br>DVIR defect repair certification <span style="color:#9A9A94">(2-5 per day, 2-5*분)</span></td><td>45-120*</td><td style="font-size:17px">Fleetio AI, Samsara AI, Decisiv, Wrench Voice</td></tr><tr class=""><td><b style="font-size:19px">Dealership service tech</b><br><span style="font-size:15px;color:#9A9A94">#51 · 270K명</span></td><td style="font-size:17px;line-height:1.35">Warranty RO story (3C, DTCs, test results) <span style="color:#9A9A94">(~5 cars x 2 stories…, 3-5분)</span><br>Customer pay RO notes / MPI <span style="color:#9A9A94">(3-6 per day, 2-5*분)</span></td><td>30 (AutoSuccess est…</td><td style="font-size:17px">Wrench Voice, Bayworks, Tekion AI, CDK AI</td></tr><tr class=""><td><b style="font-size:19px">Tire / quick lube tech</b><br><span style="font-size:15px;color:#9A9A94">#67 · 105K명</span></td><td style="font-size:17px;line-height:1.35">Multi-point inspection checklist <span style="color:#9A9A94">(15-30 per day, 1-3*분)</span><br>Tire torque / TPMS record <span style="color:#9A9A94">(10-25 per day, 1*분)</span></td><td>20-60*</td><td style="font-size:17px">AutoVitals, UVeye drive-through scanning</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">16 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 보험·검사 (1/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>보험·검사: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class="us"><td><b style="font-size:19px">Independent adjuster / CAT adjuster</b><br><span style="font-size:15px;color:#9A9A94">#2 · 80K명</span></td><td style="font-size:17px;line-height:1.35">Xactimate estimate + sketch <span style="color:#9A9A94">(per claim (5-10 cla…, 20-120분)</span><br>Narrative report (first report / final repo… <span style="color:#9A9A94">(per claim, 15-30분)</span><br>Photo report with captions <span style="color:#9A9A94">(per claim, 15-30분)</span></td><td>180-300 (often nigh…</td><td style="font-size:17px">Verisk XactAI, Hover, Encircle, Tractable, Plnar, ClaimGeni…</td></tr><tr class="us"><td><b style="font-size:19px">Public adjuster</b><br><span style="font-size:15px;color:#9A9A94">#3 · 20K명</span></td><td style="font-size:17px;line-height:1.35">Loss inspection notes + scope <span style="color:#9A9A94">(per claim, 30-60분)</span><br>Xactimate estimate <span style="color:#9A9A94">(per claim, 60-240분)</span><br>Sworn proof of loss + supplement/demand let… <span style="color:#9A9A94">(per claim, 30-60분)</span></td><td>120-240*</td><td style="font-size:17px">ClaimWizard AI, Encircle, Hover, Cotality/CoreLogic</td></tr><tr class="us"><td><b style="font-size:19px">Home inspector</b><br><span style="font-size:15px;color:#9A9A94">#8 · 35K명</span></td><td style="font-size:17px;line-height:1.35">Home inspection report (narrative + photos,… <span style="color:#9A9A94">(1-2/day, 30-180분)</span><br>Wind mitigation / 4-point insurance forms (… <span style="color:#9A9A94">(add-on, 15-30분)</span><br>Inspection agreement / summary repair list <span style="color:#9A9A94">(per job, 5-15분)</span></td><td>60-180</td><td style="font-size:17px">Spectora AI features, HomeGauge AI, Inspectify, Scout (AI r…</td></tr><tr class=""><td><b style="font-size:19px">Backflow prevention tester</b><br><span style="font-size:15px;color:#9A9A94">#13 · 45K명</span></td><td style="font-size:17px;line-height:1.35">Backflow assembly test report (purveyor-spe… <span style="color:#9A9A94">(5-20 tests/day, 5-10분)</span><br>Repair/fail report <span style="color:#9A9A94">(as needed, 10분)</span><br>Test kit calibration certificate <span style="color:#9A9A94">(annual, 15분)</span></td><td>45-120*</td><td style="font-size:17px">Syncta, SwiftComply, BSI, Tokay</td></tr><tr class=""><td><b style="font-size:19px">Commissioning agent</b><br><span style="font-size:15px;color:#9A9A94">#15 · 12K명</span></td><td style="font-size:17px;line-height:1.35">Cx issues log entries <span style="color:#9A9A94">(5-30/site visit, 3-5 each분)</span><br>Functional performance test forms <span style="color:#9A9A94">(per equipment, 30-60분)</span><br>Site visit report <span style="color:#9A9A94">(per visit, 30-90분)</span></td><td>120-240*</td><td style="font-size:17px">PingCx, CxAlloy, Bluerithm, Facility Grid, Helonic</td></tr><tr class=""><td><b style="font-size:19px">Fire &amp; life safety ITM tech</b><br><span style="font-size:15px;color:#9A9A94">#25 · 60K명</span></td><td style="font-size:17px;line-height:1.35">NFPA 25 sprinkler ITM report <span style="color:#9A9A94">(2-6/day, 15-45분)</span><br>NFPA 72 fire alarm ITM report (device-by-de… <span style="color:#9A9A94">(1-3/day, 30-90분)</span><br>Extinguisher / hood (NFPA 10/96) tags + rep… <span style="color:#9A9A94">(10-30 sites/day, 3-10 each분)</span></td><td>60-150*</td><td style="font-size:17px">Inspect Point, BuildingReports, Uptick, ServiceTrade, ZenFi…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">17 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 보험·검사 (2/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>보험·검사: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Property insurance staff field adjuster</b><br><span style="font-size:15px;color:#9A9A94">#26 · 300K명</span></td><td style="font-size:17px;line-height:1.35">Field inspection report / scope notes <span style="color:#9A9A94">(per claim (3-6/day), 15-30분)</span><br>Xactimate estimate + sketch <span style="color:#9A9A94">(per claim, 20-60분)</span><br>Activity log / file notes <span style="color:#9A9A94">(per contact, 5-10분)</span></td><td>120-240*</td><td style="font-size:17px">Xactimate AI / Verisk XactAI, CoreLogic Mobile Claims AI, H…</td></tr><tr class=""><td><b style="font-size:19px">Commercial property condition assessor</b><br><span style="font-size:15px;color:#9A9A94">#44 · 6K명</span></td><td style="font-size:17px;line-height:1.35">PCA report (PCR) with immediate/short-term… <span style="color:#9A9A94">(1 site/1-2 days, 240-600분)</span><br>Site walk notes + photo log <span style="color:#9A9A94">(per site, 60-120분)</span><br>Opinions of probable cost / reserve table <span style="color:#9A9A94">(per site, 60-120분)</span></td><td>180-300*</td><td style="font-size:17px">Partner ESI tools, SiteCapture, Fulcrum, Bluebeam</td></tr><tr class=""><td><b style="font-size:19px">Insurance loss control / underwriting f…</b><br><span style="font-size:15px;color:#9A9A94">#53 · 22K명</span></td><td style="font-size:17px;line-height:1.35">Exterior underwriting inspection report (ph… <span style="color:#9A9A94">(per inspection (5-1…, 10-20분)</span><br>Commercial loss control survey with recomme… <span style="color:#9A9A94">(per account (1-3/da…, 60-120분)</span><br>Photo set with captions <span style="color:#9A9A94">(per inspection, 5-10분)</span></td><td>90-180*</td><td style="font-size:17px">Cape Analytics (aerial), Betterview / Nearmap, Zesty.ai, Fl…</td></tr><tr class=""><td><b style="font-size:19px">Municipal building / code inspector</b><br><span style="font-size:15px;color:#9A9A94">#54 · 140K명</span></td><td style="font-size:17px;line-height:1.35">Inspection result (pass/fail + correction n… <span style="color:#9A9A94">(per inspection (10-…, 3-10분)</span><br>Code enforcement violation notice + photos <span style="color:#9A9A94">(several/day, 15-30분)</span><br>Certificate of occupancy / final reports <span style="color:#9A9A94">(weekly, 15-30분)</span></td><td>60-120*</td><td style="font-size:17px">Accela AI, OpenGov, CivCheck, Clariti</td></tr><tr class=""><td><b style="font-size:19px">Special inspector / materials testing</b><br><span style="font-size:15px;color:#9A9A94">#63 · 30K명</span></td><td style="font-size:17px;line-height:1.35">Daily special inspection field report <span style="color:#9A9A94">(daily per site, 20-45분)</span><br>Concrete field test / cylinder log <span style="color:#9A9A94">(per pour, 10-20분)</span><br>Nonconformance report <span style="color:#9A9A94">(as needed, 15-30분)</span></td><td>45-90*</td><td style="font-size:17px">Fulcrum, Raken, SpectraQEST</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">18 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 유틸리티·에너지 (1/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>유틸리티·에너지: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Telecom / fiber / cable install tech</b><br><span style="font-size:15px;color:#9A9A94">#23 · 115K명</span></td><td style="font-size:17px;line-height:1.35">Job close-out notes + photo package (before… <span style="color:#9A9A94">(Per ticket, 3-8/day…, 5-15 each분)</span><br>Splice report / OTDR + as-built redline <span style="color:#9A9A94">(Per segment, 15-45*분)</span><br>Daily production sheet (footage per code) <span style="color:#9A9A94">(Daily, 10-20*분)</span></td><td>30-60*</td><td style="font-size:17px">Telecom Contractor Solutions (closeout tooling), CompanyCam…</td></tr><tr class=""><td><b style="font-size:19px">OEM field service engineer</b><br><span style="font-size:15px;color:#9A9A94">#24 · 45K명</span></td><td style="font-size:17px;line-height:1.35">Field service report (problem, diagnosis, w… <span style="color:#9A9A94">(Per visit, 1-4/day, 15-45*분)</span><br>PM checklist / calibration certificate <span style="color:#9A9A94">(Per PM, 15-30*분)</span><br>Expense/travel and parts return reports <span style="color:#9A9A94">(Daily/weekly, 10-20*분)</span></td><td>45-90*</td><td style="font-size:17px">ServiceMax AI, Salesforce Agentforce Field Service, summari…</td></tr><tr class=""><td><b style="font-size:19px">Well site supervisor / company man</b><br><span style="font-size:15px;color:#9A9A94">#28 · 18K명</span></td><td style="font-size:17px;line-height:1.35">Daily Well Operations Report / morning repo… <span style="color:#9A9A94">(Daily (often by 5-6…, 45-90*분)</span><br>IADC tour sheet review and sign-off <span style="color:#9A9A94">(Per tour (2-3/day), 10-20*분)</span><br>Safety meeting minutes, incident reports, B… <span style="color:#9A9A94">(Daily/as needed, 10-30*분)</span></td><td>60-120*</td><td style="font-size:17px">Pason/Corva (sensor-driven auto DDR), Peloton WellView, NOV…</td></tr><tr class=""><td><b style="font-size:19px">Wind turbine technician</b><br><span style="font-size:15px;color:#9A9A94">#42 · 12K명</span></td><td style="font-size:17px;line-height:1.35">Service Report Form (reason for visit, WO s… <span style="color:#9A9A94">(Per turbine visit,…, 15-30*분)</span><br>Annual/semi-annual maintenance checklist (t… <span style="color:#9A9A94">(Per turbine PM, 30-60*분)</span><br>Climb/rescue JHA, LOTO <span style="color:#9A9A94">(Daily, 10*분)</span></td><td>30-60*</td><td style="font-size:17px">Aerones/SkySpecs (blade AI, not reports), SafetyCulture AI,…</td></tr><tr class=""><td><b style="font-size:19px">Water / wastewater treatment plant oper…</b><br><span style="font-size:15px;color:#9A9A94">#43 · 120K명</span></td><td style="font-size:17px;line-height:1.35">Daily operating log / rounds (flows, chemic… <span style="color:#9A9A94">(Every shift, multip…, 20-45*분)</span><br>Monthly operating report (MOR)/DMR <span style="color:#9A9A94">(Monthly, 60-180*분)</span><br>Maintenance/repair notes <span style="color:#9A9A94">(Daily, 10-20*분)</span></td><td>30-60*</td><td style="font-size:17px">Hach WIMS, Klir, Jacobs/Aquatic Informatics, low voice-AI d…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">19 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 유틸리티·에너지 (2/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>유틸리티·에너지: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">Utility lineworker</b><br><span style="font-size:15px;color:#9A9A94">#52 · 122K명</span></td><td style="font-size:17px;line-height:1.35">Tailboard / job briefing form (OSHA 1910.26… <span style="color:#9A9A94">(1-4x/day (start of…, 10-15 each분)</span><br>Switching log / clearance (hold tag) record <span style="color:#9A9A94">(Per switching job, 5-10*분)</span><br>Daily time/production sheet, storm damage a… <span style="color:#9A9A94">(Daily; storm events, 10-20*분)</span></td><td>25-45*</td><td style="font-size:17px">ResilientGrid (AI job briefing), SafetyCulture AI, HCSS Saf…</td></tr><tr class=""><td><b style="font-size:19px">Solar installer</b><br><span style="font-size:15px;color:#9A9A94">#60 · 25K명</span></td><td style="font-size:17px;line-height:1.35">Install checklist + required photo set (arr… <span style="color:#9A9A94">(Per job, ~1/day, 20-40*분)</span><br>Commissioning report (inverter/battery) <span style="color:#9A9A94">(Per job, 10-20*분)</span><br>AHJ inspection correction notes <span style="color:#9A9A94">(Per failed inspecti…, 15-30*분)</span></td><td>30-60*</td><td style="font-size:17px">CompanyCam (AI on Crew tier), SiteCapture, Scoop, Aurora AI…</td></tr><tr class=""><td><b style="font-size:19px">Oil &amp; gas pumper / lease operator</b><br><span style="font-size:15px;color:#9A9A94">#61 · 12K명</span></td><td style="font-size:17px;line-height:1.35">Daily gauge report / route sheet (tank leve… <span style="color:#9A9A94">(Daily, 10-40 wells/…, 1-3 per well;…분)</span><br>Run tickets / water haul tickets <span style="color:#9A9A94">(Per haul, 2-5*분)</span><br>Exception/release report (well down, spill) <span style="color:#9A9A94">(As needed, 10-20*분)</span></td><td>30-60*</td><td style="font-size:17px">iWell, GreaseBook, ProductionPro, Field Wizard (not AI-voic…</td></tr><tr class=""><td><b style="font-size:19px">Solar O&amp;M technician</b><br><span style="font-size:15px;color:#9A9A94">#62 · 12K명</span></td><td style="font-size:17px;line-height:1.35">Site inspection report (inverters, trackers… <span style="color:#9A9A94">(Per site visit, 1-3…, 20-45*분)</span><br>Corrective work order close-out <span style="color:#9A9A94">(2-6/day, 5-15*분)</span><br>Lockout/JHA pre-task <span style="color:#9A9A94">(Daily, 10*분)</span></td><td>45-90*</td><td style="font-size:17px">Raptor Maps (AI thermal/drone), Power Factors/Drive, Safety…</td></tr><tr class=""><td><b style="font-size:19px">Elevator mechanic</b><br><span style="font-size:15px;color:#9A9A94">#71 · 24K명</span></td><td style="font-size:17px;line-height:1.35">Maintenance Control Program record (task, i… <span style="color:#9A9A94">(Per unit visit, 4-1…, 3-10 each분)</span><br>Callback (trouble call) log, repair/replace… <span style="color:#9A9A94">(Per callback, 5-15*분)</span><br>Cat 1 annual / Cat 5 five-year test reports… <span style="color:#9A9A94">(Periodic, 20-60*분)</span></td><td>30-60*</td><td style="font-size:17px">OEM platforms (Otis ONE, KONE 24/7 Connected), BlueBolt/Ele…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">20 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 환경·부동산·서비스 (1/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>환경·부동산·서비스: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class="us"><td><b style="font-size:19px">Private investigators / process servers</b><br><span style="font-size:15px;color:#9A9A94">#1 · 35K명</span></td><td style="font-size:17px;line-height:1.35">Surveillance / SIU investigative report wit… <span style="color:#9A9A94">(per surveillance day, 120-240 (&#x27;ano…분)</span><br>Affidavit of service / attempt notes <span style="color:#9A9A94">(10-30 attempts/day*, 2-5 each*분)</span></td><td>120-240 (PIs)</td><td style="font-size:17px">PIwitness, Whisper Field Report, Trackops</td></tr><tr class="us"><td><b style="font-size:19px">Residential real estate appraiser</b><br><span style="font-size:15px;color:#9A9A94">#4 · 70K명</span></td><td style="font-size:17px;line-height:1.35">Field inspection notes, photos, sketch for… <span style="color:#9A9A94">(1-3 inspections/day*, 30-60 on site…분)</span></td><td>120-240*</td><td style="font-size:17px">ValueMate ($19/report, $167/mo), BoxLi voice capture, a la…</td></tr><tr class="us"><td><b style="font-size:19px">Asbestos / lead / mold inspector-assess…</b><br><span style="font-size:15px;color:#9A9A94">#6 · 30K명</span></td><td style="font-size:17px;line-height:1.35">Mold assessment report + remediation protoc… <span style="color:#9A9A94">(1-2 jobs/day*, hours per rep…분)</span><br>Asbestos survey / clearance letter <span style="color:#9A9A94">(per job, 60-180*분)</span></td><td>90-180*</td><td style="font-size:17px">MoldMind, Sidekik, ReportWalk (mold template)</td></tr><tr class=""><td><b style="font-size:19px">Consulting arborist</b><br><span style="font-size:15px;color:#9A9A94">#9 · 45K명</span></td><td style="font-size:17px;line-height:1.35">TRAQ tree risk assessment report <span style="color:#9A9A94">(several/week*, 45-120*분)</span><br>Estimate / work scope <span style="color:#9A9A94">(daily, 10-20*분)</span></td><td>45-120*</td><td style="font-size:17px">TreeReportPro, ArborReport, TreeCanopy (TRAQ on roadmap)</td></tr><tr class=""><td><b style="font-size:19px">Pest control technician</b><br><span style="font-size:15px;color:#9A9A94">#12 · 100K명</span></td><td style="font-size:17px;line-height:1.35">Service ticket / pesticide use record <span style="color:#9A9A94">(8-10 stops/day, 10-15 per sto…분)</span><br>WDO/WDI report (NPMA-33, CA 43M-41, TX WDI)… <span style="color:#9A9A94">(real estate transac…, ~45 per inspe…분)</span></td><td>90-150 (Serv AI: &#x27;n…</td><td style="font-size:17px">Serv AI (voice WDO/PUR), Bug HQ ($99/mo, AI WDO), FieldRout…</td></tr><tr class=""><td><b style="font-size:19px">Property manager / leasing agent</b><br><span style="font-size:15px;color:#9A9A94">#16 · 300K명</span></td><td style="font-size:17px;line-height:1.35">Move-in / move-out condition report with ph… <span style="color:#9A9A94">(several/week per ma…, zInspector: &#x27;…분)</span><br>Unit turn / make-ready scope <span style="color:#9A9A94">(per vacancy, 20-60*분)</span></td><td>30-120*</td><td style="font-size:17px">zInspector zAssistant (walk-and-talk AI, free &lt;5 units), Ha…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">21 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · DOCUMENT MAP · 환경·부동산·서비스 (2/2)</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>환경·부동산·서비스: 무슨 문서를, <span class="hl">하루 몇 건, 건당 몇 분</span>.</h1>
+    <p class="sub">괄호 = (빈도, 건당 분). 추정치는 원자료에 [INFERENCE] 표기.</p>
+    <div class="card" style="flex:1;padding:14px 20px;"><table class="mx xs"><thead><tr><th style="width:22%">세그먼트</th><th style="width:44%">핵심 문서 (빈도, 건당 시간)</th><th style="width:12%">하루 문서(분)</th><th style="width:22%">AI 경쟁</th></tr></thead><tbody><tr class=""><td><b style="font-size:19px">HOA / community association manager</b><br><span style="font-size:15px;color:#9A9A94">#17 · 125K명</span></td><td style="font-size:17px;line-height:1.35">Covenant/drive-by inspection + violation le… <span style="color:#9A9A94">(weekly-monthly per…, 60-180 per co…분)</span><br>Common-area site inspection report <span style="color:#9A9A94">(monthly per communi…, 30-60*분)</span></td><td>60-120*</td><td style="font-size:17px">HOAware (voice-to-text notes, CORI AI), Vantaca/CINC AI fea…</td></tr><tr class=""><td><b style="font-size:19px">Phase I ESA field assessor / Environmen…</b><br><span style="font-size:15px;color:#9A9A94">#18 · 14K명</span></td><td style="font-size:17px;line-height:1.35">Phase I ESA site reconnaissance notes + pho… <span style="color:#9A9A94">(1-3 sites/week*, days of draft…분)</span></td><td>120-240*</td><td style="font-size:17px">Vector Intel Site Intel (voice mobile entry), ReportWalk, C…</td></tr><tr class=""><td><b style="font-size:19px">SWPPP stormwater inspector</b><br><span style="font-size:15px;color:#9A9A94">#20 · 28K명</span></td><td style="font-size:17px;line-height:1.35">CGP inspection report (BMP by BMP) <span style="color:#9A9A94">(every 7 days, or 14…, 20-45 per sit…분)</span><br>Corrective action log <span style="color:#9A9A94">(per failed BMP, 5-15*분)</span></td><td>90-180*</td><td style="font-size:17px">Inspectial (AI drafts from photo+voice), RainCheck, SiteMar…</td></tr><tr class=""><td><b style="font-size:19px">Health inspector / food safety auditor</b><br><span style="font-size:15px;color:#9A9A94">#38 · 20K명</span></td><td style="font-size:17px;line-height:1.35">Food establishment inspection report <span style="color:#9A9A94">(3-6/day*, 15-30 each*분)</span><br>GFSI/SQF third-party audit report <span style="color:#9A9A94">(1 per 1-2 days, 120-240*분)</span></td><td>90-180*</td><td style="font-size:17px">SafetyCulture AI, gov inspection system vendors*</td></tr><tr class=""><td><b style="font-size:19px">Land surveyor field crew</b><br><span style="font-size:15px;color:#9A9A94">#64 · 50K명</span></td><td style="font-size:17px;line-height:1.35">Field notes / field book (monuments found,… <span style="color:#9A9A94">(daily, 20-60*분)</span></td><td>20-60*</td><td style="font-size:17px">None voice-specific found*; Trimble/Carlson data collectors…</td></tr><tr class=""><td><b style="font-size:19px">Home health aides and visiting nurses […</b><br><span style="font-size:15px;color:#9A9A94">#65 · 4.0M명</span></td><td style="font-size:17px;line-height:1.35">Visit note / OASIS (nurses) <span style="color:#9A9A94">(3-6 visits/shift, documentation…분)</span></td><td>50 (mean, observati…</td><td style="font-size:17px">Ambient scribes for home health (e.g., Axxess/WellSky AI, A…</td></tr></tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">22 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #1 · 환경·부동산·서비스</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Private investigators / process servers</h1>
+    <p class="sub">surveillance reports, affidavits · 인원 35K · 결제: Solo PI / small agency (bills insurer, attorney)</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Surveillance / SIU investigative report with photo log</b></td><td>per surveillance day</td><td>120-240 (&#x27;another two to four hou…</td><td>Insurer/SIU format, court defensibility</td><td>Insurance carrier, attorney</td></tr><tr><td><b>Affidavit of service / attempt notes</b></td><td>10-30 attempts/day*</td><td>2-5 each*</td><td>Court rules</td><td>Law firm, court</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"You spend a full day on surveillance, then sit down for another two to four hours reconstructing what happened into a report."<span>piwitness.com/</span></div><div class="q">"What used to eat a full evening of typing is now ten minutes of review."<span>whisper.mapaho.com/</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 4.25 / 5</div><p>하루 문서 <b>120-240 (PIs)분</b><br>문서 5 · 결제 5 · AI공백 3 · 규모 2 · 음성 5<br>포맷 자유도: 자유</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>PIwitness, Whisper Field Report, Trackops</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Word templates, Trackops/CaseFleet, voice recorders, ServeManager (process serv…</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">NCISS, state PI associations, PInow, PI FB groups</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">23 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #2 · 보험·검사</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Independent adjuster / CAT adjuster</h1>
+    <p class="sub">IA) / CAT adjuster (1099, Xactimate · 인원 80K · 결제: Adjuster pays own Xactimate (~$300/mo) and tools; IA firm p…</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Xactimate estimate + sketch</b></td><td>per claim (5-10 claims/day on CAT)</td><td>20-120</td><td>Carrier/IA firm guidelines</td><td>IA firm, carrier</td></tr><tr><td><b>Narrative report (first report / final report)</b></td><td>per claim</td><td>15-30</td><td>Carrier report format</td><td>Carrier examiner</td></tr><tr><td><b>Photo report with captions</b></td><td>per claim</td><td>15-30</td><td>Carrier photo standards</td><td>Carrier</td></tr><tr><td><b>Activity log / diary</b></td><td>per contact</td><td>5-10</td><td>State prompt-contact regs</td><td>IA firm portal</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"if you are a newer adjuster ... running 10 hail assignments per day with a close rate of 5 per night, by the end of one week, you can be as much as 35 files be…"<span>catadjuster.org/Forums/tabid/60/aft/7491/Default.aspx</span></div><div class="q">"one adjuster told me that he spent 4-5 hours computer time for every hour of inspection time"<span>catadjuster.org/Forum2/topic.asp?TOPIC_ID=106&amp;whichpage=2</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 4.10 / 5</div><p>하루 문서 <b>180-300 (often nights i…분</b><br>문서 5 · 결제 5 · AI공백 1 · 규모 3 · 음성 5<br>포맷 자유도: 반구조</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>Verisk XactAI, Hover, Encircle, Tractable, Plnar, ClaimGenius</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Xactimate, XactAnalysis, Symbility, Clear Skies / IA firm portals, CompanyCam,…</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">CatAdjuster.org, Adjuster Pro Network, Facebook IA groups, YouTube Xactimate trainers, IA…</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">24 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #3 · 보험·검사</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Public adjuster</h1>
+    <p class="sub"> · 인원 20K · 결제: PA firm or solo PA (contingency 10-20% of claim)</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Loss inspection notes + scope</b></td><td>per claim</td><td>30-60</td><td>Policy proof-of-loss requirements</td><td>Carrier, policyholder</td></tr><tr><td><b>Xactimate estimate</b></td><td>per claim</td><td>60-240</td><td>Carrier negotiation</td><td>Carrier</td></tr><tr><td><b>Sworn proof of loss + supplement/demand letters</b></td><td>per claim</td><td>30-60</td><td>Policy conditions, state PA statutes</td><td>Carrier</td></tr><tr><td><b>Photo documentation report</b></td><td>per claim</td><td>30-60</td><td>Burden of proof on insured</td><td>Carrier, appraiser</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"I can see that the program is loved by the public adjusters and the water suckers as you can write a 50 page estimate on a kitchen grease fire and it sails rig…"<span>catadjuster.org/Forums/tabid/60/aft/7320/Default.aspx</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 4.10 / 5</div><p>하루 문서 <b>120-240*분</b><br>문서 5 · 결제 5 · AI공백 2 · 규모 2 · 음성 5<br>포맷 자유도: 잠김</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>ClaimWizard AI, Encircle, Hover, Cotality/CoreLogic</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Xactimate, ClaimWizard, Encircle, CompanyCam, Hover, Matterport</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">NAPIA, state PA associations, Facebook PA groups, Xactimate trainers, Restoration contrac…</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">25 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #4 · 환경·부동산·서비스</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Residential real estate appraiser</h1>
+    <p class="sub">field inspection for URAR / UAD 3.6 · 인원 70K · 결제: Mostly self-employed fee appraisers via AMCs; pay own softw…</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Field inspection notes, photos, sketch for URAR</b></td><td>1-3 inspections/day*</td><td>30-60 on site + desk; ValueMate c…</td><td>Fannie/Freddie UAD 3.6 redesigned URAR (more structured fields, room-…</td><td>Lender via AMC (not homeowner)</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"Record video walkthroughs so nothing gets lost between the property and your desk"<span>apps.apple.com/us/app/valuemate-3-6/id6782124257</span></div><div class="q">"BoxLi just keeps the details from getting lost between the door and the desk."<span>boxli.ai/features/voice-capture</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 4.10 / 5</div><p>하루 문서 <b>120-240*분</b><br>문서 5 · 결제 5 · AI공백 3 · 규모 3 · 음성 3<br>포맷 자유도: 잠김</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>ValueMate ($19/report, $167/mo), BoxLi voice capture, a la mode/Bradford AI add…</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>a la mode TOTAL, Bradford ClickForms, ACI, HomeVision/ValueMate mobile, sketch…</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">Appraisal Institute, AppraisersForum.com, state coalitions, FB appraiser groups</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">26 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #5 · 차량·운송</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>RV / marine tech</h1>
+    <p class="sub"> · 인원 45K · 결제: Dealer/service shop; mobile RV techs self-pay</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Work order notes + photo inspection</b></td><td>2-5 per day</td><td>5-15*</td><td>Manufacturer warranty claims, customer approval</td><td>Customer, OEM</td></tr><tr><td><b>Pre-purchase / condition inspection report</b></td><td>weekly</td><td>30-90*</td><td>Buyer/insurer request (NRVIA, SAMS standards)</td><td>Buyer, insurer</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"I prefer this paperwork to Outdoorsy, RVshare, and RVezy paperwork as this is more detailed ... allowing me to document damages for insurances and pricing."<span>apps.apple.com/us/app/whip-around-dvir/id1030219989?see-all=reviews</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.95 / 5</div><p>하루 문서 <b>30-90*분</b><br>문서 3 · 결제 5 · AI공백 4 · 규모 3 · 음성 5<br>포맷 자유도: 자유</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>Jobber AI, Housecall Pro AI</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Lightspeed DMS, IDS Astra, Dockmaster, Shopmonkey, Jobber</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">RVTI, NRVIA, ABYC, IBEX, Facebook mobile RV tech groups</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">27 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #6 · 환경·부동산·서비스</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Asbestos / lead / mold inspector-assessor</h1>
+    <p class="sub"> · 인원 30K · 결제: Owner-operator or small firm (homeowner/insurer/contractor…</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Mold assessment report + remediation protocol + client letter</b></td><td>1-2 jobs/day*</td><td>hours per report (MoldMind: &#x27;draf…</td><td>Insurer/attorney scrutiny, IICRC S520, state mold licensing (TX, FL,…</td><td>Homeowner, insurer, remediation contrac…</td></tr><tr><td><b>Asbestos survey / clearance letter</b></td><td>per job</td><td>60-180*</td><td>NESHAP pre-demolition, AHERA</td><td>Contractor, building owner</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"On a busy week, the report backlog decides how many jobs you can take."<span>sidekik.ca/mould-asbestos-inspection-reports</span></div><div class="q">"Record voice memos in crawlspaces and basements. Snap 200 photos in one drag-and-drop."<span>moldmindai.com/</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.95 / 5</div><p>하루 문서 <b>90-180*분</b><br>문서 4 · 결제 5 · AI공백 3 · 규모 2 · 음성 5<br>포맷 자유도: 반구조</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>MoldMind, Sidekik, ReportWalk (mold template)</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Word templates, lab PDFs (PLM, spore trap), moisture meters, phone camera</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">IAC2/InterNACHI mold courses, ACAC, IICRC, FB groups for mold inspectors, state license l…</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">28 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #7 · 차량·운송</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Insurance auto damage appraiser</h1>
+    <p class="sub">field, often 1099 · 인원 12K · 결제: Mixed: staff paid by carrier; independent appraisers buy ow…</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Field inspection photo set + damage notes</b></td><td>4-10 per day</td><td>15-30*</td><td>Carrier guidelines, state appraiser licensing</td><td>Carrier / IA firm</td></tr><tr><td><b>Estimate + narrative report</b></td><td>4-10 per day</td><td>20-45*</td><td>Carrier assignment SLA, flat-rate per file</td><td>Carrier adjuster</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"Once on site, the appraiser inspects the damage, gathers necessary photographs and documents any additional details (Sedgwick process; network of 1,000+ indepe…"<span>sedgwick.com/loss-adjusting/auto-claims/photos-only-solution/</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.80 / 5</div><p>하루 문서 <b>90-240*분</b><br>문서 5 · 결제 5 · AI공백 2 · 규모 2 · 음성 3<br>포맷 자유도: 잠김</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>Tractable, CCC AI photo estimating, Mitchell, Snapsheet, Claim Genius</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>CCC ONE, Mitchell, Audatex, IA firm portals (Sedgwick, etc.)</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">Claims Pages forum, Facebook independent auto appraiser groups, NAIIA</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">29 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #8 · 보험·검사</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Home inspector</h1>
+    <p class="sub">Spectora/HomeGauge, state SOP · 인원 35K · 결제: Inspector (solo owner) pays software ~$50-100/mo</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Home inspection report (narrative + photos, by system)</b></td><td>1-2/day</td><td>30-180</td><td>State SOP, InterNACHI/ASHI SOP</td><td>Buyer, buyer agent</td></tr><tr><td><b>Wind mitigation / 4-point insurance forms (FL etc.)</b></td><td>add-on</td><td>15-30</td><td>OIR-B1-1802, carrier forms</td><td>Insurer</td></tr><tr><td><b>Inspection agreement / summary repair list</b></td><td>per job</td><td>5-15</td><td>State law, sales contract</td><td>Client, agents</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"I still spend roughly 4-5 hours average writing my narrative reports for single family homes"<span>inspectorsjournal.com/topic/10974-how-long-to-write-reports/</span></div><div class="q">"Depending on the condition of the home I have spent as much as 2-3 hours back at the office finalizing the report."<span>forum.nachi.org/t/report-writing-efficiency/114774</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.80 / 5</div><p>하루 문서 <b>60-180분</b><br>문서 4 · 결제 5 · AI공백 2 · 규모 2 · 음성 5<br>포맷 자유도: 반구조</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>Spectora AI features, HomeGauge AI, Inspectify, Scout (AI report writer), Repor…</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Spectora, HomeGauge, ISN, Home Inspector Pro, Palm-Tech, 3D Inspection System,…</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">InterNACHI forum + education, ASHI chapters, Facebook home inspector groups, Spectora mar…</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">30 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #9 · 환경·부동산·서비스</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Consulting arborist</h1>
+    <p class="sub">ISA TRAQ tree risk assessment · 인원 45K · 결제: Solo/small consulting arborist or tree company owner</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>TRAQ tree risk assessment report</b></td><td>several/week*</td><td>45-120*</td><td>Municipal tree permits, insurer, HOA, litigation</td><td>Homeowner, city, HOA, insurer</td></tr><tr><td><b>Estimate / work scope</b></td><td>daily</td><td>10-20*</td><td>Sales</td><td>Homeowner</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"No typing on a tiny screen with dirty gloves. Just talk like you&#x27;re explaining to a colleague."<span>treereportpro.com/</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.80 / 5</div><p>하루 문서 <b>45-120*분</b><br>문서 3 · 결제 5 · AI공백 3 · 규모 3 · 음성 5<br>포맷 자유도: 반구조</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>TreeReportPro, ArborReport, TreeCanopy (TRAQ on roadmap)</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>ISA TRAQ basic form (paper/PDF), Word, ArborGold/SingleOps, phone camera</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">ISA chapters, ASCA (consulting arborists), TCIA, arborist FB groups, TreeBuzz</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">31 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #10 · 트레이드</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Handyman</h1>
+    <p class="sub"> · 인원 1.5M · 결제: Solo owner-operator (self) or small handyman franchise owner</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Estimate / punch list walkthrough</b></td><td>2-4 per day</td><td>10-20*</td><td>win job, scope creep control</td><td>homeowner</td></tr><tr><td><b>Job completion summary w/ before-after photos</b></td><td>2-5 per day</td><td>5-10*</td><td>payment, reviews</td><td>homeowner, landlord/PM</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"What? 11:00 pm? Be right there honey."<span>plumbingzone.com/threads/buried-in-paperwork.1278/ (one-man service s…</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.80 / 5</div><p>하루 문서 <b>30-60*분</b><br>문서 2 · 결제 5 · AI공백 3 · 규모 5 · 음성 5<br>포맷 자유도: 자유</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>Jobber AI Voice (quotes), CompanyCam Walkthrough Note, Joist AI</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Jobber, Housecall Pro, Joist, CompanyCam, paper/notes app</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">Handyman FB groups, Nextdoor, Thumbtack/Angi pro communities, YouTube</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">32 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #11 · 건설·시설</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Facility maintenance vendor for retail/restau…</h1>
+    <p class="sub">ServiceChannel · 인원 175K · 결제: Vendor owner (often 1-20 person shop)</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>WO notes (found / did / recommend) + before/after photos</b></td><td>3-6 per day</td><td>5-10 each</td><td>client requires notes as system of record; scorecard; invoice approval</td><td>facility manager, store</td></tr><tr><td><b>Check-in/out + root cause/resolution codes</b></td><td>per visit</td><td>2-3</td><td>geofence, SLA, scorecard</td><td>client FM</td></tr><tr><td><b>Quote / NTE increase request</b></td><td>weekly</td><td>15-30</td><td>NTE caps</td><td>client FM</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"Always use the work order notes in ServiceChannel as the system of record"<span>servicechannel.atlassian.net/wiki/spaces/SCU/pages/4476751996/Facilit…</span></div><div class="q">"In 2026, decline rates will be tracked as part of provider performance."<span>servicechannel.com/wp-content/uploads/2025/10/Trade-Partner-Guideline…</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.80 / 5</div><p>하루 문서 <b>30-60*분</b><br>문서 2 · 결제 5 · AI공백 4 · 규모 4 · 음성 5<br>포맷 자유도: 반구조</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>ServiceChannel native, ServiceScribe/FixAIR (HVAC)</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>ServiceChannel Provider, Corrigo, Verisae, FMPilot, texts</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">ServiceChannel provider network, FB groups for facility vendors, NFMT/RFMA</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">33 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #12 · 환경·부동산·서비스</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Pest control technician</h1>
+    <p class="sub">service tickets, PUR, NPMA-33 / state WDO · 인원 100K · 결제: Pest company owner (many 1-5 tech owner-operators)</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Service ticket / pesticide use record</b></td><td>8-10 stops/day</td><td>10-15 per stop (Serv AI)</td><td>State pesticide recordkeeping (CA DPR, TX, FL)</td><td>Customer, state regulator</td></tr><tr><td><b>WDO/WDI report (NPMA-33, CA 43M-41, TX WDI) with diagram</b></td><td>real estate transactions, several/week*</td><td>~45 per inspection (Serv AI)</td><td>Lender/VA/real estate closing</td><td>Buyer, agent, lender</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"writing pesticide use reports in the truck takes 10-15 minutes per stop, and at 8-10 stops a day that&#x27;s nearly two hours"<span>goserv.ai/voice-to-report-software</span></div><div class="q">"techs end the day in the parking lot finishing paperwork"<span>goserv.ai/voice-to-report-software</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.75 / 5</div><p>하루 문서 <b>90-150 (Serv AI: &#x27;nearl…분</b><br>문서 4 · 결제 3 · AI공백 3 · 규모 4 · 음성 5<br>포맷 자유도: 잠김</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>Serv AI (voice WDO/PUR), Bug HQ ($99/mo, AI WDO), FieldRoutes/PestPac AI featur…</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>FieldRoutes, PestPac, GorillaDesk, Briostack, paper WDO forms</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">NPMA PestWorld, state pest associations, PCT magazine, FB pest owner groups</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">34 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #27 · 건설·시설</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>Residential remodeler / small builder</h1>
+    <p class="sub"> · 인원 225K · 결제: Owner (is also the super)</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Client update with photos</b></td><td>weekly to daily</td><td>15-30</td><td>client trust, payment draws</td><td>homeowner</td></tr><tr><td><b>Daily log</b></td><td>daily</td><td>10-20</td><td>record, Buildertrend portal</td><td>client, file</td></tr><tr><td><b>Change order / punch list</b></td><td>weekly</td><td>20-40</td><td>scope, final payment</td><td>homeowner</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"Client &#x27;where are we?&#x27; texts, approvals lost in texts (synthesis)"<span>/tmp/research_segments_v2.md</span></div><div class="q">"Buildertrend portal built on daily updates"<span>jmconstructionco.com/blog/daily-updates-transparent-timelines-builder…</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 3.05 / 5</div><p>하루 문서 <b>30-60*분</b><br>문서 2 · 결제 5 · AI공백 3 · 규모 4 · 음성 1<br>포맷 자유도: 자유</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>CompanyCam AI (Crew $119+), Buildertrend AI, JobTread</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>Buildertrend, CoConstruct, CompanyCam, JobTread, texts</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">ContractorTalk (172K), JLC, NAHB Remodelers, FB groups</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">35 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">04 · DEEP DIVE #34 · 트레이드</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>HVAC service tech</h1>
+    <p class="sub"> · 인원 209K · 결제: Owner/GM (ServiceTitan/HCP seat); solo owner-operators pay…</p>
+    <div class="dd" style="display:grid;grid-template-columns:1.4fr 0.6fr;gap:22px;flex:1;">
+ <div style="display:flex;flex-direction:column;gap:16px;">
+  <div class="card" style="padding:14px 20px;flex:1.3;"><table class="mx xs"><thead><tr><th style="width:28%">문서</th><th style="width:16%">빈도</th><th style="width:12%">건당(분)</th><th style="width:27%">근거 (법규·계약)</th><th style="width:17%">수신자</th></tr></thead><tbody><tr><td><b>Service ticket / job notes</b></td><td>3-6 per day</td><td>5-10 each*</td><td>invoice, warranty, callbacks</td><td>office, homeowner</td></tr><tr><td><b>Maintenance checklist / readings (delta-T, amps, refrigerant)</b></td><td>1-4 per day</td><td>5-8*</td><td>maintenance agreement, EPA 608 refrigerant logs</td><td>homeowner, office</td></tr><tr><td><b>Repair estimate / option sheet</b></td><td>1-3 per day</td><td>5-15*</td><td>sales</td><td>homeowner</td></tr></tbody></table></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">현장 원문 · 자료</div><div class="q">"Most of the time I just dump at the end of the day"<span>hvac-talk.com/threads/service-report-tool.2289472/</span></div><div class="q">"The amount of paperwork is just as much or exceeds the responsibilities of a tech because he is overworked."<span>hvac-talk.com/threads/changing-the-reality-of-reality-a-technician-is…</span></div></div>
+ </div>
+ <div style="display:flex;flex-direction:column;gap:14px;">
+  <div class="card gold tight"><div class="kicker">점수 2.85 / 5</div><p>하루 문서 <b>30-60*분</b><br>문서 2 · 결제 3 · AI공백 1 · 규모 4 · 음성 5<br>포맷 자유도: 반구조</p></div>
+  <div class="card tight"><div class="kicker">AI 경쟁</div><p>ServiceScribe, FixAIR, JobScribe, Onsite, ServiceTitan Atlas, Tylergras HVAC-Ta…</p></div>
+  <div class="card tight"><div class="kicker">현재 툴</div><p>ServiceTitan, Housecall Pro, Jobber, FieldEdge, measureQuick, CompanyCam</p></div>
+  <div class="card tight" style="flex:1;"><div class="kicker">모이는 곳</div><p style="font-size:17px !important;">HVAC-Talk, r/HVAC, HVAC School podcast, owner FB groups, supply house counters</p></div>
+ </div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">36 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">05 · RECOMMENDATION · 3개 테스트 셀</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>같은 앱, 같은 6주 예산. <span class="hl">세 유형을 동시에</span> 돌리고 2주차 리텐션으로 고른다.</h1>
+    <p class="sub">v2 플랜(A1 + B3)을 셀 2로 흡수하고, 문서 고통이 가장 큰 1099 전문가를 셀 1로 추가.</p>
+    <div class="big" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;">
+ <div class="card gold tight"><div class="pill">셀 1 · IA/CAT 손해사정사</div><div class="hook">"Talk the loss. Photos labeled and narrative written before the next claim."</div><ul><li><b>문서:</b> 서술 리포트, 사진 캡션 (견적은 Xactimate에 둠)</li><li><b>근거:</b> "it often takes more time to label the photos than to write the estimate"</li><li><b>채널:</b> CatAdjuster.org, Adjuster Pro Network, Facebook IA groups, YouTube Xactimate trainers, IA…</li></ul></div>
+ <div class="card gold tight"><div class="pill">셀 2 · 오너 운영 트레이드</div><div class="hook">"Walk the job, talk 60 seconds. The homeowner gets the report."</div><ul><li><b>대상:</b> 리모델러, 핸디맨, 굴뚝·정화조, 모바일 RV</li><li><b>문서:</b> 작업 완료 보고, 고객 업데이트, 점검 리포트</li><li><b>채널:</b> ContractorTalk, Contractors Resource Center FB, NAHB 위원회, CSIA(굴뚝)</li></ul></div>
+ <div class="card tight"><div class="pill">셀 3 · 탐정 (WILDCARD)</div><div class="hook">"Narrate the surveillance. The report is drafted when you park."</div><ul><li><b>문서:</b> 감시 리포트 + 사진 로그, 송달 진술서</li><li><b>근거:</b> "another two to four hours reconstructing what happened into a report"</li><li><b>리스크:</b> 법적 증거, 시간 기록 정확도</li><li><b>채널:</b> NCISS, state PI associations, PInow, PI FB groups</li></ul></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">37 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">05 · RECOMMENDATION · 셀별 실험 배치</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>셀마다 <span class="hl">컨시어지 → 광고 셀 → 다이어리</span> 같은 순서. 3주차에 승자에 70%.</h1>
+    <p class="sub">v2의 9개 실험을 셀 단위로 재배치. 셀 정의가 UTM과 랜딩을 결정한다.</p>
+    <div class="card" style="flex:1;padding:20px 26px;"><table class="mx sm"><thead><tr><th style="width:16%">단계</th><th style="width:28%">셀 1 · 손해사정사</th><th style="width:28%">셀 2 · 오너 트레이드</th><th style="width:28%">셀 3 · 탐정</th></tr></thead><tbody>
+ <tr><td><b>W0 컨시어지</b></td><td>음성메모 + 사진 30장 → 캡션 달린 사진 리포트</td><td>음성메모 → 집주인 리포트</td><td>음성 로그 → 시간순 감시 리포트</td></tr>
+ <tr><td><b>W1 랜딩 + Meta</b></td><td>"사진 라벨링 0분" 훅</td><td>"밤 11시 서류 끝" 훅</td><td>"리포트 2~4시간 → 10분" 훅</td></tr>
+ <tr><td><b>W1 커뮤니티</b></td><td>손해사정사 FB 그룹·포럼 (채널 목록)</td><td>ContractorTalk, CRC FB 그룹</td><td>PI 협회·포럼</td></tr>
+ <tr><td><b>W2 다이어리</b></td><td>CAT 배치 중 3명 × 5일</td><td>3명 × 5일</td><td>2명 × 5일</td></tr>
+ <tr class="us"><td><b>판정 지표</b></td><td colspan="3">7일 내 리포트 공유율 · 무수정 발송률 · 2주차 주 3건+ 사용 · 유료 의향 ($15~30/월)</td></tr>
+ <tr><td><b>Kill</b></td><td colspan="3">셀당 $500 사용 후 활성 10명 미만, 또는 2주차 리텐션 20% 미만</td></tr>
+ </tbody></table></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">38 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">06 · DECISIONS · 이번 주</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>결정 <span class="hl">3가지</span>.</h1>
+    <p class="sub">나머지는 플랜대로.</p>
+    <div class="big" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;">
+ <div class="card gold tight"><div class="kicker">D1 · 셀</div><h2>3셀 동시 vs 2셀</h2><ul><li>예산 $4K면 셀당 ~$1.3K</li><li>2셀이면 셀 1 + 셀 2</li></ul></div>
+ <div class="card gold tight"><div class="kicker">D2 · 제품 (Neo)</div><h2>템플릿 3종</h2><ul><li>사진 다수 + 캡션 자동 (셀 1)</li><li>집주인 리포트 (셀 2)</li><li>시간순 서술 로그 (셀 3)</li></ul></div>
+ <div class="card tight"><div class="kicker">D3 · 검증</div><h2>추정치 확인 인터뷰</h2><ul><li>하루 문서 시간 대부분 [INFERENCE]</li><li>셀별 5명 15분 콜로 분·건수 실측</li></ul></div>
+ </div>
+    <div class="sunset-msg">고통이 제일 큰 곳이 아니라, <span class="hl">고통이 크고 우리 양식이 들어갈 수 있는 곳</span>부터.</div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">39 / 40</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">APPENDIX · METHOD & LIMITS</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>방법과 한계</h1>
+    <p class="sub">10/20 조사. 원자료: /tmp/census_G1~G6.json (세그먼트별 출처 URL 포함).</p>
+    <div class="big" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;">
+ <div class="card tight"><div class="kicker">점수 산식</div><ul><li><b>문서 부담 30%:</b> 하루 문서 분 중간값 (150+=5, 90+=4, 60+=3, 35+=2)</li><li><b>본인 결제 25%:</b> 본인=5, 혼합·1099·오너=3, 회사=1</li><li><b>AI 공백 15%:</b> 전용 AI 경쟁사 수 (0=5 … 6+=1)</li><li><b>규모 15%:</b> 미국 인원 (300K+=5 … 10K 미만=1)</li><li><b>음성 적합 15%:</b> High=5, Med=3, Low=1</li></ul></div>
+ <div class="card gold tight"><div class="kicker">한계</div><ul><li>건당·일일 문서 시간 다수는 추정 [INFERENCE]. 출처 있는 수치: 방역(Serv AI), 탐정(PIwitness), 굴뚝(ProField), 홈인스펙터(포럼), Cx(벤더), 전기 포맨(Rhumbix)</li><li>인원은 BLS SOC 기준 근사치, 일부 미검증</li><li>레딧 차단: 원문은 포럼·리뷰·벤더 자료. 벤더 인용은 2차 자료</li><li>포맷 자유도는 판단값 [INFERENCE]</li></ul></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn Field Segment Census · 2026-10-20</span><span class="pnum">40 / 40</span></div>
+</section></div>
+<!-- Interactive Web Deck Controls -->
+<div class="deck-hud">
+  <button onclick="navSlide(-1)">◀ Prev</button>
+  <span id="hud-counter" style="font-weight:700;min-width:56px;text-align:center;">01 / 40</span>
+  <button onclick="navSlide(1)">Next ▶</button>
+  <button onclick="document.body.classList.toggle('show-grid')">Grid (G)</button>
+  <button onclick="toggleFS()">Fullscreen (F)</button>
+  <button onclick="window.print()">Print / PDF</button>
+</div>
+
+<script>
+  const viewports = Array.from(document.querySelectorAll('.slide-viewport'));
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('hud-counter');
+
+  function fitSlides() {
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    slides.forEach(s => {
+      s.style.transform = `scale(${scale})`;
+    });
+  }
+  window.addEventListener('resize', fitSlides);
+  fitSlides();
+
+  function currentIdx() {
+    return Math.round(window.scrollY / window.innerHeight);
+  }
+
+  function navSlide(delta) {
+    const next = Math.max(0, Math.min(viewports.length - 1, currentIdx() + delta));
+    viewports[next].scrollIntoView({ behavior: 'smooth' });
+  }
+
+  window.addEventListener('scroll', () => {
+    const idx = Math.max(0, Math.min(viewports.length - 1, currentIdx()));
+    counter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(viewports.length).padStart(2, '0');
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault(); navSlide(1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault(); navSlide(-1);
+    } else if (e.key === 'g' || e.key === 'G') {
+      document.body.classList.toggle('show-grid');
+    } else if (e.key === 'f' || e.key === 'F') {
+      toggleFS();
+    }
+  });
+
+  function toggleFS() {
+    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  }
+</script>
+</body>
+</html>
