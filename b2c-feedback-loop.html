@@ -421,6 +421,7 @@
   .card.tight ul li::before { top: 11px; }
   .big .card.tight li, .big .card.tight p { font-size: 26px !important; line-height: 1.45 !important; }
   .big .card.tight ul { gap: 14px !important; }
+  .big .q { font-size: 25px !important; margin-bottom: 22px !important; }
   .big .card.tight h2 { font-size: 34px !important; }
 </style>
 
@@ -429,339 +430,417 @@
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">00 · EXECUTIVE SUMMARY</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>첫 100명: <span class="hl">정비·HVAC 테크</span>를 <span class="hl">완성된 리포트</span>로 꼬신다.</h1>
-    <p class="sub">설문 대신 실물 결과물. 모든 공유 리포트가 다음 유저를 데려오는 구조. Granola식 비공개 코호트로 시작해 숫자가 통과하면 공개.</p>
+    <div class="header-row"><div class="label">00 · EXECUTIVE SUMMARY · V2</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>첫 100명은 <span class="hl">본인 카드로 툴 사는 오너</span>에서. 네트워크 대신 <span class="hl">9개 실험</span>으로 찾는다.</h1>
+    <p class="sub">웜 네트워크는 사실상 0으로 가정 (JW 제외, UCSF는 보너스). 콜드 채널과 실험으로 세그먼트 × 메시지를 숫자로 고른다.</p>
     <div class="big" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:24px;flex:1;">
- <div class="card gold tight"><div class="kicker">WHO · 누구</div><h2>1순위: 공장 정비 테크 + HVAC 서비스 테크</h2>
-  <ul><li>하루 3~5건 작업마다 기록: 우리 Bicycle 게이트(일 3~5건)와 빈도가 일치</li><li>정비는 기존 네트워크(SMRP, JW, UCSF), HVAC는 테스터 모집 선례가 있는 커뮤니티</li><li>건설 슈퍼는 2차 코호트 (Hardline과 정면 경쟁)</li></ul></div>
- <div class="card tight"><div class="kicker">WHERE · 어디서</div><h2>웜 네트워크 → 포럼 → 서브레딧 순서</h2>
-  <ul><li>코호트 1 (20명): JW·UCSF 테크, SMRP·Greg 네트워크, Neo 한국 지인</li><li>코호트 2 (+80명): HVAC-Talk, r/IndustrialMaintenance, r/PLC, r/HVAC(모드 승인)</li><li>r/electricians·r/Construction·r/Plumbing은 앱·AI 홍보 금지: 모집 금지</li></ul></div>
- <div class="card tight"><div class="kicker">WHAT · 어떤 메시지</div><h2>"Talk the job. Send the report."</h2>
-  <ul><li>Wow: 작업 끝나고 60초 말하면, 트럭에서 30분 걸리던 리포트가 끝나 있음</li><li>직군별 훅: 정비 = 기계 앞에서 WO 마감, HVAC = 트럭에서 다시 안 씀, 건설 = CYA</li></ul></div>
- <div class="card gold tight"><div class="kicker">LOOP · 피드백 루프</div><h2>창업자가 20명 직접 온보딩 → 매일 수정</h2>
-  <ul><li>11/2 출시 후 7일: 20명 중 10명이 완전한 기록 발송 (기존 합의 게이트)</li><li>매일 실사용 20건 판정, 최다 실패 1개 수정</li><li>리포트 하단 "Made with Carbyn" 링크 + 팀 초대 = 확산</li></ul></div>
+ <div class="card gold tight"><div class="kicker">WHO</div><h2>A1 1~5인 주거 서비스 오너 + B3 리모델러</h2>
+  <ul><li>말하는 사람 = 돈 내는 사람 (이미 Jobber $29, CompanyCam $63 결제)</li><li>리포트가 고객(집주인)에게 링크로 감 = 내장 확산</li><li>다음: B2 전문 하도급 포맨 (T&amp;M 티켓)</li></ul></div>
+ <div class="card tight"><div class="kicker">COMPETITION</div><h2>"1인 · 모든 직종 · 리포트 1장" 자리가 비어 있다</h2>
+  <ul><li>대형사는 AI를 팀 요금제에 묶음 (CompanyCam AI $119+, MaintainX Enterprise)</li><li>음성 포인트툴은 한 문서만 + 리뷰 0~11개</li><li>정면 회피: Hardline(GC 통화), Procore, ServiceTitan</li></ul></div>
+ <div class="card tight"><div class="kicker">MESSAGE</div><h2>"Talk the call. Ticket's done before you leave the driveway."</h2>
+  <ul><li>B3: "Walk the job, talk 60 seconds, the homeowner gets the update."</li><li>신뢰 설계: 말 안 한 숫자는 빈칸, 서명, 시간·GPS 스탬프</li></ul></div>
+ <div class="card gold tight"><div class="kicker">TEST</div><h2>6주 $4K, 9개 실험 → 3주차에 승자 몰빵</h2>
+  <ul><li>컨시어지 SMS(설치 전), 페르소나 랜딩 + Meta, 유료 다이어리 8명, 라이선스 DB 콜드메일, 검증 FB 그룹</li><li>기준: 설치가 아니라 2주차 리텐션</li></ul></div>
  </div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">1 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">1 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">01 · STARTING POINT · 이미 합의된 것과 리스크</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>제품은 <span class="hl">11/2 App Store</span>. GTM은 이 제약 위에서 짠다.</h1>
-    <p class="sub">10/18~10/19 Neo 미팅(Strategy, Daily check-out, UX, Check-in/out) 합의 사항 기준.</p>
-    <div style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:28px;flex:1;">
- <div class="card"><div class="kicker">합의된 제품 상태 (10/19 Check-in/out)</div>
- <table class="mx sm"><tbody>
- <tr><td><b>출시</b></td><td>10/26 App Store 제출, 11/2 출시 (버퍼 11/9). TestFlight 아님</td></tr>
- <tr><td><b>플로우</b></td><td>녹음 → AI 초안 → 수정 → 공유. 채팅 UI 제거</td></tr>
- <tr><td><b>템플릿</b></td><td>작업 완료 보고서부터 시작, 라이브러리를 템플릿으로 확장</td></tr>
- <tr><td><b>제거</b></td><td>글래스(Meta SDK), CMMS, Assets 탭</td></tr>
- <tr><td><b>카메라</b></td><td>기본 off, 버튼 하나로 on. 사진은 항상 가능</td></tr>
- <tr><td><b>과금</b></td><td>무료 5회 후 6번째에 Pro 업그레이드</td></tr>
- <tr><td><b>게이트</b></td><td>7일 내 20명 중 10명 완전 기록 / 12/14 4주차 50%+ 유지, 일 3~5건</td></tr>
- </tbody></table></div>
+    <div class="header-row"><div class="label">01 · STARTING POINT · 바뀐 전제</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>전제 수정: <span class="hl">웜 네트워크 ≈ 0</span>. 첫 20명도 콜드로 모은다.</h1>
+    <p class="sub">10/18~19 Neo 미팅 합의 + JK 피드백(10/20) 반영.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;">
+ <div class="card tight"><div class="kicker">무엇이 바뀌었나</div><table class="mx sm"><thead><tr><th>항목</th><th>v1</th><th>v2</th></tr></thead><tbody>
+ <tr><td><b>코호트 1</b></td><td>JW·UCSF·SMRP·Greg</td><td>콜드 20명. UCSF 1~3명은 보너스</td></tr>
+ <tr><td><b>1순위</b></td><td>공장 정비·HVAC 테크</td><td>A1 주거 서비스 오너 + B3 리모델러</td></tr>
+ <tr><td><b>정비 테크</b></td><td>1순위</td><td>B2B 파이프라인 트랙 유지, PLG 테스트에서 제외</td></tr>
+ <tr><td><b>모집</b></td><td>네트워크 + 포럼</td><td>9개 유료·무료 실험, 셀별 UTM</td></tr>
+ <tr><td><b>판정</b></td><td>7일 10/20명</td><td>세그먼트당 4주차 30명 × 주 3건+</td></tr></tbody></table></div>
  <div style="display:flex;flex-direction:column;gap:22px;">
- <div class="card gold tight" style="flex:1;"><div class="kicker">리스크 1 · 페이월이 습관보다 먼저 온다</div><h2>무료 5회 = 테크 기준 하루 반</h2>
-  <p>일 3~5건 쓰는 테크는 이틀째에 막힌다. UpKeep은 2년 무료 후 유료화, Wispr는 주 2,000단어 한도(습관 형성 후). <b>제안: 베타 코호트는 무제한, 공개 후 주간 한도.</b></p>
-  <div class="src">UpKeep: sramanamitra.com (2019) · Wispr: pmf.show</div></div>
- <div class="card tight" style="flex:1;"><div class="kicker">리스크 2 · 강제 로그인</div><h2>Apple 5.1.1(v): 계정 기능 없으면 로그인 없이 쓰게 하라</h2>
-  <p>10/19 결론(가입 필수)과 충돌 가능. 제출 전 재확인 필요. 대안: 첫 노트는 익명, 공유·저장 시 Apple 로그인.</p>
-  <div class="src">developer.apple.com/app-store/review/guidelines/#5.1.1</div></div>
+ <div class="card gold tight" style="flex:1;"><div class="kicker">왜 정비 테크를 PLG에서 뺐나</div><ul><li>테크는 카드를 안 긁는다: UpKeep 창업자 "they're not going to be the ones to put in a credit card"</li><li>공장 IT·노조·CMMS 정책이 개인 앱 사용을 막음</li><li>정비는 기존 B2B 파일럿 트랙으로 계속</li></ul></div>
+ <div class="card tight" style="flex:1;"><div class="kicker">제품 제약 (11/2 출시)</div><ul><li>무료 5회 후 유료: 베타는 무제한 권장 (습관 전 차단)</li><li>가입 필수: Apple 5.1.1(v) 재확인 필요</li><li>Android 없음: 주거 트레이드 Android 비중 미확인 (Neo 조사 중)</li></ul></div>
  </div></div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">2 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">2 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">02 · TARGET PROFILE · 누구부터</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>빈도 × 접근성 × 경쟁 강도로 보면 <span class="hl">정비·HVAC가 먼저</span>.</h1>
-    <p class="sub">피드백 루프 속도는 "하루에 몇 번 쓰느냐"와 "오늘 연락할 수 있느냐"가 결정한다.</p>
-    <div class="card" style="flex:1;padding:24px 30px;">
- <table class="mx sm"><thead><tr><th style="width:17%">페르소나</th><th style="width:20%">기록 빈도 · 문서</th><th style="width:25%">핵심 페인 (현장 언어)</th><th style="width:18%">도달 경로</th><th style="width:12%">경쟁</th><th style="width:8%">판정</th></tr></thead><tbody>
- <tr class="us"><td><b>공장 정비 테크</b><br><span style="font-size:16px;color:#FFCD11">millwright, 설비보전</span></td><td>작업마다 WO 마감, PM 기록</td><td>"clunky system에 기술자가 디테일 입력하는 건 무리한 요구" (SMRP)</td><td>JW·UCSF·SMRP·Greg, r/IndustrialMaintenance, r/PLC</td><td>CMMS 내장 음성 (약함)</td><td><span class="tag t-go">GO</span></td></tr>
- <tr class="us"><td><b>HVAC 서비스 테크</b><br><span style="font-size:16px;color:#FFCD11">커머셜/레지 서비스</span></td><td>콜당 서비스 티켓, 하루 3~6콜</td><td>"트럭에 돌아가서 전부 다시 옮겨 적는다" (r/HVAC)</td><td>HVAC-Talk(278K), r/HVAC(246K), AC Service Tech·HVAC School</td><td>measureQuick 등 (부분)</td><td><span class="tag t-go">GO</span></td></tr>
- <tr><td><b>건설 슈퍼·포맨</b></td><td>하루 1회 Daily log, punch list</td><td>"기록 안 하면 일어난 적 없는 일" (r/ConstructionManagers)</td><td>r/ConstructionManagers(59K), ContractorTalk(172K)</td><td>Hardline ($2M, 동일 포지션)</td><td><span class="tag t-next">코호트 2</span></td></tr>
- <tr><td><b>전기 테크</b></td><td>서비스 티켓, T&amp;M</td><td>"서비스 티켓을 못 써서 해독이 고문" (오너 시점)</td><td>Mike Holt(~100K), Electrician U</td><td>다수 인디앱</td><td><span class="tag t-next">코호트 2</span></td></tr>
- <tr><td><b>배관·홈서비스</b></td><td>잡당 인보이스</td><td>문서보다 견적·결제 페인</td><td>r/Plumbing (홍보 금지)</td><td>Jobber, HCP</td><td><span class="tag t-no">제외</span></td></tr>
+    <div class="header-row"><div class="label">02 · SEGMENT MAP · 주거 트레이드 × 건설 쪼개기</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>8개 하위 세그먼트. 기준은 <span class="hl">누가 돈 내나 · 얼마나 자주 쓰나 · 콜드로 닿나</span>.</h1>
+    <p class="sub">같은 "건설"도 GC 슈퍼, 하도급 포맨, 리모델러는 구매자도 문서도 다르다.</p>
+    <div class="card" style="flex:1;padding:18px 24px;"><table class="mx xs"><thead><tr><th style="width:19%">세그먼트</th><th style="width:15%">누가 돈 내나</th><th style="width:18%">문서 · 빈도</th><th style="width:22%">핵심 페인</th><th style="width:16%">경쟁 밀도</th><th style="width:10%">판정</th></tr></thead><tbody>
+ <tr class="us"><td><b>A1</b> 1~5인 오너 (HVAC·전기·핸디맨)</td><td>본인 카드</td><td>서비스 티켓, 하루 3~5건</td><td>밤 11시 서류 작업</td><td>낮음 (HVAC 포인트툴만)</td><td><span class="tag t-go">TEST 1</span></td></tr>
+ <tr class="us"><td><b>B3</b> 리모델러·소형 빌더</td><td>본인 (현장 겸임)</td><td>고객 업데이트 주~일, 로그, 펀치</td><td>"그거 어디까지 됐어요?" 문자, 승인 유실</td><td>중 (Buildertrend 무거움)</td><td><span class="tag t-go">TEST 2</span></td></tr>
+ <tr><td><b>B2</b> 전문 하도급 포맨</td><td>하도급 오너·PM</td><td>일보 + T&amp;M 티켓 매일</td><td>T&amp;M 유실·반려 = 추가 공사비 못 받음</td><td>중 (Clearstory, Raken)</td><td><span class="tag t-next">NEXT</span></td></tr>
+ <tr><td><b>A2</b> 10~100인 샵 고용 테크</td><td>오너 (FSM 이미 결제)</td><td>콜마다 FSM 노트</td><td>"콜당 15~20분 추가" (ST 리뷰)</td><td>높음 (ServiceTitan Atlas)</td><td><span class="tag t-next">LATER</span></td></tr>
+ <tr><td><b>A3a</b> 홈 인스펙터</td><td>본인 ($109 Spectora)</td><td>월 ~12건, 건당 2~3시간</td><td>매일 밤 리포트 작성</td><td>중 (Spectora 락인)</td><td><span class="tag t-next">MED</span></td></tr>
+ <tr><td><b>A3b</b> 복구·누수 테크</td><td>오너 ($285 Encircle)</td><td>매일 건조 로그</td><td>로그 없으면 보험금 거절</td><td>높음 (Encircle AI 음성)</td><td><span class="tag t-no">LOW</span></td></tr>
+ <tr><td><b>B1</b> GC 슈퍼</td><td>GC 회사 (Procore)</td><td>매일 Daily log</td><td>지쳐서 제일 먼저 빼먹음</td><td>높음 (Hardline, Procore Agent)</td><td><span class="tag t-no">LATER</span></td></tr>
+ <tr><td><b>B4</b> 안전 (JHA)</td><td>회사 안전 예산</td><td>매 교대 JHA</td><td>펜슬 위핑, 12쪽 JHA</td><td>중 (HCSS, Mitti)</td><td><span class="tag t-no">템플릿만</span></td></tr>
  </tbody></table>
- <div class="src">인용: SMRP Exchange · r/HVAC 1sxnm0e (mirror) · r/ConstructionManagers (via buildlogapp.com) · ElectricianTalk 74125 · 규모: HVAC-Talk About, GummySearch, Prowlo · Hardline: EIN Presswire 2026-05</div>
- </div>
+ <div class="src">Plumbing Zone 1278 · Spectora pricing/2023 data · Encircle pricing · ServiceTitan Field App Store reviews · Clearstory Aldridge case · NAHB Sept 2026 study · FactorLab · ASSP</div></div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">3 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">3 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">02 · PERSONA DEEP DIVE · 그들의 말로</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>페인은 "문서가 귀찮다"가 아니라 <span class="hl">"기억이 날아가고, 트럭에서 두 번 일한다"</span>.</h1>
-    <p class="sub">실제 포럼·서브레딧 원문. 우리 메시지는 이 단어를 그대로 쓴다.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;flex:1;">
- <div class="card gold tight"><div class="pill">HVAC SERVICE TECH</div>
-  <div class="q">"The apprentice I train found out the hard way you'll never remember what part went for which unit."<span>r/HVAC, 13-RTU job</span></div>
-  <div class="q">"When i get back to the truck i transcribe everything to paperwork/work tablet."<span>r/HVAC, same thread</span></div>
-  <div class="q">"Most of the time I just dump at the end of the day."<span>HVAC-Talk</span></div>
-  <div class="sub-box"><b>Job to be done:</b> 유닛별 부품·수치를 잊기 전에 남기고, 트럭에서 다시 쓰지 않기</div></div>
- <div class="card tight"><div class="pill">MAINTENANCE TECH</div>
-  <div class="q">"Getting technicians who are doing jobs in the field to go into a clunky system and enter detail is a tall order."<span>SMRP Exchange</span></div>
-  <div class="q">"More time gets spent documenting than doing."<span>Mike Holt Forum</span></div>
-  <div class="q">"I take pictures and do my write up as I go. If I dont im going to forget something."<span>r/HVAC</span></div>
-  <div class="sub-box"><b>Job to be done:</b> 기계 앞에서 WO 마감. 플래너가 받아도 되돌려 보내지 않는 기록</div></div>
- <div class="card tight"><div class="pill">CONSTRUCTION SUPER</div>
-  <div class="q">"Guys are exhausted at the end of the day and the paperwork is the first thing that gets skipped."<span>r/Construction (via BuildLog)</span></div>
-  <div class="q">"If it's not written, recorded, or photographed, it didn't happen."<span>r/ConstructionManagers</span></div>
-  <div class="q">"...on the few occasions they were needed to substantiate some claim or dispute they kept me out of trouble."<span>ContractorTalk</span></div>
-  <div class="sub-box"><b>Job to be done:</b> 분쟁 때 나를 지켜줄 기록을, 지친 하루 끝에 0분으로</div></div>
- </div>
+    <div class="header-row"><div class="label">02 · TEST FIRST · 왜 A1 + B3인가</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>두 세그먼트 모두 <span class="hl">사용자 = 구매자</span>, 결과물이 <span class="hl">집주인에게 공유</span>된다.</h1>
+    <p class="sub">나머지는 회사 구매자가 필요하거나, 이미 AI 음성을 가진 경쟁사가 있다.</p>
+    <div style="display:grid;grid-template-columns:1.25fr 0.75fr;gap:28px;flex:1;">
+ <div class="card" style="padding:22px 28px;"><table class="mx sm"><thead><tr><th style="width:24%">기준</th><th style="width:28%">A1 1~5인 오너</th><th style="width:28%">B3 리모델러</th><th style="width:20%">탈락 사유</th></tr></thead><tbody>
+ <tr><td><b>빈도</b></td><td>티켓 하루 3~5건</td><td>로그 매일 + 고객 업데이트</td><td>A3a 월 12건</td></tr>
+ <tr><td><b>본인 카드</b></td><td>Jobber $29, HCP $59, CompanyCam $63 이미 결제</td><td>오너 = 현장 리드</td><td>A2·B1·B2·B4 회사 구매</td></tr>
+ <tr><td><b>콜드 도달</b></td><td>HVAC-Talk 278K, Mike Holt ~100K, 오너 FB 그룹</td><td>ContractorTalk 172K, NAHB Remodelers 5.3만명 · ~100개 위원회</td><td>대형 서브레딧은 앱·AI 금지</td></tr>
+ <tr><td><b>경쟁 공백</b></td><td>FSM은 인보이스, 리포트는 안 씀</td><td>Buildertrend 무겁고 CompanyCam은 사진</td><td>Encircle·Hardline·Spectora 기보유</td></tr>
+ <tr><td><b>확산</b></td><td>티켓 링크 → 집주인</td><td>업데이트 링크 → 집주인 + 다른 하도급</td><td></td></tr>
+ </tbody></table></div>
+ <div style="display:flex;flex-direction:column;gap:22px;">
+ <div class="card tight" style="flex:1;"><div class="big-num hl" style="font-size:80px;">128K+</div><h2>미국 리모델링 업체 수</h2><p>NAHB 리모델러 중위 직원 5명, 연 $10K+ 공사 12건</p><div class="src">NAHB 2026</div></div>
+ <div class="card gold tight" style="flex:1;"><div class="kicker">KPI GATE (세그먼트별)</div><p><b>4주차 활성 30명, 인당 주 3건+.</b> 먼저 도달한 쪽이 유료 채널 예산을 가져간다.</p></div>
+ </div></div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">4 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">4 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">03 · CHANNEL MAP · 어디에 모여 있나</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>큰 서브레딧은 <span class="hl">모집 금지</span>. 작지만 허용되는 곳 + 포럼 + 웜 네트워크로 간다.</h1>
-    <p class="sub">규모보다 홍보 규칙이 먼저다. 레딧은 한 번 밴되면 그 커뮤니티는 끝.</p>
-    <div class="card" style="flex:1;padding:22px 28px;">
- <table class="mx xs"><thead><tr><th style="width:22%">채널</th><th style="width:11%">규모</th><th style="width:31%">홍보 규칙</th><th style="width:24%">용도</th><th style="width:12%">우선순위</th></tr></thead><tbody>
- <tr class="us"><td><b>웜 네트워크</b> (JW·UCSF 테크, SMRP, Greg/CMMS Radio, Neo 지인)</td><td>~30명</td><td>해당 없음</td><td>코호트 1 전원 직접 온보딩</td><td><span class="tag t-go">WEEK 0</span></td></tr>
- <tr class="us"><td><b>HVAC-Talk</b> 포럼</td><td>278K</td><td>본문에 이메일 금지(프로필에). 2026.2 음성 리포트 테스터 모집 글 유지됨</td><td>"former tech, 테스터 2~3명" 형식</td><td><span class="tag t-go">WEEK 1</span></td></tr>
- <tr class="us"><td><b>r/IndustrialMaintenance</b></td><td>48~61K</td><td>명문 규칙 없음, 피치는 다운보트</td><td>실제 PM 작업 리포트 + "플래너가 통과시킬까?"</td><td><span class="tag t-go">WEEK 1</span></td></tr>
- <tr class="us"><td><b>r/PLC</b></td><td>143K</td><td>명시적 금지 없음. "I built... honest feedback" 글 존재</td><td>컨트롤·정비 유즈케이스로 피드백 요청</td><td><span class="tag t-go">WEEK 2</span></td></tr>
- <tr><td><b>r/HVAC</b></td><td>246K</td><td>Pro 전용, 모드가 사진으로 Pro Flair 검증</td><td>모드메일 먼저 → 승인된 "roast it" 1회</td><td><span class="tag t-next">WEEK 2</span></td></tr>
- <tr><td><b>r/ConstructionManagers</b></td><td>59K</td><td>"medium promo tolerance"</td><td>슈퍼 10명, 2주 daily log 테스트</td><td><span class="tag t-next">코호트 2</span></td></tr>
- <tr><td><b>Mike Holt Forum</b></td><td>~100K</td><td>직업·지역 필수, 신규 글 승인제, 링크 덤핑 금지</td><td>2~3주 답변 활동 후 질문 스레드</td><td><span class="tag t-next">코호트 2</span></td></tr>
- 
- <tr><td>r/electricians · r/Construction · r/Plumbing · r/hvacadvice</td><td>298~596K</td><td>"apps, AI, market research" 명시적 금지</td><td>댓글만. 모집 금지</td><td><span class="tag t-no">NO</span></td></tr>
+    <div class="header-row"><div class="label">02 · PERSONA · 그들의 말로</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>A1의 페인은 <span class="hl">"밤 11시"</span>, B3의 페인은 <span class="hl">"문자로 승인된 건 아무도 못 찾는다"</span>.</h1>
+    <p class="sub">포럼 원문. 메시지는 이 단어를 그대로 쓴다.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;flex:1;">
+ <div class="card gold tight"><div class="pill">A1 · 1~5인 오너</div>
+  <div class="q">"I AM BURIED IN IT AND I HATE IT! How do you guys handle it (one-man service shop)?"<span>Plumbing Zone</span></div>
+  <div class="q">"What? 11:00 pm? Be right there honey."<span>Plumbing Zone, same thread</span></div>
+  <div class="q">"When i get back to the truck i transcribe everything."<span>r/HVAC (mirror)</span></div>
+  <div class="sub-box"><b>JTBD:</b> 콜 끝나고 차 출발 전에 티켓·사진 끝</div></div>
+ <div class="card gold tight"><div class="pill">B3 · 리모델러</div>
+  <div class="q">"Now all texts are forwarded to an email... All voice conversations - confirmed in a short email."<span>ContractorTalk</span></div>
+  <div class="q">"Monday 6am group texts to the owners and a midweek update."<span>ContractorTalk, same thread</span></div>
+  <div class="q">"A tile change gets approved over text and nobody can find it later."<span>Builder Playbook</span></div>
+  <div class="sub-box"><b>JTBD:</b> 현장 한 바퀴 돌고 집주인 업데이트 + 승인 기록</div></div>
+ <div class="card tight"><div class="pill">B2 · 하도급 포맨 (NEXT)</div>
+  <div class="q">"Our field guys would struggle with writing tickets so much that we would often have the home office do it all."<span>Aldridge Electric PM (Clearstory case)</span></div>
+  <div class="q">"We'd get tickets rejected on merit."<span>same source</span></div>
+  <div class="q">"The last 3 can not write a service ticket to save their life."<span>ElectricianTalk</span></div>
+  <div class="sub-box"><b>JTBD:</b> 추가 작업을 말로 남기고 서명된 T&amp;M 티켓 발송 = 못 받던 돈 회수</div></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">5 / 18</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · COMPETITOR TEARDOWN · 17개사</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>직접 경쟁(음성 리포트)은 <span class="hl">작고 한 문서짜리</span>, 대형사는 <span class="hl">AI를 비싼 팀 요금제</span>에 묶었다.</h1>
+    <p class="sub">App Store 평점·가격·투자는 10/20 각사 페이지 기준.</p>
+    <div class="card" style="flex:1;padding:16px 22px;"><table class="mx xs"><thead><tr><th style="width:14%">회사</th><th style="width:16%">세그먼트</th><th style="width:25%">포지셔닝 (원문)</th><th style="width:17%">가격</th><th style="width:13%">투자</th><th style="width:15%">App Store</th></tr></thead><tbody>
+ <tr class="us"><td><b>Hardline</b></td><td>GC 슈퍼·PM</td><td>"Summarize every phone call and site walk"</td><td>$29 / $59+ /인·월</td><td>$2M pre-seed (Mucker)</td><td>5.0 (11)</td></tr>
+ <tr class="us"><td><b>Onsite</b></td><td>주거 트레이드 오너</td><td>"Run your trades business end-to-end"</td><td>비공개</td><td>Meta 글래스 그랜트, 4명</td><td>5.0 (5)</td></tr>
+ <tr><td><b>ServiceScribe</b></td><td>HVAC 테크</td><td>"Voice-Powered HVAC Service Reports"</td><td>무료 3건, $19.99</td><td>미확인</td><td>0개</td></tr>
+ <tr><td><b>FixAIR</b></td><td>HVAC (프랑스발)</td><td>"Report done before you leave the job site."</td><td>$39, 팀 $49/인</td><td>미확인</td><td>미국 미출시</td></tr>
+ <tr><td><b>Daily Report AI</b></td><td>슈퍼·포맨</td><td>"Voice to PDF, works offline"</td><td>무료, 계정 불필요</td><td>미확인</td><td>5.0 (9)</td></tr>
+ <tr><td><b>CompanyCam</b></td><td>주거 컨트랙터</td><td>"Never lose proof of work."</td><td>$63, <b>AI는 $119+</b></td><td>$30M B</td><td>4.79 (31K)</td></tr>
+ <tr><td><b>Jobber</b></td><td>소형 홈서비스</td><td>"AI built for blue-collar businesses"</td><td>$21~280/월</td><td>$100M D</td><td>4.81 (21K)</td></tr>
+ <tr><td><b>Housecall Pro</b></td><td>소형 주거 서비스</td><td>"Trusted by 200,000+ Pros"</td><td>$59+, 사진 리포트는 상위</td><td>미확인</td><td>4.65 (31K)</td></tr>
+ <tr><td><b>ServiceTitan</b></td><td>중대형 트레이드</td><td>"powers the trades"</td><td>비공개</td><td>상장</td><td>3.46 (5.3K)</td></tr>
+ <tr><td><b>Procore</b></td><td>상업 GC</td><td>Daily Log Agent (5월 비공개 베타)</td><td>견적 + AI 크레딧</td><td>상장</td><td>4.65 (46K)</td></tr>
+ <tr><td><b>Fieldwire</b></td><td>하도급 포맨</td><td>"AI built for the jobsite"</td><td>$39, <b>커스텀 폼 $64</b></td><td>Hilti 인수</td><td>4.83 (14K)</td></tr>
  </tbody></table>
- <div class="src">레딧 직접 접속 차단으로 규모는 GummySearch·RedPulse·Prowlo, 규칙은 LeadsRover·HuntComments 미러 기준 (10/19). 게시 전 라이브 사이드바 재확인.</div>
- </div>
+ <div class="src">+ BuildLog($99~799), Raken(4.75, 23K), Mitti(SafetyCulture), MaintainX, measureQuick, ReportWalk, JobScribe, Encircle, Spectora 조사. 상세: 각사 pricing·App Store·투자 보도 (Sources 슬라이드)</div></div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">5 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">6 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">03 · CHANNEL PLAYBOOK · 어떻게 들어가나</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>포스트는 <span class="hl">설문이 아니라 실물</span>. 우리가 만든 리포트를 보여주고 "통과시킬래?"를 묻는다.</h1>
-    <p class="sub">테크들은 2026년에만 "not selling, just learning" 글을 3번 봤다. 같은 패턴은 무시당한다.</p>
-    <div class="big" style="display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;">
- <div class="card gold tight"><div class="kicker">DO</div><ul>
- <li><b>실물 먼저:</b> 실제 작업 60초 녹음 → 생성된 리포트 스크린샷 1장. 제목에 "AI" 금지</li>
- <li><b>질문은 하나:</b> "Would this pass your planner / office?"</li>
- <li><b>링크는 DM으로:</b> 본문에 링크 없이, 요청한 사람에게만</li>
- <li><b>모드 먼저:</b> r/HVAC는 Pro Flair 가진 테크(어드바이저) 통해 모드메일 승인 후 1회</li>
- <li><b>계정 예열:</b> 포스트 2~3주 전부터 답변 활동 (Mike Holt는 필수)</li>
- <li><b>오프라인:</b> 공급상 카운터용 포켓노트 + QR "Skip the notebook. Talk it." (테크들은 이미 공급상 노트를 공짜로 받음)</li></ul></div>
- <div class="card tight"><div class="kicker">DON'T</div><ul>
- <li>설문·인터뷰 요청 글 (r/electricians 등에서 명시적 금지)</li>
- <li>새 계정으로 첫 글부터 링크</li>
- <li>여러 서브레딧 동시 크로스포스트 (스팸 판정)</li>
- <li>"진단을 대신한다" 류 과장 (HVAC-Talk 반응: "measureQuick 같은 거?")</li>
- <li>AI가 다듬은 매끈한 샘플: 건설은 모든 기록이 증거로 쓰일 수 있음</li>
- <li>참고: 자기 FLRA 툴을 레딧에 올린 슈퍼는 "It got butchered" (Business Insider)</li></ul>
- <div class="sub-box"><b>공개 레딧 출시 조건:</b> 비공개 코호트가 7일 게이트(20명 중 10명 완전 기록) 통과 후. 그 전엔 피드백 요청용 1~2개 서브만.</div></div>
+    <div class="header-row"><div class="label">03 · COMPETITOR TEARDOWN · 리뷰가 말하는 것</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>불만은 "AI가 없다"가 아니라 <span class="hl">무겁고, 인터넷 필요하고, 받는 사람도 앱 깔아야</span> 한다는 것.</h1>
+    <p class="sub">App Store 실제 리뷰 원문 (1~3★ 위주).</p>
+    <div class="big" style="display:grid;grid-template-columns:1fr 1fr;gap:26px;flex:1;">
+ <div class="card tight"><div class="kicker">무엇에 화가 났나</div>
+  <div class="q">"The app is trying to be too many things at once"<span>ServiceTitan Field, 1★</span></div>
+  <div class="q">"Requires super fast internet speed"<span>Housecall Pro, 1★</span></div>
+  <div class="q">"You have to be signed in to use and is a PITA when you show up to a job with no service"<span>measureQuick</span></div>
+  <div class="q">"It is not possible to send a communication to anyone without the software"<span>Fieldwire, 3★</span></div>
+  <div class="q">"Need option to draw on pictures"<span>Raken, 3★</span></div></div>
+ <div class="card gold tight"><div class="kicker">AI 신뢰 리스크도 있다</div>
+  <div class="q">"AI won't leave me alone... This is why I won't bring AI into my company customer facing"<span>CompanyCam, 1★</span></div>
+  <div class="q">"If I find out my GC is using an app to generate site documentation with 'AI' crap, I have no confidence in approving pay apps"<span>Owner-side CM, BuildLog 홈페이지</span></div>
+  <div class="q">"the AI never invents numbers"<span>Daily Report AI 셀링 포인트</span></div>
+  <div class="sub-box"><b>제품 함의:</b> 오프라인 녹음, 받는 사람 계정 없이 여는 PDF/링크, 사진 마크업을 헤드라인으로. 말 안 한 값은 빈칸 + 서명 + 시간·GPS 스탬프.</div></div>
  </div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">6 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">7 / 18</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">03 · WHERE WE WIN · 공백과 피할 싸움</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>자리: <span class="hl">"어떤 직종이든, 1인, 리포트 한 장, 월 $10~20"</span>. 플랫폼 교체가 아니라 붙여 쓰는 도구.</h1>
+    <p class="sub">대형사 AI는 팀 요금제, 포인트툴은 한 문서. 둘 사이가 비어 있다.</p>
+    <div class="big" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:28px;flex:1;">
+ <div class="card gold tight"><div class="kicker">공백 6가지</div><ul>
+ <li><b>1인 오너·테크용 강자 없음:</b> CompanyCam AI $119+, HCP 사진 리포트 상위 요금제, MaintainX Assist Enterprise</li>
+ <li><b>가격 기준점 $10~20/월:</b> ServiceScribe $19.99, JobScribe $20, Hardline $29, FixAIR $39, measureQuick $49</li>
+ <li><b>멀티 문서:</b> 경쟁사는 각자 한 포맷. 업로드 템플릿은 Fieldwire $64 폼 장벽을 우회</li>
+ <li><b>무거움·연결·락인 불만:</b> 오프라인 + 계정 없이 여는 링크</li>
+ <li><b>신뢰:</b> 숫자 지어내지 않기를 기능으로</li>
+ <li><b>애드온 포지션:</b> Jobber·ServiceTitan 잡 기록에 링크 붙여넣기 (Raken식 확산)</li></ul></div>
+ <div class="card tight"><div class="kicker">정면으로 붙지 말 것</div><ul>
+ <li><b>Hardline:</b> GC 전화 통화 캡처 ($2M, Procore 싱크). 우리는 현장 대면 캡처</li>
+ <li><b>Procore · Trunk Tools($70M) · Fieldwire:</b> 대형 GC 계정. 그들에게 PDF 보내는 하도급 포맨을 노린다</li>
+ <li><b>ServiceTitan · HCP · Jobber:</b> 디스패치·인보이스 만들지 말 것. 링크로 연동</li>
+ <li><b>CompanyCam:</b> 사진 아카이브 싸움 말고 페이월 걸린 리포트 작성 단계를 가져온다</li>
+ <li><b>Onsite:</b> Meta 글래스 "핸즈프리 OS" 서사. 결과물 품질·가격으로 경쟁</li></ul>
+ <div class="sub-box">Onsite가 Meta 그랜트 5개사 중 하나: Meta Alina 콜에서 우리 포지션 차별화 필요</div></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">8 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
     <div class="header-row"><div class="label">04 · WOW POINT & MESSAGING</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>Wow는 하나: <span class="hl">"말하고 걸어 나오면, 리포트는 이미 끝나 있다."</span></h1>
-    <p class="sub">성공한 필드 툴의 훅은 전부 현장의 두려움을 현장 말로 짚었다: "cover your butt" (CompanyCam), "run your business from your phone" (Housecall Pro).</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;flex:1;">
- <div class="card gold tight"><div class="pill">MAINTENANCE TECH</div>
-  <div class="hook">"Close the work order before you leave the machine."</div>
-  <ul><li><b>증거 장면:</b> PM 끝나고 60초 말하기 → 수치·부품·이상·후속조치가 채워진 WO</li><li><b>보조:</b> "Your planner won't kick it back."</li></ul>
-  <div class="sub-box">기존 강점 연결: 현장 용어(부품번호, 토크값) 정확도</div></div>
- <div class="card tight"><div class="pill">HVAC SERVICE TECH</div>
-  <div class="hook">"Talk the call. Never rewrite a ticket in the truck again."</div>
-  <ul><li><b>증거 장면:</b> RTU 3대 작업, 유닛별 부품·압력이 섞이지 않은 티켓</li><li><b>보조 문구:</b> "Stop texting yourself notes."</li></ul>
-  <div class="sub-box">근거 원문: "transcribe everything" "text my wife notes"</div></div>
- <div class="card tight"><div class="pill">CONSTRUCTION SUPER (코호트 2)</div>
-  <div class="hook">"Your daily log, done before you leave the site."</div>
-  <ul><li><b>증거 장면:</b> 현장 워크 60초 → 날씨·인원·작업·지연·사진 포함 log</li><li><b>보조 문구:</b> "If it's not written, it didn't happen. Now it's written."</li></ul>
-  <div class="sub-box">Hardline 대비: 통화가 아니라 현장 워크·사진 기반</div></div>
+    <h1>Wow 하나: <span class="hl">"말하고 나오면, 고객에게 보낼 문서가 끝나 있다."</span></h1>
+    <p class="sub">훅은 세그먼트의 두려움을 현장 말로: "cover your butt"(CompanyCam), "run your business from your phone"(Housecall Pro).</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;">
+ <div class="card gold tight"><div class="pill">A1 · 1~5인 오너</div>
+  <div class="hook">"Talk the call. Ticket and photos are done before you leave the driveway."</div>
+  <ul><li><b>증거 장면:</b> 컨덴서 교체 콜 60초 → 부품·수치·사진·권고가 담긴 티켓</li><li><b>보조:</b> "Paste it into Jobber." / "No more 11pm paperwork."</li></ul></div>
+ <div class="card gold tight"><div class="pill">B3 · 리모델러</div>
+  <div class="hook">"Walk the job, talk for 60 seconds. The homeowner gets a clean update."</div>
+  <ul><li><b>증거 장면:</b> 금요일 현장 한 바퀴 → 사진 + 진행 + 다음 주 일정 + 승인 필요 항목</li><li><b>보조:</b> "Every approval, on the record."</li></ul></div>
+ <div class="card tight"><div class="pill">B2 · 하도급 포맨 (NEXT)</div>
+  <div class="hook">"Talk the extra work. Send the signed ticket before you leave."</div>
+  <ul><li><b>증거 장면:</b> 추가 배관 작업 → 시간·자재·사진·GC 서명란 T&amp;M</li><li><b>오너 메시지:</b> "Stop eating your extras."</li></ul></div>
  </div>
-    <div class="sunset-msg">우리가 파는 건 AI가 아니라 <span class="hl">트럭에서 돌려받는 30분</span>이다.</div>
+    <div class="sunset-msg">우리가 파는 건 AI가 아니라 <span class="hl">밤 11시에 돌려받는 저녁</span>이다.</div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">7 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">9 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">05 · COMPETITOR GROWTH · UPKEEP vs MAINTAINX</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>둘 다 <span class="hl">IT를 건너뛰고 테크 한 명</span>에서 시작했다. 돈은 매니저가 냈다.</h1>
+    <div class="header-row"><div class="label">05 · CHANNELS · A1 + B3가 모이는 곳</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>콜드 채널 우선순위: <span class="hl">오너 전용 공간</span> > 포럼 > 서브레딧.</h1>
+    <p class="sub">규칙 위반 1번이면 그 커뮤니티는 끝. 규모보다 허용 여부.</p>
+    <div class="card" style="flex:1;padding:18px 24px;"><table class="mx xs"><thead><tr><th style="width:24%">채널</th><th style="width:8%">대상</th><th style="width:11%">규모</th><th style="width:33%">진입 방법</th><th style="width:12%">비용</th><th style="width:12%">시점</th></tr></thead><tbody>
+ <tr class="us"><td><b>Contractors Resource Center</b> (면허 인증 FB 그룹 25개)</td><td>A1·B3</td><td>18.9만명</td><td>스폰서 포스트, 그룹당 주 2회 한도. 오너 대상</td><td>$199 / 3개 $499</td><td><span class="tag t-go">WEEK 2</span></td></tr>
+ <tr class="us"><td><b>HVAC-Talk</b></td><td>A1</td><td>27.8만</td><td>"former tech, 테스터 모집" 형식 (2026.2 선례 유지), 이메일은 프로필</td><td>무료</td><td><span class="tag t-go">WEEK 1</span></td></tr>
+ <tr class="us"><td><b>ContractorTalk</b></td><td>B3</td><td>17.2만</td><td>고객 커뮤니케이션 스레드에 실물 업데이트 샘플</td><td>무료</td><td><span class="tag t-go">WEEK 1</span></td></tr>
+ <tr><td><b>Mike Holt Forum</b></td><td>A1 (전기)</td><td>~10만</td><td>직업·지역 프로필, 2~3주 답변 활동 후 질문 스레드</td><td>무료</td><td><span class="tag t-next">WEEK 3</span></td></tr>
+ <tr><td><b>r/sweatystartup · r/Contractor · r/HVAC</b></td><td>A1·B3</td><td>20만 · 5.3만 · 23만</td><td>모드메일 먼저, "roast it" 1회. 본문 링크 금지</td><td>무료</td><td><span class="tag t-next">WEEK 2</span></td></tr>
+ <tr><td><b>NAHB Remodelers 지역 위원회</b></td><td>B3</td><td>5.3만 · ~100개</td><td>게스트 참석, 금요일 업데이트 템플릿 데모</td><td>$0~50</td><td><span class="tag t-next">WEEK 3</span></td></tr>
+ <tr><td><b>공급상 카운터 데이</b> (Johnstone 등)</td><td>A1</td><td>지점당</td><td>지점장 협의, 오전 6:30~9시, 커피 + QR 노트</td><td>$100~200</td><td><span class="tag t-next">WEEK 2</span></td></tr>
+ <tr><td><b>마이크로 크리에이터</b> (5~25만)</td><td>A1</td><td>HCP가 HVAC GUY에 52회 스폰</td><td>실제 콜 촬영 + 리포트, 고정비 + 활성 유저당 $5</td><td>$200~1,000/편</td><td><span class="tag t-next">WEEK 3</span></td></tr>
+ <tr><td>r/electricians · r/Plumbing · r/Construction</td><td>-</td><td>57~60만</td><td>앱·AI 홍보 명시 금지. 댓글만</td><td>-</td><td><span class="tag t-no">NO</span></td></tr>
+ </tbody></table>
+ <div class="src">thecontractorsresourcecenter.com · hvac-talk.com · contractortalk.com · mikeholt.com · RedPulse/GummySearch (10/19~20) · NAHB RMI Q2 2026 · johnstonefg.com/events · SponsorRadar (추정치)</div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">10 / 18</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">06 · TEST PORTFOLIO · 네트워크 뿌리기 이상의 9개 실험</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>실험마다 <span class="hl">가설 · 비용 · 신호 시점 · Kill 기준</span>을 미리 박는다.</h1>
+    <p class="sub">활성 = 7일 내 리포트 1건 생성·공유. 리텐션 = 2주차 3건+. 모든 채널에 세그먼트 × 메시지 UTM.</p>
+    <div class="card" style="flex:1;padding:16px 22px;"><table class="mx xs"><thead><tr><th style="width:4%">#</th><th style="width:20%">실험</th><th style="width:22%">검증하는 것</th><th style="width:11%">비용</th><th style="width:9%">신호</th><th style="width:34%">성공 / Kill</th></tr></thead><tbody>
+ <tr class="us"><td>8</td><td><b>컨시어지 SMS</b> "음성메모 보내면 리포트로"</td><td>설치 전에 결과물 가치</td><td>$50~100</td><td>2~5일</td><td>7일 내 두 번째 메모 40%+ / 15% 미만 Kill</td></tr>
+ <tr class="us"><td>1</td><td><b>페르소나 랜딩 + Meta 광고</b> (세그먼트 × 훅 셀)</td><td>어떤 조합이 싸게 반응하나</td><td>$600~1,200</td><td>5~7일</td><td>CPL $15 미만, LP 전환 2%+ / 셀당 $150 쓰고 CPL $40+면 Kill</td></tr>
+ <tr class="us"><td>4</td><td><b>유료 1주 다이어리</b> (8~10명, 1인 $75~100)</td><td>실제 매일 쓰나, 돈 끊어도 쓰나</td><td>$400~1,000</td><td>7~10일</td><td>8명 중 6명 주 4일+ 사용 / 3명 미만 Kill</td></tr>
+ <tr><td>5</td><td><b>라이선스 DB 콜드메일</b> (CA CSLB C-20·C-10·B)</td><td>오너가 담백한 가치 문장에 답하나</td><td>$50~150</td><td>7~14일</td><td>답장 5%+, 설치 1%+ / 500통 후 답장 2% 미만 Kill</td></tr>
+ <tr><td>9</td><td><b>인증 FB 그룹 스폰서</b></td><td>신뢰된 커뮤니티 효율</td><td>$199~999</td><td>2~4일</td><td>$199당 설치 25+ / 5 미만 Kill</td></tr>
+ <tr><td>6</td><td><b>Apple Search Ads</b> "service ticket", "daily report"</td><td>검색 수요</td><td>$100~400 (+$100 크레딧)</td><td>3~7일</td><td>CPI $5 미만, 활성 30%+ / CPI $10+ Kill</td></tr>
+ <tr><td>2</td><td><b>마이크로 크리에이터</b></td><td>동료 데모가 광고보다 나은가</td><td>$300~1,500</td><td>3~10일</td><td>편당 설치 20+ / 5 미만 Kill</td></tr>
+ <tr><td>7</td><td><b>오프라인</b> 카운터 데이·ABC 조찬</td><td>대면 데모 전환</td><td>$50~500/회</td><td>당일</td><td>회당 설치 10+ / 3 미만 Kill</td></tr>
+ <tr><td>3</td><td><b>리서치 패널</b> (Respondent)</td><td>검증된 테크 인터뷰 확보</td><td>$130~200/명</td><td>2~5일</td><td>다이어리 모집 실패 시만 사용</td></tr>
+ </tbody></table>
+ <div class="src">WordStream 2025 · Tiger Pistol · dscout · CSLB data portal · Belkins 2025 · SplitMetrics/MobileAction · Janney/Later · Contractors Resource Center · Respondent · Crescendo(Seth Radman) · Ask Alexis(Mind the Product)</div></div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">11 / 18</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">06 · TEST DESIGN · 핵심 3개 상세</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>설치 전 <span class="hl">컨시어지</span>로 가치 확인, <span class="hl">Meta 셀</span>로 메시지 고르고, <span class="hl">다이어리</span>로 습관 확인.</h1>
+    <p class="sub">세 실험이 각각 "원하나 / 누가 반응하나 / 계속 쓰나"를 답한다.</p>
+    <div class="big" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;flex:1;">
+ <div class="card gold tight"><div class="pill">EXP 8 · CONCIERGE SMS</div><h2>앱 출시 전 지금 시작</h2><ul>
+ <li>Twilio·WhatsApp 번호: "다음 작업 음성메모 + 사진 보내면 15분 안에 리포트"</li><li>실제 파이프라인 생성, 사람이 검수</li><li>3일째 App Store 링크</li><li>선례: Crescendo 수동 처리로 1,000명+, Magra·Daily Foreman이 같은 형식</li></ul>
+ <div class="sub-box">TCPA: 먼저 문자 보낸 사람에게만 답장, STOP 준수</div></div>
+ <div class="card tight"><div class="pill">EXP 1 · META 셀 테스트</div><h2>2 세그먼트 × 2 훅 = 4셀</h2><ul>
+ <li>셀당 $25~40/일, 5~7일, 20초 실제 촬영 영상</li><li>2026년 Meta 세부 관심사 통합: 첫 2초 영상과 현장 용어가 타게팅 역할</li><li>참고: 건설 SW CPL $121 → 2개월차 절반 (Main Course Media), DripJobs CPL $54→$42</li></ul>
+ <div class="sub-box">CPL보다 셀별 2주차 리텐션으로 판정</div></div>
+ <div class="card gold tight"><div class="pill">EXP 4 · 유료 다이어리</div><h2>8명 × 5 근무일</h2><ul>
+ <li>모집: Craigslist gigs, Indeed(무료 3건/월), 지역 FB</li><li>조건: 하루 3건+ 작업 중인 현역</li><li>보상: 근무일 리포트당 $10 + 종료 통화 $25~50</li><li>핵심 지표: 2주차 <b>무보상</b> 사용</li></ul>
+ <div class="sub-box">Thumbtack·Angi로 모집 금지 (약관 위반)</div></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">12 / 18</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">07 · 6-WEEK PLAN · $4K 기준</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>3주차에 판정: <span class="hl">남은 예산 70%를 2주차 리텐션 1등 셀에</span>. 가장 싼 설치가 아니라.</h1>
+    <p class="sub">예상 설치 145~325, 활성 35~50% 가정 시 100명 달성 [INFERENCE, 벤치마크 기반].</p>
+    <div style="display:grid;grid-template-columns:1.3fr 0.7fr;gap:28px;flex:1;">
+ <div class="card" style="padding:20px 26px;"><table class="mx xs"><thead><tr><th style="width:20%">주차</th><th style="width:80%">실행</th></tr></thead><tbody>
+ <tr class="us"><td><b>W0</b> 10/20~11/1</td><td>컨시어지 SMS 오픈 · 랜딩 4개 · CSLB 리스트 (C-20 HVAC, C-10 전기, B 일반) · 다이어리 모집 · 포럼 계정 예열</td></tr>
+ <tr><td><b>W1</b> 11/2~8</td><td>Meta 4셀 $30/일 · Apple Ads Basic ($100 크레딧) · 콜드메일 1차 300통 · HVAC-Talk·ContractorTalk 포스트</td></tr>
+ <tr><td><b>W2</b> 11/9~15</td><td>다이어리 8명 시작 · CRC 그룹 1개 ($199) · 카운터 데이 1회 · 서브레딧 모드 승인 포스트</td></tr>
+ <tr class="us"><td><b>W3</b> 11/16~22</td><td><b>판정:</b> 지는 Meta 셀 종료 · 이긴 세그먼트에 크리에이터 2명 · ABC 조찬 게스트</td></tr>
+ <tr><td><b>W4</b> 11/23~29</td><td>추수감사절 (저의도) · 다이어리 종료 통화 · 채널별 2주차 리텐션 리뷰 · 콜드메일 2차</td></tr>
+ <tr><td><b>W5</b> 11/30~12/6</td><td>몰빵: CRC 3개 묶음 또는 크리에이터 3번째 · 승자 셀 Meta 증액 · 승자 그룹 경품 이벤트</td></tr>
+ <tr class="us"><td><b>W6</b> 12/7~14</td><td>지출 유지 · 세그먼트 × 메시지 × 채널별 활성·리텐션 리드아웃 → Bicycle 게이트</td></tr>
+ </tbody></table></div>
+ <div class="card gold" style="padding:22px 26px;"><div class="kicker">예산 $4,000</div><table class="mx xs"><tbody>
+ <tr><td>Meta 광고</td><td><b>$1,200</b></td></tr><tr><td>크리에이터 2~4명</td><td><b>$800</b></td></tr><tr><td>다이어리 보상</td><td><b>$630</b></td></tr><tr><td>FB 그룹 스폰서</td><td><b>$500</b></td></tr><tr><td>Apple Ads</td><td><b>$300</b></td></tr><tr><td>오프라인</td><td><b>$200</b></td></tr><tr><td>콜드메일 도구</td><td><b>$100</b></td></tr><tr><td>Twilio</td><td><b>$50</b></td></tr><tr><td>예비</td><td><b>$220</b></td></tr>
+ </tbody></table><div class="src">$3K / $5K 버전은 연구 파일 참조</div></div>
+ </div>
+    
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">13 / 18</span></div>
+</section></div>
+<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
+  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
+  <div class="pad">
+    <div class="header-row"><div class="label">08 · GROWTH CASES · UPKEEP vs MAINTAINX</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>둘 다 <span class="hl">IT를 건너뛰고 개인 한 명</span>에서 시작했다. 돈은 매니저가 냈다.</h1>
     <p class="sub">1차 출처(창업자 인터뷰, 당시 홈페이지, 보도) 기준.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;">
+    <div class="big" style="display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;">
  <div class="card tight"><div class="pill">UPKEEP · RYAN CHAN · YC W17</div>
- <ul><li><b>첫 채널:</b> App Store 무료 출시, 마케팅 0. 첫 유저는 엄마·아내·형. 2년간 ~2,000명</li>
- <li><b>확산:</b> "용접공이 App Store에서 발견 → 시설 전체로 퍼짐". 2호 유료 고객 Universal Studios(타사 견적 $500K+)</li>
- <li><b>메시지:</b> "install UpKeep in seconds (not weeks)", "Treat your technicians to awesome work order software"</li>
- <li><b>전환:</b> 무료 1만명 → 첫 달 100명(1%) 유료. Unilever 등은 "직원이 먼저 다운로드" 후 계약</li>
- <li><b>실패:</b> 유료 전환 때 유저 반발. "테크는 카드를 긁지 않는다" → 영업 2명 붙이자 매출 상승</li></ul>
- <div class="sub-box">2016 ~2K → 2018 5만명/1,000개사 ($10M A) → 2020 40만명/2,000+ 유료 ($36M B)</div></div>
+ <ul><li><b>첫 채널:</b> App Store 무료, 마케팅 0. 첫 유저는 가족. 2년간 ~2,000명</li>
+ <li><b>확산:</b> "용접공이 App Store에서 발견 → 시설 전체로". 2호 유료 고객 Universal Studios</li>
+ <li><b>메시지:</b> "install UpKeep in seconds (not weeks)"</li>
+ <li><b>전환:</b> 무료 1만명 → 첫 달 100명(1%) 유료. Unilever는 "직원이 먼저 다운로드"</li>
+ <li><b>교훈:</b> 유료 전환 때 반발. "테크는 카드를 안 긁는다" → 영업 2명 붙이자 매출 상승</li></ul>
+ <div class="sub-box">2016 ~2K → 2018 5만명 ($10M A) → 2020 40만명, 2,000+ 유료 ($36M B)</div></div>
  <div class="card gold tight"><div class="pill">MAINTAINX · CHRIS TURLICA</div>
- <ul><li><b>인사이트:</b> 전작 Voo에서 공장 작업자들이 클립보드 사진을 공유하는 걸 봄 → "공장 바닥의 Google Docs + Slack"</li>
+ <ul><li><b>인사이트:</b> 전작 Voo에서 공장 작업자들이 클립보드 사진 공유 → "공장 바닥의 Google Docs + Slack"</li>
  <li><b>진입:</b> "bypassing IT to target frontline workers directly"</li>
- <li><b>메시지:</b> "The CMMS you always wish you had", "Without the paper stacks"</li>
- <li><b>무료 티어:</b> 영구 무료, 단 사진 첨부 WO 월 5건·폼 월 2개로 제한. 체험 종료 시 무료로 다운그레이드</li>
- <li><b>확장:</b> "한 공장의 챔피언 한 명 → 크루 → 공장장 → 지역 리더"</li>
+ <li><b>무료 티어:</b> 영구 무료, 사진 첨부 WO 월 5건·폼 월 2개 제한</li>
+ <li><b>확장:</b> "챔피언 한 명 → 크루 → 공장장 → 지역 리더"</li>
  <li><b>첫 100명 채널:</b> 1차 출처 없음 (UNCONFIRMED)</li></ul>
  <div class="sub-box">2019 시드 $3.8M, 1,600개사 가입 → 2021 매출 12배 → 2026.8 Autodesk 인수 (~$3.6B)</div></div>
  </div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">8 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">14 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">06 · BENCHMARKS · 블루칼라에서 빠르게 큰 회사들</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>공통점: <span class="hl">하나의 좁은 서클 + 결과물이 퍼지는 구조</span>.</h1>
-    <p class="sub">6개 필드워커 툴 + 2개 AI 툴(메시징·비공개 베타 벤치마크).</p>
-    <div class="card" style="flex:1;padding:20px 26px;">
- <table class="mx xs"><thead><tr><th style="width:13%">회사</th><th style="width:20%">첫 채널</th><th style="width:22%">훅</th><th style="width:25%">성장 전술</th><th style="width:20%">증거</th></tr></thead><tbody>
- <tr class="us"><td><b>CompanyCam</b></td><td>창업자 가족 지붕회사, 네브래스카</td><td>"Cover their butts"</td><td>공유 갤러리를 페북에 게시, 2017 네브래스카 전 업체 무료</td><td>2017 MoM 20% → 2026 $2B</td></tr>
- <tr class="us"><td><b>SafetyCulture</b></td><td>App Store 검색만, 영업 0</td><td>안전을 모든 작업자 손에</td><td>무료 앱 + 공개 체크리스트 6만개, 공유·내보내기만 유료</td><td>6주 1만 다운로드, 2016 100만명</td></tr>
- <tr class="us"><td><b>Fieldwire</b></td><td>포맨이 직접 프로젝트 생성</td><td>"field-first tool for the jobsite"</td><td>프로젝트 1개가 30~50명을 끌어옴, 컨퍼런스·영업 0</td><td>2015 3.5만 → 2019 50만 프로젝트</td></tr>
- <tr><td><b>Housecall Pro</b></td><td>샌디에이고, 부동산 중개인 제휴</td><td>"Run your business from your smartphone"</td><td>무료 앱, 페북 그룹 3개, 현금 리퍼럴, 앰버서더</td><td>2022 2.5만개사, 현재 20만+ 프로</td></tr>
- <tr><td><b>Jobber</b></td><td>에드먼턴 페인터 1명</td><td>"Run a stronger service business"</td><td>비고객에게도 열린 페북 그룹, YouTube 교육, 그랜트</td><td>20만+ 프로, $100M D</td></tr>
- <tr><td><b>ServiceTitan</b></td><td>창업자 아버지 회사, LA 아르메니아 커뮤니티</td><td>숫자로 보이는 매출 증가</td><td>협회에 ~4% 리베이트 주고 리스트·전시회 접근</td><td>매출 $685M, 2024 IPO</td></tr>
- <tr><td><b>Wispr Flow</b></td><td>창업자가 첫 500명 직접 온보딩</td><td>"말하면 내가 썼을 글로"</td><td>주 2,000단어 페이월, 크리에이터 프로그램</td><td>유료전환 20%, 90% 오가닉</td></tr>
- <tr><td><b>Granola</b></td><td>150명 비공개 베타 ~1년</td><td>"AI should help you think better"</td><td>트윗 1개 + Product Hunt로 공개, 팀 내 전파</td><td>2025 $250M 밸류</td></tr>
- </tbody></table>
- <div class="src">출처: Medium/Startland/Insight(CompanyCam) · ENR/Startup News(SafetyCulture) · TechCrunch 2015·2019(Fieldwire) · SD Tech Scene/HCP(Housecall Pro) · Paychex/Globe(Jobber) · SEC 424B4, Strategy Canon(2차)(ServiceTitan) · PMF Show/TechCrunch(Wispr) · Lightspeed/TechCrunch(Granola)</div>
- </div>
-    
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">9 / 14</span></div>
-</section></div>
-<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
-  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
-  <div class="pad">
-    <div class="header-row"><div class="label">06 · WHAT WE COPY · 5가지 반복 패턴</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>성공 패턴 5개를 <span class="hl">우리 실행 항목</span>으로 바꾼다.</h1>
-    <p class="sub">패턴은 benchmark 8개사 + UpKeep·MaintainX에서 반복 확인된 것만.</p>
-    <div class="card" style="flex:1;padding:24px 30px;">
- <table class="mx sm"><thead><tr><th style="width:30%">패턴</th><th style="width:28%">누가</th><th style="width:42%">Carbyn 실행</th></tr></thead><tbody>
- <tr><td><b>1. 좁은 서클에서 시작</b></td><td>CompanyCam, ServiceTitan, Jobber</td><td>JW·UCSF·SMRP 정비 테크 20명. 광고 0</td></tr>
- <tr><td><b>2. 현장 개인은 무료, 공유·팀에서 과금</b></td><td>SafetyCulture, Fieldwire, MaintainX</td><td>베타 무제한. 공개 후 주간 한도, 팀 템플릿·히스토리·웹링크가 Pro</td></tr>
- <tr class="us"><td><b>3. 결과물이 확산 수단</b></td><td>CompanyCam 갤러리, Fieldwire 프로젝트, UpKeep 용접공</td><td>공유 리포트 하단 "Made with Carbyn · get it free" + 받은 사람 원탭 팀 초대</td></tr>
- <tr><td><b>4. 커뮤니티를 소유, 비고객에게도 개방</b></td><td>Housecall Pro, Jobber</td><td>WhatsApp/Discord "Field Report Crew": 베타 유저 + 관심자. 매주 개선 공개</td></tr>
- <tr class="us"><td><b>5. 규모 전에 손으로 온보딩</b></td><td>Wispr 500명, Granola 150명</td><td>JK·Neo가 20명 전원 15분 통화 온보딩, 첫 리포트를 같이 만듦</td></tr>
- <tr><td><b>+ 사람이 클로징</b></td><td>UpKeep (영업 2명 후 매출 상승)</td><td>리포트 3건+ 받은 매니저에게 JK가 직접 "팀 전체로" 연락</td></tr>
+    <div class="header-row"><div class="label">08 · GROWTH CASES · 블루칼라 성장 패턴 → Carbyn</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <h1>반복 패턴: <span class="hl">좁은 서클 · 개인 무료 · 결과물이 퍼짐</span>.</h1>
+    <p class="sub">CompanyCam, SafetyCulture, Fieldwire, Housecall Pro, Jobber, ServiceTitan, Wispr, Granola.</p>
+    <div class="card" style="flex:1;padding:20px 26px;"><table class="mx sm"><thead><tr><th style="width:26%">패턴</th><th style="width:34%">사례 (증거)</th><th style="width:40%">Carbyn 실행</th></tr></thead><tbody>
+ <tr><td><b>좁은 서클에서 시작</b></td><td>CompanyCam: 가족 지붕회사 → 2017 네브래스카 전 업체 무료, MoM 20%</td><td>CA 한 주의 HVAC·전기 오너부터 (CSLB 리스트)</td></tr>
+ <tr><td><b>개인 무료, 공유·팀에서 과금</b></td><td>SafetyCulture: 6주 1만 다운로드, 공유·내보내기만 유료</td><td>베타 무제한, 공개 후 주간 한도 + Pro $15~19</td></tr>
+ <tr class="us"><td><b>결과물이 확산 수단</b></td><td>CompanyCam 갤러리 FB 공유, Fieldwire 프로젝트당 30~50명 유입</td><td>집주인에게 가는 링크 하단 "Made with Carbyn"</td></tr>
+ <tr><td><b>커뮤니티 소유</b></td><td>Housecall Pro FB 그룹 3개, Jobber 비고객 개방 그룹</td><td>베타 유저 WhatsApp 크루, 매주 개선 공개</td></tr>
+ <tr class="us"><td><b>손으로 온보딩</b></td><td>Wispr 창업자 500명 직접, Granola 150명 1년</td><td>첫 20명 전원 15분 통화, 첫 리포트 같이</td></tr>
+ <tr><td><b>협회 렌트</b></td><td>ServiceTitan: 협회 ~4% 리베이트로 리스트·전시회 (2차 출처)</td><td>NAHB 위원회·ABC 지부 게스트 → 성과 나면 제휴</td></tr>
  </tbody></table></div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">10 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">15 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">07 · FEEDBACK LOOP DESIGN</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <div class="header-row"><div class="label">09 · FEEDBACK LOOP DESIGN</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
     <h1>확보 → 사용 → 수집 → 개선 → 확산. 단계마다 <span class="hl">장치 하나, 숫자 하나</span>.</h1>
-    <p class="sub">각 단계의 숫자가 다음 단계의 입력. 숫자가 막힌 단계만 고친다.</p>
+    <p class="sub">숫자가 막힌 단계만 고친다.</p>
     <div class="big" style="display:grid;grid-template-columns:repeat(5,1fr);gap:18px;flex:1;">
- <div class="card tight"><div class="step">01 ACQUIRE</div><h2>확보</h2><ul><li>웜 네트워크 개별 DM</li><li>포럼 실물 포스트</li><li>대기 리스트 폼 (직군·회사 규모·작업 빈도)</li></ul><div class="sub-box"><b>KPI</b> 주간 신규 대기자, 직군 비율</div></div>
- <div class="card gold tight"><div class="step">02 ACTIVATE</div><h2>사용</h2><ul><li>15분 온보딩 통화에서 첫 리포트 같이 생성</li><li>본인 양식 1장 받아서 템플릿화</li></ul><div class="sub-box"><b>KPI</b> 24시간 내 첫 리포트 공유율</div></div>
- <div class="card tight"><div class="step">03 COLLECT</div><h2>수집</h2><ul><li>로그: 원문·AI 초안·사용자 수정·공유 여부</li><li>리포트마다 👍/👎 1탭</li><li>주 1회 5분 통화</li></ul><div class="sub-box"><b>KPI</b> 무수정 발송률</div></div>
- <div class="card tight"><div class="step">04 IMPROVE</div><h2>개선</h2><ul><li>매일 20건 통과/실패 판정 (JK)</li><li>최다 실패 1개만 수정</li><li>매주 금요일 크루 채널에 변경 공개</li></ul><div class="sub-box"><b>KPI</b> 주간 실패율 감소</div></div>
- <div class="card gold tight"><div class="step">05 SPREAD</div><h2>리텐션·확산</h2><ul><li>공유 링크 워터마크</li><li>받은 사람 원탭 가입</li><li>매니저 3건+ 수신 시 JK 연락</li></ul><div class="sub-box"><b>KPI</b> 4주차 유지율, 리포트당 신규 가입</div></div>
+ <div class="card tight"><div class="step">01 ACQUIRE</div><h2>확보</h2><ul><li>9개 실험, 셀별 UTM</li><li>가입 시 직종·팀 규모·하루 작업 수 질문</li></ul><div class="sub-box"><b>KPI</b> 셀별 CPI, 직종 비율</div></div>
+ <div class="card gold tight"><div class="step">02 ACTIVATE</div><h2>사용</h2><ul><li>첫 20명 15분 통화로 첫 리포트</li><li>본인 양식 1장 받아 템플릿화</li></ul><div class="sub-box"><b>KPI</b> 24시간 내 첫 공유율</div></div>
+ <div class="card tight"><div class="step">03 COLLECT</div><h2>수집</h2><ul><li>원문·AI 초안·수정·공유 로그</li><li>리포트마다 👍/👎</li><li>주 1회 5분 통화</li></ul><div class="sub-box"><b>KPI</b> 무수정 발송률</div></div>
+ <div class="card tight"><div class="step">04 IMPROVE</div><h2>개선</h2><ul><li>매일 20건 판정 (JK)</li><li>최다 실패 1개 수정</li><li>금요일 크루에 공개</li></ul><div class="sub-box"><b>KPI</b> 주간 실패율</div></div>
+ <div class="card gold tight"><div class="step">05 SPREAD</div><h2>확산</h2><ul><li>집주인 링크 워터마크</li><li>받은 사람 원탭 가입</li><li>Jobber 붙여넣기</li></ul><div class="sub-box"><b>KPI</b> 4주차 유지율, 링크당 가입</div></div>
  </div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">11 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">16 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
-    <div class="header-row"><div class="label">08 · EXECUTION PLAN · 10/20 – 12/14</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
-    <h1>8주 플랜: <span class="hl">20명 → 100명</span>. 날짜가 아니라 게이트로 넘어간다.</h1>
-    <p class="sub">게이트 미달 시 다음 단계로 안 간다 (Neo의 원칙: "Move on numbers, not dates").</p>
-    <div class="card" style="flex:1;padding:24px 30px;">
- <table class="mx sm"><thead><tr><th style="width:15%">기간</th><th style="width:37%">할 일</th><th style="width:16%">담당</th><th style="width:32%">게이트</th></tr></thead><tbody>
- <tr><td><b>10/20 – 11/1</b><br>준비</td><td>코호트 1 명단 30명 확보 (JW·UCSF·SMRP·Greg·Neo), 대기 리스트 폼, 크루 채널 개설, 포럼 계정 예열, 데모 리포트 3종 제작</td><td>JK (모집) · Neo (제출 10/26)</td><td>20명 확정, App Store 승인</td></tr>
- <tr class="us"><td><b>11/2 – 11/9</b><br>코호트 1</td><td>20명 전원 15분 온보딩, 매일 20건 판정, 최다 실패 수정</td><td>JK · Neo</td><td><b>10/20명 7일 내 완전 기록 발송</b></td></tr>
- <tr><td><b>11/10 – 11/23</b><br>코호트 2 모집</td><td>HVAC-Talk, r/IndustrialMaintenance, r/PLC 실물 포스트. r/HVAC 모드 승인. 건설 슈퍼 10명 별도 트랙</td><td>JK</td><td>활성 50명, 무수정 발송률 50%+</td></tr>
- <tr><td><b>11/24 – 12/7</b><br>확산</td><td>워터마크·팀 초대 측정, 매니저 3건+ 수신자에게 연락, 크리에이터 1명 테스트</td><td>JK · Neo</td><td>활성 100명, 리포트당 신규 가입 측정</td></tr>
- <tr class="us"><td><b>12/14</b><br>Bicycle 게이트</td><td>코호트별 4주차 유지율 리뷰. 가장 높은 직군에 집중</td><td>JK · Neo</td><td><b>4주차 50%+ 유지, 일 3~5건</b>. 20% 미만 직군은 중단</td></tr>
- </tbody></table></div>
-    
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">12 / 14</span></div>
-</section></div>
-<div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
-  <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
-  <div class="pad">
-    <div class="header-row"><div class="label">09 · DECISIONS NEEDED</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
+    <div class="header-row"><div class="label">10 · DECISIONS NEEDED</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
     <h1>이번 주 결정 <span class="hl">4가지</span>.</h1>
     <p class="sub">나머지는 플랜대로 실행.</p>
     <div class="big" style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:24px;flex:1;">
- <div class="card gold tight"><div class="kicker">D1 · 과금</div><h2>베타는 무제한, 공개 후 주간 한도로</h2><ul><li>현재 안: 무료 5회 → 일 3~5건 테크는 이틀째 막힘</li><li>근거: UpKeep 2년 무료, Wispr 주 2,000단어 한도</li><li>공개 후 Pro: 팀 템플릿, 히스토리, 웹링크</li></ul></div>
- <div class="card tight"><div class="kicker">D2 · 로그인</div><h2>첫 노트 익명 허용 여부</h2><ul><li>Apple 5.1.1(v) 재확인 (JK, 10/26 제출 전)</li><li>대안: 첫 노트 익명 → 공유·저장 시 Apple 로그인</li><li>10/19 결론(가입 필수)은 확인 후 유지/변경</li></ul></div>
- <div class="card tight"><div class="kicker">D3 · 첫 템플릿</div><h2>정비 WO + HVAC 서비스 티켓</h2><ul><li>작업 완료 보고서 1종으로 두 직군 커버 가능한지 데모 3건으로 확인</li><li>안 되면 2종 분리</li><li>건설 daily log는 코호트 2에서</li></ul></div>
- <div class="card gold tight"><div class="kicker">D4 · 커뮤니티 채널</div><h2>WhatsApp vs Discord</h2><ul><li>테크는 WhatsApp·문자에 익숙, Discord는 젊은 층</li><li>Neo 한국 코호트는 카톡 별도</li><li>매주 금요일 개선 사항 공개 채널로 사용</li></ul></div>
+ <div class="card gold tight"><div class="kicker">D1 · 세그먼트</div><h2>A1 + B3로 확정?</h2><ul><li>정비 테크는 B2B 트랙으로 분리</li><li>B2 포맨은 4주차 이후</li></ul></div>
+ <div class="card gold tight"><div class="kicker">D2 · 예산</div><h2>6주 $3K / $4K / $5K</h2><ul><li>$4K 기준 플랜. 3주차 70% 재배분 규칙</li></ul></div>
+ <div class="card tight"><div class="kicker">D3 · 첫 템플릿</div><h2>서비스 티켓 + 고객 업데이트</h2><ul><li>A1용 티켓, B3용 주간 업데이트</li><li>"말 안 한 값은 빈칸", 서명, 시간·GPS</li></ul></div>
+ <div class="card tight"><div class="kicker">D4 · 과금·로그인</div><h2>베타 무제한 · 첫 노트 익명</h2><ul><li>Apple 5.1.1(v) 확인 후 10/26 제출 전 확정</li><li>공개 가격 기준점 $10~20/월</li></ul></div>
  </div>
-    <div class="sunset-msg">첫 100명에게 줄 것은 앱이 아니라, <span class="hl">그들이 내일 아침 상사에게 보낼 리포트</span>다.</div>
+    <div class="sunset-msg">첫 100명에게 줄 것은 앱이 아니라, <span class="hl">오늘 밤 쓰지 않아도 되는 리포트</span>다.</div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">13 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">17 / 18</span></div>
 </section></div>
 <div class="slide-viewport"><section class="slide" style="background-image: url('assets/bg_cover.jpg');">
   <div class="slide-bg-overlay" style="background: rgba(8,9,12,0.55);"></div>
   <div class="pad">
     <div class="header-row"><div class="label">APPENDIX · SOURCES</div><img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN"></div>
     <h1>출처</h1>
-    <p class="sub">모든 수치·인용은 아래 페이지에 원문 존재. 미확인 항목은 본문에 UNCONFIRMED 표기.</p>
+    <p class="sub">모든 수치·인용은 아래 페이지 원문 기준 (10/19~20 조회). 미확인은 본문에 표기.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;">
- <div class="card tight" style="font-size:16px;"><div class="kicker">COMPETITORS & BENCHMARKS</div>
- <p style="font-size:16px !important;line-height:1.55 !important;">
- UpKeep: sramanamitra.com/2019/06/12~15 (Chan interview parts 2-5) · upkeep.com/blog/qa-founders-story-ryan-upkeep-yc-w17 · techcrunch.com/2017/01/23/upkeep · forbes.com/sites/alexandrawilson1/2018/03/20 · insightpartners.com (Series B 2020) · web.archive.org onupkeep.com 2016, 2017<br>
- MaintainX: baincapitalventures.com/insight/maintainx · getmaintainx.com/newsroom/maintainx-raises-3point8-million · web.archive.org getmaintainx.com 2019, 2020, /pricing 2019 · breakingthebottleneck.substack.com · prnewswire (2021 Series B) · pulse2.com<br>
- CompanyCam: medium.com/@ProfeLuke · companycam.com/press · startlandnews.com 2026/02 · insightpartners.com (Series B)<br>
- SafetyCulture: enr.com/articles/38829 · startupnews.com.au 2017, 2019 · Fieldwire: techcrunch.com 2015/10/27, 2019/09/16<br>
- Housecall Pro: sdtechscene.org · housecallpro.com/community · Jobber: paychex.com THRIVE S4E50 · ServiceTitan: sec.gov 424B4 · strategycanon.com (2차)<br>
- Wispr: pmf.show · techcrunch.com 2025/11/20 · Granola: lsvp.com · techcrunch.com 2024/10/23, 2025/05/14 · Hardline: einpresswire.com 914057880</p></div>
- <div class="card tight"><div class="kicker">CHANNELS, QUOTES, INTERNAL</div>
- <p style="font-size:16px !important;line-height:1.55 !important;">
- Subreddit 규모: gummysearch.com, redpulse.io, prowlo.com · 규칙: leadsrover.io, huntcomments.com, threadotter.com, reddifier.com (모두 10/19 조회, 라이브 재확인 필요)<br>
- HVAC-Talk: hvac-talk.com/about, /threads/service-report-tool.2289472 · ContractorTalk: /about, /threads/daily-reports.94435 · Mike Holt: forums.mikeholt.com rules, 2575194, 51524 · ElectricianTalk: 74125, 68465, 307152, 307733 · SMRP Exchange WO closeout thread · r/HVAC 1sxnm0e (reddit.sentinel-team.org mirror) · buildlogapp.com (r/Construction·r/ConstructionManagers 인용, 2차) · Business Insider (FLRA tool)<br>
- 크리에이터: socialblade.com, vidiq.com, trari.com, dustinstelzer.com · AHR Expo: achrnews.com · SMRP prospectus 2026<br>
- Apple: developer.apple.com/app-store/review/guidelines/#5.1.1<br>
- 내부: Granola 0565b0ff (10/18 Strategy), c97b6c9c (Daily check-out), cea627de (UX), 3e72c3de (10/19 Check-in/out) · 04_Carbyn Product Strategy</p></div>
+ <div class="card tight"><div class="kicker">COMPETITORS · SEGMENTS</div>
+ <p style="font-size:15px !important;line-height:1.5 !important;">
+ Hardline: hardlineapp.com, /pricing, /llms.txt, techfundingnews.com, einpresswire 914057880 · Onsite: useonsite.com, /blog/onsite-receives-meta-ai-glasses-impact-grant · ServiceScribe: getservicescribe.com · FixAIR: fixair.ai/pricing · BuildLog: buildlogapp.com/pricing · Daily Report AI, ReportWalk, Raken, CompanyCam, ServiceTitan Field, Housecall Pro, Jobber, Procore, Fieldwire, Mitti, MaintainX, measureQuick: apps.apple.com 각 앱 페이지 + 공식 pricing · Procore Daily Log Agent press · Trunk Tools: ENR 61084<br>
+ Segments: plumbingzone.com/threads/buried-in-paperwork.1278 · contractortalk.com 448458, 94435 · thebuilderplaybook.com · clearstory.build/customers/aldridge · electriciantalk.com 74125 · spectora.com pricing, 2023 data · forum.nachi.org 114774 · getencircle.com · NAHB Sept 2026 special study, RMI Q2 2026 · iicrc.org · factorlab.com · ASSP · ABC chapters · PHCC · DealStream associations</p></div>
+ <div class="card tight"><div class="kicker">EXPERIMENTS · CHANNELS · CASES</div>
+ <p style="font-size:15px !important;line-height:1.5 !important;">
+ wordstream.com/blog/facebook-ads-benchmarks-2025 · tigerpistol.com · heydigital.co/case-studies/dripjobs · bearfoxmarketing.com · maincoursemedia.com · janney.ai · later.com · sponsorradar.com · getjobber.com/ambassador · respondent.io/pricing · userinterviews.com/pricing · help.dscout.com · cslb.ca.gov data portal · Belkins 2025 report · smarteroutbound.com · TCPA (Olshan, Consumer Action) · ads.apple.com/app-store/basic · SplitMetrics via appdevelopermagazine · mobileaction.co · johnstonefg.com/events · abccentralflorida.com · thecontractorsresourcecenter.com · sethradman.com (Crescendo) · mindtheproduct.com (Ask Alexis) · magra.app · thumbtack.com/terms<br>
+ Channels: hvac-talk.com, mikeholt.com, redpulse.io, gummysearch.com, prowlo.com, leadsrover.io · Cases: sramanamitra.com (Chan 2019), techcrunch, forbes, baincapitalventures.com, getmaintainx.com newsroom, web.archive.org, companycam.com/press, enr.com 38829, pmf.show, lsvp.com<br>
+ Internal: Granola 0565b0ff, c97b6c9c, cea627de, 3e72c3de · JK feedback 10/20</p></div>
  </div>
     
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM · 2026-10-20</span><span class="pnum">14 / 14</span></div>
+  <div class="ftr"><span>Confidential · Carbyn B2C Feedback Loop GTM v2 · 2026-10-20</span><span class="pnum">18 / 18</span></div>
 </section></div>
 <!-- Interactive Web Deck Controls -->
 <div class="deck-hud">
   <button onclick="navSlide(-1)">◀ Prev</button>
-  <span id="hud-counter" style="font-weight:700;min-width:56px;text-align:center;">01 / 14</span>
+  <span id="hud-counter" style="font-weight:700;min-width:56px;text-align:center;">01 / 18</span>
   <button onclick="navSlide(1)">Next ▶</button>
   <button onclick="document.body.classList.toggle('show-grid')">Grid (G)</button>
   <button onclick="toggleFS()">Fullscreen (F)</button>
