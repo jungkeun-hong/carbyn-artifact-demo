@@ -1,90 +1,76 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>CARBYN · Expansion Map</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>CARBYN · Expansion</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#050608;font-family:Inter,Arial,sans-serif;color:#F5F5F3}
-.slide{width:1920px;height:1080px;position:relative;overflow:hidden;margin:0 auto 40px;background:url(assets/bg_cover.jpg) center/cover}
-.slide::before{content:'';position:absolute;inset:0;background:rgba(8,9,12,0.62)}
-.in{position:absolute;inset:0;padding:84px 96px}
-.logo{position:absolute;top:70px;right:96px;height:34px}
-.eyebrow{font-size:20px;letter-spacing:.22em;color:#FFCD11;font-weight:700}
-h1{font-size:60px;font-weight:800;line-height:1.08;margin-top:16px;letter-spacing:-.01em}
-h1 .g{color:#FFCD11}
-.foot{position:absolute;left:96px;bottom:44px;font-size:17px;color:#9A9A94}
-.glass{background:rgba(18,20,25,.68);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.14);border-radius:24px}
-.stage{display:flex;gap:22px;align-items:center;padding:26px 30px;margin-bottom:22px}
-.tag{font-size:16px;font-weight:800;letter-spacing:.18em;padding:8px 14px;border-radius:999px;white-space:nowrap}
-.t1{background:#FFCD11;color:#111}.t2{background:rgba(255,205,17,.22);color:#FFCD11;border:1px solid #FFCD11}.t3{background:rgba(255,255,255,.08);color:#E5E5E0;border:1px solid rgba(255,255,255,.35)}
-.stage h3{font-size:30px;font-weight:700}
-.stage p{font-size:20px;color:#BDBDB7;margin-top:6px}
-.step h3{font-size:36px;font-weight:800;margin-top:14px}
-.step p{font-size:21px;color:#C9C9C3;margin-top:10px;line-height:1.4}
-.bn{position:absolute;right:28px;bottom:6px;font-size:130px;font-weight:800;color:rgba(255,255,255,.07);line-height:1}
-.step .num{font-size:18px;font-weight:800;letter-spacing:.18em}
+body{background:#000;font-family:"Helvetica Now Display","Helvetica Neue",Helvetica,Arial,sans-serif;color:#F4F4F2}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;margin:0 auto 40px;background:#0B0B0C}
+.lab{position:absolute;top:64px;left:96px;font-size:18px;font-weight:500;letter-spacing:.16em;color:#BDBDB7}
+.logo{position:absolute;top:58px;right:96px;height:30px}
+h1{position:absolute;left:96px;top:120px;font-size:84px;font-weight:500;letter-spacing:-.02em;line-height:1.02}
+h1 .y{color:#FFD100}
+.sub{position:absolute;left:100px;top:226px;font-size:28px;color:#D3D3D1}
+.plot{position:absolute;left:96px;top:300px}
+.foot{position:absolute;left:96px;right:96px;bottom:40px;display:flex;justify-content:space-between;font-size:16px;letter-spacing:.12em;color:#8E8E89;border-top:1px solid rgba(255,255,255,.12);padding-top:14px}
+.chip{position:absolute;right:96px;top:150px;font-size:14px;font-weight:700;letter-spacing:.16em;color:#8E8E89;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px}
 </style></head><body>
-
-<!-- SLIDE 1: MARKET -->
-<section class="slide"><div class="in">
-<img class="logo" src="assets/carbyn_logo.png">
-<div class="eyebrow">MARKET</div>
-<h1>Start in maintenance.<br><span class="g">Expand to every field report.</span></h1>
-
-<svg width="980" height="712" viewBox="0 0 1100 800" style="position:absolute;left:70px;top:300px">
- <defs><radialGradient id="g1"><stop offset="0" stop-color="#FFCD11" stop-opacity=".95"/><stop offset="1" stop-color="#FFB300" stop-opacity=".85"/></radialGradient></defs>
- <circle cx="550" cy="400" r="370" fill="rgba(255,255,255,0.035)" stroke="rgba(255,255,255,0.30)" stroke-width="2" stroke-dasharray="6 8"/>
- <circle cx="550" cy="400" r="250" fill="rgba(255,205,17,0.09)" stroke="#FFCD11" stroke-opacity=".7" stroke-width="2"/>
- <circle cx="550" cy="400" r="108" fill="url(#g1)"/>
- <text x="550" y="390" text-anchor="middle" font-size="26" font-weight="800" fill="#111">Industrial</text>
- <text x="550" y="422" text-anchor="middle" font-size="26" font-weight="800" fill="#111">Maintenance</text>
- <text x="550" y="200" text-anchor="middle" font-size="24" font-weight="700" fill="#FFCD11">Inspection &amp; Claims</text>
- <g font-size="20" fill="#F0F0EC" text-anchor="middle">
-  <text x="375" y="407">Adjusters</text>
-  <text x="727" y="407">Inspectors</text>
-  <text x="550" y="590">Auto appraisers</text>
+<section class="slide">
+ <div class="lab">03 · MARKET</div><img class="logo" src="assets/carbyn_logo.png">
+ <h1>73 field segments. <span class="y">One path.</span></h1>
+ <div class="sub">Start in maintenance. Win report-heavy pros. Then every field worker.</div>
+ <div class="plot"><svg width="1728" height="700" viewBox="0 0 1728 700">
+ <defs>
+  <marker id="ah" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFD100"/></marker>
+  <linearGradient id="zone" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFD100" stop-opacity="0"/><stop offset="1" stop-color="#FFD100" stop-opacity="0.10"/></linearGradient>
+ </defs>
+ <rect x="740" y="30" width="900" height="204" rx="18" fill="url(#zone)"/>
+ <line x1="140" y1="30" x2="140" y2="630" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+ <line x1="140" y1="630" x2="1640" y2="630" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+ <line x1="140" y1="231.0" x2="1640" y2="231.0" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4 8"/>
+ <line x1="140" y1="429.0" x2="1640" y2="429.0" stroke="rgba(255,255,255,0.08)" stroke-dasharray="4 8"/>
+ <g font-size="17" fill="#8E8E89" font-weight="600" letter-spacing="1.5">
+  <text x="122" y="138.0" text-anchor="end">SELF</text>
+  <text x="122" y="336.0" text-anchor="end">MIXED</text>
+  <text x="122" y="534.0" text-anchor="end">COMPANY</text>
+  <text x="140" y="666">0</text><text x="500" y="666" text-anchor="middle">1 hr</text>
+  <text x="860" y="666" text-anchor="middle">2 hr</text><text x="1220" y="666" text-anchor="middle">3 hr</text>
+  <text x="1580" y="666" text-anchor="middle">4 hr</text>
  </g>
- <text x="550" y="78" text-anchor="middle" font-size="24" font-weight="700" fill="#E5E5E0">Field Documentation</text>
- <g font-size="21" font-weight="600" fill="#D8D8D2" text-anchor="middle">
-  <text x="245" y="215">Trades</text>
-  <text x="855" y="215">Construction</text>
-  <text x="225" y="600">Fleet</text>
-  <text x="875" y="600">Utilities</text>
-  <text x="550" y="715">Property &amp; Environmental</text>
+ <text x="1640" y="696" text-anchor="end" font-size="18" fill="#D3D3D1" font-weight="600">Report time per worker per day →</text>
+ <text x="14" y="330.0" font-size="18" fill="#D3D3D1" font-weight="600" transform="rotate(-90 14 330.0)" text-anchor="middle">Who pays</text>
+ <circle cx="626" cy="133" r="13" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="410" cy="142" r="34" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="401" cy="124" r="18" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="851" cy="279" r="15" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="633" cy="173" r="13" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="627" cy="98" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="1223" cy="386" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="592" cy="317" r="21" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="690" cy="274" r="16" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="1227" cy="304" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="628" cy="283" r="17" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="946" cy="369" r="11" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="674" cy="538" r="16" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="260" cy="132" r="34" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="413" cy="116" r="16" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="546" cy="276" r="13" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="761" cy="294" r="13" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="1224" cy="519" r="21" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="406" cy="143" r="19" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="679" cy="305" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="416" cy="355" r="20" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="525" cy="537" r="23" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="501" cy="575" r="18" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="685" cy="502" r="14" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="690" cy="481" r="15" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="408" cy="362" r="19" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="403" cy="329" r="12" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="851" cy="549" r="17" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="640" cy="537" r="21" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="958" cy="505" r="11" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="504" cy="540" r="34" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="532" cy="523" r="14" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="312" cy="187" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="409" cy="350" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="401" cy="355" r="16" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="1583" cy="589" r="9" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="416" cy="501" r="23" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="543" cy="549" r="16" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="670" cy="523" r="12" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="326" cy="363" r="12" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="403" cy="497" r="21" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="348" cy="574" r="16" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="942" cy="522" r="11" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="681" cy="576" r="17" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="410" cy="568" r="19" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="491" cy="573" r="14" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="271" cy="517" r="13" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="404" cy="297" r="11" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="405" cy="328" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="547" cy="499" r="10" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="535" cy="518" r="12" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="377" cy="536" r="13" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="446" cy="552" r="34" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="384" cy="473" r="15" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="328" cy="563" r="33" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="357" cy="565" r="12" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="402" cy="545" r="11" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="356" cy="474" r="11" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="269" cy="486" r="13" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/><circle cx="538" cy="481" r="14" fill="rgba(255,209,0,0.18)" stroke="#FFD100" stroke-width="2.4"/><circle cx="410" cy="528" r="24" fill="rgba(255,209,0,0.18)" stroke="#FFD100" stroke-width="2.4"/><circle cx="407" cy="576" r="20" fill="rgba(255,209,0,0.18)" stroke="#FFD100" stroke-width="2.4"/><circle cx="509" cy="485" r="13" fill="rgba(255,209,0,0.18)" stroke="#FFD100" stroke-width="2.4"/><circle cx="365" cy="543" r="14" fill="rgba(255,209,0,0.18)" stroke="#FFD100" stroke-width="2.4"/><circle cx="318" cy="515" r="17" fill="rgba(255,209,0,0.18)" stroke="#FFD100" stroke-width="2.4"/><circle cx="1216" cy="89" r="12" fill="#FFD100" fill-opacity="0.92"/><circle cx="1580" cy="112" r="14" fill="#FFD100" fill-opacity="0.92"/><circle cx="1223" cy="79" r="11" fill="#FFD100" fill-opacity="0.92"/><circle cx="1220" cy="132" r="14" fill="#FFD100" fill-opacity="0.92"/><circle cx="500" cy="92" r="13" fill="#FFD100" fill-opacity="0.92"/><circle cx="951" cy="115" r="12" fill="#FFD100" fill-opacity="0.92"/><circle cx="1130" cy="172" r="10" fill="#FFD100" fill-opacity="0.92"/><circle cx="860" cy="162" r="12" fill="#FFD100" fill-opacity="0.92"/>
+ <path d="M 485 481 C 685 261, 665 159, 965 129" fill="none" stroke="#FFD100" stroke-width="5" marker-end="url(#ah)"/>
+ <text x="1556" y="119" font-size="21" font-weight="700" fill="#FFD100" text-anchor="end" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Insurance adjusters</text><text x="1196" y="139" font-size="21" font-weight="700" fill="#FFD100" text-anchor="end" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Appraisers</text><text x="523" y="99" font-size="21" font-weight="700" fill="#FFD100" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">RV inspectors</text><text x="1150" y="179" font-size="21" font-weight="700" fill="#FFD100" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Auto appraisers</text><text x="882" y="169" font-size="21" font-weight="700" fill="#FFD100" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Home inspectors</text><text x="366" y="149" font-size="21" font-weight="500" fill="#BDBDB7" text-anchor="end" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Trades</text><text x="216" y="139" font-size="21" font-weight="500" fill="#BDBDB7" text-anchor="end" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Fleet</text><text x="444" y="535" font-size="21" font-weight="700" fill="#FFD100" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Plant maintenance</text><text x="439" y="575" font-size="21" font-weight="500" fill="#BDBDB7" paint-order="stroke" stroke="#0B0B0C" stroke-width="6">Construction</text>
+ <g font-weight="800" letter-spacing="2">
+  <rect x="355" y="573" width="88" height="34" rx="17" fill="#FFD100"/><text x="399" y="596" font-size="16" fill="#111" text-anchor="middle">NOW</text>
+  <rect x="760" y="46" width="92" height="34" rx="17" fill="#FFD100"/><text x="806" y="69" font-size="16" fill="#111" text-anchor="middle">NEXT</text>
+  <rect x="800" y="313" width="92" height="34" rx="17" fill="#0B0B0C" stroke="rgba(255,255,255,0.6)"/><text x="846" y="336" font-size="16" fill="#E5E5E0" text-anchor="middle">THEN</text>
  </g>
-</svg>
-
-<div style="position:absolute;right:96px;top:400px;width:720px">
- <div class="glass stage"><span class="tag t1">NOW</span><div><h3>Plant &amp; facility maintenance</h3><p>B2B pilots · techs on the floor</p></div></div>
- <div class="glass stage"><span class="tag t2">NEXT</span><div><h3>Inspection &amp; claims</h3><p>Report-heavy · self-paying pros</p></div></div>
- <div class="glass stage"><span class="tag t3">THEN</span><div><h3>Every field report</h3><p>Trades · construction · fleet · utilities</p></div></div>
-</div>
-<div class="foot" style="left:auto;right:96px;">73 US field segments mapped · Carbyn segment census, Oct 2026</div>
-</div></section>
-
-<!-- SLIDE 2: PRODUCT -->
-<section class="slide"><div class="in">
-<img class="logo" src="assets/carbyn_logo.png">
-<div class="eyebrow">PRODUCT</div>
-<h1>From voice-to-doc <span class="g">to a spatial field agent.</span></h1>
-
-<div style="position:absolute;left:96px;right:96px;top:340px;height:540px;display:grid;grid-template-columns:repeat(4,1fr);gap:26px;align-items:end">
- <div class="glass step" style="height:300px;padding:32px;position:relative;border-color:#FFCD11;background:linear-gradient(160deg,rgba(255,205,17,.20),rgba(18,20,25,.75))">
-  <span class="tag t1">NOW</span><h3>Voice → Doc</h3><p>Talk the job.<br>Your form, filled.</p><div class="bn">01</div></div>
- <div class="glass step" style="height:380px;padding:32px;position:relative">
-  <span class="tag t2">NEXT</span><h3>Vision</h3><p>Photos become findings.<br>Defects tagged, measured.</p><div class="bn">02</div></div>
- <div class="glass step" style="height:460px;padding:32px;position:relative">
-  <span class="tag t3">THEN</span><h3>Spatial</h3><p>Every note pinned to<br>the asset and the room.<br>Site memory in 3D.</p><div class="bn">03</div></div>
- <div class="glass step" style="height:540px;padding:32px;position:relative">
-  <span class="tag t3">THEN</span><h3>Agent</h3><p>Opens the work order.<br>Files the claim.<br>Flags what's next.</p><div class="bn">04</div></div>
-</div>
-
-<svg width="1728" height="80" style="position:absolute;left:96px;top:900px">
- <defs><linearGradient id="ar" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1700" y2="0"><stop offset="0" stop-color="#FFCD11"/><stop offset="1" stop-color="#9A9A94"/></linearGradient></defs>
- <rect x="0" y="33" width="1700" height="4" rx="2" fill="url(#ar)"/>
- <polygon points="1698,23 1728,35 1698,47" fill="#9A9A94"/>
- <text x="0" y="20" font-size="20" fill="#FFCD11" font-weight="700">Phone</text>
- <text x="1728" y="20" font-size="20" fill="#E5E5E0" font-weight="700" text-anchor="end">Hands-free on glasses</text>
- <text x="864" y="72" font-size="19" fill="#A8A8A2" text-anchor="middle">Every report trains the next: field data compounds into the moat</text>
-</svg>
-</div></section>
+</svg></div>
+ <div class="foot"><span>CARBYN · INVESTOR</span><span>Bubble = US workers · Carbyn census of 73 segments, Oct 2026</span><span>01</span></div>
+</section>
+<section class="slide">
+ <div class="lab">04 · PRODUCT</div><img class="logo" src="assets/carbyn_logo.png">
+ <h1>Voice today. <span class="y">Spatial agent next.</span></h1>
+ <div class="sub">Each layer does more of the job. Each job makes the next one smarter.</div>
+ <div class="chip">ILLUSTRATIVE</div>
+ <div class="plot" style="top:330px"><svg width="1728" height="640" viewBox="0 0 1728 640">
+ <defs>
+  <linearGradient id="ar2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD100" stop-opacity="0.22"/><stop offset="1" stop-color="#FFD100" stop-opacity="0"/></linearGradient>
+  <marker id="ah2" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="rgba(255,255,255,0.45)"/></marker>
+ </defs>
+ <path d="M 130.0 489.6 L 145.6 488.1 L 161.2 486.6 L 176.8 485.0 L 192.4 483.2 L 208.0 481.3 L 223.6 479.3 L 239.2 477.2 L 254.8 474.9 L 270.4 472.5 L 286.0 469.9 L 301.6 467.1 L 317.2 464.2 L 332.8 461.1 L 348.4 457.7 L 364.0 454.2 L 379.6 450.5 L 395.2 446.6 L 410.8 442.4 L 426.4 438.0 L 442.0 433.4 L 457.6 428.5 L 473.2 423.4 L 488.8 418.1 L 504.4 412.5 L 520.0 406.6 L 535.6 400.5 L 551.2 394.1 L 566.8 387.5 L 582.4 380.6 L 598.0 373.5 L 613.6 366.2 L 629.2 358.7 L 644.8 350.9 L 660.4 343.0 L 676.0 334.9 L 691.6 326.6 L 707.2 318.2 L 722.8 309.6 L 738.4 301.0 L 754.0 292.3 L 769.6 283.6 L 785.2 274.8 L 800.8 266.0 L 816.4 257.3 L 832.0 248.6 L 847.6 240.0 L 863.2 231.4 L 878.8 223.0 L 894.4 214.7 L 910.0 206.6 L 925.6 198.7 L 941.2 190.9 L 956.8 183.4 L 972.4 176.1 L 988.0 169.0 L 1003.6 162.1 L 1019.2 155.5 L 1034.8 149.1 L 1050.4 143.0 L 1066.0 137.1 L 1081.6 131.5 L 1097.2 126.2 L 1112.8 121.1 L 1128.4 116.2 L 1144.0 111.6 L 1159.6 107.2 L 1175.2 103.0 L 1190.8 99.1 L 1206.4 95.4 L 1222.0 91.9 L 1237.6 88.5 L 1253.2 85.4 L 1268.8 82.5 L 1284.4 79.7 L 1300.0 77.1 L 1315.6 74.7 L 1331.2 72.4 L 1346.8 70.3 L 1362.4 68.3 L 1378.0 66.4 L 1393.6 64.6 L 1409.2 63.0 L 1424.8 61.5 L 1440.4 60.0 L 1456.0 58.7 L 1471.6 57.4 L 1487.2 56.3 L 1502.8 55.2 L 1518.4 54.2 L 1534.0 53.2 L 1549.6 52.4 L 1565.2 51.6 L 1580.8 50.8 L 1596.4 50.1 L 1612.0 49.4 L 1627.6 48.8 L 1643.2 48.2 L 1658.8 47.7 L 1674.4 47.2 L 1690.0 46.8 L 1690 540 L 130 540 Z" fill="url(#ar2)"/>
+ <line x1="130" y1="20" x2="130" y2="540" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+ <line x1="130" y1="540" x2="1710" y2="540" stroke="rgba(255,255,255,0.35)" stroke-width="2" marker-end="url(#ah2)"/>
+ <path d="M 130.0 60.0 L 145.6 61.5 L 161.2 63.0 L 176.8 64.6 L 192.4 66.4 L 208.0 68.3 L 223.6 70.3 L 239.2 72.4 L 254.8 74.7 L 270.4 77.1 L 286.0 79.7 L 301.6 82.5 L 317.2 85.4 L 332.8 88.5 L 348.4 91.9 L 364.0 95.4 L 379.6 99.1 L 395.2 103.0 L 410.8 107.2 L 426.4 111.6 L 442.0 116.2 L 457.6 121.1 L 473.2 126.2 L 488.8 131.5 L 504.4 137.1 L 520.0 143.0 L 535.6 149.1 L 551.2 155.5 L 566.8 162.1 L 582.4 169.0 L 598.0 176.1 L 613.6 183.4 L 629.2 190.9 L 644.8 198.7 L 660.4 206.6 L 676.0 214.7 L 691.6 223.0 L 707.2 231.4 L 722.8 240.0 L 738.4 248.6 L 754.0 257.3 L 769.6 266.0 L 785.2 274.8 L 800.8 283.6 L 816.4 292.3 L 832.0 301.0 L 847.6 309.6 L 863.2 318.2 L 878.8 326.6 L 894.4 334.9 L 910.0 343.0 L 925.6 350.9 L 941.2 358.7 L 956.8 366.2 L 972.4 373.5 L 988.0 380.6 L 1003.6 387.5 L 1019.2 394.1 L 1034.8 400.5 L 1050.4 406.6 L 1066.0 412.5 L 1081.6 418.1 L 1097.2 423.4 L 1112.8 428.5 L 1128.4 433.4 L 1144.0 438.0 L 1159.6 442.4 L 1175.2 446.6 L 1190.8 450.5 L 1206.4 454.2 L 1222.0 457.7 L 1237.6 461.1 L 1253.2 464.2 L 1268.8 467.1 L 1284.4 469.9 L 1300.0 472.5 L 1315.6 474.9 L 1331.2 477.2 L 1346.8 479.3 L 1362.4 481.3 L 1378.0 483.2 L 1393.6 485.0 L 1409.2 486.6 L 1424.8 488.1 L 1440.4 489.6 L 1456.0 490.9 L 1471.6 492.2 L 1487.2 493.3 L 1502.8 494.4 L 1518.4 495.4 L 1534.0 496.4 L 1549.6 497.2 L 1565.2 498.0 L 1580.8 498.8 L 1596.4 499.5 L 1612.0 500.2 L 1627.6 500.8 L 1643.2 501.4 L 1658.8 501.9 L 1674.4 502.4 L 1690.0 502.8" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-dasharray="10 10"/>
+ <path d="M 130.0 489.6 L 145.6 488.1 L 161.2 486.6 L 176.8 485.0 L 192.4 483.2 L 208.0 481.3 L 223.6 479.3 L 239.2 477.2 L 254.8 474.9 L 270.4 472.5 L 286.0 469.9 L 301.6 467.1 L 317.2 464.2 L 332.8 461.1 L 348.4 457.7 L 364.0 454.2 L 379.6 450.5 L 395.2 446.6 L 410.8 442.4 L 426.4 438.0 L 442.0 433.4 L 457.6 428.5 L 473.2 423.4 L 488.8 418.1 L 504.4 412.5 L 520.0 406.6 L 535.6 400.5 L 551.2 394.1 L 566.8 387.5 L 582.4 380.6 L 598.0 373.5 L 613.6 366.2 L 629.2 358.7 L 644.8 350.9 L 660.4 343.0 L 676.0 334.9 L 691.6 326.6 L 707.2 318.2 L 722.8 309.6 L 738.4 301.0 L 754.0 292.3 L 769.6 283.6 L 785.2 274.8 L 800.8 266.0 L 816.4 257.3 L 832.0 248.6 L 847.6 240.0 L 863.2 231.4 L 878.8 223.0 L 894.4 214.7 L 910.0 206.6 L 925.6 198.7 L 941.2 190.9 L 956.8 183.4 L 972.4 176.1 L 988.0 169.0 L 1003.6 162.1 L 1019.2 155.5 L 1034.8 149.1 L 1050.4 143.0 L 1066.0 137.1 L 1081.6 131.5 L 1097.2 126.2 L 1112.8 121.1 L 1128.4 116.2 L 1144.0 111.6 L 1159.6 107.2 L 1175.2 103.0 L 1190.8 99.1 L 1206.4 95.4 L 1222.0 91.9 L 1237.6 88.5 L 1253.2 85.4 L 1268.8 82.5 L 1284.4 79.7 L 1300.0 77.1 L 1315.6 74.7 L 1331.2 72.4 L 1346.8 70.3 L 1362.4 68.3 L 1378.0 66.4 L 1393.6 64.6 L 1409.2 63.0 L 1424.8 61.5 L 1440.4 60.0 L 1456.0 58.7 L 1471.6 57.4 L 1487.2 56.3 L 1502.8 55.2 L 1518.4 54.2 L 1534.0 53.2 L 1549.6 52.4 L 1565.2 51.6 L 1580.8 50.8 L 1596.4 50.1 L 1612.0 49.4 L 1627.6 48.8 L 1643.2 48.2 L 1658.8 47.7 L 1674.4 47.2 L 1690.0 46.8" fill="none" stroke="#FFD100" stroke-width="6"/>
+ <circle cx="286" cy="470" r="17" fill="#FFD100" stroke="#FFD100" stroke-width="4"/><g font-family="inherit"><text x="266" y="320" text-anchor="start" font-size="15" font-weight="800" letter-spacing="2" fill="#FFD100">NOW</text><text x="266" y="360" text-anchor="start" font-size="38" font-weight="600" fill="#F4F4F2">Voice → Doc</text><text x="266" y="392" text-anchor="start" font-size="21" fill="#C9C9C3">Talk the job. Form filled.</text></g><circle cx="692" cy="327" r="12" fill="#0B0B0C" stroke="#FFD100" stroke-width="4"/><g font-family="inherit"><text x="714" y="371" text-anchor="start" font-size="15" font-weight="800" letter-spacing="2" fill="#A8A8A2">NEXT</text><text x="714" y="411" text-anchor="start" font-size="38" font-weight="600" fill="#F4F4F2">Vision</text><text x="714" y="443" text-anchor="start" font-size="21" fill="#C9C9C3">Photos become findings.</text></g><circle cx="1128" cy="116" r="12" fill="#0B0B0C" stroke="#FFD100" stroke-width="4"/><g font-family="inherit"><text x="1150" y="160" text-anchor="start" font-size="15" font-weight="800" letter-spacing="2" fill="#A8A8A2">2027</text><text x="1150" y="200" text-anchor="start" font-size="38" font-weight="600" fill="#F4F4F2">Spatial</text><text x="1150" y="232" text-anchor="start" font-size="21" fill="#C9C9C3">Notes pinned to the asset.</text></g><circle cx="1534" cy="53" r="12" fill="#0B0B0C" stroke="#FFD100" stroke-width="4"/><g font-family="inherit"><text x="1554" y="97" text-anchor="end" font-size="15" font-weight="800" letter-spacing="2" fill="#A8A8A2">2028</text><text x="1554" y="137" text-anchor="end" font-size="38" font-weight="600" fill="#F4F4F2">Agent</text><text x="1554" y="169" text-anchor="end" font-size="21" fill="#C9C9C3">Files it. Flags what's next.</text></g>
+ <text x="1643" y="472" text-anchor="end" font-size="19" fill="#BDBDB7">Human work left</text>
+ <text x="1222" y="332" text-anchor="middle" font-size="24" font-weight="600" fill="#FFD100" opacity="0.95">Every report trains the next</text>
+ <text x="106" y="280.0" font-size="18" fill="#D3D3D1" font-weight="600" transform="rotate(-90 106 280.0)" text-anchor="middle">Share of the job Carbyn does</text>
+ <line x1="286" y1="540" x2="286" y2="550" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><text x="286" y="580" text-anchor="middle" font-size="16" font-weight="700" letter-spacing="2" fill="#8E8E89">VOICE</text><line x1="692" y1="540" x2="692" y2="550" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><text x="692" y="580" text-anchor="middle" font-size="16" font-weight="700" letter-spacing="2" fill="#8E8E89">CAMERA</text><line x1="1128" y1="540" x2="1128" y2="550" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><text x="1128" y="580" text-anchor="middle" font-size="16" font-weight="700" letter-spacing="2" fill="#8E8E89">3D SCAN</text><line x1="1534" y1="540" x2="1534" y2="550" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><text x="1534" y="580" text-anchor="middle" font-size="16" font-weight="700" letter-spacing="2" fill="#8E8E89">GLASSES</text>
+ <text x="130" y="628" font-size="21" font-weight="700" fill="#FFD100">On the phone</text>
+ <line x1="280" y1="621" x2="1410" y2="621" stroke="rgba(255,255,255,0.25)" stroke-width="2" marker-end="url(#ah2)"/>
+ <text x="1690" y="628" text-anchor="end" font-size="21" font-weight="700" fill="#F4F4F2">Hands-free on glasses</text>
+</svg></div>
+ <div class="foot"><span>CARBYN · INVESTOR</span><span></span><span>02</span></div>
+</section>
 </body></html>
