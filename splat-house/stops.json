@@ -1,0 +1,2870 @@
+{
+"areas": {
+"exterior_front": {
+"name": "Front yard & entry",
+"ko": "전면·현관",
+"level": 0,
+"color": "#5b8a5a",
+"rect": [
+-12,
+8,
+14,
+18
+]
+},
+"exterior_rear": {
+"name": "Rear yard, deck & porch",
+"ko": "후면·데크",
+"level": 0,
+"color": "#5b8a5a",
+"rect": [
+-12,
+-17,
+14,
+-6
+]
+},
+"roof": {
+"name": "Roof",
+"ko": "지붕",
+"level": 3,
+"color": "#6b6b7a",
+"rect": [
+-10,
+-6,
+10,
+6
+]
+},
+"attic": {
+"name": "Attic",
+"ko": "다락",
+"level": 2,
+"color": "#a8865a",
+"rect": [
+-4,
+-5,
+6,
+5
+]
+},
+"garage": {
+"name": "Garage",
+"ko": "차고",
+"level": 0,
+"color": "#8a8a8a",
+"rect": [
+-10,
+-2,
+-4,
+5
+]
+},
+"crawl": {
+"name": "Crawl space",
+"ko": "크롤스페이스",
+"level": -1,
+"color": "#6d5a4a",
+"rect": [
+6,
+-5,
+10,
+5
+]
+},
+"basement": {
+"name": "Basement",
+"ko": "지하실",
+"level": -1,
+"color": "#7a6a5a",
+"rect": [
+-4,
+-5,
+6,
+5
+]
+},
+"kitchen": {
+"name": "Kitchen",
+"ko": "주방",
+"level": 0,
+"color": "#c7a35a",
+"rect": [
+-4,
+-5,
+0,
+0
+]
+},
+"dining": {
+"name": "Dining room",
+"ko": "다이닝",
+"level": 0,
+"color": "#b08a5a",
+"rect": [
+0,
+-5,
+4,
+0
+]
+},
+"living": {
+"name": "Living room",
+"ko": "거실",
+"level": 0,
+"color": "#9a7a9a",
+"rect": [
+0,
+0,
+6,
+5
+]
+},
+"bedroom": {
+"name": "Bedroom / den",
+"ko": "침실·서재",
+"level": 0,
+"color": "#7a8ab0",
+"rect": [
+6,
+0,
+10,
+5
+]
+},
+"bathroom": {
+"name": "Bathrooms",
+"ko": "욕실",
+"level": 0,
+"color": "#6aa0b0",
+"rect": [
+6,
+-5,
+10,
+0
+]
+},
+"laundry": {
+"name": "Laundry",
+"ko": "세탁실",
+"level": 0,
+"color": "#8ab0a0",
+"rect": [
+4,
+-5,
+6,
+0
+]
+},
+"panel": {
+"name": "Electric panel",
+"ko": "분전반",
+"level": 0,
+"color": "#c06060",
+"rect": [
+-4,
+0,
+0,
+5
+]
+},
+"upstairs": {
+"name": "Upstairs bonus room & nursery",
+"ko": "2층 보너스룸",
+"level": 1,
+"color": "#b09ac0",
+"rect": [
+0,
+-5,
+6,
+5
+]
+},
+"hottub": {
+"name": "Hot tub / spa",
+"ko": "스파",
+"level": 0,
+"color": "#5a8aa0",
+"rect": [
+8,
+-12,
+13,
+-8
+]
+},
+"dock": {
+"name": "Dock (lake)",
+"ko": "선착장",
+"level": 0,
+"color": "#4a7aa0",
+"rect": [
+16,
+-28,
+28,
+-20
+]
+}
+},
+"stops": [
+{
+"id": "IMG_8650",
+"file": "IMG_8650.JPG",
+"area": "exterior_front",
+"pos": [
+-3,
+1.6,
+9
+],
+"yaw": 150,
+"chapter": "EXTERIOR",
+"label": "Exterior Siding(s) ",
+"severity": "description",
+"tag": "",
+"text": "EXTERIOR SIDING PHOTO(s)\n﻿",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8650.sog.webm",
+"splatBytes": 2823382,
+"index": 0
+},
+{
+"id": "IMG_8648",
+"file": "IMG_8648.JPG",
+"area": "exterior_front",
+"pos": [
+5,
+1.6,
+13
+],
+"yaw": 200,
+"chapter": "EXTERIOR",
+"label": "Exterior Siding(s) ",
+"severity": "description",
+"tag": "",
+"text": "EXTERIOR SIDING PHOTO(s)\n﻿",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8648.sog.webm",
+"splatBytes": 2967195,
+"index": 1
+},
+{
+"id": "IMG_8657",
+"file": "IMG_8657.JPG",
+"area": "exterior_front",
+"pos": [
+-7,
+1.6,
+10
+],
+"yaw": 180,
+"chapter": "LOTS AND GROUNDS",
+"label": "Driveway ",
+"severity": "description",
+"tag": "",
+"text": "DRIVEWAY PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8657.sog.webm",
+"splatBytes": 2895629,
+"index": 2
+},
+{
+"id": "IMG_8663",
+"file": "IMG_8663.JPG",
+"area": "exterior_rear",
+"pos": [
+-6,
+1.6,
+-9
+],
+"yaw": 20,
+"chapter": "LOTS AND GROUNDS",
+"label": "Deck ",
+"severity": "description",
+"tag": "",
+"text": "DECK PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8663.sog.webm",
+"splatBytes": 3028263,
+"index": 3
+},
+{
+"id": "IMG_8673",
+"file": "IMG_8673.JPG",
+"area": "exterior_rear",
+"pos": [
+-9,
+1.6,
+-11
+],
+"yaw": 30,
+"chapter": "LOTS AND GROUNDS",
+"label": "Grading, Swale, Surface Drainage ",
+"severity": "description",
+"tag": "",
+"text": "SWALE AND SURFACE DRAIN PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8673.sog.webm",
+"splatBytes": 3107165,
+"index": 4
+},
+{
+"id": "IMG_8667",
+"file": "IMG_8667.JPG",
+"area": "exterior_rear",
+"pos": [
+7,
+1.6,
+-9
+],
+"yaw": -120,
+"chapter": "LOTS AND GROUNDS",
+"label": "Deck rails and steps ",
+"severity": "major-concern",
+"tag": "(LAG-1) Defective/Major Concern ",
+"text": "DECK RAILS AND STEPS\n:\n✒️",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8667.sog.webm",
+"splatBytes": 3020326,
+"index": 5
+},
+{
+"id": "IMG_8660",
+"file": "IMG_8660.JPG",
+"area": "exterior_rear",
+"pos": [
+12,
+1.6,
+-7
+],
+"yaw": 240,
+"chapter": "AIR CONDITIONING",
+"label": "Age (Approximate) ",
+"severity": "due-diligence",
+"tag": "(AC-4) Due Diligence ",
+"text": "The unit is nearing or exceeded the manufacturers stated design life, evaluation is recommended",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8660.sog.webm",
+"splatBytes": 3030878,
+"index": 6
+},
+{
+"id": "IMG_8678",
+"file": "IMG_8678.JPG",
+"area": "exterior_rear",
+"pos": [
+13,
+1.6,
+-8
+],
+"yaw": 250,
+"chapter": "ELECTRICAL",
+"label": "Electrical Mast ",
+"severity": "description",
+"tag": "",
+"text": "ELECTRIC MAST PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8678.sog.webm",
+"splatBytes": 2828408,
+"index": 7
+},
+{
+"id": "IMG_8622",
+"file": "IMG_8622.JPG",
+"area": "exterior_rear",
+"pos": [
+1,
+0.8,
+-7
+],
+"yaw": 0,
+"chapter": "LOTS AND GROUNDS",
+"label": "Deck ",
+"severity": "major-concern",
+"tag": "(LAG-2) Defective/Major Concern ",
+"text": "DECK\n:\n✒️\n.There are damaged supports under the concrete deck/Rear porch area with some visible repairs present\nA qualified contractor is recommended to evaluate and estimate repairs",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8622.sog.webm",
+"splatBytes": 2905818,
+"index": 8
+},
+{
+"id": "IMG_8621",
+"file": "IMG_8621.JPG",
+"area": "exterior_rear",
+"pos": [
+4,
+0.8,
+-7
+],
+"yaw": 30,
+"chapter": "LOTS AND GROUNDS",
+"label": "Deck ",
+"severity": "major-concern",
+"tag": "(LAG-2) Defective/Major Concern ",
+"text": "DECK\n:\n✒️\n.There are damaged supports under the concrete deck/Rear porch area with some visible repairs present\nA qualified contractor is recommended to evaluate and estimate repairs",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8621.sog.webm",
+"splatBytes": 3055589,
+"index": 9
+},
+{
+"id": "IMG_8664",
+"file": "IMG_8664.JPG",
+"area": "exterior_rear",
+"pos": [
+6,
+1.2,
+-8
+],
+"yaw": -60,
+"chapter": "LOTS AND GROUNDS",
+"label": "Deck rails and steps ",
+"severity": "major-concern",
+"tag": "(LAG-1) Defective/Major Concern ",
+"text": "DECK RAILS AND STEPS\n:\n✒️",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8664.sog.webm",
+"splatBytes": 2940307,
+"index": 10
+},
+{
+"id": "IMG_8668",
+"file": "IMG_8668.JPG",
+"area": "exterior_rear",
+"pos": [
+6,
+0.9,
+-10
+],
+"yaw": -90,
+"chapter": "LOTS AND GROUNDS",
+"label": "Deck rails and steps ",
+"severity": "major-concern",
+"tag": "(LAG-1) Defective/Major Concern ",
+"text": "DECK RAILS AND STEPS\n:\n✒️",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8668.sog.webm",
+"splatBytes": 2985732,
+"index": 11
+},
+{
+"id": "IMG_6191-1",
+"file": "IMG_6191-1.JPG",
+"area": "exterior_rear",
+"pos": [
+11,
+0.9,
+-9
+],
+"yaw": 180,
+"chapter": "AIR CONDITIONING",
+"label": "AC System Operation ",
+"severity": "major-concern",
+"tag": "(AC-2) Defective/Major Concern ",
+"text": "AC OPERATION\n:\n✒️\nDen AC unit\nUnit not functioning at the time of the inspection\nA Qualified Air Conditioning Contractor is recommended to evaluate and estimate repairs",
+"caption": "",
+"dt": "2025:04:12 13:15:45",
+"focal35": 24,
+"imageSize": [
+4284,
+5712
+],
+"fovY": 71.59,
+"fovX": 56.81,
+"splat": "splats/IMG_6191-1.sog.webm",
+"splatBytes": 2964568,
+"index": 12
+},
+{
+"id": "IMG_6208",
+"file": "IMG_6208.JPG",
+"area": "roof",
+"pos": [
+-2,
+0.3,
+5.5
+],
+"yaw": 180,
+"chapter": "ROOF",
+"label": "Roof Surface ",
+"severity": "other",
+"tag": "(R-2) Marginal ",
+"text": "ROOF SURFACE\n:\n✒️\nDamaged shingles on dormer\nRepair recommended",
+"caption": "",
+"dt": "2025:04:12 13:21:38",
+"focal35": 24,
+"imageSize": [
+4284,
+5712
+],
+"fovY": 71.59,
+"fovX": 56.81,
+"splat": "splats/IMG_6208.sog.webm",
+"splatBytes": 2664987,
+"index": 13
+},
+{
+"id": "IMG_8652",
+"file": "IMG_8652.JPG",
+"area": "roof",
+"pos": [
+2,
+0.3,
+4
+],
+"yaw": 180,
+"chapter": "ROOF",
+"label": "Roof Surface ",
+"severity": "description",
+"tag": "",
+"text": "ROOF PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"splat": "splats/IMG_8652.sog.webm",
+"splatBytes": 2834501,
+"index": 14
+},
+{
+"id": "20210901_000902",
+"file": "20210901_000902.jpg",
+"area": "roof",
+"pos": [
+0,
+0.3,
+0
+],
+"yaw": 0,
+"chapter": "CHIMNEY SCOPE EVALUATION",
+"label": "Flue ",
+"severity": "major-concern",
+"tag": "(CSE-1) Defective/Major Concern ",
+"text": "FLUE\n:\n✒️ The chimney liner in the left chimney is broken with damaged areas present\nDamaged\nGaps present\nVoids present\nRecommend Repairs\nUnsafe conditions exist, Do not use fireplace until evaluation by a Qualified Contractor or Chimney Sweep\nA Qualified Contractor is recommended to evaluate and estimate repairs",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1280,
+720
+],
+"fovY": 38.94,
+"fovX": 64.3,
+"numSplats": 294912,
+"splat": "splats/20210901_000902.sog.webm",
+"splatBytes": 3113646,
+"index": 15
+},
+{
+"id": "IMG_6111",
+"file": "IMG_6111.JPG",
+"area": "attic",
+"pos": [
+3,
+0.9,
+0
+],
+"yaw": -90,
+"chapter": "ATTIC",
+"label": "Attic Location(s) ",
+"severity": "description",
+"tag": "",
+"text": "ATTIC LOCATION PHOTO(s):",
+"caption": "",
+"dt": "2025:04:09 11:44:51",
+"focal35": 24,
+"imageSize": [
+4284,
+5712
+],
+"fovY": 71.59,
+"fovX": 56.81,
+"numSplats": 294912,
+"splat": "splats/IMG_6111.sog.webm",
+"splatBytes": 2925109,
+"index": 16
+},
+{
+"id": "IMG_8640",
+"file": "IMG_8640.JPG",
+"area": "garage",
+"pos": [
+-5,
+1.5,
+0
+],
+"yaw": 180,
+"chapter": "GARAGE/CARPORT",
+"label": "Garage Location ",
+"severity": "description",
+"tag": "",
+"text": "GARAGE LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8640.sog.webm",
+"splatBytes": 2930699,
+"index": 17
+},
+{
+"id": "IMG_8956",
+"file": "IMG_8956.JPG",
+"area": "garage",
+"pos": [
+-9,
+1.5,
+0
+],
+"yaw": 90,
+"chapter": "GARAGE/CARPORT",
+"label": "Garage Location ",
+"severity": "description",
+"tag": "",
+"text": "GARAGE LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8956.sog.webm",
+"splatBytes": 2749649,
+"index": 18
+},
+{
+"id": "IMG_6197",
+"file": "IMG_6197.JPG",
+"area": "crawl",
+"pos": [
+9,
+0.6,
+-4
+],
+"yaw": 180,
+"chapter": "CRAWL SPACE",
+"label": "Crawl Space Location ",
+"severity": "description",
+"tag": "",
+"text": "CRAWL SPACE LOCATION PHOTO(s):",
+"caption": "",
+"dt": "2025:04:12 13:17:10",
+"focal35": 24,
+"imageSize": [
+4284,
+5712
+],
+"fovY": 71.59,
+"fovX": 56.81,
+"numSplats": 294912,
+"splat": "splats/IMG_6197.sog.webm",
+"splatBytes": 2961497,
+"index": 19
+},
+{
+"id": "IMG_8954",
+"file": "IMG_8954.JPG",
+"area": "crawl",
+"pos": [
+8,
+0.6,
+0
+],
+"yaw": 90,
+"chapter": "WATER HEATER",
+"label": "Water Heater Location ",
+"severity": "description",
+"tag": "",
+"text": "WATER HEATER LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8954.sog.webm",
+"splatBytes": 2942072,
+"index": 20
+},
+{
+"id": "IMG_8937",
+"file": "IMG_8937.JPG",
+"area": "basement",
+"pos": [
+3,
+1.4,
+-4
+],
+"yaw": 90,
+"chapter": "BASEMENT",
+"label": "Basement Location ",
+"severity": "description",
+"tag": "",
+"text": "BASEMENT LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294911,
+"splat": "splats/IMG_8937.sog.webm",
+"splatBytes": 2999755,
+"index": 21
+},
+{
+"id": "IMG_8938",
+"file": "IMG_8938.JPG",
+"area": "basement",
+"pos": [
+5,
+1.4,
+0
+],
+"yaw": 180,
+"chapter": "BASEMENT",
+"label": "Basement Stairs/Railings ",
+"severity": "other",
+"tag": "(B-1) Safety ",
+"text": "BASEMENT STAIRS\n:\n✒️\nOpen stairs with grab rails only\nBaluster openings too wide, Recommend improving space for safety\nRecommend Repair",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8938.sog.webm",
+"splatBytes": 3018358,
+"index": 22
+},
+{
+"id": "IMG_8940",
+"file": "IMG_8940.JPG",
+"area": "basement",
+"pos": [
+-3,
+1.4,
+-4
+],
+"yaw": 0,
+"chapter": "BASEMENT",
+"label": "Basement Location ",
+"severity": "description",
+"tag": "",
+"text": "BASEMENT LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8940.sog.webm",
+"splatBytes": 2976170,
+"index": 23
+},
+{
+"id": "IMG_8945",
+"file": "IMG_8945.JPG",
+"area": "basement",
+"pos": [
+1,
+1.4,
+0
+],
+"yaw": 0,
+"chapter": "BASEMENT",
+"label": "Basement Location ",
+"severity": "description",
+"tag": "",
+"text": "BASEMENT LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8945.sog.webm",
+"splatBytes": 3059404,
+"index": 24
+},
+{
+"id": "IMG_8947",
+"file": "IMG_8947.JPG",
+"area": "basement",
+"pos": [
+-1,
+1.4,
+4
+],
+"yaw": -90,
+"chapter": "BASEMENT",
+"label": "Basement Location ",
+"severity": "description",
+"tag": "",
+"text": "BASEMENT LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294891,
+"splat": "splats/IMG_8947.sog.webm",
+"splatBytes": 2962669,
+"index": 25
+},
+{
+"id": "IMG_8948",
+"file": "IMG_8948.JPG",
+"area": "basement",
+"pos": [
+3,
+1.4,
+4
+],
+"yaw": -90,
+"chapter": "HEATING SYSTEM",
+"label": "Manufacturer ",
+"severity": "description",
+"tag": "",
+"text": "HEATING MANUFACTURE PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294894,
+"splat": "splats/IMG_8948.sog.webm",
+"splatBytes": 2909509,
+"index": 26
+},
+{
+"id": "5DFB5B58-FB7E-4D28-809C-97445499B398-1",
+"file": "5DFB5B58-FB7E-4D28-809C-97445499B398-1.JPG",
+"area": "basement",
+"pos": [
+5,
+1.4,
+-4
+],
+"yaw": 90,
+"chapter": "WATER HEATER",
+"label": "Water Heater Location ",
+"severity": "description",
+"tag": "",
+"text": "WATER HEATER LOCATION PHOTO(s):",
+"caption": "",
+"dt": "2025:04:12 12:55:18",
+"focal35": 24,
+"imageSize": [
+3024,
+4032
+],
+"fovY": 71.59,
+"fovX": 56.81,
+"numSplats": 283109,
+"splat": "splats/5DFB5B58-FB7E-4D28-809C-97445499B398-1.sog.webm",
+"splatBytes": 2772660,
+"index": 27
+},
+{
+"id": "IMG_8706",
+"file": "IMG_8706.JPG",
+"area": "basement",
+"pos": [
+5,
+1.2,
+-2
+],
+"yaw": 90,
+"chapter": "WATER HEATER",
+"label": "TPRV/ Drain Tube ",
+"severity": "major-concern",
+"tag": "(WH-1) Defective/Major Concern ",
+"text": "DRAIN TUBE/TPRV\n:\n✒️\nLeaking\nRecommend Repair",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+3024,
+4032
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294760,
+"splat": "splats/IMG_8706.sog.webm",
+"splatBytes": 3106711,
+"index": 28
+},
+{
+"id": "IMG_8906",
+"file": "IMG_8906.JPG",
+"area": "kitchen",
+"pos": [
+-1,
+1.5,
+-4
+],
+"yaw": -90,
+"chapter": "KITCHEN",
+"label": "Location ",
+"severity": "description",
+"tag": "",
+"text": "KITCHEN PHOTO(S)",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294909,
+"splat": "splats/IMG_8906.sog.webm",
+"splatBytes": 2965332,
+"index": 29
+},
+{
+"id": "IMG_8907",
+"file": "IMG_8907.JPG",
+"area": "kitchen",
+"pos": [
+-3,
+1.5,
+-1
+],
+"yaw": 180,
+"chapter": "KITCHEN",
+"label": "Location ",
+"severity": "description",
+"tag": "",
+"text": "KITCHEN PHOTO(S)",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8907.sog.webm",
+"splatBytes": 2855925,
+"index": 30
+},
+{
+"id": "IMG_8908",
+"file": "IMG_8908.JPG",
+"area": "kitchen",
+"pos": [
+-3,
+1.5,
+-4
+],
+"yaw": 90,
+"chapter": "KITCHEN",
+"label": "Location ",
+"severity": "description",
+"tag": "",
+"text": "KITCHEN PHOTO(S)",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8908.sog.webm",
+"splatBytes": 2890270,
+"index": 31
+},
+{
+"id": "IMG_8909",
+"file": "IMG_8909.JPG",
+"area": "kitchen",
+"pos": [
+-1,
+1.5,
+-2.5
+],
+"yaw": 0,
+"chapter": "KITCHEN",
+"label": "Location ",
+"severity": "description",
+"tag": "",
+"text": "KITCHEN PHOTO(S)",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8909.sog.webm",
+"splatBytes": 2897556,
+"index": 32
+},
+{
+"id": "IMG_8602",
+"file": "IMG_8602.JPG",
+"area": "living",
+"pos": [
+1,
+1.5,
+4
+],
+"yaw": 90,
+"chapter": "LIVING SPSCE",
+"label": "Location ",
+"severity": "description",
+"tag": "",
+"text": "GENERAL PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8602.sog.webm",
+"splatBytes": 2756799,
+"index": 33
+},
+{
+"id": "IMG_8895",
+"file": "IMG_8895.JPG",
+"area": "living",
+"pos": [
+5,
+1.5,
+1
+],
+"yaw": -90,
+"chapter": "BEDROOM",
+"label": "Location ",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Bedroom items were functioning as designed and intended unless listed in comments below\nBedroom Items inspected but not limited to;\nCloset, Inspected\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected\nDoor, Inspected\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8895.sog.webm",
+"splatBytes": 2765433,
+"index": 34
+},
+{
+"id": "IMG_8899",
+"file": "IMG_8899.JPG",
+"area": "living",
+"pos": [
+3,
+1.5,
+1
+],
+"yaw": 0,
+"chapter": "FIREPLACE",
+"label": "Gas Fireplace Operation ",
+"severity": "description",
+"tag": "",
+"text": "GAS FIREPLACE OPERATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8899.sog.webm",
+"splatBytes": 2820221,
+"index": 35
+},
+{
+"id": "IMG_8900",
+"file": "IMG_8900.JPG",
+"area": "dining",
+"pos": [
+3,
+1.5,
+-4
+],
+"yaw": -90,
+"chapter": "LIVING SPSCE",
+"label": "Location ",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Living Space items were functioning as designed and intended unless listed in comments below\nLiving Space Items inspected but not limited to;\nCloset, Inspected (If Present)\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected (If Present)\nDoor, Inspected (If Present)\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8900.sog.webm",
+"splatBytes": 2862319,
+"index": 36
+},
+{
+"id": "IMG_8919",
+"file": "IMG_8919.JPG",
+"area": "bedroom",
+"pos": [
+7,
+1.5,
+4
+],
+"yaw": 180,
+"chapter": "BEDROOM",
+"label": "Location ",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Bedroom items were functioning as designed and intended unless listed in comments below\nBedroom Items inspected but not limited to;\nCloset, Inspected\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected\nDoor, Inspected\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8919.sog.webm",
+"splatBytes": 2894987,
+"index": 37
+},
+{
+"id": "IMG_8930",
+"file": "IMG_8930.JPG",
+"area": "upstairs",
+"pos": [
+5,
+1.4,
+-3
+],
+"yaw": -90,
+"chapter": "LIVING SPSCE",
+"label": "Location ",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Living Space items were functioning as designed and intended unless listed in comments below\nLiving Space Items inspected but not limited to;\nCloset, Inspected (If Present)\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected (If Present)\nDoor, Inspected (If Present)\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8930.sog.webm",
+"splatBytes": 2867765,
+"index": 38
+},
+{
+"id": "IMG_8894",
+"file": "IMG_8894.JPG",
+"area": "bathroom",
+"pos": [
+9,
+1.5,
+-4
+],
+"yaw": 0,
+"chapter": "BATHROOM",
+"label": "Location/Inspected Items ",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Bathroom items were functioning as designed and intended unless listed in comments below\nToilet, Inspected\nBathtub/Shower/Spa Tub, Inspected (Existing Fixtures)\nFaucets, Inspected\nSink/Counter/Cabinet, Inspected\nVentilation, Inspected\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow (If present),  Inspected\nDoor, Inspected\nElectrical, Tested\nIf there are concerns or deficiencies found they will be listed in the bathroom section section\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8894.sog.webm",
+"splatBytes": 2928705,
+"index": 39
+},
+{
+"id": "IMG_8889",
+"file": "IMG_8889.JPG",
+"area": "bathroom",
+"pos": [
+7,
+1.5,
+-1
+],
+"yaw": 90,
+"chapter": "BATHROOM",
+"label": "Location/Inspected Items ",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Bathroom items were functioning as designed and intended unless listed in comments below\nToilet, Inspected\nBathtub/Shower/Spa Tub, Inspected (Existing Fixtures)\nFaucets, Inspected\nSink/Counter/Cabinet, Inspected\nVentilation, Inspected\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow (If present),  Inspected\nDoor, Inspected\nElectrical, Tested\nIf there are concerns or deficiencies found they will be listed in the bathroom section section\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8889.sog.webm",
+"splatBytes": 2902842,
+"index": 40
+},
+{
+"id": "IMG_8604",
+"file": "IMG_8604.JPG",
+"area": "bathroom",
+"pos": [
+7,
+1.5,
+-4
+],
+"yaw": 0,
+"chapter": "BATHROOM",
+"label": "Location/Inspected Items ",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Bathroom items were functioning as designed and intended unless listed in comments below\nToilet, Inspected\nBathtub/Shower/Spa Tub, Inspected (Existing Fixtures)\nFaucets, Inspected\nSink/Counter/Cabinet, Inspected\nVentilation, Inspected\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow (If present),  Inspected\nDoor, Inspected\nElectrical, Tested\nIf there are concerns or deficiencies found they will be listed in the bathroom section section\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8604.sog.webm",
+"splatBytes": 2906759,
+"index": 41
+},
+{
+"id": "IMG_8682",
+"file": "IMG_8682.JPG",
+"area": "laundry",
+"pos": [
+5,
+1.5,
+-4
+],
+"yaw": 0,
+"chapter": "LAUNDRY ROOM/AREA",
+"label": "Laundry Room area/Location ",
+"severity": "description",
+"tag": "",
+"text": "LAUNDRY ROOM PHOTO(s)",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294908,
+"splat": "splats/IMG_8682.sog.webm",
+"splatBytes": 2843794,
+"index": 42
+},
+{
+"id": "IMG_8684",
+"file": "IMG_8684.JPG",
+"area": "laundry",
+"pos": [
+5,
+1.5,
+-2.5
+],
+"yaw": 90,
+"chapter": "AIR CONDITIONING",
+"label": "Type/Size ",
+"severity": "other",
+"tag": "(AC-1) INFORMATION: ",
+"text": "This type of system has a filter inside the indoor head unit that requires routine cleaning or changing",
+"caption": "",
+"dt": null,
+"focal35": null,
+"imageSize": [
+1188,
+1584
+],
+"fovY": 59.96,
+"fovX": 46.79,
+"numSplats": 294912,
+"splat": "splats/IMG_8684.sog.webm",
+"splatBytes": 2853914,
+"index": 43
+},
+{
+"id": "IMG_2840",
+"file": "IMG_2840.JPG",
+"area": "panel",
+"pos": [
+-3,
+1.5,
+2.5
+],
+"yaw": 90,
+"chapter": "ELECTRIC PANEL",
+"label": "Manufacturer ",
+"severity": "description",
+"tag": "",
+"text": "MANUFACTURER PHOTO(s):",
+"caption": "",
+"dt": "2024:07:18 10:09:04",
+"focal35": 24,
+"imageSize": [
+3024,
+4032
+],
+"fovY": 71.59,
+"fovX": 56.81,
+"numSplats": 294912,
+"splat": "splats/IMG_2840.sog.webm",
+"splatBytes": 2834566,
+"index": 44
+},
+{
+"id": "IMG_2156",
+"file": "IMG_2156.JPG",
+"area": "dock",
+"pos": [
+26,
+1.6,
+-22
+],
+"yaw": 90,
+"chapter": "DOCK",
+"label": "Dock ",
+"severity": "other",
+"tag": "(D-3) Dock Inspection/List ",
+"text": "DOCK\n:\nLocation:\nDock Type:\nSeawall:\nDavit/Lifts:\nElectric/Dock:\nRoof/Dock:\nDocumentation Pictures:",
+"caption": "",
+"dt": "2023:10:28 10:20:55",
+"focal35": 116,
+"imageSize": [
+3024,
+4032
+],
+"fovY": 16.97,
+"fovX": 12.77,
+"numSplats": 294912,
+"splat": "splats/IMG_2156.sog.webm",
+"splatBytes": 3230112,
+"index": 45
+},
+{
+"id": "IMG_9580",
+"file": "IMG_9580.JPG",
+"area": "dock",
+"pos": [
+22,
+1.0,
+-26
+],
+"yaw": 180,
+"chapter": "DOCK",
+"label": "Dock ",
+"severity": "major-concern",
+"tag": "(D-1) Defective/Major Concern ",
+"text": "DOCK\n:\n✒️\nWater Damaged Decking on side of framework at end\nA Qualified Contractor is recommended to evaluate and make necessary repairs",
+"caption": "",
+"dt": "2023:09:06 09:26:10",
+"focal35": 73,
+"imageSize": [
+3024,
+4032
+],
+"fovY": 26.67,
+"fovX": 20.16,
+"numSplats": 294911,
+"splat": "splats/IMG_9580.sog.webm",
+"splatBytes": 3270490,
+"index": 46
+},
+{
+"id": "IMG_9433",
+"file": "IMG_9433.JPG",
+"area": "hottub",
+"pos": [
+9,
+0.5,
+-11
+],
+"yaw": 180,
+"chapter": "HOT TUB/SPA",
+"label": "Cover ",
+"severity": "other",
+"tag": "(HT-2) Hot Tub/Spa  Inspection/List ",
+"text": "SPA/HOT TUB\n:\nType/Location:\nDeck\nFiberglass\nCleanliness/Clarity:\nWater is clean and clear at the time of inspection\nCover:\nGood Condition\nLatch mechanism not working/Damaged\nDeck/Patio:\nDeck is built to properly support the weight\nSkimmer/Wier:\nGood Condition\nManual, Weir\nPump Motor:\nGood Condition\nRunning quietly\nFilter(s)\nGood Condition\nFilter cartridge\nElectrical/Breakers/Grounding:\nGFCI Protected\nSteps/Handrails:\nPlastic\nLights:\nUnderwater lights working\nEdge Lights working\nJets:\nWorking Properly\nDocumentation Pictures:",
+"caption": "",
+"dt": "2025:11:20 10:15:24",
+"focal35": 24,
+"imageSize": [
+4284,
+5712
+],
+"fovY": 71.59,
+"fovX": 56.81,
+"numSplats": 294911,
+"splat": "splats/IMG_9433.sog.webm",
+"splatBytes": 3052128,
+"index": 47
+},
+{
+"id": "mv_gen_dining_IMG_8901",
+"file": "IMG_8901.JPG",
+"area": "dining",
+"mv": "gen_dining",
+"gen": true,
+"pos": [
+1.0,
+1.5,
+-1.0
+],
+"yaw": 170.00000000000003,
+"look": [
+0.17364652184737497,
+-0.004366965415916819,
+-0.984798362392869
+],
+"up": [
+0.009947759102216512,
+0.9999469282169537,
+-0.0026800814897453397
+],
+"chapter": "LIVING SPSCE",
+"label": "Dining room (AI expanded) · IMG_8901",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Living Space items were functioning as designed and intended unless listed in comments below\nLiving Space Items inspected but not limited to;\nCloset, Inspected (If Present)\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected (If Present)\nDoor, Inspected (If Present)\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 60.9,
+"photo": "IMG_8901",
+"index": 48
+},
+{
+"id": "mv_gen_den_IMG_8893",
+"file": "IMG_8893.JPG",
+"area": "bedroom",
+"mv": "gen_den",
+"gen": true,
+"pos": [
+9.0,
+1.5,
+1.0
+],
+"yaw": 90.00000000000001,
+"look": [
+0.9999717474821708,
+-0.007520585026902928,
+-1.1102230246251565e-16
+],
+"up": [
+0.0075141765298865175,
+0.9991190978757019,
+0.0412863867636942
+],
+"chapter": "BEDROOM",
+"label": "Den (AI expanded) · IMG_8893",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Bedroom items were functioning as designed and intended unless listed in comments below\nBedroom Items inspected but not limited to;\nCloset, Inspected\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected\nDoor, Inspected\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 86.96,
+"photo": "IMG_8893",
+"index": 49
+},
+{
+"id": "mv_gen_bath_IMG_8892",
+"file": "IMG_8892.JPG",
+"area": "bathroom",
+"mv": "gen_bath",
+"gen": true,
+"pos": [
+9.0,
+1.5,
+-1.0
+],
+"yaw": -180.0,
+"look": [
+-5.551115123125783e-17,
+0.005433473287144358,
+-0.999985239238994
+],
+"up": [
+0.06177901889854055,
+0.9980751188758579,
+0.005423094352397347
+],
+"chapter": "BATHROOM",
+"label": "Bathroom (AI expanded) · IMG_8892",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Bathroom items were functioning as designed and intended unless listed in comments below\nToilet, Inspected\nBathtub/Shower/Spa Tub, Inspected (Existing Fixtures)\nFaucets, Inspected\nSink/Counter/Cabinet, Inspected\nVentilation, Inspected\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow (If present),  Inspected\nDoor, Inspected\nElectrical, Tested\nIf there are concerns or deficiencies found they will be listed in the bathroom section section\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 91.66,
+"photo": "IMG_8892",
+"index": 50
+},
+{
+"id": "mv_gen_basement_IMG_8942",
+"file": "IMG_8942.JPG",
+"area": "basement",
+"mv": "gen_basement",
+"gen": true,
+"pos": [
+-3.0,
+1.4,
+3.9999999999999996
+],
+"yaw": 3.1818531761332133e-15,
+"look": [
+5.551115123125783e-17,
+0.028566083633293448,
+0.9995919061635414
+],
+"up": [
+-0.03878679358744889,
+0.9988397224500033,
+-0.028544587917724042
+],
+"chapter": "BASEMENT",
+"label": "Basement (AI expanded) · IMG_8942",
+"severity": "description",
+"tag": "",
+"text": "BASEMENT LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 60.08,
+"photo": "IMG_8942",
+"index": 51
+},
+{
+"id": "mv_gen_garage_IMG_8644",
+"file": "IMG_8644.JPG",
+"area": "garage",
+"mv": "gen_garage",
+"gen": true,
+"pos": [
+-9.0,
+1.5,
+4.0
+],
+"yaw": 0.0,
+"look": [
+0.0,
+0.010879771045383187,
+0.9999408135603387
+],
+"up": [
+-0.048709353253110946,
+0.9987538787591906,
+-0.010866856690033663
+],
+"chapter": "GARAGE/CARPORT",
+"label": "Garage (AI expanded) · IMG_8644",
+"severity": "description",
+"tag": "",
+"text": "GARAGE LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 54.15,
+"photo": "IMG_8644",
+"index": 52
+},
+{
+"id": "mv_gen_bonus_IMG_8928",
+"file": "IMG_8928.JPG",
+"area": "upstairs",
+"mv": "gen_bonus",
+"gen": true,
+"pos": [
+3.0,
+1.4,
+4.0
+],
+"yaw": 179.99999999999997,
+"look": [
+3.8510861166685117e-16,
+-0.09350527992508662,
+-0.9956187837895474
+],
+"up": [
+0.0026056810341313274,
+0.9956154038696399,
+-0.09350496249430809
+],
+"chapter": "LIVING SPSCE",
+"label": "Bonus room (AI expanded) · IMG_8928",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Living Space items were functioning as designed and intended unless listed in comments below\nLiving Space Items inspected but not limited to;\nCloset, Inspected (If Present)\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected (If Present)\nDoor, Inspected (If Present)\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 58.01,
+"photo": "IMG_8928",
+"index": 53
+},
+{
+"id": "mv_gen_nursery_IMG_8934",
+"file": "IMG_8934.JPG",
+"area": "upstairs",
+"mv": "gen_nursery",
+"gen": true,
+"pos": [
+1.0,
+1.4,
+-3.0
+],
+"yaw": 90.0,
+"look": [
+0.999880853525328,
+0.015436280620221681,
+5.551115123125783e-17
+],
+"up": [
+-0.015428367469577127,
+0.9993682813777816,
+0.032015678245740774
+],
+"chapter": "LIVING SPSCE",
+"label": "Nursery (AI expanded) · IMG_8934",
+"severity": "other",
+"tag": "Inspected Items ",
+"text": "Living Space items were functioning as designed and intended unless listed in comments below\nLiving Space Items inspected but not limited to;\nCloset, Inspected (If Present)\nWalls, visually inspected\nCeiling, Visually inspected\nFloor, Inspected\nWindow,  Checked and inspected (If Present)\nDoor, Inspected (If Present)\nElectrical, Tested\nDOCUMENTATION PHOTOS:",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 60.02,
+"photo": "IMG_8934",
+"index": 54
+},
+{
+"id": "mv_gen_laundry_IMG_8683",
+"file": "IMG_8683.JPG",
+"area": "laundry",
+"mv": "gen_laundry",
+"gen": true,
+"pos": [
+5.0,
+1.5,
+-1.0
+],
+"yaw": 180.0,
+"look": [
+1.6653345369377348e-16,
+-0.013406871175067725,
+-0.9999101206657443
+],
+"up": [
+0.07614803114146511,
+0.9970069083529685,
+-0.013367943797366905
+],
+"chapter": "LAUNDRY ROOM/AREA",
+"label": "Laundry (AI expanded) · IMG_8683",
+"severity": "description",
+"tag": "",
+"text": "LAUNDRY ROOM PHOTO(s)",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 52.41,
+"photo": "IMG_8683",
+"index": 55
+},
+{
+"id": "mv_gen_attic_IMG_6113",
+"file": "IMG_6113.JPG",
+"area": "attic",
+"mv": "gen_attic",
+"gen": true,
+"pos": [
+-2.0,
+0.9,
+0.0
+],
+"yaw": 90.00000000000001,
+"look": [
+0.9998362170904855,
+0.018098038277884917,
+-5.551115123125783e-17
+],
+"up": [
+-0.017983755738924613,
+0.9935226145195866,
+0.11220249088701997
+],
+"chapter": "ATTIC",
+"label": "Attic (AI expanded) · IMG_6113",
+"severity": "description",
+"tag": "",
+"text": "ATTIC LOCATION PHOTO(s):",
+"caption": "",
+"dt": "2025:04:09 11:44:55",
+"focal35": 24,
+"fovY": 64.77,
+"photo": "IMG_6113",
+"index": 56
+},
+{
+"id": "mv_gen_crawl_IMG_8635",
+"file": "IMG_8635.JPG",
+"area": "crawl",
+"mv": "gen_crawl",
+"gen": true,
+"pos": [
+7.0,
+0.5999999999999999,
+4.0
+],
+"yaw": -3.181142023309252e-14,
+"look": [
+-5.551115123125783e-16,
+-0.019215376377826936,
+0.9998153676128159
+],
+"up": [
+-0.010313326517371931,
+0.999762193665399,
+0.019214354434986012
+],
+"chapter": "CRAWL SPACE",
+"label": "Crawl space (AI expanded) · IMG_8635",
+"severity": "description",
+"tag": "",
+"text": "CRAWL SPACE LOCATION PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 63.77,
+"photo": "IMG_8635",
+"index": 57
+},
+{
+"id": "mv_gen_rear_IMG_8659",
+"file": "IMG_8659.JPG",
+"area": "exterior_rear",
+"mv": "gen_rear",
+"gen": true,
+"pos": [
+0.0,
+1.6,
+-13.0
+],
+"yaw": 0.0,
+"look": [
+0.0,
+0.009226827440924849,
+0.9999574319121003
+],
+"up": [
+0.005556882780301111,
+0.9999419929864715,
+-0.009226684984531795
+],
+"chapter": "LOTS AND GROUNDS",
+"label": "Rear yard (AI expanded) · IMG_8659",
+"severity": "description",
+"tag": "",
+"text": "SWALE AND SURFACE DRAIN PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 68.34,
+"photo": "IMG_8659",
+"index": 58
+},
+{
+"id": "mv_gen_deck_IMG_8674",
+"file": "IMG_8674.JPG",
+"area": "exterior_rear",
+"mv": "gen_deck",
+"gen": true,
+"pos": [
+3.0,
+1.6,
+-11.0
+],
+"yaw": 19.999999999999993,
+"look": [
+0.3414588197470786,
+-0.05726872758677723,
+0.9381503969287248
+],
+"up": [
+0.05142058865318481,
+0.9977853618892825,
+0.04219353815495121
+],
+"chapter": "LOTS AND GROUNDS",
+"label": "Deck stairs (AI expanded) · IMG_8674",
+"severity": "other",
+"tag": "Acceptable ",
+"text": "DECK\n:\n✒️Treated wood deck",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 55.24,
+"photo": "IMG_8674",
+"index": 59
+},
+{
+"id": "mv_gen_porch_IMG_8671",
+"file": "IMG_8671.JPG",
+"area": "exterior_rear",
+"mv": "gen_porch",
+"gen": true,
+"pos": [
+3.0,
+1.6000000000000003,
+-7.0
+],
+"yaw": -90.0,
+"look": [
+-0.9984891874585582,
+-0.05494853454338934,
+-1.9081958235744878e-17
+],
+"up": [
+-0.05489771391271115,
+0.9975657149008824,
+-0.04299866631813324
+],
+"chapter": "LOTS AND GROUNDS",
+"label": "Back porch (AI expanded) · IMG_8671",
+"severity": "description",
+"tag": "",
+"text": "DECK PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 56.75,
+"photo": "IMG_8671",
+"index": 60
+},
+{
+"id": "mv_gen_garagefront_IMG_8651",
+"file": "IMG_8651.JPG",
+"area": "exterior_front",
+"mv": "gen_garagefront",
+"gen": true,
+"pos": [
+-7.0,
+1.6,
+14.0
+],
+"yaw": -180.0,
+"look": [
+-2.220446049250313e-16,
+-0.009186089404672883,
+-0.9999578064659332
+],
+"up": [
+-0.0006900541645337831,
+0.9999575689128173,
+-0.009186087214546623
+],
+"chapter": "EXTERIOR",
+"label": "Garage front (AI expanded) · IMG_8651",
+"severity": "description",
+"tag": "",
+"text": "EXTERIOR SIDING PHOTO(s)\n﻿",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 77.81,
+"photo": "IMG_8651",
+"index": 61
+},
+{
+"id": "mv_gen_driveway_IMG_8656",
+"file": "IMG_8656.JPG",
+"area": "exterior_front",
+"mv": "gen_driveway",
+"gen": true,
+"pos": [
+-9.0,
+1.6,
+17.0
+],
+"yaw": 3.1806853245606266e-15,
+"look": [
+5.551115123125783e-17,
+-0.009063248280988909,
+0.9999589261169279
+],
+"up": [
+-0.0058615467277539236,
+0.9999417496119242,
+0.009063092442774336
+],
+"chapter": "LOTS AND GROUNDS",
+"label": "Driveway (AI expanded) · IMG_8656",
+"severity": "description",
+"tag": "",
+"text": "DRIVEWAY PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 54.52,
+"photo": "IMG_8656",
+"index": 62
+},
+{
+"id": "mv_gen_side_IMG_8676",
+"file": "IMG_8676.JPG",
+"area": "exterior_rear",
+"mv": "gen_side",
+"gen": true,
+"pos": [
+-11.0,
+1.6,
+-7.000000000000001
+],
+"yaw": -180.0,
+"look": [
+-1.6653345369377348e-16,
+-0.0019085765737057404,
+-0.9999981786673733
+],
+"up": [
+-0.006336095105856233,
+0.9999781054506299,
+-0.0019085382623906088
+],
+"chapter": "LOTS AND GROUNDS",
+"label": "Side yard (AI expanded) · IMG_8676",
+"severity": "description",
+"tag": "",
+"text": "SWALE AND SURFACE DRAIN PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 55.64,
+"photo": "IMG_8676",
+"index": 63
+},
+{
+"id": "mv_gen_hottub_IMG_9417",
+"file": "IMG_9417.JPG",
+"area": "hottub",
+"mv": "gen_hottub",
+"gen": true,
+"pos": [
+12.0,
+1.6,
+-9.0
+],
+"yaw": -90.00000000000001,
+"look": [
+-0.9969782258670841,
+-0.07768151137477336,
+-5.551115123125783e-17
+],
+"up": [
+-0.07584750483859644,
+0.9734402618439189,
+-0.21601206599011757
+],
+"chapter": "HOT TUB/SPA",
+"label": "Hot tub (AI expanded) · IMG_9417",
+"severity": "other",
+"tag": "(HT-2) Hot Tub/Spa  Inspection/List ",
+"text": "SPA/HOT TUB\n:\nType/Location:\nDeck\nFiberglass\nCleanliness/Clarity:\nWater is clean and clear at the time of inspection\nCover:\nGood Condition\nLatch mechanism not working/Damaged\nDeck/Patio:\nDeck is built to properly support the weight\nSkimmer/Wier:\nGood Condition\nManual, Weir\nPump Motor:\nGood Condition\nRunning quietly\nFilter(s)\nGood Condition\nFilter cartridge\nElectrical/Breakers/Grounding:\nGFCI Protected\nSteps/Handrails:\nPlastic\nLights:\nUnderwater lights working\nEdge Lights working\nJets:\nWorking Properly\nDocumentation Pictures:",
+"caption": "",
+"dt": "2025:11:20 10:11:32",
+"focal35": 24,
+"fovY": 67.27,
+"photo": "IMG_9417",
+"index": 64
+},
+{
+"id": "mv_gen_dock_IMG_6233",
+"file": "IMG_6233.JPG",
+"area": "dock",
+"mv": "gen_dock",
+"gen": true,
+"pos": [
+18.0,
+1.6,
+-23.0
+],
+"yaw": -90.0,
+"look": [
+-0.999351354871108,
+-0.036012067609395966,
+1.1102230246251565e-16
+],
+"up": [
+-0.03600653313484477,
+0.999197775296559,
+-0.017530982431685913
+],
+"chapter": "DOCK",
+"label": "Dock (AI expanded) · IMG_6233",
+"severity": "other",
+"tag": "(D-2) Safety ",
+"text": "DAVITS/LIFTS\n:\n✒️\nCover missing, Recommend installing cover for safety\nRecommend Repair",
+"caption": "",
+"dt": "2021:05:28 09:15:43",
+"focal35": 26,
+"fovY": 64.82,
+"photo": "IMG_6233",
+"index": 65
+},
+{
+"id": "mv_gen_kitchen_IMG_8904",
+"file": "IMG_8904.JPG",
+"area": "kitchen",
+"mv": "gen_kitchen",
+"gen": true,
+"pos": [
+-1.0,
+1.5,
+-0.9999999999999999
+],
+"yaw": -150.0,
+"look": [
+-0.49647280859482723,
+-0.11857045280767659,
+-0.8599161290626589
+],
+"up": [
+-0.14326987274035358,
+0.9882340224774157,
+-0.05354679371103501
+],
+"chapter": "KITCHEN",
+"label": "Kitchen (AI expanded) · IMG_8904",
+"severity": "description",
+"tag": "",
+"text": "KITCHEN PHOTO(S)",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 58.68,
+"photo": "IMG_8904",
+"index": 66
+},
+{
+"id": "mv_gen_living_IMG_8898",
+"file": "IMG_8898.JPG",
+"area": "living",
+"mv": "gen_living",
+"gen": true,
+"pos": [
+5.0,
+1.5,
+4.0
+],
+"yaw": -180.0,
+"look": [
+-1.1102230246251565e-16,
+-0.01079285496960973,
+-0.9999417548934957
+],
+"up": [
+0.06488392758760056,
+0.9978346960247596,
+-0.010770112280690537
+],
+"chapter": "LIVING SPSCE",
+"label": "Living room (AI expanded) · IMG_8898",
+"severity": "description",
+"tag": "",
+"text": "GENERAL PHOTO(s):",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 87.19,
+"photo": "IMG_8898",
+"index": 67
+},
+{
+"id": "mv_gen_front_IMG_8649",
+"file": "IMG_8649.JPG",
+"area": "exterior_front",
+"mv": "gen_front",
+"gen": true,
+"pos": [
+1.0,
+1.6,
+13.0
+],
+"yaw": 179.99999999999997,
+"look": [
+4.440892098500626e-16,
+-0.015577724125985268,
+-0.9998786598849048
+],
+"up": [
+0.0163400470918921,
+0.999745168611893,
+-0.015575644382202335
+],
+"chapter": "EXTERIOR",
+"label": "Front entry (AI expanded) · IMG_8649",
+"severity": "description",
+"tag": "",
+"text": "EXTERIOR SIDING PHOTO(s)\n﻿",
+"caption": "",
+"dt": null,
+"focal35": null,
+"fovY": 61.23,
+"photo": "IMG_8649",
+"index": 68
+}
+],
+"mv": {
+"gen_kitchen": {
+"label": "Kitchen (AI expanded)",
+"area": "kitchen",
+"splat": "splats/mv_gen_kitchen.sog.webm",
+"transform": {
+"pos": [
+-1.7049145736265108,
+1.4935603425978732,
+-1.8525269624185432
+],
+"quat": [
+0.8736618413249196,
+-0.02855920164715721,
+0.48493018611653815,
+0.027241028009375834
+],
+"scale": 2.4932065143179907,
+"centroid": [
+0.1185075516533931,
+-0.01143698971837145,
+0.06767179240965053
+]
+},
+"splatBytes": 8719279,
+"kind": "gen",
+"frames": 20
+},
+"gen_living": {
+"label": "Living room (AI expanded)",
+"area": "living",
+"splat": "splats/mv_gen_living.sog.webm",
+"transform": {
+"pos": [
+5.016329108494887,
+1.5545395531743609,
+3.6393298204394617
+],
+"quat": [
+0.8996531603197391,
+0.040834893392479914,
+-0.43468134510392675,
+0.002971670737433175
+],
+"scale": 2.2377533404507,
+"centroid": [
+0.09549068947747426,
+-0.011919495074332107,
+0.065596723913924
+]
+},
+"splatBytes": 8554281,
+"kind": "gen",
+"frames": 20
+},
+"gen_dining": {
+"label": "Dining room (AI expanded)",
+"area": "dining",
+"splat": "splats/mv_gen_dining.sog.webm",
+"transform": {
+"pos": [
+0.9571212092904067,
+1.5031307729966428,
+-1.0154107358982434
+],
+"quat": [
+0.9914351311918784,
+0.005488609606869911,
+-0.13038440067975776,
+-0.005115062316987407
+],
+"scale": 3.6295165558111084,
+"centroid": [
+0.005283209279048808,
+0.00038960312529281115,
+-0.0037350754774888887
+]
+},
+"splatBytes": 8564970,
+"kind": "gen",
+"frames": 30
+},
+"gen_den": {
+"label": "Den (AI expanded)",
+"area": "bedroom",
+"splat": "splats/mv_gen_den.sog.webm",
+"transform": {
+"pos": [
+9.302564784161508,
+1.5040705441761415,
+1.0690265533716998
+],
+"quat": [
+0.9831097644984554,
+0.016169063671275553,
+0.18153595724609853,
+0.01668677783541273
+],
+"scale": 2.293941476344785,
+"centroid": [
+0.052508010068292525,
+0.0017033897566534962,
+-0.0018406166765649985
+]
+},
+"splatBytes": 8635234,
+"kind": "gen",
+"frames": 30
+},
+"gen_bath": {
+"label": "Bathroom (AI expanded)",
+"area": "bathroom",
+"splat": "splats/mv_gen_bath.sog.webm",
+"transform": {
+"pos": [
+8.882956210530597,
+1.5047101094561524,
+-1.0583804878156182
+],
+"quat": [
+0.9644410098961084,
+0.009732878242936206,
+-0.26330241079820593,
+0.02075210783355997
+],
+"scale": 2.1872122845531647,
+"centroid": [
+-0.014753895538998902,
+0.004489137276566679,
+-0.04398955090852634
+]
+},
+"splatBytes": 8783179,
+"kind": "gen",
+"frames": 30
+},
+"gen_basement": {
+"label": "Basement (AI expanded)",
+"area": "basement",
+"splat": "splats/mv_gen_basement.sog.webm",
+"transform": {
+"pos": [
+-3.054285893381939,
+1.4799939963292326,
+4.5912187645580245
+],
+"quat": [
+0.07640228215809892,
+-0.0005479618030951818,
+0.9970766208843498,
+0.000776598186593567
+],
+"scale": 4.168017188855221,
+"centroid": [
+-0.036050239306413975,
+0.006866245006870635,
+-0.03548144607715787
+]
+},
+"splatBytes": 8627306,
+"kind": "gen",
+"frames": 30
+},
+"gen_garage": {
+"label": "Garage (AI expanded)",
+"area": "garage",
+"splat": "splats/mv_gen_garage.sog.webm",
+"transform": {
+"pos": [
+-9.036310376724728,
+1.5094724872283494,
+4.034037097576034
+],
+"quat": [
+0.030442094869233296,
+0.0002690864137104419,
+0.9994228121246715,
+-0.015074782163873353
+],
+"scale": 3.856820479651308,
+"centroid": [
+-0.006158106403752533,
+0.002921895542985896,
+-0.045759869185482076
+]
+},
+"splatBytes": 8576837,
+"kind": "gen",
+"frames": 30
+},
+"gen_front": {
+"label": "Front entry (AI expanded)",
+"area": "exterior_front",
+"splat": "splats/mv_gen_front.sog.webm",
+"transform": {
+"pos": [
+3.65413490590247,
+1.550641534414337,
+12.03161457862635
+],
+"quat": [
+0.9996225233216736,
+-0.00657448367128761,
+-0.026258148654474817,
+0.004700708638654077
+],
+"scale": 6.875061063868398,
+"centroid": [
+0.351230133758639,
+0.0005357071380527958,
+0.1193793718092973
+]
+},
+"splatBytes": 8502775,
+"kind": "gen",
+"frames": 20
+},
+"gen_bonus": {
+"label": "Bonus room (AI expanded)",
+"area": "upstairs",
+"splat": "splats/mv_gen_bonus.sog.webm",
+"transform": {
+"pos": [
+3.0317740392104082,
+1.6450515669222743,
+2.6118156666431203
+],
+"quat": [
+0.9995887886326046,
+0.0002871887235927231,
+-0.00825363074009393,
+0.027459947965090596
+],
+"scale": 4.0538561887554545,
+"centroid": [
+0.011304644000146493,
+-0.0457527266745625,
+0.19531676174049736
+]
+},
+"splatBytes": 8677426,
+"kind": "gen",
+"frames": 20
+},
+"gen_nursery": {
+"label": "Nursery (AI expanded)",
+"area": "upstairs",
+"splat": "splats/mv_gen_nursery.sog.webm",
+"transform": {
+"pos": [
+1.538375298527224,
+1.3883820539365643,
+-2.6480366955796386
+],
+"quat": [
+0.7246213108277779,
+-0.008353884646630855,
+0.6889912987508294,
+-0.012048184559889557
+],
+"scale": 2.7985883314373803,
+"centroid": [
+0.08907221386596452,
+0.0007389987611992188,
+0.11741672133048339
+]
+},
+"splatBytes": 8740403,
+"kind": "gen",
+"frames": 20
+},
+"gen_laundry": {
+"label": "Laundry (AI expanded)",
+"area": "laundry",
+"splat": "splats/mv_gen_laundry.sog.webm",
+"transform": {
+"pos": [
+5.721479011069142,
+1.4851552252504392,
+-1.2320457913796337
+],
+"quat": [
+0.8475162776376874,
+-0.10092128429828429,
+0.519475060183383,
+0.04094771498159559
+],
+"scale": 3.6373585180707964,
+"centroid": [
+0.09227702939671563,
+0.024037024994553714,
+-0.12148328716281534
+]
+},
+"splatBytes": 8571843,
+"kind": "gen",
+"frames": 20
+},
+"gen_attic": {
+"label": "Attic (AI expanded)",
+"area": "attic",
+"splat": "splats/mv_gen_attic.sog.webm",
+"transform": {
+"pos": [
+-1.9437280003878137,
+0.8972285366829029,
+0.000714249232429881
+],
+"quat": [
+0.704669271062961,
+-0.01939459909812913,
+0.7075642976712189,
+-0.04917146130076774
+],
+"scale": 1.9454168572686008,
+"centroid": [
+0.00042965692886509524,
+0.0004939404007736278,
+0.030641654903117897
+]
+},
+"splatBytes": 8569658,
+"kind": "gen",
+"frames": 20
+},
+"gen_crawl": {
+"label": "Crawl space (AI expanded)",
+"area": "crawl",
+"splat": "splats/mv_gen_crawl.sog.webm",
+"transform": {
+"pos": [
+7.0135675461302665,
+0.6659649236824643,
+4.791861450015354
+],
+"quat": [
+0.009933149811017202,
+-0.007543646356024994,
+0.9999178247509423,
+0.002961364521766929
+],
+"scale": 2.5176822531814103,
+"centroid": [
+0.01570560769728894,
+-0.020135055026144287,
+0.17070560968771517
+]
+},
+"splatBytes": 8774955,
+"kind": "gen",
+"frames": 20
+},
+"gen_rear": {
+"label": "Rear yard (AI expanded)",
+"area": "exterior_rear",
+"splat": "splats/mv_gen_rear.sog.webm",
+"transform": {
+"pos": [
+-3.984285794319254,
+1.7036939730873326,
+-12.047094776962707
+],
+"quat": [
+0.033797146514868925,
+0.0042128891962379756,
+0.9993991959646321,
+0.0064227375253512985
+],
+"scale": 5.700067669611591,
+"centroid": [
+0.5948609089793006,
+-0.006093744109454407,
+0.1279307230745627
+]
+},
+"splatBytes": 8880188,
+"kind": "gen",
+"frames": 20
+},
+"gen_deck": {
+"label": "Deck stairs (AI expanded)",
+"area": "exterior_rear",
+"splat": "splats/mv_gen_deck.sog.webm",
+"transform": {
+"pos": [
+3.7909934173148288,
+2.301957706986288,
+-8.542673931509736
+],
+"quat": [
+0.17398996108429884,
+-0.025246343474605516,
+0.984186225807123,
+0.021623795101162472
+],
+"scale": 4.874661899199725,
+"centroid": [
+0.025820866640694023,
+-0.17331119686536883,
+0.5200059804167152
+]
+},
+"splatBytes": 8803168,
+"kind": "gen",
+"frames": 20
+},
+"gen_porch": {
+"label": "Back porch (AI expanded)",
+"area": "exterior_rear",
+"splat": "splats/mv_gen_porch.sog.webm",
+"transform": {
+"pos": [
+0.9983140337190131,
+2.0726031004441383,
+-7.276438374749124
+],
+"quat": [
+-0.558992358444437,
+-0.029896636964058382,
+0.8280788262624266,
+0.030318175980877028
+],
+"scale": 3.5844524485883213,
+"centroid": [
+0.011266547736975946,
+0.011447980293969868,
+-0.06457738816965403
+]
+},
+"splatBytes": 8687102,
+"kind": "gen",
+"frames": 20
+},
+"gen_garagefront": {
+"label": "Garage front (AI expanded)",
+"area": "exterior_front",
+"splat": "splats/mv_gen_garagefront.sog.webm",
+"transform": {
+"pos": [
+-6.942059687065794,
+1.6137843656844488,
+13.935124029138743
+],
+"quat": [
+0.9427645014211333,
+-0.0006395964557372705,
+0.33341723427929054,
+-0.00525677297249857
+],
+"scale": 6.022574766967703,
+"centroid": [
+-0.0019328375209883447,
+8.968005944215323e-05,
+-0.014468996344510768
+]
+},
+"splatBytes": 8463743,
+"kind": "gen",
+"frames": 20
+},
+"gen_driveway": {
+"label": "Driveway (AI expanded)",
+"area": "exterior_front",
+"splat": "splats/mv_gen_driveway.sog.webm",
+"transform": {
+"pos": [
+-8.526071403328228,
+1.790635962392705,
+21.868104532801397
+],
+"quat": [
+0.245445958487739,
+0.0014217394827759097,
+0.9693859525353998,
+0.006718269562441738
+],
+"scale": 18.45333782161071,
+"centroid": [
+-0.023264007885403944,
+0.0026650573486284466,
+-0.06910988024696826
+]
+},
+"splatBytes": 8534245,
+"kind": "gen",
+"frames": 20
+},
+"gen_side": {
+"label": "Side yard (AI expanded)",
+"area": "exterior_rear",
+"splat": "splats/mv_gen_side.sog.webm",
+"transform": {
+"pos": [
+-10.940744187639888,
+1.65499146073558,
+-9.664156371330595
+],
+"quat": [
+0.9998869804796935,
+0.003304997909472954,
+-0.01450324919855785,
+-0.0021815175232220213
+],
+"scale": 9.613084379458938,
+"centroid": [
+0.011097604679754703,
+-0.005198751160477697,
+0.22764557474115582
+]
+},
+"splatBytes": 8654905,
+"kind": "gen",
+"frames": 20
+},
+"gen_hottub": {
+"label": "Hot tub (AI expanded)",
+"area": "hottub",
+"splat": "splats/mv_gen_hottub.sog.webm",
+"transform": {
+"pos": [
+11.431907026871297,
+1.6850662798736225,
+-10.01603666867628
+],
+"quat": [
+-0.6650924553152254,
+0.03171752660963848,
+0.742200699547969,
+-0.07605357308527484
+],
+"scale": 2.490750170871461,
+"centroid": [
+0.27587956165187755,
+-0.08013726088610967,
+0.1214753841851671
+]
+},
+"splatBytes": 8544766,
+"kind": "gen",
+"frames": 20
+},
+"gen_dock": {
+"label": "Dock (AI expanded)",
+"area": "dock",
+"splat": "splats/mv_gen_dock.sog.webm",
+"transform": {
+"pos": [
+16.391813302215358,
+1.8959403778050723,
+-23.264415138635655
+],
+"quat": [
+-0.6053358099432526,
+-0.02094516578783324,
+0.795217334580898,
+0.027554455402320505
+],
+"scale": 4.642773586992941,
+"centroid": [
+-0.14733379494465332,
+0.05897252123853771,
+-0.30753983431270276
+]
+},
+"splatBytes": 8577274,
+"kind": "gen",
+"frames": 20
+}
+}
+}
