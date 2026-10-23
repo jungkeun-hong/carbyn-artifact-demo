@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CARBYN · Eric Bahn (Hustle Fund) Visual Deck</title>
+<title>CARBYN · Eric Bahn (Hustle Fund) Visual Strategy Deck (v2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -31,12 +31,12 @@
     background: rgba(8, 9, 12, 0.58); z-index: 1;
   }
   .pad {
-    position: absolute; left: 96px; top: 68px; width: 1728px; bottom: 120px;
+    position: absolute; left: 96px; top: 68px; width: 1728px; bottom: 118px;
     display: flex; flex-direction: column; z-index: 5;
   }
   .header-row {
     display: flex; justify-content: space-between; align-items: center;
-    width: 100%; height: 40px; margin-bottom: 18px; flex-shrink: 0;
+    width: 100%; height: 40px; margin-bottom: 16px; flex-shrink: 0;
   }
   .label {
     font-size: 18px; font-weight: 700; letter-spacing: 0.14em;
@@ -44,17 +44,17 @@
   }
   .brand-logo { height: 32px; width: auto; display: block; }
   h1 {
-    font-size: 72px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+    font-size: 70px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
     color: #F5F5F3; margin-bottom: 10px;
   }
   h1 .hl { color: #FFCD11; }
   .sub {
-    font-size: 28px; font-weight: 400; color: #C2C2BC; margin-bottom: 28px; flex-shrink: 0;
+    font-size: 27px; font-weight: 400; color: #C2C2BC; margin-bottom: 26px; flex-shrink: 0;
   }
   .card {
     background: rgba(18, 20, 26, 0.72);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 24px; padding: 32px 36px;
+    border-radius: 24px; padding: 30px 34px;
     backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
     display: flex; flex-direction: column;
   }
@@ -62,36 +62,34 @@
     background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.82) 100%);
     border: 1.5px solid rgba(255, 205, 17, 0.55);
   }
-  .card.red {
-    background: linear-gradient(155deg, rgba(239, 68, 68, 0.15) 0%, rgba(18, 20, 26, 0.82) 100%);
-    border: 1.5px solid rgba(239, 68, 68, 0.45);
-  }
   .card.green {
     background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.82) 100%);
     border: 1.5px solid rgba(16, 185, 129, 0.50);
   }
+  .card.blue {
+    background: linear-gradient(155deg, rgba(59, 130, 246, 0.16) 0%, rgba(18, 20, 26, 0.82) 100%);
+    border: 1.5px solid rgba(59, 130, 246, 0.48);
+  }
   .kicker {
-    font-size: 16px; font-weight: 800; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #9CA3AF; margin-bottom: 12px;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #9CA3AF; margin-bottom: 10px;
   }
   .card.gold .kicker { color: #FFCD11; }
-  .card.red .kicker { color: #F87171; }
   .card.green .kicker { color: #34D399; }
+  .card.blue .kicker { color: #60A5FA; }
   .huge {
-    font-size: 96px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
-    color: #FFF; margin-bottom: 12px;
+    font-size: 88px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
+    color: #FFF; margin-bottom: 10px;
   }
   .huge.hl { color: #FFCD11; }
   .huge.green { color: #34D399; }
-  .huge.red { color: #F87171; }
-  .tag-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
   .tag {
-    padding: 10px 18px; border-radius: 12px; font-size: 20px; font-weight: 600;
+    padding: 9px 16px; border-radius: 12px; font-size: 19px; font-weight: 600;
     background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: #E5E5E0;
   }
   .tag.gold { background: rgba(255,205,17,0.16); border-color: rgba(255,205,17,0.5); color: #FFCD11; }
   .tag.green { background: rgba(16,185,129,0.16); border-color: rgba(16,185,129,0.5); color: #34D399; }
-  .tag.red { background: rgba(239,68,68,0.14); border-color: rgba(239,68,68,0.45); color: #FCA5A5; }
   .ftr-rule {
     position: absolute; left: 96px; top: 982px; width: 1728px; height: 1px;
     background: rgba(255, 255, 255, 0.18); z-index: 5;
@@ -122,421 +120,436 @@
 </head>
 <body class="web-mode">
 
-<!-- ==================== SLIDE 1: 3-MONTH VISUAL SNAPSHOT ==================== -->
+<!-- ==================== SLIDE 1: THE 3-MONTH UPGRADE (TEAM + ICP + TRACTION) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">01 · CATCH-UP SINCE JULY 1</div>
+      <div class="label">01 · EXECUTION VELOCITY SINCE JULY 1</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>3 Months. <span class="hl">New Engine.</span> Hard Lessons.</h1>
-    <p class="sub">Split with Jeremy → Onboarded Neo Lee (CTO) → Pivoted ICP to Plant Maintenance.</p>
+    <h1>Upgraded Engine. <span class="hl">73 Meetings.</span> 4x Faster Loop.</h1>
+    <p class="sub">Acted on your July 1 advice: paired JK with a "figure-it-out-tonight" CTO &amp; proved where B2B converts.</p>
 
-    <!-- Visual Timeline Bar -->
-    <div class="card" style="padding: 26px 40px; margin-bottom: 26px;">
-      <svg width="1640" height="120" viewBox="0 0 1640 120" style="width:100%;height:auto;">
-        <line x1="80" y1="60" x2="1560" y2="60" stroke="rgba(255,255,255,0.22)" stroke-width="6"/>
-        <line x1="80" y1="60" x2="1560" y2="60" stroke="#FFCD11" stroke-width="6" stroke-dasharray="1480" stroke-dashoffset="0"/>
-        <circle cx="120" cy="60" r="18" fill="#0B0B0D" stroke="#9CA3AF" stroke-width="5"/>
-        <text x="120" y="25" text-anchor="middle" font-size="16" font-weight="800" fill="#9CA3AF">JULY 1</text>
-        <text x="120" y="105" text-anchor="middle" font-size="20" font-weight="700" fill="#E5E5E0">Last Sync (Goal: 5 Pilots)</text>
+    <div class="card" style="padding: 24px 36px; margin-bottom: 24px;">
+      <svg width="1640" height="115" viewBox="0 0 1640 115" style="width:100%;height:auto;">
+        <line x1="90" y1="56" x2="1550" y2="56" stroke="#FFCD11" stroke-width="5"/>
+        <circle cx="120" cy="56" r="16" fill="#0B0B0D" stroke="#9CA3AF" stroke-width="5"/>
+        <text x="120" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#9CA3AF">JULY 1 SYNC</text>
+        <text x="120" y="98" text-anchor="middle" font-size="19" font-weight="700" fill="#D4D4CE">Paused Raise · Tested CNC Shops</text>
 
-        <circle cx="580" cy="60" r="20" fill="#FFCD11"/>
-        <text x="580" y="25" text-anchor="middle" font-size="16" font-weight="800" fill="#FFCD11">AUG 18</text>
-        <text x="580" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="#FFF">Split w/ Jeremy → Neo Joined (CTO)</text>
+        <circle cx="580" cy="56" r="18" fill="#FFCD11"/>
+        <text x="580" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#FFCD11">AUG 18 UPGRADE</text>
+        <text x="580" y="98" text-anchor="middle" font-size="21" font-weight="800" fill="#FFF">Clean Split → Neo Lee Joined (CTO)</text>
 
-        <circle cx="1060" cy="60" r="20" fill="#FFCD11"/>
-        <text x="1060" y="25" text-anchor="middle" font-size="16" font-weight="800" fill="#FFCD11">SEPT – OCT</text>
-        <text x="1060" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="#FFF">6,500 Outbound · SMRP Booth · 2 Paid</text>
+        <circle cx="1060" cy="56" r="18" fill="#FFCD11"/>
+        <text x="1060" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#FFCD11">SEPT – OCT HUSTLE</text>
+        <text x="1060" y="98" text-anchor="middle" font-size="21" font-weight="800" fill="#FFF">73 Meetings → First Paid Pilots ($14K+)</text>
 
-        <circle cx="1510" cy="60" r="22" fill="#10B981" stroke="#FFF" stroke-width="4"/>
-        <text x="1510" y="25" text-anchor="middle" font-size="16" font-weight="800" fill="#34D399">NOW (OCT 23)</text>
-        <text x="1510" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="#34D399">Local 4.5% Reply + PLG Launch</text>
+        <circle cx="1510" cy="56" r="20" fill="#10B981" stroke="#FFF" stroke-width="4"/>
+        <text x="1510" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#34D399">OCT 23 BREAKTHROUGH</text>
+        <text x="1510" y="98" text-anchor="middle" font-size="21" font-weight="800" fill="#34D399">4.5% Local Reply + PLG Launch</text>
       </svg>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; flex: 1;">
-      <div class="card gold" style="justify-content:center; align-items:center; text-align:center;">
-        <div class="kicker">CO-FOUNDER UPGRADE</div>
-        <div class="huge hl">Neo Lee</div>
-        <div style="font-size:28px;font-weight:700;margin-bottom:14px;">Full-Stack Physical AI &amp; Edge Builder</div>
-        <div class="tag-grid" style="justify-content:center;">
-          <span class="tag gold">ROKA Top-20 STEM Officer</span>
-          <span class="tag">3D Gaussian Splatting</span>
-          <span class="tag">Shipped 4 Products in 8 Wks</span>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; flex: 1;">
+      <div class="card gold" style="justify-content:space-between;">
+        <div>
+          <div class="kicker">01 · "SCRAPPY BUILDER" CTO</div>
+          <div class="huge hl">10x Speed</div>
+          <div style="font-size:26px;font-weight:700;color:#FFF;">Dohyeon (Neo) Lee</div>
+        </div>
+        <div class="tag-grid">
+          <span class="tag gold">ROKA Top-20 STEM Robotics Officer</span>
+          <span class="tag">Shipped 4 Core Systems in 8 Wks</span>
+          <span class="tag">100% Milestone-Aligned Equity</span>
         </div>
       </div>
 
-      <div class="card" style="justify-content:center; align-items:center; text-align:center;">
-        <div class="kicker">ICP PIVOT</div>
-        <div class="huge" style="font-size:64px; margin: 18px 0;">Machine Shop<br><span style="color:#FFCD11;">↓</span><br>Maintenance</div>
-        <div class="tag-grid" style="justify-content:center;">
-          <span class="tag gold">Factory Maintenance</span>
-          <span class="tag gold">MEP / HVAC Service</span>
-          <span class="tag">Campus Facilities</span>
+      <div class="card" style="justify-content:space-between;">
+        <div>
+          <div class="kicker">02 · PAID B2B TRACTION</div>
+          <div class="huge">$25K</div>
+          <div style="font-size:26px;font-weight:700;color:#FFF;">2 Signed/Active + 2 Proposals Out</div>
         </div>
-      </div>
-
-      <div class="card green" style="justify-content:center; align-items:center; text-align:center;">
-        <div class="kicker">ACTIVE PAID PILOTS</div>
-        <div class="huge green">2 + 1</div>
-        <div style="font-size:26px;font-weight:700;margin-bottom:14px;">$14K Signed/Active · 1 Paused</div>
-        <div class="tag-grid" style="justify-content:center;">
+        <div class="tag-grid">
           <span class="tag green">Dunmore ($5K Signed)</span>
-          <span class="tag green">JW Aluminum ($9K Jan Budget)</span>
-          <span class="tag">Cadrex / E2E (Paused)</span>
+          <span class="tag green">JW Aluminum ($9K Deploying)</span>
+          <span class="tag gold">Leitz &amp; Nahanni ($11K Out)</span>
+        </div>
+      </div>
+
+      <div class="card green" style="justify-content:space-between;">
+        <div>
+          <div class="kicker">03 · FUNNEL VELOCITY JUMP</div>
+          <div class="huge green">1.1% → 4.5%</div>
+          <div style="font-size:26px;font-weight:700;color:#FFF;">Refined ICP + Visual SOP Hook</div>
+        </div>
+        <div class="tag-grid">
+          <span class="tag green">Stanford (Demo Done)</span>
+          <span class="tag green">Therma (VP Service Ops)</span>
+          <span class="tag green">Devcon + UC Davis</span>
         </div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>01 · 3-Month Executive Summary</span><span>01 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>01 · 3.5-Month Execution Velocity</span><span>01 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 2: PRODUCT & VALUE VISUAL ==================== -->
+<!-- ==================== SLIDE 2: NEO'S SHIPPING VELOCITY (WHY WE DON'T NEED AN ACADEMIC CTO ADVISOR) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">02 · PRODUCT &amp; VALUE PROPOSITION</div>
+      <div class="label">02 · PRODUCT &amp; ENGINEERING VELOCITY</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>AI Copilot on <span class="hl">Safety Glasses &amp; Phone.</span></h1>
-    <p class="sub">Zero custom hardware. Plugs directly into existing factory CMMS.</p>
+    <h1>4 Live Systems Shipped in <span class="hl">8 Weeks.</span></h1>
+    <p class="sub">Zero hardware capex. Works on Meta Z87.1+ safety glasses TODAY—and on any phone without glasses.</p>
 
     <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; flex: 1;">
-      <!-- Left: Visual Flow Diagram -->
+      <!-- Left: Architecture Visual Diagram -->
       <div class="card" style="justify-content:space-between;">
-        <div class="kicker">HOW IT WORKS ON THE FLOOR</div>
+        <div class="kicker">POINT-OF-WORK EXECUTION LAYER (COEXISTS WITH CMMS)</div>
         <svg width="920" height="360" viewBox="0 0 920 360" style="width:100%;height:auto;">
           <defs>
             <marker id="arw" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFCD11"/></marker>
           </defs>
-          <!-- Input Node -->
-          <rect x="10" y="55" width="230" height="250" rx="22" fill="rgba(255,205,17,0.14)" stroke="#FFCD11" stroke-width="2.5"/>
-          <text x="125" y="105" text-anchor="middle" font-size="16" font-weight="800" fill="#FFCD11">POINT OF WORK</text>
-          <text x="125" y="150" text-anchor="middle" font-size="28" font-weight="800" fill="#FFF">AI Safety Glasses</text>
-          <text x="125" y="185" text-anchor="middle" font-size="22" font-weight="600" fill="#D4D4CE">+ Mobile / AirPods</text>
-          <text x="125" y="235" text-anchor="middle" font-size="17" fill="#9CA3AF">Meta Z87.1+ · Mentra</text>
-          <text x="125" y="262" text-anchor="middle" font-size="17" fill="#9CA3AF">Viture · Hapware · Mira</text>
+          <!-- Input -->
+          <rect x="10" y="35" width="235" height="290" rx="22" fill="rgba(255,205,17,0.14)" stroke="#FFCD11" stroke-width="2.5"/>
+          <text x="127" y="80" text-anchor="middle" font-size="15" font-weight="800" fill="#FFCD11">HARDWARE-AGNOSTIC</text>
+          <text x="127" y="125" text-anchor="middle" font-size="27" font-weight="800" fill="#FFF">Z87.1+ Glasses</text>
+          <text x="127" y="160" text-anchor="middle" font-size="23" font-weight="700" fill="#FFCD11">OR Any Phone</text>
+          <text x="127" y="210" text-anchor="middle" font-size="17" fill="#D4D4CE">Meta · Mentra · Viture</text>
+          <text x="127" y="240" text-anchor="middle" font-size="17" fill="#D4D4CE">iOS / Android + AirPods</text>
+          <text x="127" y="285" text-anchor="middle" font-size="15" font-weight="700" fill="#34D399">Offline Edge Ready</text>
 
-          <line x1="245" y1="180" x2="310" y2="180" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw)"/>
+          <line x1="250" y1="180" x2="310" y2="180" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw)"/>
 
-          <!-- 3 Core Features -->
-          <rect x="320" y="20" width="310" height="92" rx="16" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
-          <text x="345" y="55" font-size="15" font-weight="800" fill="#FFCD11">01 · WORK ORDER SYNC</text>
-          <text x="345" y="88" font-size="24" font-weight="700" fill="#FFF">Voice Read &amp; Closeout</text>
+          <!-- Center 4 Shipped Modules -->
+          <rect x="320" y="15" width="315" height="74" rx="14" fill="rgba(255,205,17,0.20)" stroke="#FFCD11" stroke-width="2"/>
+          <text x="342" y="44" font-size="14" font-weight="800" fill="#FFCD11">01 · KILLER WEDGE (10X HOOK)</text>
+          <text x="342" y="72" font-size="22" font-weight="800" fill="#FFF">Video → Visual SOP in 30s</text>
 
-          <rect x="320" y="134" width="310" height="92" rx="16" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
-          <text x="345" y="169" font-size="15" font-weight="800" fill="#FFCD11">02 · LIVE TROUBLESHOOTING</text>
-          <text x="345" y="202" font-size="24" font-weight="700" fill="#FFF">Real-Time Repair Guide</text>
+          <rect x="320" y="102" width="315" height="74" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <text x="342" y="131" font-size="14" font-weight="800" fill="#9CA3AF">02 · CMMS VOICE COPILOT</text>
+          <text x="342" y="159" font-size="22" font-weight="700" fill="#FFF">Work Order Read &amp; Closeout</text>
 
-          <rect x="320" y="248" width="310" height="92" rx="16" fill="rgba(255,205,17,0.18)" stroke="#FFCD11" stroke-width="2"/>
-          <text x="345" y="283" font-size="15" font-weight="800" fill="#FFCD11">03 · TRIBAL CAPTURE</text>
-          <text x="345" y="316" font-size="24" font-weight="700" fill="#FFF">Video → Visual SOP PDF</text>
+          <rect x="320" y="189" width="315" height="74" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <text x="342" y="218" font-size="14" font-weight="800" fill="#9CA3AF">03 · REALTIME GUIDANCE</text>
+          <text x="342" y="246" font-size="22" font-weight="700" fill="#FFF">LiveKit + Gemini Live Agent</text>
 
-          <line x1="635" y1="180" x2="695" y2="180" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw)"/>
+          <rect x="320" y="276" width="315" height="74" rx="14" fill="rgba(16,185,129,0.18)" stroke="#10B981" stroke-width="2"/>
+          <text x="342" y="305" font-size="14" font-weight="800" fill="#34D399">04 · SPATIAL TWIN ENGINE</text>
+          <text x="342" y="333" font-size="22" font-weight="800" fill="#FFF">Voice-Anchored 3DGS Scan</text>
 
-          <!-- Output CMMS Node -->
-          <rect x="705" y="55" width="205" height="250" rx="22" fill="rgba(59,130,246,0.15)" stroke="#60A5FA" stroke-width="2.5"/>
-          <text x="807" y="105" text-anchor="middle" font-size="15" font-weight="800" fill="#60A5FA">SYSTEM OF RECORD</text>
-          <text x="807" y="150" text-anchor="middle" font-size="26" font-weight="800" fill="#FFF">CMMS &amp; ERP</text>
-          <text x="807" y="195" text-anchor="middle" font-size="20" font-weight="600" fill="#93C5FD">Limble · Coast</text>
-          <text x="807" y="225" text-anchor="middle" font-size="20" font-weight="600" fill="#93C5FD">MaintainX · Maximo</text>
-          <text x="807" y="265" text-anchor="middle" font-size="16" fill="#9CA3AF">Auto-logged</text>
+          <line x1="640" y1="180" x2="700" y2="180" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw)"/>
+
+          <!-- Output -->
+          <rect x="708" y="35" width="202" height="290" rx="22" fill="rgba(59,130,246,0.15)" stroke="#60A5FA" stroke-width="2.5"/>
+          <text x="809" y="80" text-anchor="middle" font-size="14" font-weight="800" fill="#60A5FA">SYSTEM OF RECORD</text>
+          <text x="809" y="125" text-anchor="middle" font-size="25" font-weight="800" fill="#FFF">CMMS &amp; PDF</text>
+          <text x="809" y="170" text-anchor="middle" font-size="19" font-weight="700" fill="#93C5FD">Limble · Coast</text>
+          <text x="809" y="200" text-anchor="middle" font-size="19" font-weight="700" fill="#93C5FD">MaintainX · SAP</text>
+          <text x="809" y="245" text-anchor="middle" font-size="18" font-weight="700" fill="#FFCD11">WhatsApp / SMS</text>
+          <text x="809" y="275" text-anchor="middle" font-size="16" fill="#D4D4CE">Viral Report Link</text>
         </svg>
         <div class="tag-grid">
-          <span class="tag gold">Advisor: CMMSRadio (Greg Christensen)</span>
-          <span class="tag">Partners: Limble · Coast · Automotive Consulting</span>
+          <span class="tag gold">Industry Advisor: CMMSRadio (Greg Christensen)</span>
+          <span class="tag">Partners: Limble · Coast · Procore (Applied)</span>
         </div>
       </div>
 
-      <!-- Right: 4 Value Pillars -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 22px;">
-        <div class="card gold" style="justify-content:center;">
-          <div class="kicker">VALUE 01</div>
-          <div class="huge hl" style="font-size:66px;">↓ MTTR</div>
-          <div style="font-size:26px;font-weight:700;">Cut Unplanned Downtime &amp; Repair Time</div>
+      <!-- Right: P&L Impact Hierarchy (Save Time < Cut Downtime < Unlock Unstaffed Work) -->
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div class="card gold" style="flex:1; justify-content:center;">
+          <div class="kicker">TIER 1 P&amp;L PAIN · TRIBAL KNOWLEDGE LOSS</div>
+          <div style="font-size:44px;font-weight:800;color:#FFCD11;margin-bottom:6px;">Do Job Once → SOP</div>
+          <div style="font-size:22px;color:#E5E5E0;">Retiring veterans leave zero manuals. Carbyn captures visual SOPs while they work.</div>
         </div>
-        <div class="card" style="justify-content:center;">
-          <div class="kicker">VALUE 02</div>
-          <div class="huge" style="font-size:66px;">-90%</div>
-          <div style="font-size:26px;font-weight:700;">Save End-of-Shift Documentation Time</div>
+        <div class="card green" style="flex:1; justify-content:center;">
+          <div class="kicker">TIER 2 P&amp;L PAIN · UNPLANNED DOWNTIME</div>
+          <div style="font-size:44px;font-weight:800;color:#34D399;margin-bottom:6px;">↓ MTTR &amp; Rework</div>
+          <div style="font-size:22px;color:#E5E5E0;">Instant machine history &amp; schematics at the point of repair—hands stay on the wrench.</div>
         </div>
-        <div class="card" style="justify-content:center;">
-          <div class="kicker">VALUE 03</div>
-          <div class="huge" style="font-size:66px;">3x Faster</div>
-          <div style="font-size:26px;font-weight:700;">New Tech Onboarding via Visual SOPs</div>
-        </div>
-        <div class="card" style="justify-content:center;">
-          <div class="kicker">VALUE 04</div>
-          <div class="huge" style="font-size:66px;">↓ Scrap</div>
-          <div style="font-size:26px;font-weight:700;">Fewer Repeat Errors &amp; Rework</div>
+        <div class="card" style="flex:1; justify-content:center;">
+          <div class="kicker">TIER 3 P&amp;L PAIN · WRENCH-TIME DRAIN</div>
+          <div style="font-size:44px;font-weight:800;color:#FFF;margin-bottom:6px;">45m → 30s Docs</div>
+          <div style="font-size:22px;color:#D4D4CE;">Eliminates end-of-shift truck/desk typing in English, Spanish, and Korean.</div>
         </div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>02 · Product &amp; Ecosystem</span><span>02 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>02 · Product Architecture &amp; P&amp;L Value</span><span>02 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 3: 3-MONTH OUTBOUND & BOOTH FUNNEL ==================== -->
+<!-- ==================== SLIDE 3: FUNNEL LEARNINGS (REFRAMED AS ITERATION, NOT COMPLAINING!) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">03 · 3-MONTH TRACTION &amp; FUNNEL REALITY</div>
+      <div class="label">03 · FUNNEL DIAGNOSIS: COHORT 1 VS. COHORT 2</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>6,500 Outbound → 73 Meetings → <span class="hl">0.3% Conversion.</span></h1>
-    <p class="sub">High activity across cold outbound &amp; SMRP conference—but slow conversion to paid.</p>
-
-    <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; flex: 1;">
-      <!-- Visual Funnel Chart -->
-      <div class="card" style="justify-content:space-between;">
-        <div class="kicker">3-MONTH GTM FUNNEL BREAKDOWN</div>
-        <svg width="920" height="390" viewBox="0 0 920 390" style="width:100%;height:auto;">
-          <!-- Bar 1 -->
-          <text x="10" y="42" font-size="20" font-weight="700" fill="#E5E5E0">1. Cold Outbound (Email + LI)</text>
-          <rect x="310" y="14" width="590" height="44" rx="10" fill="#3B82F6"/>
-          <text x="328" y="43" font-size="22" font-weight="800" fill="#FFF">6,500 Sent  (Origami 4K · Gojiberry 2K · Direct 500)</text>
-
-          <!-- Bar 2 -->
-          <text x="10" y="118" font-size="20" font-weight="700" fill="#E5E5E0">2. SMRP Booth (North Carolina)</text>
-          <rect x="310" y="90" width="380" height="44" rx="10" fill="#60A5FA"/>
-          <text x="328" y="119" font-size="22" font-weight="800" fill="#08090C">87 Visited → 61 SQLs → 5 Demos → 0 Paid</text>
-
-          <!-- Bar 3 -->
-          <text x="10" y="194" font-size="20" font-weight="700" fill="#E5E5E0">3. 1st Discovery Meetings</text>
-          <rect x="310" y="166" width="260" height="44" rx="10" fill="#FFCD11"/>
-          <text x="328" y="195" font-size="22" font-weight="800" fill="#08090C">73 Meetings (1.1%)</text>
-
-          <!-- Bar 4 -->
-          <text x="10" y="270" font-size="20" font-weight="700" fill="#FFCD11">4. Paid Pilots Closed</text>
-          <rect x="310" y="242" width="110" height="44" rx="10" fill="#10B981"/>
-          <text x="435" y="271" font-size="24" font-weight="800" fill="#34D399">2 Paid (0.3%) — Dunmore ($5K) + JWA ($9K)</text>
-
-          <!-- Bar 5 -->
-          <text x="10" y="346" font-size="20" font-weight="700" fill="#9CA3AF">5. Live Floor Deployment</text>
-          <rect x="310" y="318" width="45" height="44" rx="10" fill="#EF4444"/>
-          <text x="370" y="347" font-size="22" font-weight="800" fill="#FCA5A5">0 Live Yet (Deploying JWA &amp; Dunmore Now)</text>
-        </svg>
-      </div>
-
-      <!-- Enterprise Logos & Pipeline -->
-      <div class="card gold" style="justify-content:space-between;">
-        <div>
-          <div class="kicker">ENTERPRISE &amp; INSTITUTIONAL PIPELINE BUILT</div>
-          <div style="font-size:32px;font-weight:700;margin-bottom:18px;">Relationships Opened Across Tier-1 Logos</div>
-          <div class="tag-grid">
-            <span class="tag gold">Cintas</span>
-            <span class="tag gold">USPS</span>
-            <span class="tag gold">Target</span>
-            <span class="tag gold">Walmart</span>
-            <span class="tag gold">Xylem</span>
-            <span class="tag gold">UCSF</span>
-            <span class="tag">Hayco</span>
-            <span class="tag">Novolex</span>
-            <span class="tag">Petronas</span>
-            <span class="tag">Granite Construction</span>
-            <span class="tag">Cadrex</span>
-          </div>
-        </div>
-        <div style="border-top:1px solid rgba(255,255,255,0.18); padding-top:20px;">
-          <div class="kicker">KEY REALITY CHECK</div>
-          <div style="font-size:28px;font-weight:700;color:#FFCD11;">Enterprise = 6+ Mo Cycle · Mid-Market = 2–4 Mo</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>03 · Outbound &amp; Conference Funnel</span><span>03 / 09</span></div>
-</section></div>
-
-<!-- ==================== SLIDE 4: LEARNINGS (WHY DEMO = WOW BUT CONVERSION = LOW) ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">04 · HONEST SELF-REFLECTION</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Demo Was <span class="hl">"Wow."</span> Why Was Conversion Low?</h1>
-    <p class="sub">Two root causes: Perceived ROI ("Nice-to-Have") + Pre-Deployment Friction.</p>
+    <h1>73 Meetings Taught Us <span class="hl">What Actually Converts.</span></h1>
+    <p class="sub">Cohort 1 (broad national outreach) revealed the exact bottlenecks—Cohort 2 (this week) fixed them.</p>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
-      <!-- Left: Value Perception Comparison -->
+      <!-- Left: Cohort 1 (Broad Outbound + SMRP) -->
+      <div class="card" style="justify-content:space-between;">
+        <div>
+          <div class="kicker">COHORT 1 (AUG – EARLY OCT) · BROAD EXPLORATION</div>
+          <div style="font-size:34px;font-weight:800;margin-bottom:18px;">6,500 National Outbound + SMRP Booth</div>
+          <svg width="740" height="260" viewBox="0 0 740 260" style="width:100%;height:auto;">
+            <text x="10" y="45" font-size="20" font-weight="700" fill="#9CA3AF">Outbound + Booth</text>
+            <rect x="215" y="18" width="500" height="40" rx="8" fill="#475569"/>
+            <text x="235" y="45" font-size="20" font-weight="800" fill="#FFF">6,500 Touches + 87 SMRP Visitors (61 SQLs)</text>
+
+            <text x="10" y="115" font-size="20" font-weight="700" fill="#E5E5E0">1st Meetings</text>
+            <rect x="215" y="88" width="240" height="40" rx="8" fill="#60A5FA"/>
+            <text x="235" y="115" font-size="20" font-weight="800" fill="#08090C">73 Meetings (1.1%)</text>
+
+            <text x="10" y="185" font-size="20" font-weight="700" fill="#FFCD11">Paid Pilots</text>
+            <rect x="215" y="158" width="95" height="40" rx="8" fill="#FFCD11"/>
+            <text x="325" y="185" font-size="22" font-weight="800" fill="#FFCD11">2 Closed ($14K) + 2 Proposals Out ($11K)</text>
+
+            <text x="10" y="242" font-size="18" font-weight="700" fill="#9CA3AF">Enterprise Pipeline:</text>
+            <text x="215" y="242" font-size="18" font-weight="600" fill="#D4D4CE">Cintas · USPS · Walmart · Target · Xylem · UCSF · Hayco</text>
+          </svg>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);padding:18px 22px;border-radius:16px;font-size:20px;color:#D4D4CE;">
+          <b>Why 73 Meetings Took 2–3 Months to Close:</b> Pitching "Voice CMMS" to remote enterprises triggered 6-month IT/security/Wi-Fi reviews.
+        </div>
+      </div>
+
+      <!-- Right: Cohort 2 (Localized Bay Area + Visual SOP Hook) -->
       <div class="card gold" style="justify-content:space-between;">
-        <div class="kicker">ROOT CAUSE 01 · PERCEIVED PRODUCT VALUE</div>
-        <div style="font-size:34px;font-weight:700;margin-bottom:10px;">Not Seen as a 10x "Must-Have" Yet</div>
-        <svg width="740" height="250" viewBox="0 0 740 250" style="width:100%;height:auto;">
-          <!-- Robot Bar -->
-          <text x="10" y="65" font-size="24" font-weight="800" fill="#34D399">Industrial Robot</text>
-          <rect x="240" y="30" width="470" height="54" rx="12" fill="rgba(16,185,129,0.25)" stroke="#10B981" stroke-width="2.5"/>
-          <text x="265" y="65" font-size="24" font-weight="800" fill="#FFF">10x Throughput  (Clear Hard ROI)</text>
+        <div>
+          <div class="kicker">COHORT 2 (LAUNCHED THIS WEEK) · PRECISION LOCAL + SOP HOOK</div>
+          <div style="font-size:34px;font-weight:800;color:#FFCD11;margin-bottom:18px;">386 Bay Area Local Targets (First 88 Sent)</div>
+          <svg width="740" height="260" viewBox="0 0 740 260" style="width:100%;height:auto;">
+            <text x="10" y="45" font-size="20" font-weight="700" fill="#E5E5E0">Verified Local List</text>
+            <rect x="215" y="18" width="500" height="40" rx="8" fill="rgba(255,205,17,0.28)" stroke="#FFCD11" stroke-width="2"/>
+            <text x="235" y="45" font-size="20" font-weight="800" fill="#FFF">386 Direct Emails (MEP · Plants · Campuses)</text>
 
-          <!-- Glasses Bar -->
-          <text x="10" y="165" font-size="24" font-weight="800" fill="#FFCD11">AI Glasses (Old)</text>
-          <rect x="240" y="130" width="180" height="54" rx="12" fill="rgba(255,205,17,0.25)" stroke="#FFCD11" stroke-width="2.5"/>
-          <text x="435" y="165" font-size="24" font-weight="700" fill="#FDE68A">"Cool Vitamin" (No Urgency)</text>
-        </svg>
-        <div style="font-size:24px;font-weight:600;color:#F5F5F3;background:rgba(0,0,0,0.35);padding:18px 22px;border-radius:16px;">
-          💡 <b>Insight:</b> When ROI isn't 10x obvious, buyers use IT &amp; security as polite excuses to stall.
+            <text x="10" y="115" font-size="20" font-weight="700" fill="#E5E5E0">Dispatched (48h)</text>
+            <rect x="215" y="88" width="220" height="40" rx="8" fill="#FFCD11"/>
+            <text x="235" y="115" font-size="20" font-weight="800" fill="#08090C">88 Delivered (60/day Drip)</text>
+
+            <text x="10" y="185" font-size="20" font-weight="700" fill="#34D399">Positive Replies</text>
+            <rect x="215" y="158" width="140" height="40" rx="8" fill="#10B981"/>
+            <text x="370" y="185" font-size="24" font-weight="900" fill="#34D399">4.5% Reply in 48h (4x Jump!)</text>
+
+            <text x="10" y="242" font-size="18" font-weight="800" fill="#34D399">Warm Threads:</text>
+            <text x="215" y="242" font-size="19" font-weight="800" fill="#FFF">Stanford · Therma (VP Ops) · Devcon · UC Davis</text>
+          </svg>
         </div>
-      </div>
-
-      <!-- Right: 6 Friction Walls -->
-      <div class="card red" style="justify-content:space-between;">
-        <div class="kicker">ROOT CAUSE 02 · DEPLOYMENT FRICTION BEFORE DAY 1</div>
-        <div style="font-size:34px;font-weight:700;margin-bottom:10px;">6 Walls Blocking Fast Floor Rollout</div>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; flex:1; align-items:stretch;">
-          <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(239,68,68,0.35);border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:center;">
-            <div style="font-size:15px;font-weight:800;color:#F87171;">FRICTION 01</div>
-            <div style="font-size:25px;font-weight:700;">📡 No Factory Wi-Fi</div>
-          </div>
-          <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(239,68,68,0.35);border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:center;">
-            <div style="font-size:15px;font-weight:800;color:#F87171;">FRICTION 02</div>
-            <div style="font-size:25px;font-weight:700;">🚫 Camera / Security Ban</div>
-          </div>
-          <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(239,68,68,0.35);border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:center;">
-            <div style="font-size:15px;font-weight:800;color:#F87171;">FRICTION 03</div>
-            <div style="font-size:25px;font-weight:700;">👷 Union Pushback</div>
-          </div>
-          <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(239,68,68,0.35);border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:center;">
-            <div style="font-size:15px;font-weight:800;color:#F87171;">FRICTION 04</div>
-            <div style="font-size:25px;font-weight:700;">🔒 IT Gatekeeper</div>
-          </div>
-          <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(239,68,68,0.35);border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:center;">
-            <div style="font-size:15px;font-weight:800;color:#F87171;">FRICTION 05</div>
-            <div style="font-size:25px;font-weight:700;">🕶️ Meta HW Dependency</div>
-          </div>
-          <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(239,68,68,0.35);border-radius:16px;padding:18px;display:flex;flex-direction:column;justify-content:center;">
-            <div style="font-size:15px;font-weight:800;color:#F87171;">FRICTION 06</div>
-            <div style="font-size:25px;font-weight:700;">⏳ 2–6 Mo Sales Cycle</div>
-          </div>
+        <div style="background:rgba(0,0,0,0.35);border:1px solid rgba(255,205,17,0.4);padding:18px 22px;border-radius:16px;font-size:20px;color:#FFF;">
+          <b>What Changed:</b> Zero-HIPAA local accounts + <b>"Do the job once → Visual SOP"</b> hook + <b>"Can I drop by from Berkeley?"</b>
         </div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>04 · Key Learnings &amp; Bottlenecks</span><span>04 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>03 · Cohort 1 vs. Cohort 2 Funnel Math</span><span>03 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 5: NEW BAY AREA EXPERIMENT (4.5% REPLY IN 48H) ==================== -->
+<!-- ==================== SLIDE 4: TURNING 6 BARRIERS INTO OUR ARCHITECTURE ADVANTAGE ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">05 · THIS WEEK'S GTM EXPERIMENT (LIVE)</div>
+      <div class="label">04 · HOW WE SOLVED THE "WOW DEMO → SLOW CLOSE" GAP</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>New Local Campaign: <span class="hl">4 Replies in First 88 Sent.</span></h1>
-    <p class="sub">386 verified Bay Area targets (Schools · MEP Contractors · Factories · Utilities) @ 60/day.</p>
+    <h1>Turning 6 Field Barriers Into <span class="hl">Our Wedge.</span></h1>
+    <p class="sub">When buyers see a 1.5x vitamin, IT &amp; Wi-Fi are excuses. Here is how we engineered around every blocker.</p>
 
-    <div style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 28px; flex: 1;">
-      <!-- Left: Visual Bar Jump -->
-      <div class="card gold" style="justify-content:center; align-items:center; text-align:center;">
-        <div class="kicker">CONVERSION VELOCITY JUMP</div>
-        <svg width="560" height="320" viewBox="0 0 560 320" style="width:100%;height:auto;">
-          <line x1="60" y1="260" x2="500" y2="260" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
-          <!-- Old Campaign -->
-          <rect x="120" y="220" width="110" height="40" rx="8" fill="#64748B"/>
-          <text x="175" y="205" text-anchor="middle" font-size="28" font-weight="800" fill="#9CA3AF">0.3%</text>
-          <text x="175" y="295" text-anchor="middle" font-size="18" font-weight="700" fill="#9CA3AF">Prior 6,500 Blast</text>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
+      <!-- Left: Offer Shift -->
+      <div class="card gold" style="justify-content:space-between;">
+        <div>
+          <div class="kicker">SHIFT 01 · FROM VITAMIN TO DISCRETIONARY PAINKILLER</div>
+          <div style="font-size:34px;font-weight:800;margin-bottom:20px;">Why Managers Pull Out Their Card</div>
+          <svg width="740" height="230" viewBox="0 0 740 230" style="width:100%;height:auto;">
+            <rect x="10" y="10" width="720" height="90" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)"/>
+            <text x="35" y="45" font-size="16" font-weight="800" fill="#F87171">OLD PITCH (SLOW · 6-MO IT REVIEW)</text>
+            <text x="35" y="80" font-size="24" font-weight="700" fill="#D4D4CE">"Buy AI Glasses for ERP Integration" → $50K+ IT Gate</text>
 
-          <!-- New Campaign -->
-          <rect x="330" y="55" width="110" height="205" rx="10" fill="#FFCD11"/>
-          <text x="385" y="40" text-anchor="middle" font-size="38" font-weight="900" fill="#FFCD11">4.5%</text>
-          <text x="385" y="295" text-anchor="middle" font-size="18" font-weight="800" fill="#FFF">Bay Area Local (4 / 88)</text>
-        </svg>
-        <div style="font-size:22px;color:#E5E5E0;margin-top:8px;"><b>296 more emails</b> queued across next 5 days</div>
+            <rect x="10" y="125" width="720" height="95" rx="16" fill="rgba(255,205,17,0.20)" stroke="#FFCD11" stroke-width="2.5"/>
+            <text x="35" y="160" font-size="16" font-weight="800" fill="#FFCD11">NEW OFFER (FAST · MANAGER'S DISCRETIONARY BUDGET)</text>
+            <text x="35" y="198" font-size="25" font-weight="800" fill="#FFF">"$5K–$9K 6-Week SOP &amp; Service Report Pilot" → Zero IT</text>
+          </svg>
+        </div>
+        <div class="tag-grid">
+          <span class="tag gold">Under $10K Discretionary Limit</span>
+          <span class="tag green">Works Standalone (PDF/Link) Day 1</span>
+        </div>
       </div>
 
-      <!-- Right: 4 Logos that replied in 48h -->
-      <div style="display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 22px;">
-        <div class="card green" style="justify-content:center;">
-          <div class="kicker">REPLY 01 · CAMPUS FACILITIES</div>
-          <div style="font-size:38px;font-weight:800;color:#FFF;margin-bottom:8px;">Stanford University</div>
-          <div style="font-size:22px;color:#34D399;font-weight:700;">Director of Maintenance · Demo Done</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:8px;">"70–80 WOs/wk, capacity breaks at 100–200."</div>
-        </div>
-        <div class="card green" style="justify-content:center;">
-          <div class="kicker">REPLY 02 · #1 MEP CONTRACTOR</div>
-          <div style="font-size:38px;font-weight:800;color:#FFF;margin-bottom:8px;">Therma</div>
-          <div style="font-size:22px;color:#34D399;font-weight:700;">VP Service Ops + Ops Manager</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:8px;">"Looping in Ops Mgr—both want to meet."</div>
-        </div>
-        <div class="card" style="justify-content:center;">
-          <div class="kicker">REPLY 03 · SILICON VALLEY GC</div>
-          <div style="font-size:38px;font-weight:800;color:#FFF;margin-bottom:8px;">Devcon Construction</div>
-          <div style="font-size:22px;color:#FFCD11;font-weight:700;">ACC Forma &amp; Punch List Inquiry</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:8px;">Same-day reply on GC field inspection fit.</div>
-        </div>
-        <div class="card" style="justify-content:center;">
-          <div class="kicker">REPLY 04 · HIGHER-ED</div>
-          <div style="font-size:38px;font-weight:800;color:#FFF;margin-bottom:8px;">UC Davis</div>
-          <div style="font-size:22px;color:#FFCD11;font-weight:700;">Director of Building Maintenance</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:8px;">Coordinating demo with maintenance lead.</div>
+      <!-- Right: Technical & GTM Bypass Matrix -->
+      <div class="card" style="justify-content:space-between;">
+        <div class="kicker">SHIFT 02 · BYPASSING PRE-DEPLOYMENT FRICTION</div>
+        <div style="font-size:34px;font-weight:800;margin-bottom:14px;">Every Blocker Mapped to a Solution</div>
+        <div style="display:grid; grid-template-columns: 1fr; gap: 14px; flex:1;">
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:16px 22px; border-radius:14px;">
+            <span style="font-size:22px;font-weight:700;color:#FCA5A5;">📡 No Factory Wi-Fi / Camera Ban</span>
+            <span style="font-size:22px;font-weight:800;color:#34D399;">→ Offline Edge + Voice-Only Mode</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:16px 22px; border-radius:14px;">
+            <span style="font-size:22px;font-weight:700;color:#FCA5A5;">🕶️ Meta Glasses Dependency</span>
+            <span style="font-size:22px;font-weight:800;color:#34D399;">→ Phone "Skateboard" App + Mentra/Viture</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:16px 22px; border-radius:14px;">
+            <span style="font-size:22px;font-weight:700;color:#FCA5A5;">🔒 Enterprise IT / HIPAA Gate</span>
+            <span style="font-size:22px;font-weight:800;color:#34D399;">→ Target MEP Contractors &amp; SMB Plants</span>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:16px 22px; border-radius:14px;">
+            <span style="font-size:22px;font-weight:700;color:#FCA5A5;">⏳ 3–6 Mo B2B Feedback Delay</span>
+            <span style="font-size:22px;font-weight:800;color:#FFCD11;">→ Launch 24h Self-Serve PLG Loop</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>05 · Live Bay Area Campaign Signal</span><span>05 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>04 · Solving Deployment Friction</span><span>04 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 6: WHAT'S NEXT (3 PILLARS: 10X PRODUCT + VOLUME + PLG SKATEBOARD) ==================== -->
+<!-- ==================== SLIDE 5: THE DUAL-CLOCK ENGINE (PLG SKATEBOARD -> B2B LADDER) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">06 · WHAT'S NEXT (THE 8-WEEK SPRINT)</div>
+      <div class="label">05 · THE DUAL-CLOCK ENGINE (MAINTAINX / BEAT THE GMAT MODEL)</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>10x Product Vision + <span class="hl">PLG Fast Feedback Loop.</span></h1>
-    <p class="sub">Unleashing Neo's technical superpower while running a 24-hour self-serve loop.</p>
+    <h1>24-Hour PLG Loop Feeds <span class="hl">$10K+ B2B Pilots.</span></h1>
+    <p class="sub">Individual techs adopt free for instant reports → supervisors see the watermark → unlocks B2B pilots.</p>
 
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; flex: 1;">
-      <div class="card">
-        <div class="kicker">PILLAR 01 · PRODUCT (10X WOW)</div>
-        <div class="huge hl" style="font-size:68px;">3D + Edge</div>
-        <div style="font-size:30px;font-weight:700;margin-bottom:18px;">Show Full 10x Potential</div>
+    <div class="card" style="flex:1; justify-content:center; padding: 28px 36px;">
+      <svg width="1640" height="460" viewBox="0 0 1640 460" style="width:100%;height:auto;">
+        <defs>
+          <marker id="arw2" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFCD11"/></marker>
+        </defs>
+
+        <!-- Step 1 -->
+        <rect x="10" y="60" width="350" height="330" rx="24" fill="rgba(255,205,17,0.16)" stroke="#FFCD11" stroke-width="2.5"/>
+        <text x="185" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#FFCD11">STEP 1 · FREE "SKATEBOARD" APP</text>
+        <text x="185" y="160" text-anchor="middle" font-size="34" font-weight="800" fill="#FFF">1-Tap Field Note</text>
+        <text x="185" y="205" text-anchor="middle" font-size="21" fill="#D4D4CE">Tech speaks &amp; snaps photos</text>
+        <text x="185" y="235" text-anchor="middle" font-size="21" fill="#D4D4CE">on their own phone (EN/ES/KR)</text>
+        <rect x="45" y="280" width="280" height="65" rx="14" fill="rgba(0,0,0,0.4)"/>
+        <text x="185" y="320" text-anchor="middle" font-size="22" font-weight="800" fill="#FFCD11">Target: 500+ Users</text>
+
+        <line x1="365" y1="225" x2="425" y2="225" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw2)"/>
+
+        <!-- Step 2 -->
+        <rect x="435" y="60" width="350" height="330" rx="24" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+        <text x="610" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#9CA3AF">STEP 2 · VIRAL CONTAGION</text>
+        <text x="610" y="160" text-anchor="middle" font-size="34" font-weight="800" fill="#FFF">Shared Report</text>
+        <text x="610" y="205" text-anchor="middle" font-size="21" fill="#D4D4CE">Sent via WhatsApp / SMS / Email</text>
+        <text x="610" y="235" text-anchor="middle" font-size="21" fill="#D4D4CE">to Supervisor w/ Carbyn Footer</text>
+        <rect x="470" y="280" width="280" height="65" rx="14" fill="rgba(0,0,0,0.4)"/>
+        <text x="610" y="320" text-anchor="middle" font-size="22" font-weight="800" fill="#FFF">50%+ W4 Retention</text>
+
+        <line x1="790" y1="225" x2="850" y2="225" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw2)"/>
+
+        <!-- Step 3 -->
+        <rect x="860" y="60" width="350" height="330" rx="24" fill="rgba(59,130,246,0.16)" stroke="#60A5FA" stroke-width="2.5"/>
+        <text x="1035" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#60A5FA">STEP 3 · THE HARDWARE BAIT</text>
+        <text x="1035" y="160" text-anchor="middle" font-size="34" font-weight="800" fill="#FFF">Free Safety Glasses</text>
+        <text x="1035" y="205" text-anchor="middle" font-size="21" fill="#D4D4CE">Log 10+ reports + book 15-min</text>
+        <text x="1035" y="235" text-anchor="middle" font-size="21" fill="#D4D4CE">Manager Demo → Get Z87.1+ Glasses</text>
+        <rect x="895" y="280" width="280" height="65" rx="14" fill="rgba(0,0,0,0.4)"/>
+        <text x="1035" y="320" text-anchor="middle" font-size="22" font-weight="800" fill="#60A5FA">PQL Sniping (50+ FTE)</text>
+
+        <line x1="1215" y1="225" x2="1275" y2="225" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw2)"/>
+
+        <!-- Step 4 -->
+        <rect x="1285" y="60" width="345" height="330" rx="24" fill="rgba(16,185,129,0.18)" stroke="#10B981" stroke-width="2.5"/>
+        <text x="1457" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#34D399">STEP 4 · B2B CONVERSION</text>
+        <text x="1457" y="160" text-anchor="middle" font-size="34" font-weight="800" fill="#FFF">$10K–$50K Rollout</text>
+        <text x="1457" y="205" text-anchor="middle" font-size="21" fill="#D4D4CE">Plant-wide SOP &amp; CMMS</text>
+        <text x="1457" y="235" text-anchor="middle" font-size="21" fill="#D4D4CE">deployment across team</text>
+        <rect x="1320" y="280" width="275" height="65" rx="14" fill="rgba(0,0,0,0.4)"/>
+        <text x="1457" y="320" text-anchor="middle" font-size="22" font-weight="800" fill="#34D399">5+ Paid Pilots (Dec 20)</text>
+      </svg>
+    </div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>05 · Bottom-Up PLG to B2B Ladder</span><span>05 / 09</span></div>
+</section></div>
+
+<!-- ==================== SLIDE 6: 8-WEEK SPRINT SCORECARD (DEC 20 KILL / SCALE GATES) ==================== -->
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">06 · RELENTLESS FOCUS ON METRICS (OCT 23 → DEC 20)</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Our 2-Track <span class="hl">Scorecard &amp; Kill Gates.</span></h1>
+    <p class="sub">Co-founder equity unlocks &amp; resource allocation tied strictly to these numbers.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
+      <div class="card gold" style="justify-content:space-between;">
+        <div>
+          <div class="kicker">TRACK A · TOP-DOWN B2B PILOTS (JK LEAD)</div>
+          <div style="display:flex; align-items:baseline; gap:24px; margin: 10px 0 20px;">
+            <div class="huge hl">5 Pilots</div>
+            <div style="font-size:32px;font-weight:700;color:#E5E5E0;">→ $100K Signed (Mar 31)</div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="background:rgba(0,0,0,0.35);padding:20px;border-radius:16px;">
+              <div style="font-size:15px;font-weight:800;color:#FFCD11;">USAGE GATE</div>
+              <div style="font-size:36px;font-weight:800;color:#FFF;">50+ Techs</div>
+              <div style="font-size:18px;color:#D4D4CE;">≥1 job/day for 6 consecutive wks</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.35);padding:20px;border-radius:16px;">
+              <div style="font-size:15px;font-weight:800;color:#FFCD11;">LOCAL CADENCE</div>
+              <div style="font-size:36px;font-weight:800;color:#FFF;">60 / Day</div>
+              <div style="font-size:18px;color:#D4D4CE;">Bay Area emails + drop-in demos</div>
+            </div>
+          </div>
+        </div>
         <div class="tag-grid">
-          <span class="tag gold">3D Gaussian Splatting Demo</span>
-          <span class="tag gold">Video → Visual SOP in 30s</span>
-          <span class="tag">Offline / On-Device AI</span>
-          <span class="tag">Zero Meta Dependency</span>
+          <span class="tag green">Closed: Dunmore ($5K) · JWA ($9K)</span>
+          <span class="tag gold">Active: Stanford · Therma · Devcon · Leitz · Nahanni</span>
         </div>
       </div>
 
-      <div class="card">
-        <div class="kicker">PILLAR 02 · B2B GTM VOLUME</div>
-        <div class="huge" style="font-size:68px;">10x Vol</div>
-        <div style="font-size:30px;font-weight:700;margin-bottom:18px;">Scale Local &amp; Mid-Market</div>
-        <div class="tag-grid">
-          <span class="tag gold">400+ Bay Area Local Targets</span>
-          <span class="tag gold">$5K–$9K Discretionary Pilots</span>
-          <span class="tag">Target: 5 Paid Pilots (Dec 20)</span>
-          <span class="tag">$100K Signed by Mar 31</span>
+      <div class="card green" style="justify-content:space-between;">
+        <div>
+          <div class="kicker">TRACK B · BOTTOM-UP PLG SKATEBOARD (NEO LEAD)</div>
+          <div style="display:flex; align-items:baseline; gap:24px; margin: 10px 0 20px;">
+            <div class="huge green">50% W4</div>
+            <div style="font-size:32px;font-weight:700;color:#E5E5E0;">→ 1,000 Users / 15K Logs</div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="background:rgba(0,0,0,0.35);padding:20px;border-radius:16px;">
+              <div style="font-size:15px;font-weight:800;color:#34D399;">DEC 20 GATE</div>
+              <div style="font-size:36px;font-weight:800;color:#FFF;">500 Users</div>
+              <div style="font-size:18px;color:#D4D4CE;">100+ Activated (≥2 reports)</div>
+            </div>
+            <div style="background:rgba(0,0,0,0.35);padding:20px;border-radius:16px;">
+              <div style="font-size:15px;font-weight:800;color:#F87171;">2-WEEK KILL RULE</div>
+              <div style="font-size:36px;font-weight:800;color:#FCA5A5;">&lt;15% W2</div>
+              <div style="font-size:18px;color:#D4D4CE;">Kill segment immediately after 50 trials</div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="card gold">
-        <div class="kicker">PILLAR 03 · PLG ("SKATEBOARD")</div>
-        <div class="huge hl" style="font-size:68px;">24h Loop</div>
-        <div style="font-size:30px;font-weight:700;margin-bottom:18px;">Bottom-Up B2B2C App</div>
         <div class="tag-grid">
-          <span class="tag gold">Phone Voice/Photo → Instant Report</span>
-          <span class="tag gold">Viral Watermark to Supervisor</span>
-          <span class="tag">Goal: 500 Users / 50% Retention</span>
-          <span class="tag">1,000 Users / 15K Sessions</span>
+          <span class="tag green">Deploying TestFlight Oct 24–25</span>
+          <span class="tag">PostHog Funnel Sensors Live</span>
         </div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>06 · What's Next: Product + Volume + PLG</span><span>06 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>06 · Dec 20 Milestone &amp; Kill Gates</span><span>06 / 09</span></div>
 </section></div>
 
 <!-- ==================== SLIDE 7: LONG-TERM VISION PART 1 (73 FIELD SEGMENTS -> ONE PATH) ==================== -->
@@ -544,188 +557,195 @@
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">07 · MARKET EXPANSION MAP (73 FIELD SEGMENTS)</div>
+      <div class="label">07 · HORIZONTAL MARKET EXPANSION (73 FIELD SEGMENTS)</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>73 Field Segments. <span class="hl">One Path.</span></h1>
-    <p class="sub">Start in maintenance &amp; MEP. Win report-heavy pros via PLG. Then every field worker.</p>
+    <h1>73 Field Segments. <span class="hl">One Path to 1B Workers.</span></h1>
+    <p class="sub">Dual entry: B2B Plant/MEP Maintenance (Bottom-Left) + Self-Serve Report Pros (Top-Right).</p>
 
     <div class="card" style="flex:1; padding: 20px 32px; justify-content:center;">
       <svg width="1640" height="580" viewBox="0 0 1728 620" style="width:100%;height:100%;">
         <defs>
           <marker id="ah" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFCD11"/></marker>
-          <linearGradient id="zone" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.02"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0.20"/></linearGradient>
+          <linearGradient id="zone" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.03"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0.22"/></linearGradient>
         </defs>
-        <rect x="700" y="20" width="940" height="210" rx="18" fill="url(#zone)" stroke="rgba(255,205,17,0.35)" stroke-dasharray="6 6"/>
+        <rect x="700" y="20" width="940" height="210" rx="18" fill="url(#zone)" stroke="rgba(255,205,17,0.4)" stroke-dasharray="6 6"/>
         <line x1="160" y1="20" x2="160" y2="530" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
         <line x1="160" y1="530" x2="1660" y2="530" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
         <line x1="160" y1="190" x2="1660" y2="190" stroke="rgba(255,255,255,0.10)" stroke-dasharray="4 8"/>
         <line x1="160" y1="360" x2="1660" y2="360" stroke="rgba(255,255,255,0.10)" stroke-dasharray="4 8"/>
         <g font-size="17" fill="#B4B4AE" font-weight="700" letter-spacing="1.5">
           <text x="140" y="110" text-anchor="end">SELF (PLG)</text>
-          <text x="140" y="280" text-anchor="end">MIXED</text>
-          <text x="140" y="450" text-anchor="end">COMPANY</text>
+          <text x="140" y="280" text-anchor="end">MID-MARKET</text>
+          <text x="140" y="450" text-anchor="end">ENTERPRISE</text>
           <text x="160" y="568">0 hr</text>
           <text x="520" y="568" text-anchor="middle">1 hr / day</text>
           <text x="880" y="568" text-anchor="middle">2 hrs / day</text>
           <text x="1240" y="568" text-anchor="middle">3 hrs / day</text>
           <text x="1600" y="568" text-anchor="middle">4 hrs / day</text>
         </g>
-        <text x="1660" y="605" text-anchor="end" font-size="19" fill="#FFCD11" font-weight="700">Report time per worker per day →</text>
-        <text x="24" y="275" font-size="19" fill="#D3D3D1" font-weight="600" transform="rotate(-90 24 275)" text-anchor="middle">Who pays</text>
+        <text x="1660" y="605" text-anchor="end" font-size="19" fill="#FFCD11" font-weight="700">Daily Documentation &amp; Reporting Time per Worker →</text>
+        <text x="24" y="275" font-size="19" fill="#D3D3D1" font-weight="600" transform="rotate(-90 24 275)" text-anchor="middle">Who Pays / Decision Speed</text>
 
-        <!-- Background 73 census bubbles -->
-        <circle cx="280" cy="130" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-        <circle cx="430" cy="140" r="34" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-        <circle cx="620" cy="120" r="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-        <circle cx="880" cy="140" r="24" fill="rgba(255,205,17,0.22)" stroke="#FFCD11" stroke-width="2.5"/>
-        <circle cx="1180" cy="115" r="26" fill="rgba(255,205,17,0.22)" stroke="#FFCD11" stroke-width="2.5"/>
-        <circle cx="1500" cy="105" r="28" fill="rgba(255,205,17,0.22)" stroke="#FFCD11" stroke-width="2.5"/>
-        <circle cx="760" cy="275" r="34" fill="rgba(255,205,17,0.28)" stroke="#FFCD11" stroke-width="3"/>
-        <circle cx="1060" cy="295" r="26" fill="rgba(255,205,17,0.20)" stroke="#FFCD11" stroke-width="2"/>
+        <!-- Census Bubbles -->
+        <circle cx="280" cy="130" r="28" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <circle cx="430" cy="140" r="32" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <circle cx="880" cy="135" r="26" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
+        <circle cx="1180" cy="115" r="28" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
+        <circle cx="1500" cy="105" r="30" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
+        <circle cx="760" cy="275" r="36" fill="rgba(255,205,17,0.28)" stroke="#FFCD11" stroke-width="3"/>
+        <circle cx="1060" cy="295" r="28" fill="rgba(255,205,17,0.22)" stroke="#FFCD11" stroke-width="2.5"/>
         <circle cx="480" cy="450" r="36" fill="rgba(255,205,17,0.25)" stroke="#FFCD11" stroke-width="3"/>
         <circle cx="820" cy="460" r="28" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
 
-        <!-- Trajectory Arrow -->
-        <path d="M 510 430 C 660 280, 720 180, 1020 125" fill="none" stroke="#FFCD11" stroke-width="5" marker-end="url(#ah)"/>
+        <!-- Dual Convergence Arrows -->
+        <path d="M 510 430 C 620 350, 680 310, 725 285" fill="none" stroke="#FFCD11" stroke-width="5" marker-end="url(#ah)"/>
+        <path d="M 1150 125 C 980 180, 880 225, 800 260" fill="none" stroke="#34D399" stroke-width="5" marker-end="url(#ah)"/>
 
-        <!-- Crisp Labels -->
-        <text x="480" y="395" font-size="22" font-weight="800" fill="#FFCD11" text-anchor="middle">Plant Maintenance</text>
-        <text x="820" y="512" font-size="20" font-weight="600" fill="#D4D4CE" text-anchor="middle">Construction &amp; Facilities</text>
-        <text x="760" y="222" font-size="23" font-weight="800" fill="#FFCD11" text-anchor="middle">MEP / HVAC Service</text>
-        <text x="880" y="95" font-size="22" font-weight="800" fill="#FFCD11" text-anchor="middle">Home Inspectors</text>
-        <text x="1180" y="72" font-size="22" font-weight="800" fill="#FFCD11" text-anchor="middle">Appraisers</text>
-        <text x="1500" y="60" font-size="22" font-weight="800" fill="#FFCD11" text-anchor="middle">Insurance Adjusters</text>
-        <text x="430" y="90" font-size="20" font-weight="600" fill="#9CA3AF" text-anchor="middle">Trades</text>
-        <text x="280" y="85" font-size="20" font-weight="600" fill="#9CA3AF" text-anchor="middle">Fleet</text>
+        <!-- Labels -->
+        <text x="480" y="395" font-size="22" font-weight="800" fill="#FFCD11" text-anchor="middle">Plant Maintenance (JWA/Dunmore)</text>
+        <text x="820" y="512" font-size="20" font-weight="600" fill="#D4D4CE" text-anchor="middle">Campus &amp; Utilities (Stanford/EBMUD)</text>
+        <text x="760" y="218" font-size="24" font-weight="900" fill="#FFCD11" text-anchor="middle">MEP / HVAC Service (Therma)</text>
+        <text x="1060" y="348" font-size="20" font-weight="700" fill="#F5F5F3" text-anchor="middle">Commercial GC Punch Lists (Devcon)</text>
+        <text x="880" y="88" font-size="22" font-weight="800" fill="#34D399" text-anchor="middle">Home &amp; Facility Inspectors</text>
+        <text x="1180" y="68" font-size="22" font-weight="800" fill="#34D399" text-anchor="middle">Property Appraisers</text>
+        <text x="1500" y="55" font-size="22" font-weight="800" fill="#34D399" text-anchor="middle">Insurance Loss Adjusters</text>
 
-        <!-- NOW / NEXT / THEN Badges -->
-        <rect x="345" y="434" width="90" height="34" rx="17" fill="#FFCD11"/><text x="390" y="457" font-size="16" font-weight="900" fill="#000" text-anchor="middle">NOW</text>
-        <rect x="740" y="35" width="96" height="34" rx="17" fill="#FFCD11"/><text x="788" y="58" font-size="16" font-weight="900" fill="#000" text-anchor="middle">NEXT</text>
-        <rect x="1030" y="340" width="96" height="34" rx="17" fill="#0B0B0C" stroke="#FFF" stroke-width="2"/><text x="1078" y="363" font-size="16" font-weight="800" fill="#FFF" text-anchor="middle">THEN</text>
+        <!-- Track Badges -->
+        <rect x="290" y="434" width="140" height="34" rx="17" fill="#FFCD11"/><text x="360" y="457" font-size="15" font-weight="900" fill="#000" text-anchor="middle">TRACK A · B2B</text>
+        <rect x="1310" y="155" width="160" height="34" rx="17" fill="#10B981"/><text x="1390" y="178" font-size="15" font-weight="900" fill="#000" text-anchor="middle">TRACK B · PLG</text>
       </svg>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>07 · 73 Field Segments Census</span><span>07 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>07 · 73 Field Segments Convergence</span><span>07 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 8: LONG-TERM VISION PART 2 (VOICE -> VISION -> SPATIAL 3DGS -> ROBOTICS WORLD MODEL) ==================== -->
+<!-- ==================== SLIDE 8: UPGRADED LONG-TERM VISION (WORKFLOW UTILITY -> 3DGS SPATIAL TWIN -> PHYSICAL WORLD MODEL) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">08 · LONG-TERM VISION (DIGITAL TWIN &amp; PHYSICAL AI)</div>
+      <div class="label">08 · LONG-TERM VISION: THE TROJAN HORSE FOR PHYSICAL AI</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>Voice Today. <span class="hl">Spatial Twin &amp; Robotics Data Next.</span></h1>
-    <p class="sub">Each layer does more of the job. Every field report trains our Physical World Model.</p>
+    <h1>Workflow Utility Today → <span class="hl">Physical World Model Tomorrow.</span></h1>
+    <p class="sub">Why we give away the mobile app: every report harvests 1st-person video + voice + 3D spatial data for robotics.</p>
 
-    <div class="card" style="flex:1; padding: 24px 36px; justify-content:center;">
-      <svg width="1640" height="560" viewBox="0 0 1728 580" style="width:100%;height:100%;">
-        <defs>
-          <linearGradient id="ar2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.28"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0"/></linearGradient>
-          <marker id="ah2" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="rgba(255,255,255,0.45)"/></marker>
-        </defs>
-        <path d="M 130 460 C 450 440, 750 280, 1130 120 C 1350 65, 1520 50, 1680 45 L 1680 490 L 130 490 Z" fill="url(#ar2)"/>
-        <line x1="130" y1="20" x2="130" y2="490" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
-        <line x1="130" y1="490" x2="1700" y2="490" stroke="rgba(255,255,255,0.35)" stroke-width="2" marker-end="url(#ah2)"/>
+    <div style="display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 28px; flex: 1;">
+      <!-- Left: S-Curve Evolution -->
+      <div class="card" style="padding: 22px 28px; justify-content:center;">
+        <div class="kicker">4-STAGE INTELLIGENCE &amp; DATA MOAT FLYWHEEL</div>
+        <svg width="880" height="440" viewBox="0 0 920 460" style="width:100%;height:auto;">
+          <defs>
+            <linearGradient id="ar3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.28"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0"/></linearGradient>
+          </defs>
+          <path d="M 70 390 C 260 375, 430 250, 640 120 C 760 65, 840 48, 890 42 L 890 410 L 70 410 Z" fill="url(#ar3)"/>
+          <line x1="70" y1="20" x2="70" y2="410" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+          <line x1="70" y1="410" x2="900" y2="410" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+          <path d="M 70 390 C 260 375, 430 250, 640 120 C 760 65, 840 48, 890 42" fill="none" stroke="#FFCD11" stroke-width="5"/>
 
-        <!-- Falling Human Manual Work Line -->
-        <path d="M 130 60 C 450 80, 750 240, 1130 400 C 1350 450, 1520 465, 1680 470" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-dasharray="10 10"/>
-        <!-- Rising Carbyn Intelligence Line -->
-        <path d="M 130 460 C 450 440, 750 280, 1130 120 C 1350 65, 1520 50, 1680 45" fill="none" stroke="#FFCD11" stroke-width="6"/>
+          <circle cx="140" cy="380" r="13" fill="#FFCD11"/>
+          <text x="140" y="310" font-size="14" font-weight="800" fill="#FFCD11">STAGE 1 · NOW</text>
+          <text x="140" y="338" font-size="24" font-weight="800" fill="#FFF">Voice → Report</text>
+          <text x="140" y="360" font-size="16" fill="#C9C9C3">Daily habit wedge</text>
 
-        <!-- Stage 1 -->
-        <circle cx="260" cy="445" r="16" fill="#FFCD11"/>
-        <text x="260" y="330" font-size="16" font-weight="800" fill="#FFCD11" letter-spacing="2">NOW · SKATEBOARD</text>
-        <text x="260" y="370" font-size="36" font-weight="800" fill="#FFF">1. Voice → Doc</text>
-        <text x="260" y="405" font-size="21" fill="#D4D4CE">Talk the job. Form filled.</text>
+          <circle cx="380" cy="270" r="13" fill="#0B0B0C" stroke="#FFCD11" stroke-width="4"/>
+          <text x="380" y="195" font-size="14" font-weight="800" fill="#FFCD11">STAGE 2 · NOW</text>
+          <text x="380" y="223" font-size="24" font-weight="800" fill="#FFF">POV Video → SOP</text>
+          <text x="380" y="245" font-size="16" fill="#C9C9C3">Action &amp; tool labels</text>
 
-        <!-- Stage 2 -->
-        <circle cx="680" cy="300" r="14" fill="#0B0B0C" stroke="#FFCD11" stroke-width="5"/>
-        <text x="705" y="335" font-size="16" font-weight="800" fill="#FFCD11" letter-spacing="2">NOW · GLASSES / PHONE</text>
-        <text x="705" y="375" font-size="36" font-weight="800" fill="#FFF">2. POV Vision → SOP</text>
-        <text x="705" y="410" font-size="21" fill="#D4D4CE">Video becomes step-by-step guide.</text>
+          <circle cx="630" cy="125" r="13" fill="#0B0B0C" stroke="#FFCD11" stroke-width="4"/>
+          <text x="630" y="55" font-size="14" font-weight="800" fill="#FFCD11">STAGE 3 · 2027</text>
+          <text x="630" y="83" font-size="24" font-weight="800" fill="#FFF">3DGS Spatial Twin</text>
+          <text x="630" y="105" font-size="16" fill="#C9C9C3">Defects pinned in 3D</text>
 
-        <!-- Stage 3 -->
-        <circle cx="1130" cy="120" r="14" fill="#0B0B0C" stroke="#FFCD11" stroke-width="5"/>
-        <text x="1155" y="155" font-size="16" font-weight="800" fill="#FFCD11" letter-spacing="2">2027 · 3DGS DIGITAL TWIN</text>
-        <text x="1155" y="195" font-size="36" font-weight="800" fill="#FFF">3. Spatial Memory</text>
-        <text x="1155" y="230" font-size="21" fill="#D4D4CE">Defects &amp; notes pinned in 3D space.</text>
+          <circle cx="865" cy="45" r="15" fill="#10B981" stroke="#FFF" stroke-width="3"/>
+          <text x="855" y="95" text-anchor="end" font-size="14" font-weight="800" fill="#34D399">STAGE 4 · ENDGAME</text>
+          <text x="855" y="123" text-anchor="end" font-size="24" font-weight="800" fill="#FFF">Robotics World Model</text>
+          <text x="855" y="145" text-anchor="end" font-size="16" fill="#C9C9C3">Egocentric training corpus</text>
+        </svg>
+      </div>
 
-        <!-- Stage 4 -->
-        <circle cx="1580" cy="48" r="16" fill="#10B981" stroke="#FFF" stroke-width="4"/>
-        <text x="1560" y="95" text-anchor="end" font-size="16" font-weight="800" fill="#34D399" letter-spacing="2">2028 · ENDGAME</text>
-        <text x="1560" y="135" text-anchor="end" font-size="36" font-weight="800" fill="#FFF">4. Robotics World Model</text>
-        <text x="1560" y="170" text-anchor="end" font-size="21" fill="#D4D4CE">1st-person dataset for physical AI.</text>
-
-        <text x="1660" y="445" text-anchor="end" font-size="20" fill="#9CA3AF">Human manual work left ↓</text>
-        <text x="85" y="255" font-size="20" fill="#FFCD11" font-weight="700" transform="rotate(-90 85 255)" text-anchor="middle">Share of the Job &amp; Data Captured ↑</text>
-
-        <text x="260" y="535" text-anchor="middle" font-size="17" font-weight="800" fill="#FFCD11" letter-spacing="2">VOICE</text>
-        <text x="680" y="535" text-anchor="middle" font-size="17" font-weight="800" fill="#FFCD11" letter-spacing="2">1ST-PERSON CAMERA</text>
-        <text x="1130" y="535" text-anchor="middle" font-size="17" font-weight="800" fill="#FFCD11" letter-spacing="2">3D GAUSSIAN SPLATTING</text>
-        <text x="1580" y="535" text-anchor="middle" font-size="17" font-weight="800" fill="#34D399" letter-spacing="2">SPATIAL + ROBOTICS DATA</text>
-      </svg>
+      <!-- Right: Visual Pipeline of How 1 Field Inspection Trains Robotics -->
+      <div class="card gold" style="justify-content:space-between;">
+        <div class="kicker">HOW 1 FIELD WORKER SESSION BUILDS THE MOAT</div>
+        <div style="font-size:30px;font-weight:800;margin-bottom:14px;">Paid to Harvest What Robotics Lacks</div>
+        <div style="display:flex; flex-direction:column; gap:14px; flex:1; justify-content:center;">
+          <div style="background:rgba(0,0,0,0.4);padding:18px 22px;border-radius:16px;border-left:4px solid #FFCD11;">
+            <div style="font-size:14px;font-weight:800;color:#FFCD11;">01 · USER GETS IMMEDIATE UTILITY</div>
+            <div style="font-size:22px;font-weight:700;color:#FFF;">Tech films &amp; talks for 2 mins → Gets finished PDF SOP / Report</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);padding:18px 22px;border-radius:16px;border-left:4px solid #60A5FA;">
+            <div style="font-size:14px;font-weight:800;color:#60A5FA;">02 · BACKGROUND 3DGS RECONSTRUCTION (BUILT)</div>
+            <div style="font-size:22px;font-weight:700;color:#FFF;">Frames auto-stitch into a 3D Gaussian Splatting facility twin</div>
+          </div>
+          <div style="background:rgba(0,0,0,0.4);padding:18px 22px;border-radius:16px;border-left:4px solid #34D399;">
+            <div style="font-size:14px;font-weight:800;color:#34D399;">03 · PROPRIETARY PHYSICAL AI DATASET</div>
+            <div style="font-size:22px;font-weight:700;color:#FFF;">1st-person hands + 3D pose + causal diagnostic voice = Robotics Gold</div>
+          </div>
+        </div>
+        <div class="tag-grid">
+          <span class="tag gold">Beat the GMAT Playbook: Free Utility → High-Ticket Data</span>
+        </div>
+      </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>08 · Long-Term Vision: Spatial Tech &amp; Robotics Data</span><span>08 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>08 · Long-Term Vision: Spatial &amp; Robotics Data Moat</span><span>08 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 9: 3 QUESTIONS FOR ERIC ==================== -->
+<!-- ==================== SLIDE 9: 3 SHARP OPERATOR QUESTIONS FOR ERIC (REFRAMED!) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">09 · ADVICE &amp; DISCUSSION</div>
+      <div class="label">09 · OPERATOR-TO-OPERATOR DISCUSSION</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>3 Questions for <span class="hl">Eric.</span></h1>
-    <p class="sub">Getting your honest operator perspective on where we go next.</p>
+    <h1>3 Areas Where We Want <span class="hl">Your Brain.</span></h1>
+    <p class="sub">Drawing on your Beat the GMAT journey &amp; Hustle Fund's top B2B/PLG winners.</p>
 
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; flex: 1;">
       <div class="card gold" style="justify-content:space-between;">
         <div>
-          <div class="kicker">QUESTION 01</div>
-          <div class="huge hl" style="font-size:64px; margin-bottom:20px;">Volume<br>vs. Pivot?</div>
-          <div style="font-size:26px;line-height:1.4;color:#E5E5E0;font-weight:600;">
-            6,500 outbound → 0.3% paid.<br><br>
-            Bay Area local → 4.5% reply.<br><br>
-            Is this a <b>volume/offer problem</b> or a <b>pivot signal</b>?
+          <div class="kicker">01 · FAST-CLOSE B2B OFFER</div>
+          <div class="huge hl" style="font-size:58px; margin: 12px 0 22px;">$5K–$9K<br>Card Swipe</div>
+          <div style="font-size:24px;line-height:1.42;color:#F5F5F3;font-weight:600;">
+            Local + Visual SOP jumped replies to <b>4.5%</b> (Stanford, Therma VP, Devcon).<br><br>
+            What pilot offer structure forces an <b>immediate manager card swipe</b> without a 6-mo IT review?
           </div>
         </div>
-        <div class="tag gold" style="text-align:center;">B2B Sales Diagnosis</div>
+        <div class="tag gold" style="text-align:center;">Closing Therma &amp; Devcon Next Week</div>
       </div>
 
       <div class="card" style="justify-content:space-between;">
         <div>
-          <div class="kicker">QUESTION 02</div>
-          <div class="huge" style="font-size:64px; margin-bottom:20px;">B2B + PLG<br>Balance?</div>
-          <div style="font-size:26px;line-height:1.4;color:#E5E5E0;font-weight:600;">
-            Launching <b>Skateboard (PLG)</b> for fast feedback in a massive market.<br><br>
-            How should <b>2 founders</b> set kill criteria &amp; split focus?
+          <div class="kicker">02 · DUAL-CLOCK GUARDRAILS</div>
+          <div class="huge" style="font-size:58px; margin: 12px 0 22px;">B2B + PLG<br>Kill Rules</div>
+          <div style="font-size:24px;line-height:1.42;color:#E5E5E0;font-weight:600;">
+            Like <b>Beat the GMAT</b> (free community → $100K B2B) &amp; <b>Rupa Health</b>:<br><br>
+            How should a <b>2-founder team</b> split weekly bandwidth &amp; set ruthless kill criteria through Dec 20?
           </div>
         </div>
-        <div class="tag" style="text-align:center;">Beat the GMAT / Rupa Playbook</div>
+        <div class="tag" style="text-align:center;">8-Week Sprint Discipline</div>
       </div>
 
       <div class="card green" style="justify-content:space-between;">
         <div>
-          <div class="kicker">QUESTION 03</div>
-          <div class="huge green" style="font-size:64px; margin-bottom:20px;">Advisor<br>Intro?</div>
-          <div style="font-size:26px;line-height:1.4;color:#E5E5E0;font-weight:600;">
-            Unleashing Neo's full technical &amp; spatial AI capability.<br><br>
-            Any <b>CTO / PLG advisor</b> in your network we should meet?
+          <div class="kicker">03 · TWO HIGH-LEVERAGE INTROS</div>
+          <div class="huge green" style="font-size:58px; margin: 12px 0 22px;">PLG Peer<br>+ NBNG</div>
+          <div style="font-size:24px;line-height:1.42;color:#E5E5E0;font-weight:600;">
+            <b>1. Deskless PLG Founder/CTO:</b> A Hustle Fund founder who flipped free field users into B2B contracts.<br><br>
+            <b>2. NBNG Fund (Midwest):</b> Ahead of JK's Minneapolis MD&amp;M trip next week!
           </div>
         </div>
-        <div class="tag green" style="text-align:center;">Network &amp; Mentorship</div>
+        <div class="tag green" style="text-align:center;">Next Check-In: Dec 20 Scorecard</div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ERIC BAHN 1:1</span><span>09 · Open Discussion</span><span>09 / 09</span></div>
+  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>09 · Strategic Questions &amp; Asks</span><span>09 / 09</span></div>
 </section></div>
 
 <div class="deck-hud">
