@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CARBYN · Eric Bahn (Hustle Fund) 1:1</title>
+<title>CARBYN</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -31,12 +31,12 @@
     background: rgba(8, 9, 12, 0.58); z-index: 1;
   }
   .pad {
-    position: absolute; left: 96px; top: 68px; width: 1728px; bottom: 118px;
+    position: absolute; left: 96px; top: 64px; width: 1728px; bottom: 104px;
     display: flex; flex-direction: column; z-index: 5;
   }
   .header-row {
     display: flex; justify-content: space-between; align-items: center;
-    width: 100%; height: 40px; margin-bottom: 18px; flex-shrink: 0;
+    width: 100%; height: 38px; margin-bottom: 14px; flex-shrink: 0;
   }
   .label {
     font-size: 18px; font-weight: 700; letter-spacing: 0.14em;
@@ -44,52 +44,57 @@
   }
   .brand-logo { height: 32px; width: auto; display: block; }
   h1 {
-    font-size: 74px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
-    color: #F5F5F3; margin-bottom: 32px; flex-shrink: 0;
+    font-size: 72px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+    color: #F5F5F3; margin-bottom: 26px; flex-shrink: 0;
   }
   h1 .hl { color: #FFCD11; }
   .card {
-    background: rgba(18, 20, 26, 0.72);
+    background: rgba(18, 20, 26, 0.74);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 24px; padding: 34px 38px;
     backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
     display: flex; flex-direction: column;
   }
   .card.gold {
-    background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.82) 100%);
+    background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.84) 100%);
     border: 1.5px solid rgba(255, 205, 17, 0.55);
   }
   .card.green {
-    background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.82) 100%);
+    background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.84) 100%);
     border: 1.5px solid rgba(16, 185, 129, 0.50);
   }
+  .card.blue {
+    background: linear-gradient(155deg, rgba(59, 130, 246, 0.16) 0%, rgba(18, 20, 26, 0.84) 100%);
+    border: 1.5px solid rgba(59, 130, 246, 0.48);
+  }
   .kicker {
-    font-size: 15px; font-weight: 800; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #9CA3AF; margin-bottom: 12px;
+    font-size: 16px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #9CA3AF; margin-bottom: 16px; flex-shrink: 0;
   }
   .card.gold .kicker { color: #FFCD11; }
   .card.green .kicker { color: #34D399; }
+  .card.blue .kicker { color: #60A5FA; }
   .huge {
-    font-size: 92px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
-    color: #FFF; margin-bottom: 12px;
+    font-size: 96px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
+    color: #FFF; margin-bottom: 14px;
   }
   .huge.hl { color: #FFCD11; }
   .huge.green { color: #34D399; }
-  .tag-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .tag-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: auto; padding-top: 18px; }
   .tag {
-    padding: 10px 18px; border-radius: 12px; font-size: 20px; font-weight: 600;
+    padding: 11px 20px; border-radius: 12px; font-size: 21px; font-weight: 600;
     background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: #E5E5E0;
   }
   .tag.gold { background: rgba(255,205,17,0.16); border-color: rgba(255,205,17,0.5); color: #FFCD11; }
   .tag.green { background: rgba(16,185,129,0.16); border-color: rgba(16,185,129,0.5); color: #34D399; }
   .ftr-rule {
-    position: absolute; left: 96px; top: 982px; width: 1728px; height: 1px;
+    position: absolute; left: 96px; top: 992px; width: 1728px; height: 1px;
     background: rgba(255, 255, 255, 0.18); z-index: 5;
   }
   .ftr {
-    position: absolute; left: 96px; top: 998px; width: 1728px;
+    position: absolute; left: 96px; top: 1008px; width: 1728px;
     display: flex; justify-content: space-between; align-items: center;
-    font-size: 17px; color: #8E8E89; z-index: 5; letter-spacing: 0.06em;
+    font-size: 17px; color: #8E8E89; z-index: 5; letter-spacing: 0.08em;
   }
   .deck-hud {
     position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
@@ -122,72 +127,75 @@
     </div>
     <h1>Upgraded Engine. <span class="hl">73 Meetings.</span> 4x Faster Loop.</h1>
 
-    <div class="card" style="padding: 28px 40px; margin-bottom: 28px;">
-      <svg width="1640" height="120" viewBox="0 0 1640 120" style="width:100%;height:auto;">
-        <line x1="90" y1="58" x2="1550" y2="58" stroke="#FFCD11" stroke-width="5"/>
-        <circle cx="120" cy="58" r="16" fill="#0B0B0D" stroke="#9CA3AF" stroke-width="5"/>
-        <text x="120" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="#9CA3AF">JULY 1</text>
-        <text x="120" y="102" text-anchor="middle" font-size="20" font-weight="700" fill="#D4D4CE">Last Sync (Goal: 5 Pilots)</text>
-
-        <circle cx="580" cy="58" r="18" fill="#FFCD11"/>
-        <text x="580" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="#FFCD11">AUG 18</text>
-        <text x="580" y="102" text-anchor="middle" font-size="21" font-weight="800" fill="#FFF">Clean Split → Neo Lee Joined (CTO)</text>
-
-        <circle cx="1060" cy="58" r="18" fill="#FFCD11"/>
-        <text x="1060" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="#FFCD11">SEPT – OCT</text>
-        <text x="1060" y="102" text-anchor="middle" font-size="21" font-weight="800" fill="#FFF">73 Meetings → First Paid Pilots</text>
-
-        <circle cx="1510" cy="58" r="20" fill="#10B981" stroke="#FFF" stroke-width="4"/>
-        <text x="1510" y="24" text-anchor="middle" font-size="15" font-weight="800" fill="#34D399">OCT 23</text>
-        <text x="1510" y="102" text-anchor="middle" font-size="21" font-weight="800" fill="#34D399">4.5% Local Reply + PLG Launch</text>
-      </svg>
+    <!-- Top Timeline Box (Pure HTML/CSS Grid so zero text clipping) -->
+    <div class="card" style="padding: 28px 42px; margin-bottom: 26px;">
+      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position:relative;">
+        <div style="border-left: 4px solid #9CA3AF; padding-left: 18px;">
+          <div style="font-size:15px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;">JULY 1</div>
+          <div style="font-size:26px;font-weight:800;color:#E5E5E0;margin-top:4px;">Last Sync</div>
+          <div style="font-size:19px;color:#9CA3AF;margin-top:2px;">Goal: 5 Design Partners</div>
+        </div>
+        <div style="border-left: 4px solid #FFCD11; padding-left: 18px;">
+          <div style="font-size:15px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;">AUG 18</div>
+          <div style="font-size:26px;font-weight:800;color:#FFF;margin-top:4px;">Co-Founder Upgrade</div>
+          <div style="font-size:19px;color:#D4D4CE;margin-top:2px;">Clean Split → Neo Lee (CTO)</div>
+        </div>
+        <div style="border-left: 4px solid #FFCD11; padding-left: 18px;">
+          <div style="font-size:15px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;">SEPT TO OCT</div>
+          <div style="font-size:26px;font-weight:800;color:#FFF;margin-top:4px;">73 Customer Meetings</div>
+          <div style="font-size:19px;color:#D4D4CE;margin-top:2px;">6,500 Outbound + SMRP Booth</div>
+        </div>
+        <div style="border-left: 4px solid #10B981; padding-left: 18px;">
+          <div style="font-size:15px;font-weight:800;color:#34D399;letter-spacing:0.1em;">OCT 23</div>
+          <div style="font-size:26px;font-weight:800;color:#34D399;margin-top:4px;">4.5% Local Reply</div>
+          <div style="font-size:19px;color:#D4D4CE;margin-top:2px;">Bay Area Drip + PLG Launch</div>
+        </div>
+      </div>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; flex: 1;">
-      <div class="card gold" style="justify-content:space-between;">
-        <div>
-          <div class="kicker">01 · CO-FOUNDER &amp; CTO</div>
-          <div class="huge hl">Neo Lee</div>
-          <div style="font-size:26px;font-weight:700;color:#FFF;">Full-Stack Physical AI Builder</div>
-        </div>
+      <div class="card gold">
+        <div class="kicker">01 · CO-FOUNDER &amp; CTO</div>
+        <div class="huge hl" style="margin-top:12px;">Neo Lee</div>
+        <div style="font-size:30px;font-weight:700;color:#FFF;margin-top:8px;">Full-Stack Physical AI Builder</div>
+        <div style="font-size:22px;color:#D4D4CE;margin-top:12px;line-height:1.4;">ROKA Top-20 STEM Robotics Officer. Shipped 4 production systems in 8 weeks.</div>
         <div class="tag-grid">
-          <span class="tag gold">ROKA Top-20 STEM Robotics Officer</span>
-          <span class="tag">Shipped 4 Systems in 8 Wks</span>
+          <span class="tag gold">Edge AI &amp; 3DGS</span>
+          <span class="tag">Milestone-Gated Equity</span>
         </div>
       </div>
 
-      <div class="card" style="justify-content:space-between;">
-        <div>
-          <div class="kicker">02 · PAID B2B PILOTS</div>
-          <div class="huge">$25K</div>
-          <div style="font-size:26px;font-weight:700;color:#FFF;">2 Signed/Active + 2 Proposals Out</div>
-        </div>
+      <div class="card">
+        <div class="kicker">02 · PAID B2B PILOTS</div>
+        <div class="huge" style="margin-top:12px;">$25K</div>
+        <div style="font-size:30px;font-weight:700;color:#FFF;margin-top:8px;">2 Active + 2 Proposals Out</div>
+        <div style="font-size:22px;color:#D4D4CE;margin-top:12px;line-height:1.4;">Pivoted ICP from CNC machine shops to Factory &amp; Facility Maintenance.</div>
         <div class="tag-grid">
           <span class="tag green">Dunmore ($5K Signed)</span>
-          <span class="tag green">JW Aluminum ($9K Jan Budget)</span>
-          <span class="tag gold">Leitz &amp; Nahanni ($11K Out)</span>
+          <span class="tag green">JW Aluminum ($9K)</span>
+          <span class="tag gold">Leitz &amp; Nahanni ($11K)</span>
         </div>
       </div>
 
-      <div class="card green" style="justify-content:space-between;">
-        <div>
-          <div class="kicker">03 · REPLY RATE JUMP</div>
-          <div class="huge green">1.1% → 4.5%</div>
-          <div style="font-size:26px;font-weight:700;color:#FFF;">Bay Area Local + Visual SOP</div>
-        </div>
+      <div class="card green">
+        <div class="kicker">03 · REPLY VELOCITY JUMP</div>
+        <div class="huge green" style="margin-top:12px;">1.1% → 4.5%</div>
+        <div style="font-size:30px;font-weight:700;color:#FFF;margin-top:8px;">Bay Area Local + Visual SOP</div>
+        <div style="font-size:22px;color:#D4D4CE;margin-top:12px;line-height:1.4;">4 positive replies in first 88 local emails sent over 48 hours.</div>
         <div class="tag-grid">
-          <span class="tag green">Stanford (Demo Done)</span>
-          <span class="tag green">Therma (VP Service Ops)</span>
-          <span class="tag green">Devcon + UC Davis</span>
+          <span class="tag green">Stanford</span>
+          <span class="tag green">Therma VP</span>
+          <span class="tag green">Devcon</span>
+          <span class="tag green">UC Davis</span>
         </div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>01 · 3-Month Summary</span><span>01 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>01 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 2: PRODUCT & VALUE ==================== -->
+<!-- ==================== SLIDE 2: PRODUCT & VALUE (ZERO EMPTY GAP, FULL HEIGHT FLOW) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
@@ -197,69 +205,89 @@
     </div>
     <h1>AI Copilot on <span class="hl">Safety Glasses &amp; Phone.</span></h1>
 
-    <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 28px; flex: 1;">
-      <div class="card" style="justify-content:space-between;">
-        <div class="kicker">POINT-OF-WORK EXECUTION LAYER</div>
-        <svg width="920" height="400" viewBox="0 0 920 400" style="width:100%;height:auto;">
-          <defs>
-            <marker id="arw" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFCD11"/></marker>
-          </defs>
-          <rect x="10" y="45" width="235" height="310" rx="22" fill="rgba(255,205,17,0.14)" stroke="#FFCD11" stroke-width="2.5"/>
-          <text x="127" y="95" text-anchor="middle" font-size="15" font-weight="800" fill="#FFCD11">NO CUSTOM HARDWARE</text>
-          <text x="127" y="145" text-anchor="middle" font-size="28" font-weight="800" fill="#FFF">Z87.1+ Glasses</text>
-          <text x="127" y="182" text-anchor="middle" font-size="24" font-weight="700" fill="#FFCD11">+ Mobile App</text>
-          <text x="127" y="235" text-anchor="middle" font-size="18" fill="#D4D4CE">Meta · Mentra · Viture</text>
-          <text x="127" y="268" text-anchor="middle" font-size="18" fill="#D4D4CE">Hapware · Aircaps · Mira</text>
-          <text x="127" y="315" text-anchor="middle" font-size="16" font-weight="700" fill="#34D399">Offline Edge Ready</text>
+    <div style="display: grid; grid-template-columns: 1.22fr 0.78fr; gap: 28px; flex: 1;">
+      <!-- Left: Full-Height 3-Column Visual Architecture (HTML Flexbox so zero dead space & zero overflow!) -->
+      <div class="card" style="padding: 32px 34px;">
+        <div class="kicker">POINT-OF-WORK EXECUTION LAYER (NO CUSTOM HARDWARE)</div>
+        <div style="display:grid; grid-template-columns: 1fr 36px 1.25fr 36px 0.95fr; gap: 12px; flex: 1; align-items: stretch;">
+          <!-- Col 1: Hardware Input -->
+          <div style="background:rgba(255,205,17,0.13); border:2px solid #FFCD11; border-radius:20px; padding:26px 22px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="font-size:14px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;">INPUT DEVICE</div>
+              <div style="font-size:32px;font-weight:800;color:#FFF;margin-top:10px;line-height:1.15;">Z87.1+ Glasses<br><span style="color:#FFCD11;">or Phone</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:16px 0;">
+              <div style="background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:10px;font-size:19px;font-weight:600;color:#E5E5E0;">🕶️ Meta · Mentra · Viture</div>
+              <div style="background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:10px;font-size:19px;font-weight:600;color:#E5E5E0;">📱 iOS / Android + AirPods</div>
+              <div style="background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:10px;font-size:19px;font-weight:600;color:#E5E5E0;">🥽 Hapware · Aircaps · Mira</div>
+            </div>
+            <div style="font-size:17px;font-weight:800;color:#34D399;">✓ Offline Edge Ready</div>
+          </div>
 
-          <line x1="250" y1="200" x2="310" y2="200" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw)"/>
+          <!-- Arrow 1 -->
+          <div style="display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:#FFCD11;">→</div>
 
-          <rect x="320" y="25" width="315" height="78" rx="14" fill="rgba(255,205,17,0.20)" stroke="#FFCD11" stroke-width="2"/>
-          <text x="342" y="55" font-size="14" font-weight="800" fill="#FFCD11">01 · TRIBAL KNOWLEDGE</text>
-          <text x="342" y="84" font-size="23" font-weight="800" fill="#FFF">Video → Visual SOP in 30s</text>
+          <!-- Col 2: 4 Core Features -->
+          <div style="display:flex; flex-direction:column; justify-content:space-between; gap:14px;">
+            <div style="flex:1; background:rgba(255,205,17,0.20); border:2px solid #FFCD11; border-radius:16px; padding:16px 22px; display:flex; flex-direction:column; justify-content:center;">
+              <div style="font-size:13px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;">01 · TRIBAL KNOWLEDGE CAPTURE</div>
+              <div style="font-size:25px;font-weight:800;color:#FFF;margin-top:4px;">Video → Visual SOP in 30s</div>
+            </div>
+            <div style="flex:1; background:rgba(255,255,255,0.06); border:1.5px solid rgba(255,255,255,0.2); border-radius:16px; padding:16px 22px; display:flex; flex-direction:column; justify-content:center;">
+              <div style="font-size:13px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;">02 · CMMS VOICE COPILOT</div>
+              <div style="font-size:25px;font-weight:700;color:#FFF;margin-top:4px;">Work Order Read &amp; Closeout</div>
+            </div>
+            <div style="flex:1; background:rgba(255,255,255,0.06); border:1.5px solid rgba(255,255,255,0.2); border-radius:16px; padding:16px 22px; display:flex; flex-direction:column; justify-content:center;">
+              <div style="font-size:13px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;">03 · FIELD TROUBLESHOOTING</div>
+              <div style="font-size:25px;font-weight:700;color:#FFF;margin-top:4px;">Real-Time Repair Guidance</div>
+            </div>
+            <div style="flex:1; background:rgba(16,185,129,0.16); border:2px solid #10B981; border-radius:16px; padding:16px 22px; display:flex; flex-direction:column; justify-content:center;">
+              <div style="font-size:13px;font-weight:800;color:#34D399;letter-spacing:0.1em;">04 · SPATIAL DIGITAL TWIN</div>
+              <div style="font-size:25px;font-weight:800;color:#FFF;margin-top:4px;">3D Gaussian Splatting Scan</div>
+            </div>
+          </div>
 
-          <rect x="320" y="116" width="315" height="78" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
-          <text x="342" y="146" font-size="14" font-weight="800" fill="#9CA3AF">02 · CMMS SYNC</text>
-          <text x="342" y="175" font-size="23" font-weight="700" fill="#FFF">Work Order Read &amp; Update</text>
+          <!-- Arrow 2 -->
+          <div style="display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:#FFCD11;">→</div>
 
-          <rect x="320" y="207" width="315" height="78" rx="14" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
-          <text x="342" y="237" font-size="14" font-weight="800" fill="#9CA3AF">03 · COPILOT</text>
-          <text x="342" y="266" font-size="23" font-weight="700" fill="#FFF">Real-Time Repair Guidance</text>
-
-          <rect x="320" y="298" width="315" height="78" rx="14" fill="rgba(16,185,129,0.18)" stroke="#10B981" stroke-width="2"/>
-          <text x="342" y="328" font-size="14" font-weight="800" fill="#34D399">04 · SPATIAL TWIN</text>
-          <text x="342" y="357" font-size="23" font-weight="800" fill="#FFF">3D Gaussian Splatting Scan</text>
-
-          <line x1="640" y1="200" x2="700" y2="200" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw)"/>
-
-          <rect x="708" y="45" width="202" height="310" rx="22" fill="rgba(59,130,246,0.15)" stroke="#60A5FA" stroke-width="2.5"/>
-          <text x="809" y="95" text-anchor="middle" font-size="14" font-weight="800" fill="#60A5FA">INTEGRATIONS</text>
-          <text x="809" y="145" text-anchor="middle" font-size="26" font-weight="800" fill="#FFF">CMMS &amp; PDF</text>
-          <text x="809" y="195" text-anchor="middle" font-size="20" font-weight="700" fill="#93C5FD">Limble · Coast</text>
-          <text x="809" y="228" text-anchor="middle" font-size="20" font-weight="700" fill="#93C5FD">MaintainX</text>
-          <text x="809" y="280" text-anchor="middle" font-size="18" font-weight="700" fill="#FFCD11">CMMSRadio</text>
-          <text x="809" y="308" text-anchor="middle" font-size="16" fill="#D4D4CE">Industry Advisor</text>
-        </svg>
+          <!-- Col 3: System of Record Output -->
+          <div style="background:rgba(59,130,246,0.15); border:2px solid #60A5FA; border-radius:20px; padding:26px 22px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="font-size:14px;font-weight:800;color:#60A5FA;letter-spacing:0.1em;">SYSTEM OF RECORD</div>
+              <div style="font-size:32px;font-weight:800;color:#FFF;margin-top:10px;line-height:1.15;">CMMS &amp;<br>PDF Reports</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin:16px 0;">
+              <div style="background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:10px;font-size:19px;font-weight:700;color:#93C5FD;">Limble · Coast CMMS</div>
+              <div style="background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:10px;font-size:19px;font-weight:700;color:#93C5FD;">MaintainX · Maximo</div>
+              <div style="background:rgba(0,0,0,0.35);padding:10px 14px;border-radius:10px;font-size:19px;font-weight:700;color:#FFCD11;">CMMSRadio Advisor</div>
+            </div>
+            <div style="font-size:17px;font-weight:800;color:#FFCD11;">✓ Auto-Synced</div>
+          </div>
+        </div>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:20px;">
+      <!-- Right: 3 Value Pillars -->
+      <div style="display:flex; flex-direction:column; gap:22px;">
         <div class="card gold" style="flex:1; justify-content:center;">
-          <div class="kicker">VALUE 01 · ONBOARDING &amp; SOPs</div>
-          <div style="font-size:48px;font-weight:800;color:#FFCD11;">Do Job Once → SOP</div>
+          <div class="kicker">VALUE 01 · ONBOARDING &amp; TRAINING</div>
+          <div style="font-size:50px;font-weight:800;color:#FFCD11;line-height:1.05;">Do Job Once → SOP</div>
+          <div style="font-size:22px;color:#E5E5E0;margin-top:10px;">Cuts new technician onboarding time &amp; repeat errors.</div>
         </div>
         <div class="card green" style="flex:1; justify-content:center;">
-          <div class="kicker">VALUE 02 · DOWNTIME &amp; REPAIR</div>
-          <div style="font-size:48px;font-weight:800;color:#34D399;">↓ Downtime &amp; MTTR</div>
+          <div class="kicker">VALUE 02 · EQUIPMENT RELIABILITY</div>
+          <div style="font-size:50px;font-weight:800;color:#34D399;line-height:1.05;">↓ Downtime &amp; MTTR</div>
+          <div style="font-size:22px;color:#E5E5E0;margin-top:10px;">Instant repair history &amp; schematics while hands stay on the tool.</div>
         </div>
         <div class="card" style="flex:1; justify-content:center;">
-          <div class="kicker">VALUE 03 · DOCUMENTATION</div>
-          <div style="font-size:48px;font-weight:800;color:#FFF;">45m → 30s Reports</div>
+          <div class="kicker">VALUE 03 · ZERO PAPERWORK</div>
+          <div style="font-size:50px;font-weight:800;color:#FFF;line-height:1.05;">45m → 30s Reports</div>
+          <div style="font-size:22px;color:#D4D4CE;margin-top:10px;">Eliminates end-of-shift desk typing in EN / ES / KR.</div>
         </div>
       </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>02 · Product &amp; Value</span><span>02 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>02 / 09</span></div>
 </section></div>
 
 <!-- ==================== SLIDE 3: COHORT 1 VS COHORT 2 FUNNEL ==================== -->
@@ -273,49 +301,79 @@
     <h1>73 Meetings Taught Us <span class="hl">What Converts.</span></h1>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
+      <!-- Left: Cohort 1 -->
       <div class="card" style="justify-content:space-between;">
         <div>
-          <div class="kicker">COHORT 1 (AUG – OCT) · NATIONAL OUTREACH</div>
-          <div style="font-size:36px;font-weight:800;margin-bottom:24px;">6,500 Outbound + SMRP Booth</div>
-          <svg width="740" height="300" viewBox="0 0 740 300" style="width:100%;height:auto;">
-            <text x="10" y="50" font-size="21" font-weight="700" fill="#9CA3AF">Outbound + Booth</text>
-            <rect x="215" y="20" width="500" height="44" rx="10" fill="#475569"/>
-            <text x="235" y="50" font-size="21" font-weight="800" fill="#FFF">6,500 Sent + 87 SMRP Visitors (61 SQLs)</text>
+          <div class="kicker">COHORT 1 (AUG TO OCT) · NATIONAL OUTBOUND + BOOTH</div>
+          <div style="font-size:38px;font-weight:800;margin-bottom:26px;">6,500 Touches + SMRP Conference</div>
 
-            <text x="10" y="135" font-size="21" font-weight="700" fill="#E5E5E0">1st Meetings</text>
-            <rect x="215" y="105" width="240" height="44" rx="10" fill="#60A5FA"/>
-            <text x="235" y="135" font-size="21" font-weight="800" fill="#08090C">73 Meetings (1.1%)</text>
+          <div style="display:flex;flex-direction:column;gap:22px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:21px;font-weight:700;margin-bottom:8px;">
+                <span style="color:#9CA3AF;">1. Outbound (Origami 4K · Gojiberry 2K · Direct 500) + Booth</span>
+                <span style="color:#FFF;font-weight:800;">6,500 + 87</span>
+              </div>
+              <div style="width:100%;height:44px;background:#475569;border-radius:10px;display:flex;align-items:center;padding:0 18px;font-size:20px;font-weight:800;">6,500 Cold Outbound · 87 Booth Visitors (61 SQLs)</div>
+            </div>
 
-            <text x="10" y="220" font-size="21" font-weight="700" fill="#FFCD11">Paid Pilots</text>
-            <rect x="215" y="190" width="100" height="44" rx="10" fill="#FFCD11"/>
-            <text x="330" y="220" font-size="23" font-weight="800" fill="#FFCD11">2 Paid ($14K) + 2 Out ($11K)</text>
-          </svg>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:21px;font-weight:700;margin-bottom:8px;">
+                <span style="color:#E5E5E0;">2. 1st Discovery &amp; Demo Meetings</span>
+                <span style="color:#60A5FA;font-weight:800;">73 Meetings (1.1%)</span>
+              </div>
+              <div style="width:52%;height:44px;background:#60A5FA;color:#08090C;border-radius:10px;display:flex;align-items:center;padding:0 18px;font-size:20px;font-weight:800;">73 Meetings Held</div>
+            </div>
+
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:21px;font-weight:700;margin-bottom:8px;">
+                <span style="color:#FFCD11;">3. Paid Pilots Signed / Active (0.3%)</span>
+                <span style="color:#FFCD11;font-weight:800;">2 Active ($14K) + 2 Out ($11K)</span>
+              </div>
+              <div style="width:28%;height:44px;background:#FFCD11;color:#08090C;border-radius:10px;display:flex;align-items:center;padding:0 18px;font-size:20px;font-weight:800;">2 Paid Pilots</div>
+            </div>
+          </div>
         </div>
+
         <div class="tag-grid">
-          <span class="tag">Cintas</span><span class="tag">USPS</span><span class="tag">Walmart</span><span class="tag">Target</span><span class="tag">Xylem</span><span class="tag">UCSF</span><span class="tag">Hayco</span><span class="tag">Novolex</span>
+          <span class="tag">Cintas</span><span class="tag">USPS</span><span class="tag">Walmart</span><span class="tag">Target</span><span class="tag">Xylem</span><span class="tag">UCSF</span><span class="tag">Hayco</span><span class="tag">Novolex</span><span class="tag">Petronas</span><span class="tag">Granite</span>
         </div>
       </div>
 
+      <!-- Right: Cohort 2 -->
       <div class="card gold" style="justify-content:space-between;">
         <div>
-          <div class="kicker">COHORT 2 (THIS WEEK) · BAY AREA LOCAL + SOP HOOK</div>
-          <div style="font-size:36px;font-weight:800;color:#FFCD11;margin-bottom:24px;">386 Local Targets (First 88 Sent)</div>
-          <svg width="740" height="300" viewBox="0 0 740 300" style="width:100%;height:auto;">
-            <text x="10" y="50" font-size="21" font-weight="700" fill="#E5E5E0">Verified Local</text>
-            <rect x="215" y="20" width="500" height="44" rx="10" fill="rgba(255,205,17,0.28)" stroke="#FFCD11" stroke-width="2"/>
-            <text x="235" y="50" font-size="21" font-weight="800" fill="#FFF">386 Direct Emails (60/day Cadence)</text>
+          <div class="kicker">COHORT 2 (LIVE THIS WEEK) · BAY AREA LOCAL + SOP HOOK</div>
+          <div style="font-size:38px;font-weight:800;color:#FFCD11;margin-bottom:26px;">386 Local Targets @ 60/Day</div>
 
-            <text x="10" y="135" font-size="21" font-weight="700" fill="#E5E5E0">Sent (48h)</text>
-            <rect x="215" y="105" width="220" height="44" rx="10" fill="#FFCD11"/>
-            <text x="235" y="135" font-size="21" font-weight="800" fill="#08090C">88 Delivered</text>
+          <div style="display:flex;flex-direction:column;gap:22px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:21px;font-weight:700;margin-bottom:8px;">
+                <span style="color:#E5E5E0;">1. Verified Bay Area Local Targets</span>
+                <span style="color:#FFF;font-weight:800;">386 Direct Emails</span>
+              </div>
+              <div style="width:100%;height:44px;background:rgba(255,205,17,0.28);border:2px solid #FFCD11;border-radius:10px;display:flex;align-items:center;padding:0 18px;font-size:20px;font-weight:800;">Schools · MEP Contractors · Plants · Utilities</div>
+            </div>
 
-            <text x="10" y="220" font-size="21" font-weight="700" fill="#34D399">Replies (48h)</text>
-            <rect x="215" y="190" width="150" height="44" rx="10" fill="#10B981"/>
-            <text x="380" y="220" font-size="25" font-weight="900" fill="#34D399">4 Replies (4.5% — 4x Jump)</text>
-          </svg>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:21px;font-weight:700;margin-bottom:8px;">
+                <span style="color:#E5E5E0;">2. Dispatched in First 48 Hours</span>
+                <span style="color:#FFCD11;font-weight:800;">88 Delivered (296 Queued)</span>
+              </div>
+              <div style="width:55%;height:44px;background:#FFCD11;color:#08090C;border-radius:10px;display:flex;align-items:center;padding:0 18px;font-size:20px;font-weight:800;">88 Sent So Far</div>
+            </div>
+
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:21px;font-weight:700;margin-bottom:8px;">
+                <span style="color:#34D399;">3. Positive Replies in 48 Hours</span>
+                <span style="color:#34D399;font-weight:900;">4 Replies (4.5% · 4x Jump!)</span>
+              </div>
+              <div style="width:42%;height:44px;background:#10B981;color:#08090C;border-radius:10px;display:flex;align-items:center;padding:0 18px;font-size:20px;font-weight:900;">4.5% Reply Rate</div>
+            </div>
+          </div>
         </div>
+
         <div class="tag-grid">
-          <span class="tag green">Stanford University</span>
+          <span class="tag green">Stanford University (Demo Done)</span>
           <span class="tag green">Therma (VP Service Ops)</span>
           <span class="tag green">Devcon Construction</span>
           <span class="tag green">UC Davis</span>
@@ -324,10 +382,10 @@
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>03 · Outbound Funnel Comparison</span><span>03 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>03 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 4: TURNING BARRIERS INTO OUR WEDGE ==================== -->
+<!-- ==================== SLIDE 4: KEY LEARNINGS (HTML CARDS SO ZERO CLIPPING!) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
@@ -335,41 +393,51 @@
       <div class="label">04 · KEY LEARNINGS FROM 73 MEETINGS</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <h1>Why Conversion Lagged—and <span class="hl">How We Fixed It.</span></h1>
+    <h1>Why Conversion Lagged &amp; <span class="hl">How We Fixed It.</span></h1>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
-      <div class="card gold" style="justify-content:center;">
-        <div class="kicker">LEARNING 01 · PERCEIVED VALUE</div>
-        <div style="font-size:38px;font-weight:800;margin-bottom:28px;">Vitamin vs. Discretionary Painkiller</div>
-        <svg width="740" height="280" viewBox="0 0 740 280" style="width:100%;height:auto;">
-          <rect x="10" y="15" width="720" height="105" rx="18" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)"/>
-          <text x="35" y="55" font-size="16" font-weight="800" fill="#F87171">OLD PITCH (1.5X VITAMIN → 6-MO IT STALL)</text>
-          <text x="35" y="95" font-size="26" font-weight="700" fill="#D4D4CE">"Voice CMMS + AI Glasses" → Triggers IT / Union / Budget Freeze</text>
+      <!-- Left: Offer Shift (Pure HTML Boxes so zero text overflow!) -->
+      <div class="card gold" style="justify-content:space-between;">
+        <div class="kicker">LEARNING 01 · PERCEIVED PRODUCT VALUE (1.5X VS. 10X)</div>
+        <div style="font-size:38px;font-weight:800;margin-bottom:18px;">Vitamin Pitch vs. Painkiller Offer</div>
 
-          <rect x="10" y="150" width="720" height="110" rx="18" fill="rgba(255,205,17,0.20)" stroke="#FFCD11" stroke-width="2.5"/>
-          <text x="35" y="190" font-size="16" font-weight="800" fill="#FFCD11">NEW OFFER (10X PAINKILLER → MANAGER CARD SWIPE)</text>
-          <text x="35" y="232" font-size="27" font-weight="800" fill="#FFF">"$5K–$9K Visual SOP &amp; Report Pilot" → Zero IT Needed</text>
-        </svg>
+        <div style="display:flex; flex-direction:column; gap:22px; flex:1; justify-content:center;">
+          <div style="background:rgba(0,0,0,0.38); border:1.5px solid rgba(248,113,113,0.45); border-radius:20px; padding:26px 30px;">
+            <div style="font-size:15px;font-weight:800;color:#F87171;letter-spacing:0.1em;">OLD PITCH (1.5X VITAMIN → 6-MO IT STALL)</div>
+            <div style="font-size:28px;font-weight:800;color:#E5E5E0;margin-top:8px;">"Voice CMMS + AI Glasses"</div>
+            <div style="font-size:21px;color:#9CA3AF;margin-top:6px;">Feels like a nice-to-have → stalls in IT, union, &amp; budget reviews.</div>
+          </div>
+
+          <div style="text-align:center;font-size:32px;font-weight:900;color:#FFCD11;line-height:1;">↓</div>
+
+          <div style="background:rgba(255,205,17,0.18); border:2px solid #FFCD11; border-radius:20px; padding:26px 30px;">
+            <div style="font-size:15px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;">NEW OFFER (10X PAINKILLER → FAST CARD SWIPE)</div>
+            <div style="font-size:28px;font-weight:800;color:#FFF;margin-top:8px;">"$5K to $9K Visual SOP &amp; Report Pilot"</div>
+            <div style="font-size:21px;color:#FDE68A;margin-top:6px;">Fits manager's discretionary card with zero IT integration Day 1.</div>
+          </div>
+        </div>
       </div>
 
-      <div class="card" style="justify-content:center;">
-        <div class="kicker">LEARNING 02 · DEPLOYMENT FRICTION WORKAROUNDS</div>
-        <div style="font-size:38px;font-weight:800;margin-bottom:24px;">Removing Pre-Deployment Blockers</div>
-        <div style="display:grid; grid-template-columns: 1fr; gap: 18px;">
-          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:20px 26px; border-radius:16px;">
+      <!-- Right: 4 Blockers Mapped to Solutions -->
+      <div class="card" style="justify-content:space-between;">
+        <div class="kicker">LEARNING 02 · PRE-DEPLOYMENT FRICTION</div>
+        <div style="font-size:38px;font-weight:800;margin-bottom:18px;">Every Field Blocker Solved</div>
+
+        <div style="display:flex; flex-direction:column; justify-content:space-between; gap:16px; flex:1;">
+          <div style="flex:1; display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); padding:0 28px; border-radius:18px;">
             <span style="font-size:24px;font-weight:700;color:#FCA5A5;">📡 No Wi-Fi / Camera Ban</span>
             <span style="font-size:24px;font-weight:800;color:#34D399;">→ Offline Edge + Audio Mode</span>
           </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:20px 26px; border-radius:16px;">
+          <div style="flex:1; display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); padding:0 28px; border-radius:18px;">
             <span style="font-size:24px;font-weight:700;color:#FCA5A5;">🕶️ Meta HW Dependency</span>
             <span style="font-size:24px;font-weight:800;color:#34D399;">→ Phone "Skateboard" App</span>
           </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:20px 26px; border-radius:16px;">
+          <div style="flex:1; display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); padding:0 28px; border-radius:18px;">
             <span style="font-size:24px;font-weight:700;color:#FCA5A5;">🔒 Enterprise IT / Unions</span>
             <span style="font-size:24px;font-weight:800;color:#34D399;">→ Local MEP &amp; Mid-Market</span>
           </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); padding:20px 26px; border-radius:16px;">
-            <span style="font-size:24px;font-weight:700;color:#FCA5A5;">⏳ 2–6 Mo Sales Cycle</span>
+          <div style="flex:1; display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); padding:0 28px; border-radius:18px;">
+            <span style="font-size:24px;font-weight:700;color:#FCA5A5;">⏳ 2 to 6 Mo Sales Cycle</span>
             <span style="font-size:24px;font-weight:800;color:#FFCD11;">→ 24-Hour PLG Loop</span>
           </div>
         </div>
@@ -377,7 +445,7 @@
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>04 · Key Learnings &amp; Fixes</span><span>04 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>04 / 09</span></div>
 </section></div>
 
 <!-- ==================== SLIDE 5: BOTTOM-UP PLG ("SKATEBOARD") TO B2B LADDER ==================== -->
@@ -390,57 +458,56 @@
     </div>
     <h1>24-Hour PLG Loop Feeds <span class="hl">B2B Pilots.</span></h1>
 
-    <div class="card" style="flex:1; justify-content:center; padding: 32px 36px;">
-      <svg width="1640" height="500" viewBox="0 0 1640 500" style="width:100%;height:auto;">
-        <defs>
-          <marker id="arw2" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFCD11"/></marker>
-        </defs>
+    <!-- 4-Step Full-Height HTML Grid -->
+    <div style="display:grid; grid-template-columns: 1fr 32px 1fr 32px 1fr 32px 1fr; gap: 12px; flex: 1; align-items: stretch;">
+      <div class="card gold" style="justify-content:space-between; text-align:center; padding:36px 28px;">
+        <div class="kicker">STEP 01 · SKATEBOARD APP</div>
+        <div>
+          <div style="font-size:42px;font-weight:800;color:#FFF;margin-bottom:14px;">1-Tap Note</div>
+          <div style="font-size:23px;color:#E5E5E0;line-height:1.4;">Tech talks &amp; snaps photos on phone → Gets clean PDF Report in 30s.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.45);padding:20px;border-radius:16px;font-size:26px;font-weight:800;color:#FFCD11;">500+ Users</div>
+      </div>
 
-        <rect x="10" y="50" width="350" height="390" rx="24" fill="rgba(255,205,17,0.16)" stroke="#FFCD11" stroke-width="2.5"/>
-        <text x="185" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#FFCD11">STEP 1 · SKATEBOARD APP</text>
-        <text x="185" y="170" text-anchor="middle" font-size="36" font-weight="800" fill="#FFF">1-Tap Field Note</text>
-        <text x="185" y="220" text-anchor="middle" font-size="22" fill="#D4D4CE">Phone voice &amp; photo</text>
-        <text x="185" y="252" text-anchor="middle" font-size="22" fill="#D4D4CE">→ Instant PDF Report</text>
-        <rect x="45" y="320" width="280" height="72" rx="14" fill="rgba(0,0,0,0.4)"/>
-        <text x="185" y="364" text-anchor="middle" font-size="24" font-weight="800" fill="#FFCD11">500+ Users</text>
+      <div style="display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#FFCD11;">→</div>
 
-        <line x1="365" y1="245" x2="425" y2="245" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw2)"/>
+      <div class="card" style="justify-content:space-between; text-align:center; padding:36px 28px;">
+        <div class="kicker">STEP 02 · VIRAL SHARE</div>
+        <div>
+          <div style="font-size:42px;font-weight:800;color:#FFF;margin-bottom:14px;">Boss Link</div>
+          <div style="font-size:23px;color:#D4D4CE;line-height:1.4;">Shared via WhatsApp / SMS to supervisor with Carbyn footer watermark.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.45);padding:20px;border-radius:16px;font-size:26px;font-weight:800;color:#FFF;">50%+ Retention</div>
+      </div>
 
-        <rect x="435" y="50" width="350" height="390" rx="24" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
-        <text x="610" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#9CA3AF">STEP 2 · VIRAL SHARE</text>
-        <text x="610" y="170" text-anchor="middle" font-size="36" font-weight="800" fill="#FFF">Supervisor Link</text>
-        <text x="610" y="220" text-anchor="middle" font-size="22" fill="#D4D4CE">Shared via WhatsApp / SMS</text>
-        <text x="610" y="252" text-anchor="middle" font-size="22" fill="#D4D4CE">with Carbyn Watermark</text>
-        <rect x="470" y="320" width="280" height="72" rx="14" fill="rgba(0,0,0,0.4)"/>
-        <text x="610" y="364" text-anchor="middle" font-size="24" font-weight="800" fill="#FFF">50%+ Retention</text>
+      <div style="display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#FFCD11;">→</div>
 
-        <line x1="790" y1="245" x2="850" y2="245" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw2)"/>
+      <div class="card blue" style="justify-content:space-between; text-align:center; padding:36px 28px;">
+        <div class="kicker">STEP 03 · GLASSES UNLOCK</div>
+        <div>
+          <div style="font-size:42px;font-weight:800;color:#FFF;margin-bottom:14px;">Free Z87.1+</div>
+          <div style="font-size:23px;color:#E5E5E0;line-height:1.4;">Log 10+ reports + book 15-min Manager Demo to unlock free safety glasses.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.45);padding:20px;border-radius:16px;font-size:26px;font-weight:800;color:#60A5FA;">B2B Lead Capture</div>
+      </div>
 
-        <rect x="860" y="50" width="350" height="390" rx="24" fill="rgba(59,130,246,0.16)" stroke="#60A5FA" stroke-width="2.5"/>
-        <text x="1035" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#60A5FA">STEP 3 · GLASSES UNLOCK</text>
-        <text x="1035" y="170" text-anchor="middle" font-size="36" font-weight="800" fill="#FFF">Free Z87.1+ Pair</text>
-        <text x="1035" y="220" text-anchor="middle" font-size="22" fill="#D4D4CE">10+ reports + 15-min</text>
-        <text x="1035" y="252" text-anchor="middle" font-size="22" fill="#D4D4CE">Manager Demo Call</text>
-        <rect x="895" y="320" width="280" height="72" rx="14" fill="rgba(0,0,0,0.4)"/>
-        <text x="1035" y="364" text-anchor="middle" font-size="24" font-weight="800" fill="#60A5FA">B2B Lead Capture</text>
+      <div style="display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:900;color:#FFCD11;">→</div>
 
-        <line x1="1215" y1="245" x2="1275" y2="245" stroke="#FFCD11" stroke-width="4" marker-end="url(#arw2)"/>
-
-        <rect x="1285" y="50" width="345" height="390" rx="24" fill="rgba(16,185,129,0.18)" stroke="#10B981" stroke-width="2.5"/>
-        <text x="1457" y="110" text-anchor="middle" font-size="16" font-weight="800" fill="#34D399">STEP 4 · B2B EXPANSION</text>
-        <text x="1457" y="170" text-anchor="middle" font-size="36" font-weight="800" fill="#FFF">Team Rollout</text>
-        <text x="1457" y="220" text-anchor="middle" font-size="22" fill="#D4D4CE">Paid Pilot ($5K–$9K)</text>
-        <text x="1457" y="252" text-anchor="middle" font-size="22" fill="#D4D4CE">→ Plant-wide Contract</text>
-        <rect x="1320" y="320" width="275" height="72" rx="14" fill="rgba(0,0,0,0.4)"/>
-        <text x="1457" y="364" text-anchor="middle" font-size="24" font-weight="800" fill="#34D399">$100K Target</text>
-      </svg>
+      <div class="card green" style="justify-content:space-between; text-align:center; padding:36px 28px;">
+        <div class="kicker">STEP 04 · B2B ROLLOUT</div>
+        <div>
+          <div style="font-size:42px;font-weight:800;color:#FFF;margin-bottom:14px;">Team Pilot</div>
+          <div style="font-size:23px;color:#E5E5E0;line-height:1.4;">Convert plant manager into $5K to $9K paid pilot &amp; site rollout.</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.45);padding:20px;border-radius:16px;font-size:26px;font-weight:800;color:#34D399;">$100K Target</div>
+      </div>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>05 · B2B2C PLG Motion</span><span>05 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>05 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 6: 2-TRACK SCORECARD (DEC 20 & MAR 31) ==================== -->
+<!-- ==================== SLIDE 6: 2-TRACK SCORECARD ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
@@ -454,20 +521,20 @@
       <div class="card gold" style="justify-content:space-between;">
         <div>
           <div class="kicker">TRACK A · B2B PILOTS</div>
-          <div style="display:flex; align-items:baseline; gap:24px; margin: 16px 0 28px;">
+          <div style="display:flex; align-items:baseline; gap:24px; margin: 12px 0 28px;">
             <div class="huge hl">5 Pilots</div>
             <div style="font-size:34px;font-weight:700;color:#E5E5E0;">→ $100K Signed</div>
           </div>
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 18px;">
-            <div style="background:rgba(0,0,0,0.35);padding:24px;border-radius:18px;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background:rgba(0,0,0,0.38);padding:28px;border-radius:18px;">
               <div style="font-size:15px;font-weight:800;color:#FFCD11;">ACTIVE USAGE</div>
-              <div style="font-size:42px;font-weight:800;color:#FFF;margin:6px 0;">50+ Techs</div>
-              <div style="font-size:19px;color:#D4D4CE;">6+ consecutive weeks (≥1/day)</div>
+              <div style="font-size:46px;font-weight:800;color:#FFF;margin:8px 0;">50+ Techs</div>
+              <div style="font-size:20px;color:#D4D4CE;">6+ consecutive weeks (≥1/day)</div>
             </div>
-            <div style="background:rgba(0,0,0,0.35);padding:24px;border-radius:18px;">
+            <div style="background:rgba(0,0,0,0.38);padding:28px;border-radius:18px;">
               <div style="font-size:15px;font-weight:800;color:#FFCD11;">OUTBOUND VOLUME</div>
-              <div style="font-size:42px;font-weight:800;color:#FFF;margin:6px 0;">60 / Day</div>
-              <div style="font-size:19px;color:#D4D4CE;">Bay Area local + drop-in demos</div>
+              <div style="font-size:46px;font-weight:800;color:#FFF;margin:8px 0;">60 / Day</div>
+              <div style="font-size:20px;color:#D4D4CE;">Bay Area local + drop-in demos</div>
             </div>
           </div>
         </div>
@@ -480,20 +547,20 @@
       <div class="card green" style="justify-content:space-between;">
         <div>
           <div class="kicker">TRACK B · PLG SKATEBOARD</div>
-          <div style="display:flex; align-items:baseline; gap:24px; margin: 16px 0 28px;">
+          <div style="display:flex; align-items:baseline; gap:24px; margin: 12px 0 28px;">
             <div class="huge green">500 Users</div>
             <div style="font-size:34px;font-weight:700;color:#E5E5E0;">→ 1,000 Users</div>
           </div>
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 18px;">
-            <div style="background:rgba(0,0,0,0.35);padding:24px;border-radius:18px;">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background:rgba(0,0,0,0.38);padding:28px;border-radius:18px;">
               <div style="font-size:15px;font-weight:800;color:#34D399;">RETENTION GATE</div>
-              <div style="font-size:42px;font-weight:800;color:#FFF;margin:6px 0;">50%+</div>
-              <div style="font-size:19px;color:#D4D4CE;">Cohort retention target</div>
+              <div style="font-size:46px;font-weight:800;color:#FFF;margin:8px 0;">50%+</div>
+              <div style="font-size:20px;color:#D4D4CE;">Cohort retention target</div>
             </div>
-            <div style="background:rgba(0,0,0,0.35);padding:24px;border-radius:18px;">
+            <div style="background:rgba(0,0,0,0.38);padding:28px;border-radius:18px;">
               <div style="font-size:15px;font-weight:800;color:#34D399;">CUMULATIVE LOGS</div>
-              <div style="font-size:42px;font-weight:800;color:#FFF;margin:6px 0;">15,000+</div>
-              <div style="font-size:19px;color:#D4D4CE;">Generated reports &amp; SOPs</div>
+              <div style="font-size:46px;font-weight:800;color:#FFF;margin:8px 0;">15,000+</div>
+              <div style="font-size:20px;color:#D4D4CE;">Generated reports &amp; SOPs</div>
             </div>
           </div>
         </div>
@@ -505,142 +572,159 @@
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>06 · Track A &amp; Track B Milestones</span><span>06 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>06 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 7: 73 FIELD SEGMENTS -> ONE PATH ==================== -->
+<!-- ==================== SLIDE 7: 73 FIELD SEGMENTS (ZERO OVERLAP) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">07 · MARKET EXPANSION (73 FIELD SEGMENTS)</div>
+      <div class="label">07 · MARKET EXPANSION</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
     <h1>73 Field Segments. <span class="hl">One Path.</span></h1>
 
     <div class="card" style="flex:1; padding: 20px 32px; justify-content:center;">
-      <svg width="1640" height="640" viewBox="0 0 1728 640" style="width:100%;height:100%;">
+      <svg width="1640" height="660" viewBox="0 0 1728 660" style="width:100%;height:100%;">
         <defs>
           <marker id="ah" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#FFCD11"/></marker>
-          <linearGradient id="zone" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.03"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0.22"/></linearGradient>
+          <marker id="ahg" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#34D399"/></marker>
+          <linearGradient id="zone" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.03"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0.20"/></linearGradient>
         </defs>
-        <rect x="700" y="20" width="940" height="210" rx="18" fill="url(#zone)" stroke="rgba(255,205,17,0.4)" stroke-dasharray="6 6"/>
-        <line x1="160" y1="20" x2="160" y2="545" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
-        <line x1="160" y1="545" x2="1660" y2="545" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
-        <line x1="160" y1="195" x2="1660" y2="195" stroke="rgba(255,255,255,0.10)" stroke-dasharray="4 8"/>
-        <line x1="160" y1="370" x2="1660" y2="370" stroke="rgba(255,255,255,0.10)" stroke-dasharray="4 8"/>
+        <rect x="740" y="25" width="900" height="205" rx="18" fill="url(#zone)" stroke="rgba(255,205,17,0.35)" stroke-dasharray="6 6"/>
+        <line x1="170" y1="25" x2="170" y2="560" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+        <line x1="170" y1="560" x2="1660" y2="560" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+        <line x1="170" y1="205" x2="1660" y2="205" stroke="rgba(255,255,255,0.10)" stroke-dasharray="4 8"/>
+        <line x1="170" y1="385" x2="1660" y2="385" stroke="rgba(255,255,255,0.10)" stroke-dasharray="4 8"/>
+
         <g font-size="18" fill="#B4B4AE" font-weight="700" letter-spacing="1.5">
-          <text x="140" y="115" text-anchor="end">SELF (PLG)</text>
-          <text x="140" y="285" text-anchor="end">MIXED</text>
-          <text x="140" y="460" text-anchor="end">COMPANY</text>
-          <text x="160" y="585">0 hr</text>
-          <text x="520" y="585" text-anchor="middle">1 hr / day</text>
-          <text x="880" y="585" text-anchor="middle">2 hrs / day</text>
-          <text x="1240" y="585" text-anchor="middle">3 hrs / day</text>
-          <text x="1600" y="585" text-anchor="middle">4 hrs / day</text>
+          <text x="148" y="120" text-anchor="end">SELF (PLG)</text>
+          <text x="148" y="300" text-anchor="end">MIXED</text>
+          <text x="148" y="475" text-anchor="end">COMPANY</text>
+          <text x="170" y="600">0 hr</text>
+          <text x="530" y="600" text-anchor="middle">1 hr / day</text>
+          <text x="890" y="600" text-anchor="middle">2 hrs / day</text>
+          <text x="1250" y="600" text-anchor="middle">3 hrs / day</text>
+          <text x="1610" y="600" text-anchor="middle">4 hrs / day</text>
         </g>
-        <text x="1660" y="622" text-anchor="end" font-size="20" fill="#FFCD11" font-weight="700">Report time per worker per day →</text>
-        <text x="24" y="280" font-size="20" fill="#D3D3D1" font-weight="600" transform="rotate(-90 24 280)" text-anchor="middle">Who pays</text>
+        <text x="1660" y="642" text-anchor="end" font-size="20" fill="#FFCD11" font-weight="700">Report time per worker per day →</text>
+        <text x="24" y="290" font-size="20" fill="#D3D3D1" font-weight="600" transform="rotate(-90 24 290)" text-anchor="middle">Who pays</text>
 
-        <circle cx="280" cy="130" r="28" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-        <circle cx="430" cy="140" r="32" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
-        <circle cx="880" cy="135" r="26" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
-        <circle cx="1180" cy="115" r="28" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
-        <circle cx="1500" cy="105" r="30" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
-        <circle cx="760" cy="280" r="36" fill="rgba(255,205,17,0.28)" stroke="#FFCD11" stroke-width="3"/>
-        <circle cx="1060" cy="300" r="28" fill="rgba(255,205,17,0.22)" stroke="#FFCD11" stroke-width="2.5"/>
-        <circle cx="480" cy="460" r="36" fill="rgba(255,205,17,0.25)" stroke="#FFCD11" stroke-width="3"/>
-        <circle cx="820" cy="470" r="28" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+        <!-- Background Census Bubbles -->
+        <circle cx="290" cy="145" r="26" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <circle cx="450" cy="150" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.28)" stroke-width="1.5"/>
+        <circle cx="880" cy="150" r="24" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
+        <circle cx="1180" cy="135" r="26" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
+        <circle cx="1500" cy="125" r="28" fill="rgba(16,185,129,0.25)" stroke="#34D399" stroke-width="3"/>
+        <circle cx="780" cy="300" r="34" fill="rgba(255,205,17,0.28)" stroke="#FFCD11" stroke-width="3"/>
+        <circle cx="1120" cy="315" r="26" fill="rgba(255,205,17,0.22)" stroke="#FFCD11" stroke-width="2.5"/>
+        <circle cx="510" cy="465" r="34" fill="rgba(255,205,17,0.25)" stroke="#FFCD11" stroke-width="3"/>
+        <circle cx="860" cy="475" r="26" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
 
-        <path d="M 510 440 C 620 355, 680 315, 725 290" fill="none" stroke="#FFCD11" stroke-width="5" marker-end="url(#ah)"/>
-        <path d="M 1150 125 C 980 180, 880 230, 800 265" fill="none" stroke="#34D399" stroke-width="5" marker-end="url(#ah)"/>
+        <!-- Arrows -->
+        <path d="M 542 448 C 635 380, 695 340, 742 315" fill="none" stroke="#FFCD11" stroke-width="5" marker-end="url(#ah)"/>
+        <path d="M 1150 148 C 1010 205, 900 250, 822 285" fill="none" stroke="#34D399" stroke-width="5" marker-end="url(#ahg)"/>
 
-        <text x="480" y="405" font-size="23" font-weight="800" fill="#FFCD11" text-anchor="middle">Plant Maintenance</text>
-        <text x="820" y="522" font-size="21" font-weight="600" fill="#D4D4CE" text-anchor="middle">Campus &amp; Utilities</text>
-        <text x="760" y="222" font-size="25" font-weight="900" fill="#FFCD11" text-anchor="middle">MEP / HVAC Service</text>
-        <text x="1060" y="352" font-size="21" font-weight="700" fill="#F5F5F3" text-anchor="middle">Construction GC</text>
-        <text x="880" y="88" font-size="23" font-weight="800" fill="#34D399" text-anchor="middle">Home Inspectors</text>
-        <text x="1180" y="68" font-size="23" font-weight="800" fill="#34D399" text-anchor="middle">Appraisers</text>
-        <text x="1500" y="55" font-size="23" font-weight="800" fill="#34D399" text-anchor="middle">Insurance Adjusters</text>
+        <!-- Well-Spaced Labels with Halo Stroke so zero overlap -->
+        <text x="510" y="412" font-size="23" font-weight="800" fill="#FFCD11" text-anchor="middle" paint-order="stroke" stroke="#0B0B0D" stroke-width="8">Plant Maintenance</text>
+        <text x="860" y="532" font-size="21" font-weight="600" fill="#D4D4CE" text-anchor="middle" paint-order="stroke" stroke="#0B0B0D" stroke-width="8">Campus &amp; Utilities</text>
+        <text x="780" y="244" font-size="25" font-weight="900" fill="#FFCD11" text-anchor="middle" paint-order="stroke" stroke="#0B0B0D" stroke-width="8">MEP / HVAC Service</text>
+        <text x="1120" y="370" font-size="21" font-weight="700" fill="#F5F5F3" text-anchor="middle" paint-order="stroke" stroke="#0B0B0D" stroke-width="8">Construction GC</text>
+        <text x="880" y="106" font-size="22" font-weight="800" fill="#34D399" text-anchor="middle" paint-order="stroke" stroke="#0B0B0D" stroke-width="8">Home Inspectors</text>
+        <text x="1180" y="90" font-size="22" font-weight="800" fill="#34D399" text-anchor="middle" paint-order="stroke" stroke="#0B0B0D" stroke-width="8">Appraisers</text>
+        <text x="1500" y="80" font-size="22" font-weight="800" fill="#34D399" text-anchor="middle" paint-order="stroke" stroke="#0B0B0D" stroke-width="8">Insurance Adjusters</text>
+        <text x="450" y="102" font-size="20" font-weight="600" fill="#9CA3AF" text-anchor="middle">Trades</text>
+        <text x="290" y="102" font-size="20" font-weight="600" fill="#9CA3AF" text-anchor="middle">Fleet</text>
 
-        <rect x="290" y="444" width="140" height="36" rx="18" fill="#FFCD11"/><text x="360" y="468" font-size="16" font-weight="900" fill="#000" text-anchor="middle">TRACK A · B2B</text>
-        <rect x="1310" y="155" width="160" height="36" rx="18" fill="#10B981"/><text x="1390" y="179" font-size="16" font-weight="900" fill="#000" text-anchor="middle">TRACK B · PLG</text>
+        <rect x="315" y="448" width="145" height="36" rx="18" fill="#FFCD11"/><text x="387" y="472" font-size="15" font-weight="900" fill="#000" text-anchor="middle">TRACK A · B2B</text>
+        <rect x="1445" y="172" width="165" height="36" rx="18" fill="#10B981"/><text x="1527" y="196" font-size="15" font-weight="900" fill="#000" text-anchor="middle">TRACK B · PLG</text>
       </svg>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>07 · 73 Field Segments</span><span>07 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>07 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 8: FULL-SCREEN LONG-TERM VISION GRAPH ==================== -->
+<!-- ==================== SLIDE 8: LONG-TERM VISION (ZERO OVERLAP, CRISP CALLOUT CARDS ON CURVE) ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
     <div class="header-row">
-      <div class="label">08 · LONG-TERM VISION: DIGITAL TWIN &amp; ROBOTICS DATA</div>
+      <div class="label">08 · LONG-TERM VISION</div>
       <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
     <h1>Voice Today. <span class="hl">Spatial Twin &amp; Robotics Data Next.</span></h1>
 
-    <!-- Full-Bleed Graph Using 100% of Slide Width -->
     <div class="card" style="flex:1; padding: 24px 36px; justify-content:center;">
-      <svg width="1650" height="650" viewBox="0 0 1728 650" style="width:100%;height:100%;">
+      <svg width="1650" height="660" viewBox="0 0 1728 660" style="width:100%;height:100%;">
         <defs>
-          <linearGradient id="ar3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.30"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0.0"/></linearGradient>
+          <linearGradient id="ar3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFCD11" stop-opacity="0.28"/><stop offset="1" stop-color="#FFCD11" stop-opacity="0.0"/></linearGradient>
           <marker id="ah2" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="rgba(255,255,255,0.45)"/></marker>
         </defs>
+
         <!-- Shaded Area under Carbyn Curve -->
-        <path d="M 130 510 C 460 490, 760 310, 1140 135 C 1360 72, 1530 52, 1690 45 L 1690 540 L 130 540 Z" fill="url(#ar3)"/>
+        <path d="M 140 520 C 460 500, 760 350, 1120 195 C 1340 115, 1510 85, 1680 75 L 1680 555 L 140 555 Z" fill="url(#ar3)"/>
+
         <!-- Axes -->
-        <line x1="130" y1="20" x2="130" y2="540" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
-        <line x1="130" y1="540" x2="1705" y2="540" stroke="rgba(255,255,255,0.35)" stroke-width="2" marker-end="url(#ah2)"/>
+        <line x1="140" y1="30" x2="140" y2="555" stroke="rgba(255,255,255,0.35)" stroke-width="2"/>
+        <line x1="140" y1="555" x2="1700" y2="555" stroke="rgba(255,255,255,0.35)" stroke-width="2" marker-end="url(#ah2)"/>
 
         <!-- Falling Human Manual Work Curve -->
-        <path d="M 130 65 C 460 85, 760 265, 1140 440 C 1360 495, 1530 512, 1690 518" fill="none" stroke="rgba(255,255,255,0.40)" stroke-width="3.5" stroke-dasharray="10 10"/>
+        <path d="M 140 90 C 460 110, 760 270, 1120 430 C 1340 500, 1510 522, 1680 530" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="3.5" stroke-dasharray="10 10"/>
+
         <!-- Rising Carbyn Curve -->
-        <path d="M 130 510 C 460 490, 760 310, 1140 135 C 1360 72, 1530 52, 1690 45" fill="none" stroke="#FFCD11" stroke-width="7"/>
+        <path d="M 140 520 C 460 500, 760 350, 1120 195 C 1340 115, 1510 85, 1680 75" fill="none" stroke="#FFCD11" stroke-width="7"/>
 
-        <!-- Node 1: NOW -->
-        <circle cx="270" cy="492" r="18" fill="#FFCD11"/>
-        <text x="270" y="365" font-size="17" font-weight="800" fill="#FFCD11" letter-spacing="2">NOW</text>
-        <text x="270" y="410" font-size="42" font-weight="800" fill="#FFF">Voice → Doc</text>
-        <text x="270" y="446" font-size="22" fill="#D4D4CE">Talk the job. Form filled.</text>
+        <!-- NODE 1: NOW (x=280, y=503) - Label placed cleanly ABOVE-LEFT -->
+        <circle cx="280" cy="503" r="16" fill="#FFCD11"/>
+        <line x1="280" y1="487" x2="280" y2="435" stroke="#FFCD11" stroke-width="2" stroke-dasharray="4 4"/>
+        <rect x="175" y="315" width="310" height="115" rx="16" fill="rgba(14,16,22,0.92)" stroke="rgba(255,205,17,0.55)" stroke-width="2"/>
+        <text x="200" y="350" font-size="16" font-weight="800" fill="#FFCD11" letter-spacing="2">STAGE 1 · NOW</text>
+        <text x="200" y="388" font-size="32" font-weight="800" fill="#FFF">Voice → Doc</text>
+        <text x="200" y="416" font-size="19" fill="#D4D4CE">Talk the job. Form filled.</text>
 
-        <!-- Node 2: NEXT -->
-        <circle cx="700" cy="330" r="16" fill="#0B0B0C" stroke="#FFCD11" stroke-width="5"/>
-        <text x="725" y="365" font-size="17" font-weight="800" fill="#FFCD11" letter-spacing="2">NEXT</text>
-        <text x="725" y="410" font-size="42" font-weight="800" fill="#FFF">POV Vision → SOP</text>
-        <text x="725" y="446" font-size="22" fill="#D4D4CE">1st-person video becomes guide.</text>
+        <!-- NODE 2: NEXT (x=700, y=365) - Label placed cleanly ABOVE -->
+        <circle cx="700" cy="365" r="16" fill="#0B0B0D" stroke="#FFCD11" stroke-width="5"/>
+        <line x1="700" y1="349" x2="700" y2="295" stroke="#FFCD11" stroke-width="2" stroke-dasharray="4 4"/>
+        <rect x="555" y="175" width="350" height="115" rx="16" fill="rgba(14,16,22,0.92)" stroke="rgba(255,205,17,0.45)" stroke-width="2"/>
+        <text x="580" y="210" font-size="16" font-weight="800" fill="#FFCD11" letter-spacing="2">STAGE 2 · NEXT</text>
+        <text x="580" y="248" font-size="32" font-weight="800" fill="#FFF">POV Vision → SOP</text>
+        <text x="580" y="276" font-size="19" fill="#D4D4CE">1st-person video becomes guide.</text>
 
-        <!-- Node 3: 2027 -->
-        <circle cx="1140" cy="135" r="16" fill="#0B0B0C" stroke="#FFCD11" stroke-width="5"/>
-        <text x="1165" y="170" font-size="17" font-weight="800" fill="#FFCD11" letter-spacing="2">2027</text>
-        <text x="1165" y="215" font-size="42" font-weight="800" fill="#FFF">Spatial 3DGS Twin</text>
-        <text x="1165" y="251" font-size="22" fill="#D4D4CE">Defects &amp; notes pinned in 3D space.</text>
+        <!-- NODE 3: 2027 (x=1120, y=195) - Label placed cleanly BELOW-RIGHT -->
+        <circle cx="1120" cy="195" r="16" fill="#0B0B0D" stroke="#FFCD11" stroke-width="5"/>
+        <line x1="1120" y1="211" x2="1120" y2="265" stroke="#FFCD11" stroke-width="2" stroke-dasharray="4 4"/>
+        <rect x="965" y="268" width="360" height="115" rx="16" fill="rgba(14,16,22,0.92)" stroke="rgba(255,205,17,0.45)" stroke-width="2"/>
+        <text x="990" y="303" font-size="16" font-weight="800" fill="#FFCD11" letter-spacing="2">STAGE 3 · 2027</text>
+        <text x="990" y="341" font-size="32" font-weight="800" fill="#FFF">Spatial 3DGS Twin</text>
+        <text x="990" y="369" font-size="19" fill="#D4D4CE">Defects pinned in 3D space.</text>
 
-        <!-- Node 4: 2028 -->
-        <circle cx="1600" cy="48" r="18" fill="#10B981" stroke="#FFF" stroke-width="4"/>
-        <text x="1575" y="95" text-anchor="end" font-size="17" font-weight="800" fill="#34D399" letter-spacing="2">2028</text>
-        <text x="1575" y="140" text-anchor="end" font-size="42" font-weight="800" fill="#FFF">Robotics World Model</text>
-        <text x="1575" y="176" text-anchor="end" font-size="22" fill="#D4D4CE">Egocentric action dataset for robots.</text>
+        <!-- NODE 4: 2028 (x=1560, y=82) - Label placed cleanly BELOW -->
+        <circle cx="1560" cy="82" r="18" fill="#10B981" stroke="#FFF" stroke-width="4"/>
+        <line x1="1560" y1="100" x2="1560" y2="145" stroke="#34D399" stroke-width="2" stroke-dasharray="4 4"/>
+        <rect x="1310" y="148" width="375" height="115" rx="16" fill="rgba(14,16,22,0.94)" stroke="#10B981" stroke-width="2.5"/>
+        <text x="1335" y="183" font-size="16" font-weight="800" fill="#34D399" letter-spacing="2">STAGE 4 · 2028 ENDGAME</text>
+        <text x="1335" y="221" font-size="32" font-weight="800" fill="#FFF">Robotics World Model</text>
+        <text x="1335" y="249" font-size="19" fill="#D4D4CE">Egocentric dataset for robots.</text>
 
         <!-- Axis & Curve Labels -->
-        <text x="1675" y="492" text-anchor="end" font-size="21" fill="#9CA3AF">Human work left ↓</text>
-        <text x="80" y="280" font-size="21" fill="#FFCD11" font-weight="700" transform="rotate(-90 80 280)" text-anchor="middle">Share of the Job &amp; Spatial Data Captured ↑</text>
+        <text x="1675" y="508" text-anchor="end" font-size="20" fill="#9CA3AF">Human work left ↓</text>
+        <text x="75" y="295" font-size="21" fill="#FFCD11" font-weight="700" transform="rotate(-90 75 295)" text-anchor="middle">Share of the Job &amp; Spatial Data Captured ↑</text>
 
         <!-- Bottom Modality Markers -->
-        <text x="270" y="590" text-anchor="middle" font-size="18" font-weight="800" fill="#FFCD11" letter-spacing="2">PHONE / VOICE</text>
-        <text x="700" y="590" text-anchor="middle" font-size="18" font-weight="800" fill="#FFCD11" letter-spacing="2">POV CAMERA</text>
-        <text x="1140" y="590" text-anchor="middle" font-size="18" font-weight="800" fill="#FFCD11" letter-spacing="2">3D GAUSSIAN SPLATTING</text>
-        <text x="1600" y="590" text-anchor="middle" font-size="18" font-weight="800" fill="#34D399" letter-spacing="2">PHYSICAL AI CORPUS</text>
+        <text x="280" y="610" text-anchor="middle" font-size="18" font-weight="800" fill="#FFCD11" letter-spacing="2">PHONE / VOICE</text>
+        <text x="700" y="610" text-anchor="middle" font-size="18" font-weight="800" fill="#FFCD11" letter-spacing="2">POV CAMERA</text>
+        <text x="1120" y="610" text-anchor="middle" font-size="18" font-weight="800" fill="#FFCD11" letter-spacing="2">3D GAUSSIAN SPLATTING</text>
+        <text x="1560" y="610" text-anchor="middle" font-size="18" font-weight="800" fill="#34D399" letter-spacing="2">PHYSICAL AI CORPUS</text>
       </svg>
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>08 · Long-Term Vision</span><span>08 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>08 / 09</span></div>
 </section></div>
 
-<!-- ==================== SLIDE 9: ADVICE WE NEED FROM YOU (CLEAN 4 BULLETS) ==================== -->
+<!-- ==================== SLIDE 9: ADVICE WE NEED FROM YOU ==================== -->
 <div class="slide-viewport"><section class="slide">
   <div class="slide-bg-overlay"></div>
   <div class="pad">
@@ -651,7 +735,7 @@
     <h1>Advice We Need From <span class="hl">You.</span></h1>
 
     <div class="card gold" style="flex:1; justify-content:center; padding: 56px 68px;">
-      <ul style="list-style:none; display:flex; flex-direction:column; gap: 44px;">
+      <ul style="list-style:none; display:flex; flex-direction:column; gap: 46px;">
         <li style="font-size:38px; font-weight:700; line-height:1.3; padding-left:44px; position:relative; color:#FFF;">
           <span style="width:16px;height:16px;border-radius:50%;background:#FFCD11;position:absolute;left:0;top:18px;"></span>
           <span style="color:#FFCD11;">Timing &amp; Focus:</span> Run fast PLG feedback loop (<i>Skateboard</i>) vs. scale B2B outbound volume?
@@ -672,7 +756,7 @@
     </div>
   </div>
   <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · HUSTLE FUND 1:1</span><span>09 · Advice We Need From You</span><span>09 / 09</span></div>
+  <div class="ftr"><span>CARBYN</span><span>09 / 09</span></div>
 </section></div>
 
 <div class="deck-hud">
