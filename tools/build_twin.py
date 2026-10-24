@@ -29,8 +29,7 @@ sub('<span>원본 사진</span>', '<span>source photo</span>')
 sub('<span>FLOOR PLAN · 평면 배치</span>', '<span>FLOOR PLAN · PINS</span>')
 import re
 src = re.sub(r'<div class="notice" style="flex-basis:100%">.*?</div>\n',
-    '<div class="notice" style="flex-basis:100%"><b>Real WebGL 3D Gaussian Splatting</b> (Spark 2.4 + three.js, SOG-compressed splats from inspection photos). '
-    'This demo scene is a residential walkdown capture; WO / RFI pins and POV clips show how a plant, jobsite or MEP Cx capture is tagged. Pin placement is hand-set, not survey-grade.</div>\n',
+    '<div class="notice" style="flex-basis:100%"><b>Real WebGL 3DGS</b> · Spark 2.4 + three.js · SOG splats from a residential walkdown capture. Pins show how plant, jobsite and MEP Cx captures get tagged; pin placement is hand-set, not survey-grade.</div>\n',
     src, count=1, flags=re.S)
 sub('<b>Inspection Splat Walk</b><span id="loadMsg">loading scene…</span>', '<b>Carbyn Spatial Twin</b><span id="loadMsg">loading 3DGS scene…</span>')
 sub("toast('마커를 클릭하거나 → 키로 촬영 지점을 따라가 보세요 · Enter로 1인칭 전환');",
@@ -194,7 +193,9 @@ const _rm = renderMap; renderMap = function () { _rm(); let h = '';
 # placeMarkers / renderMap are function declarations, reassignable in module scope
 sub("// ---------- boot ----------", PINS_JS + "\n// ---------- boot ----------")
 sub("await select(0);", "if (new URLSearchParams(location.search).has('embed')) document.body.classList.add('embed');\nplacePins(); renderWo();\nawait select(PINS[0].s.index);\nopenPin(PINS[0], { noNav: true });")
-sub("setTimeout(cctv, 300);", "")
+sub("setTimeout(cctv, 300);", "setMode('walk');")
+sub("const lab = makeLabel(a.name, a.ko, 1);", "const lab = makeLabel(a.name, 'L' + (a.level + 1 > 0 ? a.level + 1 : 'B1'), 1);")
+sub("$('areaKo').textContent = a.ko;", "$('areaKo').textContent = '';")
 sub("window.__app = { scene, camera, stops, loaded, select, setMode };", "window.__app = { scene, camera, stops, loaded, select, setMode, openPin, PINS, renderer, freeze: () => { renderer.setAnimationLoop(null); renderer.render(scene, camera); } };")
 (R / 'twin.html').write_text(src)
 print('ok', len(src))
