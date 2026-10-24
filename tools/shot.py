@@ -17,7 +17,7 @@ with sync_playwright() as p:
     if js:
         pg.evaluate(js)
         pg.wait_for_timeout(4000)
-    pg.screenshot(path=out)
+    pg.screenshot(path=out, timeout=120000)
     for l in logs[-15:]:
         print(l)
     b.close()
