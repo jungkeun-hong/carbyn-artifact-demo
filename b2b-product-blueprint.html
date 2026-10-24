@@ -338,8 +338,8 @@
         <div class="card green" style="flex:1; padding:22px 26px;">
           <div class="kicker">02 · LIMBLE CMMS REST API V2 (`/V2/TASKS`)</div>
           <img src="assets/product-ui/limble_manage_work_board.png" alt="Limble Work Board" style="width:100%; height:195px; object-fit:cover; border-radius:12px; border:1px solid rgba(16,185,129,0.5); margin-bottom:12px;">
-          <div style="font-size:23px;font-weight:800;color:#FFF;">Task #14301 · Plate Filter 143</div>
-          <div style="font-size:18px;color:#D4D4CE;margin-top:4px;">Closes PM checklist (185 bar verified), deducts spare part `SK-204`, logs 45m wrench time.</div>
+          <div style="font-size:23px;font-weight:800;color:#FFF;">Task #14301 · Compressor Skid CS-204</div>
+          <div style="font-size:18px;color:#D4D4CE;margin-top:4px;">Closes PM checklist (125 psi discharge verified), deducts filter `FLT-10M-INLINE`, logs 45m wrench time.</div>
         </div>
       </div>
     </div>
@@ -471,7 +471,7 @@
         <div class="card" style="flex:1; justify-content:center; padding: 24px 30px;">
           <div class="kicker" style="color:#34D399;">VERTICAL A · MANUFACTURING PLANT (MAXIMO &amp; LIMBLE)</div>
           <div style="font-size:32px;font-weight:800;color:#FFF;">Asset Localization &amp; LOTO Hazard Volumes</div>
-          <div style="font-size:20px;color:#D4D4CE;margin-top:6px;">3D pins on `Pump P-204` &amp; `Plate Filter 143` + 1,420mm forklift aisle clearance check. Cuts LOTO audit prep by 68%.</div>
+          <div style="font-size:20px;color:#D4D4CE;margin-top:6px;">3D pins on `Pump P-204` &amp; `Compressor Skid CS-204` + 1,420mm forklift aisle clearance check. Cuts LOTO audit prep by 68%.</div>
         </div>
 
         <div class="card gold" style="flex:1; justify-content:center; padding: 24px 30px;">
@@ -769,7 +769,7 @@
       }
     },
     limble: {
-      voice: '"Carbyn, close Limble PM task 14301 on Plate Filter 143. Manifold pressure verified at 185 bar, swapped 10-micron inline element, 45 minutes labor, attach current POV photo."',
+      voice: '"Carbyn, close Limble PM task 14301 on Compressor Skid CS-204. Discharge pressure verified at 125 psi, swapped 10-micron inline element, 45 minutes labor, attach current POV photo."',
       endpoint: "PATCH /v2/tasks/14301",
       url: "https://limblecmms.com/features/work-orders/",
       screens: [
@@ -781,12 +781,12 @@
       ],
       payload: {
         taskID: 14301,
-        assetID: "Plate Filter 143",
+        assetID: "Compressor Skid CS-204",
         statusName: "Complete",
         timeSpentMinutes: 45,
-        instructions: [{ step: "Manifold pressure (bar)", val: 185.0, pass: true }],
+        instructions: [{ step: "Discharge pressure (psi)", val: 125.0, pass: true }],
         partsUsed: [{ partID: "FLT-10M-INLINE", qty: 1 }],
-        proofPhoto: "pov_frame_02.jpg"
+        proofPhoto: "pov_frame_01.jpg"
       }
     },
     procore: {

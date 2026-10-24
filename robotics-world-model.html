@@ -230,22 +230,23 @@
       img: "assets/product-ui/pov_frame_04.jpg",
       vla: `{
   "episode_id": "carbyn_ego_92310",
-  "task": "plate_filter_143_closing_pressure",
+  "task": "cover_gasket_press_seat",
   "state_s_t": {
     "object_pose_6dof": [0.38, -0.19, 0.72, 0.11, 0.78, 0.0],
-    "gauge_reading_psi": 185.0,
-    "contact_affordance": "ball_valve_handle_yellow"
+    "tool_id": "none_bare_glove",
+    "contact_affordance": "gasket_groove_perimeter"
   },
   "action_a_t": {
-    "valve_rotation_deg": 90.0,
-    "spoken_cot_rationale": "Bleed line pressure before opening drain valve"
+    "right_hand_press_path": "groove_trace_cw",
+    "normal_force_n": 22.0,
+    "spoken_cot_rationale": "Seat gasket fully in groove before closing cover"
   },
   "world_model_z_next": {
     "v_jepa2_surprise": 0.024,
-    "state_transition": "PRESSURE_ISOLATED"
+    "state_transition": "GASKET_SEATED"
   }
 }`,
-      roi: "Pairs spoken technician Chain-of-Thought ('why I'm turning this valve') with 6-DoF hand kinematics."
+      roi: "Pairs spoken technician Chain-of-Thought ('why I'm pressing here') with 6-DoF hand kinematics."
     }
   ];
 
