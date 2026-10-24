@@ -1,0 +1,679 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>Carbyn Spatial Twin · 3DGS Work-Order Walk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-bleed WebGL stage; thin HUD rails top (mode + floors) and bottom-left (stop card); mini floor plan bottom-right. */
+:root{
+  --bg:#0f1115; --panel:#171a21e6; --panel-solid:#171a21; --line:#2a2f3a; --fg:#e8e9ec; --muted:#9aa1ad;
+  --accent:#e4b363; --accent-ink:#1a1407;
+  --sev-major:#e5484d; --sev-due:#e4b363; --sev-ok:#4cc38a; --sev-info:#7aa2f7;
+  --font:"IBM Plex Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+.notice{font-size:11.5px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 10px;backdrop-filter:blur(8px);max-width:min(560px,calc(100vw - 32px))}
+.notice b{color:var(--fg);font-weight:500}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 var(--font);overflow:hidden}
+#stage{position:fixed;inset:0}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.hud{position:fixed;z-index:5;pointer-events:none}
+.hud>*{pointer-events:auto}
+#top{top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.brand{display:flex;flex-direction:column;gap:1px;margin-right:6px}
+.brand b{font-weight:600;letter-spacing:.01em}
+.brand small{color:var(--muted);font-family:var(--mono);font-size:11px}
+.seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;backdrop-filter:blur(8px)}
+.seg button{appearance:none;border:0;background:transparent;color:var(--muted);padding:7px 12px;font:inherit;font-size:13px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.seg button:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.btn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--fg);padding:7px 11px;border-radius:8px;font:inherit;font-size:13px;cursor:pointer;backdrop-filter:blur(8px)}
+.btn:hover{border-color:#3a4150}
+.btn[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.icon{width:34px;padding:0;text-align:center;font-family:var(--mono)}
+#card{left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(400px,calc(100vw - 32px));
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(10px);overflow:hidden}
+#card header{display:flex;align-items:center;gap:8px;padding:10px 12px 0}
+#card .areaName{font-weight:600}
+#card .areaKo{color:var(--muted);font-size:12px}
+#card .counter{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sev{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;font-family:var(--mono);padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.sev::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sev-info)}
+.sev[data-s="major-concern"]{color:var(--sev-major);border-color:color-mix(in srgb,var(--sev-major) 50%,transparent)}
+.sev[data-s="major-concern"]::before{background:var(--sev-major)}
+.sev[data-s="due-diligence"]{color:var(--sev-due)}.sev[data-s="due-diligence"]::before{background:var(--sev-due)}
+.sev[data-s="other"]{color:var(--sev-ok)}.sev[data-s="other"]::before{background:var(--sev-ok)}
+#card .body{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;padding:10px 12px}
+#card .photo{position:relative;aspect-ratio:3/4;max-width:100%;border-radius:8px;overflow:hidden;background:#000;cursor:zoom-in}
+#card .photo img{width:100%;height:100%;object-fit:cover;display:block}
+#card .photo span{position:absolute;left:6px;bottom:6px;font-family:var(--mono);font-size:10px;background:#000a;padding:2px 6px;border-radius:4px}
+#card .meta{min-width:0;display:flex;flex-direction:column;gap:6px}
+#card .label{font-weight:500}
+#card .chapter{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.03em}
+#card .text{color:var(--muted);font-size:12.5px;max-height:5.6em;overflow:auto}
+#card .status{font-family:var(--mono);font-size:11px;color:var(--muted)}
+#card footer{display:flex;gap:6px;padding:0 12px 12px;align-items:center}
+#card footer .spacer{flex:1}
+#map{right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(300px,calc(100vw - 32px));
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(10px);padding:8px}
+#map svg{display:block;width:100%;height:auto}
+#map .lbl{font:1.3px var(--mono);fill:var(--muted);letter-spacing:.02em}
+#map rect.area{fill:#ffffff10;stroke:#ffffff30;stroke-width:.3;cursor:pointer}
+#map rect.area.on{fill:color-mix(in srgb,var(--accent) 35%,transparent);stroke:var(--accent)}
+#map .stop{cursor:pointer;stroke:#0f1115;stroke-width:.4}
+#map .stop.cur{stroke:#fff;stroke-width:.8}
+#map .cam{fill:none;stroke:#fff;stroke-width:.6}
+#map .title{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);padding:0 2px 6px}
+#map .lk{font:1.6px var(--mono);fill:#3d6a8a}
+#help{top:calc(56px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:min(320px,calc(100vw - 32px));
+  background:var(--panel-solid);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}
+#help h3{margin:0 0 6px;font-size:13px;font-weight:600}
+#help dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 0 8px}
+#help dt{font-family:var(--mono);font-size:11px;color:var(--accent)}
+#help dd{margin:0;color:var(--muted)}
+#help p{margin:6px 0 0;color:var(--muted);font-size:12px}
+#loading{position:fixed;inset:0;z-index:9;display:grid;place-items:center;background:var(--bg);transition:opacity .4s}
+#loading.done{opacity:0;pointer-events:none}
+#loading .box{text-align:center;color:var(--muted);font-family:var(--mono);font-size:12px}
+#loading .box b{display:block;color:var(--fg);font:600 18px var(--font);margin-bottom:8px}
+#toast{position:fixed;left:50%;top:calc(60px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:8;background:var(--panel-solid);border:1px solid var(--line);
+  padding:6px 12px;border-radius:8px;font-size:12px;color:var(--muted);transition:opacity .3s;opacity:0;pointer-events:none}
+#toast.show{opacity:1}
+#lightbox{position:fixed;inset:0;z-index:20;background:#000d;display:grid;place-items:center;cursor:zoom-out}
+#lightbox img{max-width:92vw;max-height:88vh;border-radius:6px}
+#lightbox figcaption{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--muted)}
+#fade{position:fixed;inset:0;background:#0f1115;opacity:0;pointer-events:none;z-index:3;transition:opacity .35s}
+#fade.on{opacity:1}
+.crosshair{position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:1px solid #fff8;border-radius:50%;z-index:4;pointer-events:none}
+
+#wo{top:calc(108px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));width:340px;background:var(--panel);border:1px solid var(--line);border-radius:12px;backdrop-filter:blur(10px);padding:10px}
+#wo .ttl{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px}
+#wo .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:8px}
+#wo .tabs button{appearance:none;border:1px solid var(--line);background:#0003;color:var(--muted);font:600 11px var(--mono);padding:6px 4px;border-radius:7px;cursor:pointer}
+#wo .tabs button[aria-pressed="true"]{color:#111;border-color:transparent}
+#wo .pin{display:flex;gap:8px;align-items:flex-start;padding:7px 8px;border-radius:8px;border:1px solid transparent;cursor:pointer;margin-bottom:4px;background:#ffffff06}
+#wo .pin:hover{border-color:#3a4150}
+#wo .pin.on{border-color:var(--pc);background:color-mix(in srgb,var(--pc) 14%,transparent)}
+#wo .pin i{flex:none;font-style:normal;font:600 10px var(--mono);color:#111;background:var(--pc);border-radius:5px;padding:2px 5px;margin-top:1px}
+#wo .pin b{display:block;font-size:12.5px;font-weight:600;line-height:1.3}
+#wo .pin small{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+#pov{left:max(16px,env(safe-area-inset-left,0px));top:calc(108px + env(safe-area-inset-top,0px));width:400px;background:var(--panel);border:1px solid var(--pc,var(--line));border-radius:12px;backdrop-filter:blur(10px);overflow:hidden}
+#pov video{display:block;width:100%;height:200px;object-fit:cover;background:#000}
+#pov .hd{display:flex;justify-content:space-between;align-items:center;padding:8px 12px 0;font:600 11px var(--mono);color:var(--pc)}
+#pov .hd span:last-child{color:var(--muted)}
+#pov h4{margin:4px 12px 6px;font-size:15px;font-weight:600;line-height:1.3}
+#pov dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 12px 8px;font-size:12px}
+#pov dt{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+#pov dd{margin:0;color:var(--fg)}
+#pov .voice{margin:0 12px 10px;padding:7px 9px;border-left:3px solid var(--pc);background:#0006;border-radius:6px;font-size:12px;color:#d4d4ce;font-style:italic}
+#pov .x{position:absolute;right:8px;top:8px;width:24px;height:24px;border-radius:6px;border:0;background:#000a;color:#fff;cursor:pointer}
+#card{width:min(360px,calc(100vw - 32px))}
+#map{width:min(250px,calc(100vw - 32px))}
+body.embed #help{display:none}
+@media (max-width:720px){
+  #map{display:none}
+  #card .body{grid-template-columns:90px minmax(0,1fr)}
+  .brand small{display:none}
+}
+@media (prefers-reduced-motion:reduce){#loading{transition:none}}
+</style>
+
+<div id="stage"></div>
+<div class="crosshair" id="crosshair" hidden></div>
+<div id="fade"></div>
+
+<div id="top" class="hud">
+  <div class="brand"><b>Carbyn Spatial Twin</b><small id="subtitle">real 3DGS splats · spatial WO / RFI pins</small></div>
+  <div class="seg" role="group" aria-label="View mode">
+    <button id="modeOverview" aria-pressed="true">Top-down CCTV</button>
+    <button id="modeWalk" aria-pressed="false">1st-person walk (WASD)</button>
+  </div>
+  <div class="seg" role="group" aria-label="Level" id="levels">
+    <button data-level="all" aria-pressed="true">All</button>
+    <button data-level="-1">B1</button>
+    <button data-level="0">L1</button>
+    <button data-level="1">L2</button>
+    <button data-level="2">Attic/Roof</button>
+  </div>
+  <button class="btn" id="explode" aria-pressed="false">Explode levels</button>
+  
+  <button class="btn" id="tour" aria-pressed="false">▶ Auto tour</button>
+  <button class="btn icon" id="helpBtn" aria-label="Help">?</button>
+  <div class="notice" style="flex-basis:100%"><b>Real WebGL 3D Gaussian Splatting</b> (Spark 2.4 + three.js, SOG-compressed splats from inspection photos). This demo scene is a residential walkdown capture; WO / RFI pins and POV clips show how a plant, jobsite or MEP Cx capture is tagged. Pin placement is hand-set, not survey-grade.</div>
+</div>
+
+<div id="help" class="hud" hidden>
+  <h3>조작법</h3>
+  <dl>
+    <dt>탑뷰</dt><dd>드래그 회전 · 휠 줌 · 우클릭 드래그 이동 · 마커 클릭으로 이동</dd>
+    <dt>1인칭</dt><dd>드래그로 둘러보기 · W A S D / 방향키 이동 · 휠 전진·후진 · Q E 상하</dd>
+    <dt>← →</dt><dd>이전 · 다음 촬영 지점</dd>
+    <dt>Enter</dt><dd>탑뷰 ⇄ 1인칭 전환</dd>
+  </dl>
+  <p>각 지점의 3D는 Apple SHARP(2025.12, 오픈소스)로 사진 1장에서 만든 Gaussian splat입니다. 촬영 위치 근처에서는 사진처럼 보이고, 멀어지면 찍히지 않은 뒷면이 비어 있습니다. 평면도 위 배치와 방향은 리포트 챕터를 기준으로 손으로 잡은 근사치이며 실측이 아닙니다.</p>
+  <details style="margin-top:8px"><summary style="cursor:pointer;color:var(--accent);font-size:12px">왜 집 전체를 하나의 3D로 만들지 않았나</summary>
+  <p>인스펙션 사진은 구역당 2~5장, 서로 겹치는 부분이 거의 없어 COLMAP·GLOMAP 같은 SfM도, VGGT·MapAnything·Depth Anything 3 같은 2025~26년 feed-forward 모델도 방끼리 이어 붙일 단서가 없습니다. 게다가 이 샘플 리포트는 두 채 이상의 집 사진이 섞여 있습니다(흰 벽돌집과 IMG_84xx 계열 지붕 사진의 집이 다름). 그래서 "사진 1장 = 둘러볼 수 있는 3D 한 칸"을 평면도 위에 배치하는 방식을 택했습니다.</p>
+  <p>검토한 오픈소스: VGGT / VGGT-Omega, MapAnything, Depth Anything 3, π³, AnySplat, WorldMirror, MASt3R, Brush·msplat·OpenSplat(Mac Metal 학습), SHARP(단일 사진), 뷰어 Spark·GaussianSplats3D·SuperSplat·Babylon. 이 페이지: SHARP → 4:1 서브샘플 → SOG 압축 → Spark 2.4 + three.js.</p></details>
+</div>
+
+<div id="card" class="hud">
+  <header><span class="areaName" id="areaName">—</span><span class="areaKo" id="areaKo"></span><span class="counter" id="counter">0 / 0</span></header>
+  <div class="body">
+    <div class="photo" id="photoBox" title="원본 사진 크게 보기"><img id="photo" alt="원본 인스펙션 사진"><span>source photo</span></div>
+    <div class="meta">
+      <span class="sev" id="sev" data-s="description">general</span>
+      <div class="label" id="label"></div>
+      <div class="chapter" id="chapter"></div>
+      <div class="text" id="text"></div>
+      <div class="status" id="status"></div>
+    </div>
+  </div>
+  <footer>
+    <button class="btn icon" id="prev" aria-label="Previous stop">‹</button>
+    <button class="btn icon" id="next" aria-label="Next stop">›</button>
+    <span class="spacer"></span>
+    <button class="btn" id="enter">Walk from here</button>
+  </footer>
+</div>
+
+<div id="map" class="hud">
+  <div class="title"><span>FLOOR PLAN · PINS</span><span id="mapLevel">all</span></div>
+  <svg id="mapSvg" viewBox="-14 -30 44 50" aria-label="Floor plan with camera stops"></svg>
+</div>
+
+<div id="wo" class="hud">
+  <div class="ttl"><span>SPATIAL WORK ORDERS · RFIs</span><span id="woCount"></span></div>
+  <div class="tabs" id="woTabs">
+    <button data-v="mfg" aria-pressed="true">MFG</button>
+    <button data-v="con" aria-pressed="false">CONSTR.</button>
+    <button data-v="mep" aria-pressed="false">MEP CX</button>
+  </div>
+  <div id="woList"></div>
+</div>
+<div id="pov" class="hud" hidden>
+  <button class="x" id="povX" aria-label="Close">×</button>
+  <video id="povVid" muted loop playsinline autoplay></video>
+  <div class="hd"><span id="povSys"></span><span id="povId"></span></div>
+  <h4 id="povTitle"></h4>
+  <dl id="povFields"></dl>
+  <div class="voice" id="povVoice"></div>
+</div>
+<div id="toast" role="status"></div>
+<div id="lightbox" hidden><figure style="margin:0"><img id="lightImg" alt=""><figcaption id="lightCap"></figcaption></figure></div>
+<div id="loading"><div class="box"><b>Carbyn Spatial Twin</b><span id="loadMsg">loading 3DGS scene…</span></div></div>
+
+<script type="importmap">{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/",
+  "@sparkjsdev/spark":"https://cdn.jsdelivr.net/npm/@sparkjsdev/spark@2.4.0/dist/spark.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { SplatMesh, SparkRenderer, SparkControls, SplatFileType } from '@sparkjsdev/spark';
+
+const $ = (id) => document.getElementById(id);
+const LEVEL_Y = {'-1': -3.4, '0': 0, '1': 3.4, '2': 6.6, '3': 7.8};
+const LEVEL_H = {'-1': 2.6, '0': 3.0, '1': 2.8, '2': 1.6, '3': 0.6};
+const SEV_COLOR = {'major-concern': 0xe5484d, 'due-diligence': 0xe4b363, 'other': 0x4cc38a, 'description': 0x7aa2f7};
+const MAX_LOADED = 10;
+
+const data = await (await fetch('stops.json', { cache: 'no-store' })).json();
+const stops = data.stops, areas = data.areas;
+stops.forEach((s, i) => { s.index = i; });
+
+// ---------- renderer / scene ----------
+const stage = $('stage');
+const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(stage.clientWidth, stage.clientHeight);
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0f1115);
+scene.fog = new THREE.Fog(0x0f1115, 60, 140);
+const camera = new THREE.PerspectiveCamera(55, stage.clientWidth / stage.clientHeight, 0.05, 400);
+const spark = new SparkRenderer({ renderer });
+scene.add(spark);
+scene.add(new THREE.HemisphereLight(0xcfd8ff, 0x202020, 1.1));
+const sun = new THREE.DirectionalLight(0xffffff, 0.9); sun.position.set(20, 40, 10); scene.add(sun);
+
+// ground + lake
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(140, 140), new THREE.MeshStandardMaterial({ color: 0x1b2a1f, roughness: 1 }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -0.05; scene.add(ground);
+const lake = new THREE.Mesh(new THREE.PlaneGeometry(40, 22), new THREE.MeshStandardMaterial({ color: 0x1b3144, roughness: .4, metalness: .1 }));
+lake.rotation.x = -Math.PI / 2; lake.position.set(26, -0.03, -30); scene.add(lake);
+const grid = new THREE.GridHelper(140, 70, 0x2a2f3a, 0x1d212a); grid.position.y = -0.04; scene.add(grid);
+
+// ---------- schematic house: one translucent box per area ----------
+const areaGroup = new THREE.Group(); scene.add(areaGroup);
+const areaObjs = {};
+function makeLabel(text, sub, scale = 1) {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 128;
+  const g = c.getContext('2d'); g.fillStyle = 'rgba(15,17,21,.72)'; g.beginPath(); g.roundRect(0, 0, 512, 128, 24); g.fill();
+  g.fillStyle = '#e8e9ec'; g.font = '600 46px IBM Plex Sans KR, system-ui, sans-serif'; g.textBaseline = 'middle'; g.fillText(text, 26, 46);
+  g.fillStyle = '#9aa1ad'; g.font = '32px IBM Plex Sans KR, system-ui, sans-serif'; g.fillText(sub, 26, 94);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, depthTest: false, transparent: true }));
+  sp.scale.set(4 * scale, 1 * scale, 1); sp.renderOrder = 5; return sp;
+}
+for (const [key, a] of Object.entries(areas)) {
+  const [x0, z0, x1, z1] = a.rect; const w = x1 - x0, d = z1 - z0; const lv = String(a.level);
+  const h = LEVEL_H[lv] ?? 3;
+  const g = new THREE.Group(); g.userData = { key, level: a.level, baseY: LEVEL_Y[lv] ?? 0 };
+  const col = new THREE.Color(a.color);
+  const isOutside = ['exterior_front', 'exterior_rear', 'dock', 'hottub', 'roof'].includes(key);
+  if (!isOutside) {
+    const box = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshStandardMaterial({ color: col, transparent: true, opacity: .10, roughness: .9, depthWrite: false }));
+    box.position.set((x0 + x1) / 2, h / 2, (z0 + z1) / 2); g.add(box);
+    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(box.geometry), new THREE.LineBasicMaterial({ color: col, transparent: true, opacity: .6 }));
+    edges.position.copy(box.position); g.add(edges);
+  }
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(w, d), new THREE.MeshStandardMaterial({ color: col, transparent: true, opacity: isOutside ? .12 : .22, roughness: 1, depthWrite: false }));
+  floor.rotation.x = -Math.PI / 2; floor.position.set((x0 + x1) / 2, 0.01, (z0 + z1) / 2); g.add(floor);
+  const lab = makeLabel(a.name, a.ko, 1); lab.position.set((x0 + x1) / 2, h + 0.6, (z0 + z1) / 2); g.add(lab);
+  g.position.y = g.userData.baseY; areaGroup.add(g); areaObjs[key] = g;
+}
+
+// ---------- stop markers + route ----------
+const markerGroup = new THREE.Group(); scene.add(markerGroup);
+const markers = [];
+const coneGeo = new THREE.ConeGeometry(0.28, 0.7, 12); coneGeo.rotateX(Math.PI / 2); // points along +z local
+const ringGeo = new THREE.RingGeometry(0.45, 0.6, 24); ringGeo.rotateX(-Math.PI / 2);
+for (const s of stops) {
+  const col = SEV_COLOR[s.severity] ?? SEV_COLOR.description;
+  const m = new THREE.Mesh(coneGeo, new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: .35, roughness: .5 }));
+  const yaw = THREE.MathUtils.degToRad(s.yaw);
+  m.rotation.y = yaw; // local +z (cone tip) -> viewing direction
+  if (s.mv) m.scale.setScalar(0.8);
+  m.userData.stop = s;
+  const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: .55, side: THREE.DoubleSide }));
+  ring.position.y = -s.pos[1] + 0.02;
+  m.add(ring);
+  const num = makeNumber(s.index + 1, col); num.position.y = 0.75; m.add(num);
+  markerGroup.add(m); markers.push(m);
+}
+function makeNumber(n, col) {
+  const c = document.createElement('canvas'); c.width = 128; c.height = 128; const g = c.getContext('2d');
+  g.fillStyle = '#' + new THREE.Color(col).getHexString(); g.beginPath(); g.arc(64, 64, 52, 0, Math.PI * 2); g.fill();
+  g.fillStyle = '#0f1115'; g.font = '600 58px IBM Plex Mono, monospace'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(String(n), 64, 68);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, depthTest: false, transparent: true })); sp.scale.set(.55, .55, 1); sp.renderOrder = 6; return sp;
+}
+const routeMat = new THREE.LineDashedMaterial({ color: 0xe4b363, dashSize: .5, gapSize: .3, transparent: true, opacity: .7 });
+let routeLine = null;
+function levelOffset(level) { return (LEVEL_Y[String(level)] ?? 0) * (exploded ? 1.9 : 1); }
+function placeMarkers() {
+  markers.forEach(m => { const s = m.userData.stop; const lvl = areas[s.area].level; m.position.set(s.pos[0], levelOffset(lvl) + s.pos[1], s.pos[2]); });
+  for (const g of areaGroup.children) g.position.y = levelOffset(g.userData.level);
+  if (routeLine) { scene.remove(routeLine); routeLine.geometry.dispose(); }
+  const pts = markers.map(m => m.position.clone().setY(m.position.y + 0.1));
+  routeLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), routeMat); routeLine.computeLineDistances(); scene.add(routeLine);
+  for (const [id, rec] of loaded) placeSplat(rec.mesh, rec.stop);
+  for (const [, g] of cards) { const s = g.userData.stop; g.position.set(s.pos[0], levelOffset(areas[s.area].level) + s.pos[1], s.pos[2]); }
+}
+
+// ---------- splats (lazy, LRU) ----------
+const loaded = new Map(); // id -> {mesh, stop, t}
+const FLIP = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI); // OpenCV (y down, z fwd) -> three (y up, -z fwd)
+function placeSplat(mesh, s) {
+  const lvl = areas[s.area].level;
+  if (s.mv) { // multi-view splat: whole room in COLMAP world coords, aligned by tools/add_mv_stops.py
+    const t = data.mv[s.mv].transform; const c = t.centroid;
+    const q = new THREE.Quaternion(t.quat[0], t.quat[1], t.quat[2], t.quat[3]);
+    const off = new THREE.Vector3(c[0], c[1], c[2]).applyQuaternion(q).multiplyScalar(t.scale);
+    mesh.position.set(t.pos[0] - off.x, levelOffset(lvl) + t.pos[1] - off.y, t.pos[2] - off.z);
+    mesh.quaternion.copy(q); mesh.scale.setScalar(t.scale); return;
+  }
+  mesh.position.set(s.pos[0], levelOffset(lvl) + s.pos[1], s.pos[2]);
+  const q = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(s.yaw) + Math.PI);
+  mesh.quaternion.copy(q).multiply(FLIP);
+}
+function splatUrlOf(s) { const m = s.mv ? data.mv[s.mv] : s; return m.splat ? m.splat + '?v=' + (m.splatBytes || 0) : undefined; }
+function loadSplat(s) {
+  const key = splatUrlOf(s) || s.id;
+  if (loaded.has(key)) { loaded.get(key).t = performance.now(); return loaded.get(key).promise; }
+  if (!splatUrlOf(s)) { showPhotoCard(s); return Promise.resolve({ stop: s, ok: false, missing: true }); }
+  const rec = { stop: s, t: performance.now(), mesh: null, ok: false };
+  rec.promise = new Promise((resolve) => {
+    const mesh = new SplatMesh({ url: splatUrlOf(s), fileType: SplatFileType.PCSOGSZIP, onLoad: () => { rec.ok = true; resolve(rec); } });
+    rec.mesh = mesh; placeSplat(mesh, s); scene.add(mesh);
+    // fallback: if the file fails, Spark leaves an empty mesh; treat timeout as failure
+    setTimeout(() => { if (!rec.ok) resolve(rec); }, 20000);
+  });
+  loaded.set(key, rec);
+  evict();
+  return rec.promise;
+}
+function evict() {
+  while (loaded.size > MAX_LOADED) {
+    let oldest = null;
+    for (const [id, rec] of loaded) if (!oldest || rec.t < oldest.t) oldest = rec;
+    const cur = stops[current]; if (splatUrlOf(oldest.stop) === splatUrlOf(cur)) break;
+    scene.remove(oldest.mesh); oldest.mesh.dispose?.(); loaded.delete(splatUrlOf(oldest.stop) || oldest.stop.id);
+  }
+}
+
+// photo card: textured plane 3 m in front of the camera position, sized from the camera FOV
+const cards = new Map(); const texLoader = new THREE.TextureLoader();
+function showPhotoCard(s) {
+  if (cards.has(s.id)) return;
+  const dist = 3, fovY = THREE.MathUtils.degToRad(s.fovY || 60), fovX = THREE.MathUtils.degToRad(s.fovX || 47);
+  const h = 2 * dist * Math.tan(fovY / 2), w = 2 * dist * Math.tan(fovX / 2);
+  const tex = texLoader.load(`photos/${s.id}.jpg`); tex.colorSpace = THREE.SRGBColorSpace;
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide }));
+  const g = new THREE.Group(); mesh.position.z = dist; mesh.rotation.y = Math.PI; g.add(mesh);
+  const lvl = areas[s.area].level; g.position.set(s.pos[0], levelOffset(lvl) + s.pos[1], s.pos[2]);
+  g.rotation.y = THREE.MathUtils.degToRad(s.yaw); g.userData.stop = s;
+  scene.add(g); cards.set(s.id, g);
+}
+
+// ---------- controls ----------
+const orbit = new OrbitControls(camera, renderer.domElement);
+orbit.enableDamping = true; orbit.dampingFactor = .08; orbit.maxPolarAngle = Math.PI / 2 - 0.02; orbit.minDistance = 2; orbit.maxDistance = 120;
+const walk = new SparkControls({ canvas: renderer.domElement });
+if (walk.fpsMovement) { walk.fpsMovement.moveSpeed = 1.6; }
+let mode = 'overview', exploded = false, levelFilter = 'all', current = 0, showArea = false;
+function applyVisibility() {
+  const cur = stops[current]; const curUrl = splatUrlOf(cur);
+  for (const [url, rec] of loaded) {
+    const sameArea = rec.stop.area === cur.area;
+    rec.mesh.visible = url === curUrl || (showArea && sameArea && (mode === 'walk' || levelFilter === 'all' || String(areas[rec.stop.area].level) === levelFilter));
+  }
+  for (const [id, g] of cards) g.visible = id === cur.id || (showArea && g.userData.stop.area === cur.area);
+}
+let tween = null;
+
+function setMode(m) {
+  mode = m;
+  $('modeOverview').setAttribute('aria-pressed', m === 'overview'); $('modeWalk').setAttribute('aria-pressed', m === 'walk');
+  orbit.enabled = m === 'overview'; $('crosshair').hidden = m !== 'walk';
+  camera.near = m === 'walk' ? 0.35 : 0.05; camera.updateProjectionMatrix();
+  markerGroup.visible = m === 'overview'; areaGroup.visible = m === 'overview'; if (routeLine) routeLine.visible = m === 'overview';
+  grid.visible = m === 'overview'; ground.visible = m === 'overview'; lake.visible = m === 'overview';
+  scene.fog = m === 'overview' ? new THREE.Fog(0x0f1115, 60, 140) : null;
+  if (m === 'walk') enterStop(stops[current], true); else goOverview(stops[current]);
+  applyVisibility(); renderMap();
+}
+function tweenCamera(toPos, toLook, fov, ms = 900) {
+  const fromPos = camera.position.clone(), fromQ = camera.quaternion.clone(), fromFov = camera.fov;
+  // a camera looks down its local -Z, so derive the target orientation from a camera, not a plain Object3D
+  const tmp = new THREE.PerspectiveCamera(); tmp.up.copy(camera.up); tmp.position.copy(toPos); tmp.lookAt(toLook); const toQ = tmp.quaternion.clone(); camera.up.set(0, 1, 0);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; const t0 = performance.now();
+  tween = { step() {
+    const k = reduce ? 1 : Math.min(1, (performance.now() - t0) / ms); const e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    camera.position.lerpVectors(fromPos, toPos, e); camera.quaternion.slerpQuaternions(fromQ, toQ, e);
+    camera.fov = fromFov + (fov - fromFov) * e; camera.updateProjectionMatrix();
+    if (k >= 1) { tween = null; if (mode === 'overview') { orbit.target.copy(toLook); orbit.update(); } }
+  } };
+}
+function enterStop(s, instant = false) {
+  const m = markers[s.index]; const eye = m.position.clone();
+  const dir = s.look ? new THREE.Vector3(...s.look) : new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(s.yaw));
+  const look = eye.clone().add(dir);
+  const fov = s.fovY || 60;
+  if (s.up) camera.up.set(...s.up); else camera.up.set(0, 1, 0);
+  if (instant) { camera.position.copy(eye); camera.lookAt(look); camera.fov = fov; camera.updateProjectionMatrix(); }
+  else tweenCamera(eye, look, fov);
+}
+function goOverview(s) {
+  const a = areas[s.area]; const [x0, z0, x1, z1] = a.rect; const cy = levelOffset(a.level) + 1.2;
+  const center = new THREE.Vector3((x0 + x1) / 2, cy, (z0 + z1) / 2);
+  const span = Math.max(x1 - x0, z1 - z0);
+  const back = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(0, 1, 0), THREE.MathUtils.degToRad(s.yaw)).multiplyScalar(-1);
+  const eye = center.clone().add(back.multiplyScalar(span * 1.1 + 6)).add(new THREE.Vector3(0, span * 0.9 + 6, 0));
+  tweenCamera(eye, center, 55);
+}
+function cctv() { // straight-down over the whole lot
+  const eye = new THREE.Vector3(1, 78, 4), look = new THREE.Vector3(1, 0, 0);
+  tweenCamera(eye, look, 50);
+}
+
+// ---------- selection ----------
+const fadeEl = $('fade');
+function fadeThrough(fn) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { fn(); return; }
+  fadeEl.classList.add('on'); setTimeout(() => { fn(); setTimeout(() => fadeEl.classList.remove('on'), 250); }, 360);
+}
+async function select(i, opts = {}) {
+  current = (i + stops.length) % stops.length; const s = stops[current];
+  renderCard(s); renderMap();
+  if (mode === 'walk') { if (opts.instant) enterStop(s, true); else fadeThrough(() => enterStop(s, true)); }
+  else if (!opts.keepCamera) goOverview(s);
+  $('status').textContent = 'loading 3D…';
+  const rec = await loadSplat(s);
+  applyVisibility();
+  if (stops[current] !== s) return;
+  $('status').textContent = rec.ok ? (s.mv ? (s.gen ? `AI-expanded multi-view 3DGS · ${fmt(rec.mesh.numSplats)} gaussians` : `multi-view 3DGS (DA3 → Brush) · ${fmt(rec.mesh.numSplats)} gaussians`) : `single-image 3DGS (SHARP) · ${fmt(rec.mesh.numSplats)} gaussians (${s.sub || '1/4'}) · fov ${s.fovY}°`) : (rec.missing ? 'no splat · photo only' : 'splat load failed');
+  // preload the next stop so stepping feels instant (kept hidden until selected)
+  const nx = stops[(current + 1) % stops.length]; loadSplat(nx).then(applyVisibility);
+}
+function fmt(n) { return n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(0) + 'k' : String(n); }
+function renderCard(s) {
+  const a = areas[s.area];
+  $('areaName').textContent = a.name; $('areaKo').textContent = a.ko;
+  $('counter').textContent = `${s.index + 1} / ${stops.length}`;
+  $('photo').src = `photos/${s.photo || s.id}.jpg`;
+  const sev = $('sev'); sev.dataset.s = s.severity;
+  sev.textContent = ({ 'major-concern': 'major concern', 'due-diligence': 'due diligence', 'other': s.tag || 'acceptable', 'description': 'general photo' }[s.severity] || s.severity) + (s.gen ? ' · AI-expanded' : s.mv ? ' · multi-view' : '');
+  $('label').textContent = s.label || a.name;
+  $('chapter').textContent = [s.chapter, s.dt ? s.dt.replace(/:/, '-').replace(/:/, '-') : null, s.file].filter(Boolean).join(' · ');
+  $('text').textContent = (s.text || s.caption || '').replace(/^[A-Z /]+:\s*✒️?\s*/, '').replace(/✒️/g, '').trim();
+}
+
+// ---------- mini map ----------
+const svg = $('mapSvg');
+function renderMap() {
+  const lv = levelFilter;
+  let h = '';
+  h += `<rect x="14" y="-30" width="30" height="12" fill="#1b3144" opacity=".7"/><text class="lk" x="15" y="-27.5">LAKE</text>`;
+  for (const [key, a] of Object.entries(areas)) {
+    if (lv !== 'all' && String(a.level) !== lv && !(lv === '2' && a.level === 3)) continue;
+    const [x0, z0, x1, z1] = a.rect; const on = stops[current].area === key;
+    h += `<rect class="area ${on ? 'on' : ''}" data-area="${key}" x="${x0}" y="${z0}" width="${x1 - x0}" height="${z1 - z0}" rx=".4"/>`;
+    h += `<text class="lbl" x="${x0 + .4}" y="${z0 + 1.3}">${a.name.split(' ')[0]}</text>`;
+  }
+  for (const s of stops) {
+    const a = areas[s.area]; if (lv !== 'all' && String(a.level) !== lv && !(lv === '2' && a.level === 3)) continue;
+    const col = '#' + new THREE.Color(SEV_COLOR[s.severity] ?? SEV_COLOR.description).getHexString();
+    const cur = s.index === current;
+    if (cur) { const r = THREE.MathUtils.degToRad(s.yaw); const dx = Math.sin(r) * 2.2, dz = Math.cos(r) * 2.2;
+      h += `<path class="cam" d="M${s.pos[0] + Math.sin(r - .4) * 2.2},${s.pos[2] + Math.cos(r - .4) * 2.2} L${s.pos[0]},${s.pos[2]} L${s.pos[0] + Math.sin(r + .4) * 2.2},${s.pos[2] + Math.cos(r + .4) * 2.2}"/>`; }
+    if (s.mv) { h += `<rect class="stop ${cur ? 'cur' : ''}" data-i="${s.index}" x="${s.pos[0] - .6}" y="${s.pos[2] - .6}" width="1.2" height="1.2" fill="${col}" stroke="#fff" stroke-width="${cur ? .5 : .15}"><title>${s.index + 1}. ${s.label}</title></rect>`; continue; }
+    h += `<circle class="stop ${cur ? 'cur' : ''}" data-i="${s.index}" cx="${s.pos[0]}" cy="${s.pos[2]}" r="${cur ? .9 : .6}" fill="${col}" opacity="${s.splat ? 1 : .35}"><title>${s.index + 1}. ${s.label || a.name}</title></circle>`;
+  }
+  svg.innerHTML = h;
+  $('mapLevel').textContent = lv === 'all' ? 'all levels' : ({ '-1': 'basement', '0': 'main / outside', '1': 'upper', '2': 'attic / roof' })[lv];
+}
+svg.addEventListener('click', (e) => {
+  const c = e.target.closest('.stop'); if (c) { select(+c.dataset.i); return; }
+  const r = e.target.closest('rect.area'); if (r) { const f = stops.find(s => s.area === r.dataset.area); if (f) select(f.index); }
+});
+
+// ---------- level filter / explode ----------
+function applyLevel() {
+  for (const g of areaGroup.children) g.visible = levelFilter === 'all' || String(g.userData.level) === levelFilter || (levelFilter === '2' && g.userData.level === 3);
+  markers.forEach(m => { const lvl = areas[m.userData.stop.area].level; m.visible = levelFilter === 'all' || String(lvl) === levelFilter || (levelFilter === '2' && lvl === 3); });
+  applyVisibility();
+  if (routeLine) routeLine.visible = mode === 'overview' && levelFilter === 'all';
+  renderMap();
+}
+$('levels').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return;
+  levelFilter = b.dataset.level; [...$('levels').children].forEach(x => x.setAttribute('aria-pressed', x === b)); applyLevel(); });
+$('explode').addEventListener('click', () => { exploded = !exploded; $('explode').setAttribute('aria-pressed', exploded); placeMarkers(); if (mode === 'overview') goOverview(stops[current]); });
+$('loadArea').addEventListener('click', async () => {
+  showArea = !showArea; $('loadArea').setAttribute('aria-pressed', showArea);
+  if (showArea) { const a = stops[current].area; const list = stops.filter(s => s.area === a && !s.mv); toast(`${areas[a].name}: ${list.length}개 splat 불러오는 중…`); await Promise.all(list.map(loadSplat)); toast(`${areas[a].name}: 같은 구역 splat 전부 표시 (서로 다른 사진의 독립 복원이라 겹침·고스트가 생깁니다)`); }
+  applyVisibility();
+});
+
+// ---------- picking ----------
+const ray = new THREE.Raycaster(); const ptr = new THREE.Vector2(); let downAt = null;
+renderer.domElement.addEventListener('pointerdown', (e) => { downAt = [e.clientX, e.clientY]; if (tourOn) $('tour').click(); });
+renderer.domElement.addEventListener('pointerup', (e) => {
+  if (!downAt || mode !== 'overview') return; const moved = Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]); downAt = null; if (moved > 5) return;
+  const r = renderer.domElement.getBoundingClientRect(); ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ptr, camera); ray.params.Sprite = { threshold: .4 };
+  const hits = ray.intersectObjects(markers.filter(m => m.visible), true);
+  if (hits.length) { let o = hits[0].object; while (o && !o.userData.stop) o = o.parent; if (o) select(o.userData.stop.index, { keepCamera: false }); }
+});
+renderer.domElement.addEventListener('wheel', (e) => {
+  if (mode !== 'walk') return; e.preventDefault();
+  const dir = new THREE.Vector3(); camera.getWorldDirection(dir); camera.position.addScaledVector(dir, -Math.sign(e.deltaY) * 0.25);
+}, { passive: false });
+renderer.domElement.addEventListener('dblclick', () => { if (mode === 'overview') setMode('walk'); });
+
+// ---------- UI wiring ----------
+$('modeOverview').onclick = () => setMode('overview');
+$('modeWalk').onclick = () => setMode('walk');
+$('enter').onclick = () => setMode('walk');
+$('prev').onclick = () => select(current - 1);
+$('next').onclick = () => select(current + 1);
+$('helpBtn').onclick = () => { $('help').hidden = !$('help').hidden; };
+$('photoBox').onclick = () => { $('lightImg').src = $('photo').src; $('lightCap').textContent = stops[current].file + ' · 원본 사진'; $('lightbox').hidden = false; };
+$('lightbox').onclick = () => { $('lightbox').hidden = true; };
+addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.repeat) return;
+  if (e.key === 'ArrowRight' && mode === 'overview') select(current + 1);
+  else if (e.key === 'ArrowLeft' && mode === 'overview') select(current - 1);
+  else if (e.key === 'Enter') setMode(mode === 'overview' ? 'walk' : 'overview');
+  else if (e.key === 'Escape') { if (!$('lightbox').hidden) $('lightbox').hidden = true; else if (mode === 'walk') setMode('overview'); }
+  else if (e.key === 'n' || e.key === 'N') select(current + 1);
+  else if (e.key === 'p' || e.key === 'P') select(current - 1);
+  else if (e.key === 't' || e.key === 'T') { if (mode === 'overview') cctv(); }
+});
+let tourOn = false, tourT = null, tourPhase = 0;
+function tourStep() {
+  if (!tourOn) return;
+  select(current + 1); tourPhase = 0;
+  tourT = setTimeout(tourStep, 7000);
+}
+$('tour').onclick = () => {
+  tourOn = !tourOn; $('tour').setAttribute('aria-pressed', tourOn); $('tour').textContent = tourOn ? '■ Stop tour' : '▶ Auto tour';
+  if (tourOn) { if (mode !== 'walk') setMode('walk'); tourT = setTimeout(tourStep, 6000); } else clearTimeout(tourT);
+};
+let toastT; function toast(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200); }
+
+// ---------- loop ----------
+function resize() { const w = stage.clientWidth, h = stage.clientHeight; camera.aspect = w / h; camera.updateProjectionMatrix(); renderer.setSize(w, h); }
+addEventListener('resize', resize);
+renderer.setAnimationLoop(() => {
+  if (tween) tween.step();
+  else if (mode === 'overview') orbit.update();
+  else { walk.update(camera); if (tourOn) { tourPhase += 0.0035; camera.rotateY(Math.sin(tourPhase) * 0.0012); } }
+  renderer.render(scene, camera);
+});
+
+
+// ---------- Carbyn spatial work-order / RFI pins ----------
+const VERT = { mfg: { name: 'Manufacturing', col: 0xffcd11, css: '#FFCD11' }, con: { name: 'Big Construction', col: 0x60a5fa, css: '#60A5FA' }, mep: { name: 'MEP Commissioning', col: 0x34d399, css: '#34D399' } };
+const POV = (n) => [`../assets/product-ui/pov_${n}.webm`, `../assets/product-ui/pov_${n}.mp4`];
+const PINS = [
+  { v: 'mfg', stop: 'IMG_8937', off: [0, 0.6, 2.4], id: 'WO-48213', sys: 'IBM Maximo MAS 9', title: 'AHU-B1 supply duct · insulation torn at elbow', video: 'mfg_skid',
+    fields: [['Asset', 'AHU-B1-SUP-04'], ['Failure class', 'ISO 14224 · INL (insulation)'], ['Priority', '2 · energy loss'], ['Labor', '1.5 h · HVAC tech'], ['Status', 'WAPPR → APPR']],
+    voice: '"Supply duct on AHU-B1, foil wrap torn at the elbow, about eight inches. Schedule re-wrap this week."' },
+  { v: 'mfg', stop: 'IMG_8947', off: [0.4, 0.9, 2.2], id: 'LMB-7731', sys: 'Limble CMMS', title: 'EF-03 exhaust fan · PM vibration route', video: 'mfg_skid',
+    fields: [['Asset', 'EF-03 · Basement exhaust'], ['PM template', 'Quarterly vibration + belt'], ['Reading', '0.31 in/s RMS (alert 0.30)'], ['Parts', 'Belt A-42 · staged'], ['Status', 'Open · due Fri']],
+    voice: '"EF-03 reading point-three-one inches per second, just over alert. Belt looks glazed, stage an A-42."' },
+  { v: 'con', stop: 'IMG_6197', off: [0, 0.4, 2.0], id: 'RFI-0142', sys: 'Procore RFI', title: 'BIM vs as-built · TJI joist bay notched at J-14', video: 'construction_walk',
+    fields: [['Drawing', 'S-201 · Grid C/14'], ['Deviation', 'Field notch 2 in. vs no-notch detail'], ['Ball in court', 'Structural EOR'], ['Cost impact', 'TBD'], ['Status', 'Draft → Open']],
+    voice: '"Joist bay J-fourteen has a field notch on the bottom flange. Not in S-201. Need EOR direction before close-in."' },
+  { v: 'con', stop: 'IMG_6111', off: [0.3, 0.3, 2.2], id: 'ISS-2207', sys: 'Autodesk ACC Build', title: 'Attic insulation depth below R-38 spec', video: 'construction_walk',
+    fields: [['Issue type', 'Quality · Deviation'], ['Location', 'L3 Attic · Bay A'], ['Measured', '9 in. blown (spec 13 in.)'], ['Assigned', 'Insulation sub'], ['Status', 'Open · pinned to sheet A-501']],
+    voice: '"Attic bay A, blown insulation about nine inches. Spec says R-38, so thirteen. Open an issue to the insulation sub."' },
+  { v: 'mep', stop: 'IMG_2840', off: [0, 0.2, 1.6], id: 'CX-L2-031', sys: 'ACC Build · Cx checklist', title: 'Panel LP-1 · L2 functional test + torque check', video: 'mep_panel',
+    fields: [['Equipment', 'LP-1 · 208/120V 42-ckt'], ['Checklist', 'L2 pre-functional · 18 items'], ['Torque', 'Lugs verified 250 in-lb'], ['Labeling', 'Ckt 14, 22 unlabeled'], ['Status', '16 / 18 pass · 2 open']],
+    voice: '"LP-1 lugs torqued to two-fifty inch-pounds. Circuits fourteen and twenty-two have no labels, open those two items."' },
+  { v: 'mep', stop: 'IMG_8954', off: [0.2, 0.5, 2.0], id: 'CX-PNC-118', sys: 'Procore Punch', title: 'Conduit stub-up unlabeled at crawl wall', video: 'mep_panel',
+    fields: [['System', 'Branch power · 3/4 in. EMT'], ['Location', 'Crawl · north wall'], ['Spec', 'Div 26 05 53 identification'], ['Assignee', 'Electrical sub'], ['Status', 'Punch · open']],
+    voice: '"Three-quarter EMT stub-up on the north crawl wall, no identification. Punch it to the electrical sub."' },
+];
+const pinGroup = new THREE.Group(); scene.add(pinGroup);
+const pinObjs = [];
+function pinSprite(text, css) {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 112; const g = c.getContext('2d');
+  g.fillStyle = 'rgba(11,11,13,.86)'; g.beginPath(); g.roundRect(0, 0, 512, 112, 20); g.fill();
+  g.fillStyle = css; g.fillRect(0, 0, 12, 112);
+  g.fillStyle = css; g.font = '600 40px IBM Plex Mono, monospace'; g.textBaseline = 'middle'; g.fillText(text, 30, 58);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: t, depthTest: false, transparent: true })); sp.scale.set(1.6, 0.35, 1); sp.renderOrder = 9; return sp;
+}
+for (const p of PINS) {
+  p.s = stops.find(s => s.id === p.stop); const V = VERT[p.v];
+  const g = new THREE.Group(); g.userData.pin = p;
+  const head = new THREE.Mesh(new THREE.OctahedronGeometry(0.16), new THREE.MeshBasicMaterial({ color: V.col, depthTest: false, transparent: true }));
+  head.renderOrder = 8; g.add(head);
+  const halo = new THREE.Mesh(new THREE.RingGeometry(0.22, 0.27, 32), new THREE.MeshBasicMaterial({ color: V.col, transparent: true, opacity: .8, depthTest: false, side: THREE.DoubleSide }));
+  halo.renderOrder = 8; g.add(halo); g.userData.halo = halo;
+  const lab = pinSprite(p.id, V.css); lab.position.y = 0.42; g.add(lab);
+  pinGroup.add(g); pinObjs.push(g);
+}
+function placePins() {
+  for (const g of pinObjs) {
+    const p = g.userData.pin, s = p.s, lvl = areas[s.area].level;
+    const yaw = THREE.MathUtils.degToRad(s.yaw);
+    const fwd = new THREE.Vector3(Math.sin(yaw), 0, Math.cos(yaw)), right = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
+    g.position.set(s.pos[0], levelOffset(lvl) + s.pos[1] + p.off[1] - 0.6, s.pos[2]).addScaledVector(fwd, p.off[2]).addScaledVector(right, p.off[0]);
+  }
+}
+let curVert = 'mfg', curPin = null;
+function renderWo() {
+  const list = PINS.filter(p => p.v === curVert); const V = VERT[curVert];
+  $('woList').innerHTML = list.map(p => `<div class="pin ${curPin === p ? 'on' : ''}" style="--pc:${V.css}" data-id="${p.id}"><i>${p.id}</i><div><b>${p.title}</b><small>${p.sys} · ${areas[p.s.area].name}</small></div></div>`).join('');
+  [...$('woTabs').children].forEach(b => { const on = b.dataset.v === curVert; b.setAttribute('aria-pressed', on); b.style.background = on ? VERT[b.dataset.v].css : ''; });
+  $('woCount').textContent = `${PINS.length} pins · 3 verticals`;
+  for (const g of pinObjs) g.visible = g.userData.pin.v === curVert;
+}
+function openPin(p, opts = {}) {
+  curPin = p; curVert = p.v; const V = VERT[p.v];
+  const pov = $('pov'); pov.hidden = false; pov.style.setProperty('--pc', V.css);
+  const vid = $('povVid'); const want = p.video;
+  if (vid.dataset.v !== want) { vid.dataset.v = want; vid.innerHTML = POV(want).map((u, i) => `<source src="${u}" type="video/${i ? 'mp4' : 'webm'}">`).join(''); vid.load(); vid.play().catch(() => {}); }
+  $('povSys').textContent = `${V.name.toUpperCase()} · ${p.sys}`; $('povId').textContent = p.id;
+  $('povTitle').textContent = p.title;
+  $('povFields').innerHTML = p.fields.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('povVoice').textContent = p.voice;
+  renderWo();
+  if (!opts.noNav) select(p.s.index);
+}
+$('woTabs').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; curVert = b.dataset.v; const first = PINS.find(p => p.v === curVert); openPin(first); });
+$('woList').addEventListener('click', (e) => { const r = e.target.closest('.pin'); if (r) openPin(PINS.find(p => p.id === r.dataset.id)); });
+$('povX').onclick = () => { $('pov').hidden = true; };
+renderer.domElement.addEventListener('click', (e) => {
+  const r = renderer.domElement.getBoundingClientRect(); const v = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  const rc = new THREE.Raycaster(); rc.setFromCamera(v, camera); rc.params.Sprite = { threshold: .3 };
+  const hits = rc.intersectObjects(pinObjs.filter(g => g.visible), true);
+  if (hits.length) { let o = hits[0].object; while (o && !o.userData.pin) o = o.parent; if (o) openPin(o.userData.pin); }
+});
+const _pm = placeMarkers; placeMarkers = function () { _pm(); placePins(); };
+renderer.setAnimationLoop(null);
+renderer.setAnimationLoop(() => {
+  if (tween) tween.step();
+  else if (mode === 'overview') orbit.update();
+  else { walk.update(camera); if (tourOn) { tourPhase += 0.0035; camera.rotateY(Math.sin(tourPhase) * 0.0012); } }
+  const t = performance.now() / 1000;
+  for (const g of pinObjs) { g.children[0].rotation.y = t * 1.5; const h = g.userData.halo; h.lookAt(camera.position); const k = (curPin === g.userData.pin) ? 1.25 + 0.2 * Math.sin(t * 5) : 1; h.scale.setScalar(k); }
+  renderer.render(scene, camera);
+});
+// map overlay: pins on the floor plan
+const _rm = renderMap; renderMap = function () { _rm(); let h = '';
+  for (const p of PINS) { if (p.v !== curVert) continue; const s = p.s; h += `<rect x="${s.pos[0] - .8}" y="${s.pos[2] - .8}" width="1.6" height="1.6" transform="rotate(45 ${s.pos[0]} ${s.pos[2]})" fill="${VERT[p.v].css}" stroke="#111" stroke-width=".25"><title>${p.id} ${p.title}</title></rect>`; }
+  svg.insertAdjacentHTML('beforeend', h); };
+
+// ---------- boot ----------
+placeMarkers(); applyLevel();
+camera.position.set(14, 40, 46); camera.lookAt(0, 0, 0); orbit.target.set(0, 0, 0); orbit.update();
+$('loadMsg').textContent = 'loading first splat…';
+if (new URLSearchParams(location.search).has('embed')) document.body.classList.add('embed');
+placePins(); renderWo();
+await select(PINS[0].s.index);
+openPin(PINS[0], { noNav: true });
+$('loading').classList.add('done');
+$('subtitle').textContent = `${PINS.length} spatial pins · ${stops.length} capture stops · ${stops.filter(s => !s.mv).length} single-image + ${Object.keys(data.mv || {}).length} multi-view splats`;
+
+toast('Click a WO / RFI pin · Enter = 1st-person walk · T = top-down CCTV');
+window.__app = { scene, camera, stops, loaded, select, setMode, openPin, PINS };
+</script>
+
+</body></html>
