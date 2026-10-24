@@ -21,7 +21,7 @@ sub('<button data-level="0">1층·외부</button>', '<button data-level="0">L1</
 sub('<button data-level="1">2층</button>', '<button data-level="1">L2</button>')
 sub('<button data-level="2">다락·지붕</button>', '<button data-level="2">Attic/Roof</button>')
 sub('<button class="btn" id="explode" aria-pressed="false">층 분리</button>', '<button class="btn" id="explode" aria-pressed="false">Explode levels</button>')
-sub('<button class="btn" id="loadArea" aria-pressed="false">같은 구역 전부 표시</button>', '')
+sub('<button class="btn" id="loadArea" aria-pressed="false">같은 구역 전부 표시</button>', '<button class="btn" id="loadArea" aria-pressed="false" hidden></button>')
 sub('<button class="btn" id="tour" aria-pressed="false">▶ 자동 투어</button>', '<button class="btn" id="tour" aria-pressed="false">▶ Auto tour</button>')
 sub('<button class="btn" id="enter">이 지점에서 걷기</button>', '<button class="btn" id="enter">Walk from here</button>')
 sub("tourOn ? '■ 투어 정지' : '▶ 자동 투어'", "tourOn ? '■ Stop tour' : '▶ Auto tour'")
