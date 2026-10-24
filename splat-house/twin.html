@@ -673,7 +673,7 @@ $('loading').classList.add('done');
 $('subtitle').textContent = `${PINS.length} spatial pins · ${stops.length} capture stops · ${stops.filter(s => !s.mv).length} single-image + ${Object.keys(data.mv || {}).length} multi-view splats`;
 
 toast('Click a WO / RFI pin · Enter = 1st-person walk · T = top-down CCTV');
-window.__app = { scene, camera, stops, loaded, select, setMode, openPin, PINS };
+window.__app = { scene, camera, stops, loaded, select, setMode, openPin, PINS, renderer, freeze: () => { renderer.setAnimationLoop(null); renderer.render(scene, camera); } };
 </script>
 
 </body></html>

@@ -195,6 +195,6 @@ const _rm = renderMap; renderMap = function () { _rm(); let h = '';
 sub("// ---------- boot ----------", PINS_JS + "\n// ---------- boot ----------")
 sub("await select(0);", "if (new URLSearchParams(location.search).has('embed')) document.body.classList.add('embed');\nplacePins(); renderWo();\nawait select(PINS[0].s.index);\nopenPin(PINS[0], { noNav: true });")
 sub("setTimeout(cctv, 300);", "")
-sub("window.__app = { scene, camera, stops, loaded, select, setMode };", "window.__app = { scene, camera, stops, loaded, select, setMode, openPin, PINS };")
+sub("window.__app = { scene, camera, stops, loaded, select, setMode };", "window.__app = { scene, camera, stops, loaded, select, setMode, openPin, PINS, renderer, freeze: () => { renderer.setAnimationLoop(null); renderer.render(scene, camera); } };")
 (R / 'twin.html').write_text(src)
 print('ok', len(src))
