@@ -25,7 +25,19 @@ with sync_playwright() as p:
         except Exception as e:
             logs.append('EVALERR ' + str(e)[:200])
         pg.wait_for_timeout(3000)
-    pg.screenshot(path=out, timeout=120000)
+    try:
+        st = pg.evaluate('JSON.stringify({app: !!window.__app, loaded: document.getElementById("loading") && document.getElementById("loading").className, status: (document.getElementById("status")||{}).textContent})')
+        logs.append('STATE ' + st)
+    except Exception as e:
+        logs.append('STATEERR ' + str(e)[:100])
+    try:
+        pg.screenshot(path=out, timeout=60000)
+    except Exception as e:
+        logs.append('SHOT-FALLBACK ' + str(e)[:80])
+        import base64
+        cdp = pg.context.new_cdp_session(pg)
+        d = cdp.send('Page.captureScreenshot', {'format': 'png'})
+        open(out, 'wb').write(base64.b64decode(d['data']))
     for l in logs[-15:]:
         print(l)
     b.close()
