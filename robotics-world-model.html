@@ -302,9 +302,8 @@
   setInterval(() => {
     if (rVid.paused || rVid.seeking) { wdAt = performance.now(); return; }
     if (rVid.currentTime !== wdT) { wdT = rVid.currentTime; wdAt = performance.now(); return; }
-    if (performance.now() - wdAt > 1500) { wdAt = performance.now(); try { rVid.currentTime = 0.05; } catch (e) {} rVid.play().catch(()=>{}); }
+    if (performance.now() - wdAt > 1500) { wdAt = performance.now(); wdT = -1; rVid.load(); rVid.play().catch(()=>{}); }
   }, 500);
-  rVid.addEventListener('ended', () => { rVid.currentTime = 0; rVid.play().catch(()=>{}); });
   function drawRobLoop() {
     const W = rCvs.width, H = rCvs.height;
     rCtx.fillStyle = '#07080B'; rCtx.fillRect(0, 0, W, H);
