@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARBYN | Egocentric Robotics World Model Pipeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #0B0B0C;
+      --text-head: #F4F4F2;
+      --text-body: #D3D3D1;
+      --text-muted: #8E8E93;
+      --accent: #FFD100;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg-hover: rgba(255, 255, 255, 0.13);
+      --glass-border: rgba(255, 255, 255, 0.16);
+      --green: #32D74B;
+      --red: #FF453A;
+      --orange: #FF9F0A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 48px 96px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    @media (max-width: 1180px) {
+      body { padding: 32px 24px; }
+    }
+    a { color: var(--text-head); text-decoration: underline; }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--glass-border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color: var(--text-head);
+      text-transform: uppercase;
+    }
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text-head);
+    }
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .nav-pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-head);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .nav-pill:hover, .nav-pill.active {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    header { margin-bottom: 40px; }
+    h1 {
+      color: var(--text-head);
+      font-size: 64px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 980px;
+    }
+    .lead {
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text-body);
+      max-width: 1080px;
+      line-height: 1.35;
+    }
+    @media (max-width: 900px) {
+      h1 { font-size: 40px; }
+      .lead { font-size: 20px; }
+    }
+    /* ONE YELLOW FOCAL POINT CARD */
+    .focal-card {
+      background: var(--accent);
+      color: #000000;
+      border-radius: 24px;
+      padding: 40px;
+      border: 1px solid #000000;
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: 1.25fr 1.75fr;
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .focal-card { grid-template-columns: 1fr; }
+    }
+    .focal-card h2, .focal-card p, .focal-card div, .focal-card span, .focal-card strong {
+      color: #000000;
+    }
+    .focal-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .focal-kpi-box {
+      background: rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .focal-kpi-val {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .focal-kpi-lbl {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .glass-panel {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 1180px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+    .overlay-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-ctrl {
+      padding: 9px 15px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-head);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-ctrl.active {
+      background: #F4F4F2;
+      color: #0B0B0C;
+    }
+    .viewport-stage {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      background: #000;
+      margin-bottom: 20px;
+    }
+    .viewport-stage img#baseFrame {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.88;
+    }
+    .viewport-stage canvas#poseCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .timeline-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .step-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .step-card:hover, .step-card.active {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: #F4F4F2;
+    }
+    .step-card img {
+      width: 100%;
+      height: 76px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .evidence-tag {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--text-head);
+      margin-right: 6px;
+    }
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    table.spec-table th, table.spec-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--glass-border);
+      text-align: left;
+      vertical-align: top;
+    }
+    table.spec-table th {
+      color: var(--text-head);
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>CARBYN // EGOCENTRIC ROBOTICS DATA ENGINE</span>
+    </div>
+    <div class="nav-links">
+      <a href="b2b-product-blueprint.html" class="nav-pill">Master B2B Product Blueprint</a>
+      <a href="3dgs-digital-twin.html" class="nav-pill">3DGS Spatial Digital Twin</a>
+      <a href="robotics-world-model.html" class="nav-pill active">Robotics World Model Pipeline</a>
+      <a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank" class="nav-pill">Paper MCP Canvas</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Robotics World Model Pipeline</h1>
+    <p class="lead">Transforming frontline B2B maintenance &amp; assembly video into 6-DoF hand-tool trajectories, contact affordance maps, and latent state-action-observation tuples for humanoid &amp; VLA foundation models.</p>
+  </header>
+
+  <!-- ONE YELLOW FOCAL POINT CARD -->
+  <section class="focal-card">
+    <div>
+      <div style="font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">B2B SaaS WEDGE TO PHYSICAL AI FLYWHEEL</div>
+      <h2 style="font-size:32px; font-weight:700; line-height:1.15; margin-bottom:12px;">Every Annotated SOP &amp; Work Order Generates High-Margin Robotics Training Data</h2>
+      <p style="font-size:15px; line-height:1.5;">Lab teleoperation rigs cannot replicate 45 Nm rusted flange breakaway torque or blind cable harness routing inside a live switchgear cabinet. Carbyn captures verified egocentric video paired with voice CoT reasoning and CMMS ground-truth outcomes.</p>
+    </div>
+    <div class="focal-kpis">
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">1,000+ Hrs</div>
+        <div class="focal-kpi-lbl">[FACT] V-JEPA 2 action-conditioned world model fine-tune threshold (Meta AI)</div>
+      </div>
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">6-DoF + CoT</div>
+        <div class="focal-kpi-lbl">[FACT] Synchronized bimanual hand pose, tool vector, and spoken technician intent</div>
+      </div>
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">$0 CapEx</div>
+        <div class="focal-kpi-lbl">[INFERENCE] Data collection cost subsidized by B2B CMMS/SOP SaaS contracts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE PIPELINE VISUALIZER -->
+  <div class="grid-2">
+    <div class="glass-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2 style="color:var(--text-head); font-size:24px; font-weight:600;">Egocentric Vision-to-Action Annotation Stage</h2>
+          <p style="font-size:14px; color:var(--text-muted);">Select trajectory frame (t0..t3) and toggle 6-DoF hand skeleton, contact heatmap, and SE(3) wrench vectors</p>
+        </div>
+        <div class="overlay-controls">
+          <button class="btn-ctrl active" id="ov-hand" onclick="toggleOv('hand')">21-Keypoint Hand 6-DoF</button>
+          <button class="btn-ctrl active" id="ov-tool" onclick="toggleOv('tool')">Tool SE(3) Vector</button>
+          <button class="btn-ctrl active" id="ov-heat" onclick="toggleOv('heat')">Contact Affordance Heatmap</button>
+          <button class="btn-ctrl active" id="ov-latent" onclick="toggleOv('latent')">V-JEPA 2 Latent Tokens</button>
+        </div>
+      </div>
+
+      <div class="viewport-stage">
+        <img id="baseFrame" src="assets/product-ui/pov_frame_01.jpg" alt="Egocentric Frame" />
+        <canvas id="poseCanvas" width="900" height="480"></canvas>
+      </div>
+
+      <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:10px;">
+        STATE-ACTION-OBSERVATION TRAJECTORY TIMELINE: (s_t, a_t, z_{t+1}) // CLICK STEP TO INSPECT
+      </div>
+      <div class="timeline-strip">
+        <div class="step-card active" id="step-0" onclick="selectStep(0)">
+          <img src="assets/product-ui/pov_frame_01.jpg" alt="Step t0" />
+          <div style="font-family:monospace; font-size:11px; color:var(--text-muted);">t = 0.00s // STATE s_0</div>
+          <div style="font-weight:600; font-size:13px; color:var(--text-head);">Pre-Grasp Approach</div>
+        </div>
+        <div class="step-card" id="step-1" onclick="selectStep(1)">
+          <img src="assets/product-ui/pov_frame_02.jpg" alt="Step t1" />
+          <div style="font-family:monospace; font-size:11px; color:var(--text-muted);">t = 1.40s // ACTION a_1</div>
+          <div style="font-weight:600; font-size:13px; color:var(--text-head);">Precision Socket Seat</div>
+        </div>
+        <div class="step-card" id="step-2" onclick="selectStep(2)">
+          <img src="assets/product-ui/pov_frame_03.jpg" alt="Step t2" />
+          <div style="font-family:monospace; font-size:11px; color:var(--text-muted);">t = 3.10s // TORQUE a_2</div>
+          <div style="font-weight:600; font-size:13px; color:var(--text-head);">45 Nm Impulse Drive</div>
+        </div>
+        <div class="step-card" id="step-3" onclick="selectStep(3)">
+          <img src="assets/product-ui/pov_frame_04.jpg" alt="Step t3" />
+          <div style="font-family:monospace; font-size:11px; color:var(--text-muted);">t = 4.85s // VERIFY z_3</div>
+          <div style="font-weight:600; font-size:13px; color:var(--text-head);">Post-Condition Check</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: RLDS / VLA EXPORT & LIVE VIDEO -->
+    <div class="glass-panel">
+      <h2 style="color:var(--text-head); font-size:22px; font-weight:600; margin-bottom:6px;">VLA / Humanoid Policy Export Tuple</h2>
+      <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">Open X-Embodiment (RLDS) &amp; V-JEPA 2 conditioned latent transition tensor.</p>
+
+      <div style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:12px; padding:14px; margin-bottom:16px;">
+        <div style="font-size:11px; font-family:monospace; color:var(--text-muted); margin-bottom:4px;">SPOKEN TECHNICIAN CHAIN-OF-THOUGHT (AUDIO -> WHISPER-LARGE-V3)</div>
+        <div id="cot-quote" style="font-size:14px; color:var(--text-head); font-weight:500;">"Seating 19mm deep socket onto Pump P-204 flange bolt #3; checking threads for galling before applying 45 Newton-meters."</div>
+      </div>
+
+      <pre id="rlds-json" style="background:#050506; border:1px solid var(--glass-border); border-radius:12px; padding:16px; font-size:12px; color:#32D74B; overflow-x:auto; line-height:1.45; margin-bottom:20px;"></pre>
+
+      <div style="padding-top:16px; border-top:1px solid var(--glass-border);">
+        <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:8px;">RAW CONTINUOUS EGOCENTRIC CAPTURE (SVE-DEMO.MP4)</div>
+        <video src="assets/product-ui/sve-demo.mp4" controls muted loop playsinline style="width:100%; border-radius:12px; border:1px solid var(--glass-border); background:#000;"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCIENTIFIC & COMMERCIAL GROUNDING TABLE -->
+  <section class="glass-panel">
+    <h2 style="color:var(--text-head); font-size:28px; font-weight:600; margin-bottom:12px;">2026 Robotics World Model &amp; Egocentric Data Benchmark Alignment</h2>
+    <p style="font-size:15px; color:var(--text-body); margin-bottom:16px;">Grounded in VIS 2026 V-JEPA 2, CoRL 2026 World Models Workshop, Figure 02 at BMW Spartanburg, and DaedalusIQ industrial capture architecture.</p>
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Research / Industry Pillar</th>
+          <th>Technical Requirement for Physical AI</th>
+          <th>How Carbyn B2B Field Capture Delivers It</th>
+          <th>Primary Evidence &amp; Citation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--text-head);">Meta AI V-JEPA 2 (2025/2026)</strong><br><span style="font-size:12px; color:var(--text-muted);">Self-Supervised Video World Models</span></td>
+          <td>Pre-trained on 1M+ hours of internet video, then aligned with action-conditioned latent dynamics <code>z_{t+1} = F(z_t, a_t)</code> using &lt;1,000 hrs of physical interaction trajectories.</td>
+          <td>Carbyn extracts dense 6-DoF hand-object trajectories and tool state transitions directly from industrial maintenance clips.</td>
+          <td><span class="evidence-tag">[FACT]</span> <a href="https://ai.meta.com/blog/v-jepa-2-world-model-benchmarks/" target="_blank">Meta V-JEPA 2 Benchmark Report</a> &amp; <a href="https://arxiv.org/abs/2506.09985" target="_blank">arXiv:2506.09985</a></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text-head);">Figure 02 at BMW Spartanburg</strong><br><span style="font-size:12px; color:var(--text-muted);">Humanoid Factory Deployment</span></td>
+          <td>400% speed increase and 7x grasping success required sub-millimeter bimanual coordination and failure-recovery demonstrations on sheet-metal fixtures.</td>
+          <td>Carbyn Video-to-SOP v2 automatically isolates anomaly/failure recovery clips (e.g. misaligned gasket or stripped bolt) that lab datasets miss.</td>
+          <td><span class="evidence-tag">[FACT]</span> <a href="https://www.press.bmwgroup.com/global/article/detail/T0444265EN/successful-test-of-humanoid-robots-at-bmw-group-plant-spartanburg" target="_blank">BMW Group Press Release: Figure 02 Spartanburg</a></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text-head);">CoRL 2026 World Models &amp; Ego4D</strong><br><span style="font-size:12px; color:var(--text-muted);">Egocentric Hand-Object Affordances</span></td>
+          <td>Contact affordance heatmaps, pre-grasp/post-grasp state changes, and multi-modal audio-visual reasoning to prevent causal confusion in VLA policies.</td>
+          <td>Technicians narrate root-cause diagnostics aloud while hands manipulate valves, yielding time-aligned <code>(Vision + 6-DoF + Audio CoT + CMMS Pass/Fail)</code>.</td>
+          <td><span class="evidence-tag">[FACT]</span> <a href="https://ego4d-data.org/" target="_blank">Ego4D Consortium Benchmark</a> &amp; <a href="https://roboticsconference.org/" target="_blank">Robotics World Models Spec</a></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text-head);">DaedalusIQ &amp; Industrial Data Licensing</strong><br><span style="font-size:12px; color:var(--text-muted);">Commercial Data Flywheel</span></td>
+          <td>Robotics foundation labs face an acute shortage of non-kitchen, industrial dexterous manipulation episodes with verified physical completion outcomes.</td>
+          <td><span class="evidence-tag">[INFERENCE]</span> Carbyn licenses anonymized, PII-scrubbed industrial manipulation tensors as a high-margin secondary revenue stream atop B2B SaaS.</td>
+          <td><span class="evidence-tag">[FACT]</span> <a href="https://www.ieee-ras.org/" target="_blank">IEEE RAS Industrial Manipulation Data Standards</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    const STEPS = [
+      {
+        img: "assets/product-ui/pov_frame_01.jpg",
+        cot: '"Seating 19mm deep socket onto Pump P-204 flange bolt #3; checking threads for galling before applying 45 Newton-meters."',
+        handCenter: [340, 290],
+        toolTip: [470, 220],
+        heatRadius: 75,
+        rlds: {
+          episode_id: "carbyn_mfg_p204_flange_0089",
+          step_index: 0,
+          timestamp_s: 0.00,
+          observation: {
+            rgb_frame: "pov_frame_01.jpg",
+            vjepa2_latent_patch_dim: [16, 16, 1024],
+            right_hand_mano_6dof: { pos_xyz_m: [0.14, -0.08, 0.38], rot_quat: [0.91, -0.18, 0.34, 0.12] },
+            contact_affordance_peak_uv: [0.522, 0.458]
+          },
+          action_delta_se3: {
+            linear_vel_mps: [0.12, 0.04, -0.18],
+            angular_vel_radps: [0.02, -0.05, 0.11],
+            gripper_aperture_norm: 0.65,
+            estimated_force_n: 8.4
+          },
+          language_cot: "Approach 19mm hex flange bolt #3 along surface normal; verify thread alignment."
+        }
+      },
+      {
+        img: "assets/product-ui/pov_frame_02.jpg",
+        cot: '"Socket engaged flush on hex head. Locking ratchet pawl and bracing left hand against pump casing for counter-torque."',
+        handCenter: [390, 260],
+        toolTip: [510, 205],
+        heatRadius: 95,
+        rlds: {
+          episode_id: "carbyn_mfg_p204_flange_0089",
+          step_index: 1,
+          timestamp_s: 1.40,
+          observation: {
+            rgb_frame: "pov_frame_02.jpg",
+            vjepa2_latent_patch_dim: [16, 16, 1024],
+            right_hand_mano_6dof: { pos_xyz_m: [0.19, -0.04, 0.31], rot_quat: [0.88, -0.22, 0.39, 0.15] },
+            bimanual_stabilizer_left_xyz_m: [-0.15, 0.05, 0.33]
+          },
+          action_delta_se3: {
+            linear_vel_mps: [0.01, 0.00, -0.03],
+            angular_vel_radps: [0.00, 0.00, 0.45],
+            gripper_aperture_norm: 0.18,
+            estimated_force_n: 26.0
+          },
+          language_cot: "Seat socket flush on hex nut; establish bimanual counter-brace on housing."
+        }
+      },
+      {
+        img: "assets/product-ui/pov_frame_03.jpg",
+        cot: '"Applying clockwise torque sweep... digital wrench acoustic click confirmed at 45.2 Newton-meters."',
+        handCenter: [435, 240],
+        toolTip: [530, 195],
+        heatRadius: 115,
+        rlds: {
+          episode_id: "carbyn_mfg_p204_flange_0089",
+          step_index: 2,
+          timestamp_s: 3.10,
+          observation: {
+            rgb_frame: "pov_frame_03.jpg",
+            vjepa2_latent_patch_dim: [16, 16, 1024],
+            right_hand_mano_6dof: { pos_xyz_m: [0.22, -0.02, 0.29], rot_quat: [0.76, -0.31, 0.52, 0.24] },
+            acoustic_click_detected_hz: 4120
+          },
+          action_delta_se3: {
+            linear_vel_mps: [0.00, -0.08, 0.00],
+            angular_vel_radps: [0.00, 0.00, 1.85],
+            applied_torque_nm: 45.2,
+            target_spec_torque_nm: 45.0
+          },
+          language_cot: "Execute rotational torque sweep until 45 Nm mechanical/acoustic click threshold."
+        }
+      },
+      {
+        img: "assets/product-ui/pov_frame_04.jpg",
+        cot: '"Torque verified at 45.2 Nm. Applying yellow paint witness mark across flange stud and logging pass to Maximo."',
+        handCenter: [365, 275],
+        toolTip: [495, 215],
+        heatRadius: 65,
+        rlds: {
+          episode_id: "carbyn_mfg_p204_flange_0089",
+          step_index: 3,
+          timestamp_s: 4.85,
+          observation: {
+            rgb_frame: "pov_frame_04.jpg",
+            vjepa2_latent_patch_dim: [16, 16, 1024],
+            post_condition_witness_mark: "VERIFIED_PRESENT",
+            cmms_workorder_outcome: "CLOSED_FIRST_TIME_FIX"
+          },
+          action_delta_se3: {
+            linear_vel_mps: [-0.09, 0.03, 0.14],
+            angular_vel_radps: [0.00, 0.00, 0.00],
+            reward_terminal: 1.0
+          },
+          language_cot: "Retract tool, verify witness mark integrity, commit terminal reward r_T = 1.0."
+        }
+      }
+    ];
+
+    let curStep = 0;
+    let ov = { hand: true, tool: true, heat: true, latent: true };
+    const pCanvas = document.getElementById('poseCanvas');
+    const pCtx = pCanvas.getContext('2d');
+
+    function toggleOv(k) {
+      ov[k] = !ov[k];
+      document.getElementById('ov-' + k).classList.toggle('active', ov[k]);
+      drawOverlays();
+    }
+
+    function selectStep(idx) {
+      curStep = idx;
+      document.querySelectorAll('.step-card').forEach((c, i) => c.classList.toggle('active', i === idx));
+      const s = STEPS[idx];
+      document.getElementById('baseFrame').src = s.img;
+      document.getElementById('cot-quote').textContent = s.cot;
+      document.getElementById('rlds-json').textContent = JSON.stringify(s.rlds, null, 2);
+      drawOverlays();
+    }
+
+    function drawOverlays() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+      const s = STEPS[curStep];
+      const [hx, hy] = s.handCenter;
+      const [tx, ty] = s.toolTip;
+
+      // 1. V-JEPA 2 Latent Token Grid
+      if (ov.latent) {
+        pCtx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+        pCtx.lineWidth = 1;
+        const gw = pCanvas.width / 12, gh = pCanvas.height / 8;
+        for (let x = 0; x <= pCanvas.width; x += gw) {
+          pCtx.beginPath(); pCtx.moveTo(x, 0); pCtx.lineTo(x, pCanvas.height); pCtx.stroke();
+        }
+        for (let y = 0; y <= pCanvas.height; y += gh) {
+          pCtx.beginPath(); pCtx.moveTo(0, y); pCtx.lineTo(pCanvas.width, y); pCtx.stroke();
+        }
+        pCtx.fillStyle = 'rgba(11,11,12,0.82)';
+        pCtx.fillRect(16, 16, 330, 30);
+        pCtx.font = '600 12px monospace';
+        pCtx.fillStyle = '#32D74B';
+        pCtx.fillText(`V-JEPA 2 LATENT DYNAMICS: z_${curStep} -> z_${curStep+1} [LOCKED]`, 26, 35);
+      }
+
+      // 2. Contact Affordance Heatmap
+      if (ov.heat) {
+        const grad = pCtx.createRadialGradient(tx, ty, 5, tx, ty, s.heatRadius);
+        grad.addColorStop(0, 'rgba(255, 69, 58, 0.72)');
+        grad.addColorStop(0.5, 'rgba(255, 209, 0, 0.42)');
+        grad.addColorStop(1, 'rgba(50, 215, 75, 0)');
+        pCtx.fillStyle = grad;
+        pCtx.beginPath();
+        pCtx.arc(tx, ty, s.heatRadius, 0, Math.PI * 2);
+        pCtx.fill();
+      }
+
+      // 3. 21-Keypoint Hand Skeleton (MANO 6-DoF projection)
+      if (ov.hand) {
+        const wrist = [hx - 70, hy + 80];
+        const fingers = [
+          [[hx-45, hy+40], [hx-30, hy+15], [hx-15, hy-5]],
+          [[hx-20, hy+30], [hx+5, hy-5], [hx+28, hy-25]],
+          [[hx-10, hy+40], [hx+20, hy+10], [hx+45, hy-8]],
+          [[hx, hy+55], [hx+25, hy+30], [hx+48, hy+16]],
+          [[hx+10, hy+70], [hx+30, hy+52], [hx+46, hy+40]]
+        ];
+        pCtx.strokeStyle = '#32D74B';
+        pCtx.lineWidth = 2.5;
+        for (const f of fingers) {
+          pCtx.beginPath();
+          pCtx.moveTo(wrist[0], wrist[1]);
+          for (const pt of f) pCtx.lineTo(pt[0], pt[1]);
+          pCtx.stroke();
+          for (const pt of f) {
+            pCtx.fillStyle = '#FFFFFF';
+            pCtx.beginPath(); pCtx.arc(pt[0], pt[1], 4, 0, Math.PI * 2); pCtx.fill();
+          }
+        }
+        pCtx.fillStyle = '#FFD100';
+        pCtx.beginPath(); pCtx.arc(wrist[0], wrist[1], 6, 0, Math.PI * 2); pCtx.fill();
+      }
+
+      // 4. Tool SE(3) Pose & Torque Vector
+      if (ov.tool) {
+        pCtx.strokeStyle = '#FFD100';
+        pCtx.lineWidth = 3;
+        pCtx.beginPath();
+        pCtx.moveTo(hx + 15, hy + 10);
+        pCtx.lineTo(tx, ty);
+        pCtx.stroke();
+
+        // Draw SE(3) triad at tool tip
+        pCtx.strokeStyle = '#FF453A'; pCtx.beginPath(); pCtx.moveTo(tx, ty); pCtx.lineTo(tx + 42, ty); pCtx.stroke();
+        pCtx.strokeStyle = '#32D74B'; pCtx.beginPath(); pCtx.moveTo(tx, ty); pCtx.lineTo(tx, ty - 42); pCtx.stroke();
+        pCtx.strokeStyle = '#0A84FF'; pCtx.beginPath(); pCtx.moveTo(tx, ty); pCtx.lineTo(tx - 28, ty + 28); pCtx.stroke();
+
+        pCtx.fillStyle = 'rgba(11,11,12,0.88)';
+        pCtx.fillRect(tx + 14, ty - 34, 215, 26);
+        pCtx.strokeStyle = '#FFD100';
+        pCtx.lineWidth = 1;
+        pCtx.strokeRect(tx + 14, ty - 34, 215, 26);
+        pCtx.fillStyle = '#FFD100';
+        pCtx.font = '700 11px monospace';
+        pCtx.fillText(`SE(3) WRENCH // τ = 45.2 Nm`, tx + 22, ty - 17);
+      }
+    }
+
+    selectStep(0);
+  </script>
+</body>
+</html>
