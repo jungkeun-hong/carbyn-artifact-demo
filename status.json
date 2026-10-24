@@ -1,0 +1,254 @@
+{
+  "updated_at": "2026-10-24 02:18 UTC (Oct 23 19:18 PDT)",
+  "overall_progress": 18,
+  "phase": "PHASE 1: C-SUITE & SUBAGENT SWARM EXECUTION",
+  "memory_sync": {
+    "status": "COMPLETED",
+    "channels_synced": [
+      "WhatsApp (Master Orchestrator)",
+      "Telegram CEO (Default Profile)",
+      "Telegram COO (Operations & SKT Intel)",
+      "Telegram CRO (B2B GTM & Origami)",
+      "Telegram CPO (Product, Paper MCP & 3DGS/Robotics)",
+      "Shanks (shanks1@carbyn.ai Chief of Staff)",
+      "Granola Source of Truth (147 meetings / Oct 17-24 Verbatim Transcripts)"
+    ],
+    "truth_file": "~/brain/carbyn/2026-10-24-weekly-truth-sync.md"
+  },
+  "guardrails": {
+    "openai_image_spend_usd": 0.00,
+    "openai_image_cap_usd": 50.00,
+    "origami_senders_active": 17,
+    "origami_daily_capacity": 500,
+    "origami_weekly_capacity": 2500,
+    "origami_monthly_capacity": 10000,
+    "b2b_send_gate": "LOCKED (Draft & Sequence Only - Zero sends before JK approval)",
+    "bay_area_dedupe_count": 386
+  },
+  "proactive_agendas": [
+    {
+      "id": "AGENDA-1",
+      "owner": "COO + CRO",
+      "title": "Cross-Track Signal Sharing: MEP & Inspector Vocabulary Bridge",
+      "detail": "Feed exact complaint phrasing from SKT vertical research (CxAlloy 8-click friction, ServiceChannel photo rejection) directly into CRO's MEP Subcontractor & Superintendent cold sequence hooks."
+    },
+    {
+      "id": "AGENDA-2",
+      "owner": "CEO + CPO",
+      "title": "Oct 26 Launch '30-Second Magic' Interactive Demo Embed",
+      "detail": "Pair CEO's Reddit/X helpful lead-magnet posts with CPO's interactive custom-template walkdown preview so contractors see their own form (JHA, DVI, Punch List) populated in under 30 seconds."
+    },
+    {
+      "id": "AGENDA-3",
+      "owner": "CRO + CPO",
+      "title": "Persona-Matched Visual Proof Links in B2B Sequences",
+      "detail": "Embed CPO's live GitHub 3DGS Digital Twin prototype link into Big Construction VDC/Innovation sequences, and the Robotics World Model + AI SOP prototype into Assembly Manufacturer sequences."
+    }
+  ],
+  "divisions": [
+    {
+      "id": "coo-skt-research",
+      "agent": "COO (Telegram) + Subagent Fleet",
+      "title": "1. SKT Voice/Video-to-Doc Competitor & Psychology Intel",
+      "progress": 20,
+      "status": "IN_PROGRESS",
+      "pipeline": {
+        "planner": "DONE",
+        "executors": "RUNNING (4 Parallel Subagents)",
+        "auditor": "QUEUED",
+        "recovery": "STANDBY"
+      },
+      "subagents": [
+        {
+          "role": "Planner",
+          "name": "SKT-Intel-Planner",
+          "status": "DONE",
+          "task": "Mapped Horizontal (Granola, Wispr Flow, Plaud, Otter, Voicenotes, AudioPen, Limitless) + 6 Verticals (CAT/IA Adjusters, Home Inspectors, Auto/Truck DVI, MEP/Construction, Residential Trades, Facilities) excluding zero-traction slop & App Store review bias."
+        },
+        {
+          "role": "Executor 1",
+          "name": "Horizontal-Word-Miner",
+          "status": "RUNNING",
+          "task": "Extracting exact marketing 'Words', feature/speed claims, user love triggers, and verbatim Reddit/X complaints across Granola, Wispr Flow, Plaud, Otter, Voicenotes."
+        },
+        {
+          "role": "Executor 2",
+          "name": "Vertical-Trades-Adjusters-Miner",
+          "status": "RUNNING",
+          "task": "Mining legacy standards & emerging AI tools (Xactimate, Encircle, CompanyCam, Spectora, Magicplan) for field environment constraints, buyer psychology, and exact marketing vocabulary."
+        },
+        {
+          "role": "Executor 3",
+          "name": "Vertical-Auto-MEP-Construction-Miner",
+          "status": "RUNNING",
+          "task": "Mining Tekmetric, AutoVitals, Wrench Voice, Rilla, ServiceTitan, Fieldwire, CxAlloy, Hardline for exact hook words, LinkedIn/X founder traction, and organic Reddit feedback."
+        },
+        {
+          "role": "Auditor",
+          "name": "JK-Standard-Auditor-COO",
+          "status": "PENDING",
+          "task": "Enforce [FACT] URL citations, [추정] flags, zero App-Store-only traction claims, zero em-dashes, non-wordy Carbyn template Doc + Sheet + Web Matrix."
+        }
+      ],
+      "blockers": "None. Exa, Arctic Shift Reddit archive, and Apify active.",
+      "deliverables": [
+        {"type": "Web Artifact", "label": "SKT Competitor & Word Intel Matrix (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/skt-competitor-intel.html", "ready": false},
+        {"type": "Google Doc", "label": "01_SKT_Competitor_and_Word_Research (Carbyn Template)", "url": "#", "ready": false},
+        {"type": "Google Sheet", "label": "SKT Competitor Lexicon & Reddit/X Evidence Sheet", "url": "#", "ready": false}
+      ]
+    },
+    {
+      "id": "ceo-skt-content",
+      "agent": "CEO (Telegram) + Subagent Fleet",
+      "title": "2. SKT First 100-500 Users Content & Oct 26 Launch Engine",
+      "progress": 20,
+      "status": "IN_PROGRESS",
+      "pipeline": {
+        "planner": "DONE",
+        "executors": "RUNNING (4 Parallel Subagents)",
+        "auditor": "QUEUED",
+        "recovery": "STANDBY"
+      },
+      "subagents": [
+        {
+          "role": "Planner",
+          "name": "Lauft-Fastlane-Playbook-Synthesizer",
+          "status": "DONE",
+          "task": "Synthesized Granola notes for Jay Contino (Lauft: Unc Test, Signal GTM, Objection Bank) and Jock Ferguson (Fastlane: Reddit Helpful Playbook Lead Magnet -> 100% DM -> Rainbow Button Call, 30s Magic, Launch every 2d, Clip Economy)."
+        },
+        {
+          "role": "Executor 1",
+          "name": "Channel-Viral-Anatomy-Researcher",
+          "status": "RUNNING",
+          "task": "Analyzing last 12 months (2025-2026) top posts on Reddit & X across target trades/inspectors/adjusters: sentence structure, post length, vocabulary, and engagement triggers."
+        },
+        {
+          "role": "Executor 2",
+          "name": "14Day-Calendar-and-Copywriter",
+          "status": "RUNNING",
+          "task": "Building Oct 26 - Nov 8 Day-by-Day x Channel x Subreddit/Group x Content Type (Helpful Playbook, Direct Promo, Founder Story) schedule + writing full ready-to-post copy."
+        },
+        {
+          "role": "Executor 3",
+          "name": "OpenAI-GPT-Image2-and-Video-Scripter",
+          "status": "RUNNING",
+          "task": "Generating hook images via OpenAI gpt-image-2 API (strict <$50 cost cap guard) and writing scenario-based short-form/POV video scripts."
+        },
+        {
+          "role": "Auditor",
+          "name": "JK-Standard-Auditor-CEO",
+          "status": "PENDING",
+          "task": "Verify zero AI-slop tone, authentic subreddit-native voice, <$50 OpenAI spend compliance, and complete 14-day tangible assets."
+        }
+      ],
+      "blockers": "None. OpenAI gpt-image-2 API verified ($0.00 / $50.00 spent).",
+      "deliverables": [
+        {"type": "Web Artifact", "label": "SKT 14-Day Content Studio & Image Gallery (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/skt-content-engine.html", "ready": false},
+        {"type": "Google Sheet", "label": "SKT 14-Day Launch Calendar & Copy Bank (Oct 26 - Nov 8)", "url": "#", "ready": false},
+        {"type": "Google Doc", "label": "02_SKT_First_500_Content_Playbook_and_Scripts", "url": "#", "ready": false}
+      ]
+    },
+    {
+      "id": "cro-b2b-gtm",
+      "agent": "CRO (Telegram) + Subagent Fleet",
+      "title": "3. B2B GTM Pipeline & Origami 10,000/mo Engine (Draft Only)",
+      "progress": 20,
+      "status": "IN_PROGRESS",
+      "pipeline": {
+        "planner": "DONE",
+        "executors": "RUNNING (4 Parallel Subagents)",
+        "auditor": "QUEUED",
+        "recovery": "STANDBY"
+      },
+      "subagents": [
+        {
+          "role": "Planner",
+          "name": "Origami-Capacity-and-Dedupe-Planner",
+          "status": "DONE",
+          "task": "Verified 17 active Origami email senders (500/day, 2,500/wk, 10,000/mo). Loaded 386 Bay Area leads (356 Industrial + 30 Higher-Ed) into hard exclusion filter."
+        },
+        {
+          "role": "Executor 1",
+          "name": "Big-Construction-Lead-Sourcing",
+          "status": "RUNNING",
+          "task": "Sourcing & verifying leads at Jacobs, DPR, Turner, Mortenson, Whiting-Turner, Holder, McCarthy, Skanska, Gilbane, Barton Malow (Digital Twin/AI Innovation + MEP Management teams)."
+        },
+        {
+          "role": "Executor 2",
+          "name": "MEP-Subcon-and-DC-Cx-Sourcing",
+          "status": "RUNNING",
+          "task": "Sourcing Data Center Commissioning firms & commercial MEP subcontractors (Superintendents, QA/QC Inspectors, Cx Managers with communication bottlenecks)."
+        },
+        {
+          "role": "Executor 3",
+          "name": "NA-Assembly-Mfg-Sourcing-and-Sequences",
+          "status": "RUNNING",
+          "task": "Sourcing North America Mid-to-Large Assembly Manufacturers (Enterprise: AI/Innovation; Mid-Market: Plant/Ops Managers) + drafting 3-step sequences ('AI SOPs overnight + Robotics data pipeline')."
+        },
+        {
+          "role": "Auditor",
+          "name": "JK-Standard-Auditor-CRO",
+          "status": "PENDING",
+          "task": "Audit zero overlap with 386 Bay Area leads, zero em-dashes, conversational non-buzzword hooks, and verify ZERO emails are sent before JK review."
+        }
+      ],
+      "blockers": "None. Outbound send lock engaged (Draft/Staging only).",
+      "deliverables": [
+        {"type": "Web Artifact", "label": "B2B GTM Pipeline & Sequence Review Hub (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/b2b-gtm-pipeline.html", "ready": false},
+        {"type": "Google Sheet", "label": "B2B Master Lead List & Origami 17-Sender Schedule", "url": "#", "ready": false},
+        {"type": "Google Doc", "label": "03_B2B_Origami_10K_GTM_Strategy_and_Sequences", "url": "#", "ready": false}
+      ]
+    },
+    {
+      "id": "cpo-b2b-product",
+      "agent": "CPO (Telegram) + Subagent Fleet",
+      "title": "4. B2B Product Blueprint, Paper MCP & 3DGS / Robotics Web Prototypes",
+      "progress": 20,
+      "status": "IN_PROGRESS",
+      "pipeline": {
+        "planner": "DONE",
+        "executors": "RUNNING (4 Parallel Subagents)",
+        "auditor": "QUEUED",
+        "recovery": "STANDBY"
+      },
+      "subagents": [
+        {
+          "role": "Planner",
+          "name": "Product-Blueprint-Architect",
+          "status": "DONE",
+          "task": "Inspected Carbyn Paper MCP workspace (team_01KRD65T13QFRJ8X9EGM5XENKY) and structured 4 tracks: (1) Video-to-SOP v2 for Assembly, (2) Maximo/Limble/Procore/ACC Voice-to-Doc, (3) POV->3DGS Digital Twin, (4) POV->Robotics World Model."
+        },
+        {
+          "role": "Executor 1",
+          "name": "3DGS-and-Robotics-World-Model-Builder",
+          "status": "RUNNING",
+          "task": "Researching concrete Mfg/Construction/MEP ROI for 3DGS & Robotics World Model + building interactive GitHub web visualizers with real industrial POV video feeds."
+        },
+        {
+          "role": "Executor 2",
+          "name": "Maximo-Limble-Procore-ACC-Scraper",
+          "status": "RUNNING",
+          "task": "Scraping real latest web/mobile UI screens & field schemas for IBM Maximo, Limble CMMS, Procore, and Autodesk Construction Cloud (ACC) + Video-to-SOP Assembly HUD."
+        },
+        {
+          "role": "Executor 3",
+          "name": "Paper-MCP-Canvas-Designer",
+          "status": "RUNNING",
+          "task": "Creating Paper MCP project & component artboards showing Carbyn Mobile/Web + Maximo, Limble, Procore, ACC Voice-to-Doc outputs + upgraded Assembly Video-to-SOP with minimal text."
+        },
+        {
+          "role": "Auditor",
+          "name": "JK-Standard-Auditor-CPO",
+          "status": "PENDING",
+          "task": "Audit visual fidelity, verify real screenshots/POV videos load without CORS/WAF errors, and verify Paper MCP artboards."
+        }
+      ],
+      "blockers": "None. Paper MCP and GitHub Pages pipeline active.",
+      "deliverables": [
+        {"type": "Web Artifact", "label": "B2B Product Blueprint & 3DGS / Robotics Interactive Hub (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/b2b-product-blueprint.html", "ready": false},
+        {"type": "Paper MCP", "label": "Carbyn B2B Product Blueprint Canvas (Paper.design)", "url": "#", "ready": false},
+        {"type": "Google Doc", "label": "04_B2B_Product_Blueprint_3DGS_Robotics_and_Integrations", "url": "#", "ready": false}
+      ]
+    }
+  ]
+}
