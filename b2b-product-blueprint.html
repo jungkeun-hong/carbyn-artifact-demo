@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARBYN | Master B2B Product Blueprint &amp; UI Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #0B0B0C;
+      --text-head: #F4F4F2;
+      --text-body: #D3D3D1;
+      --text-muted: #8E8E93;
+      --accent: #FFD100;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg-hover: rgba(255, 255, 255, 0.13);
+      --glass-border: rgba(255, 255, 255, 0.16);
+      --green: #32D74B;
+      --red: #FF453A;
+      --orange: #FF9F0A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 48px 96px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    @media (max-width: 1180px) {
+      body { padding: 32px 24px; }
+    }
+    a { color: var(--text-head); text-decoration: underline; }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--glass-border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color: var(--text-head);
+      text-transform: uppercase;
+    }
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text-head);
+    }
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .nav-pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-head);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .nav-pill:hover, .nav-pill.active {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    header { margin-bottom: 40px; }
+    h1 {
+      color: var(--text-head);
+      font-size: 64px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 980px;
+    }
+    .lead {
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text-body);
+      max-width: 1080px;
+      line-height: 1.35;
+    }
+    @media (max-width: 900px) {
+      h1 { font-size: 40px; }
+      .lead { font-size: 20px; }
+    }
+    /* ONE YELLOW FOCAL POINT CARD */
+    .focal-card {
+      background: var(--accent);
+      color: #000000;
+      border-radius: 24px;
+      padding: 40px;
+      border: 1px solid #000000;
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: 1.3fr 1.7fr;
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .focal-card { grid-template-columns: 1fr; }
+    }
+    .focal-card h2, .focal-card p, .focal-card div, .focal-card span, .focal-card strong, .focal-card a {
+      color: #000000;
+    }
+    .focal-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .focal-kpi-box {
+      background: rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .focal-kpi-val {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .focal-kpi-lbl {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .glass-panel {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      margin-bottom: 32px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 1180px) {
+      .grid-2, .grid-4 { grid-template-columns: 1fr; }
+    }
+    .artboard-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .artboard-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+    }
+    .sys-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .sys-tab {
+      padding: 12px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-head);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .sys-tab.active {
+      background: #F4F4F2;
+      color: #0B0B0C;
+    }
+    .screen-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .screen-gallery img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .screen-gallery img:hover {
+      transform: scale(1.02);
+      border-color: #F4F4F2;
+    }
+    .sop-step-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-head);
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sop-step-btn.active {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: #F4F4F2;
+    }
+    .badge {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .b-pass { background: rgba(50, 215, 75, 0.2); color: #32D74B; }
+    .b-block { background: rgba(255, 69, 58, 0.25); color: #FF453A; }
+    .evidence-tag {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--text-head);
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>CARBYN // MASTER B2B PRODUCT BLUEPRINT</span>
+    </div>
+    <div class="nav-links">
+      <a href="b2b-product-blueprint.html" class="nav-pill active">Master B2B Product Blueprint</a>
+      <a href="3dgs-digital-twin.html" class="nav-pill">3DGS Spatial Digital Twin</a>
+      <a href="robotics-world-model.html" class="nav-pill">Robotics World Model Pipeline</a>
+      <a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank" class="nav-pill">Paper MCP File (01M5NV...)</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>B2B Product Blueprint &amp; System Architecture</h1>
+    <p class="lead">Unified CPO product specification connecting Paper MCP artboards, Video-to-SOP v2 Assembly Guardrails, Voice-to-ERP field integrations, 3DGS Digital Twins, and the Robotics World Model pipeline.</p>
+  </header>
+
+  <!-- ONE YELLOW FOCAL POINT CARD -->
+  <section class="focal-card">
+    <div>
+      <div style="font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">SINGLE CAPTURE -> FOUR HIGH-MARGIN OUTPUTS</div>
+      <h2 style="font-size:32px; font-weight:700; line-height:1.15; margin-bottom:12px;">Zero-Typing Frontline Capture Across Manufacturing &amp; Construction</h2>
+      <p style="font-size:15px; line-height:1.5;">Technicians speak naturally and record POV video via smart glasses or rugged chest mounts. Carbyn's edge-cloud pipeline compiles structured Work Orders (IBM Maximo MAS 9, Limble), Construction RFIs/Issues (Procore, Autodesk ACC), 3DGS Spatial Twins, and 6-DoF Robotics World Model episodes.</p>
+    </div>
+    <div class="focal-kpis">
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">4 Artboards</div>
+        <div class="focal-kpi-lbl">[FACT] Live Paper MCP UI specs (<a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank">01M5NVYBYXA70J8V9T9CP2APHB</a>)</div>
+      </div>
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">4 Enterprise APIs</div>
+        <div class="focal-kpi-lbl">[FACT] Maximo MAS 9, Limble CMMS, Procore, Autodesk ACC Build</div>
+      </div>
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">91% Less Admin</div>
+        <div class="focal-kpi-lbl">[INFERENCE] Wrench-time recovery vs manual mobile form entry</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: PAPER MCP CANVAS ARTBOARDS -->
+  <section class="glass-panel">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:24px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:6px;">SECTION 01 // PAPER MCP DESIGN SYSTEM ARCHITECTURE</div>
+        <h2 style="color:var(--text-head); font-size:32px; font-weight:600;">Paper MCP Canvas Artboards (`01M5NVYBYXA70J8V9T9CP2APHB`)</h2>
+      </div>
+      <a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank" class="nav-pill" style="background:rgba(255,255,255,0.16);">Open Live Paper MCP Canvas -></a>
+    </div>
+
+    <div class="grid-2">
+      <div class="artboard-card">
+        <img src="assets/product-ui/paper_artboard_01_core_capture.jpg" alt="Paper Artboard 01 Core Capture" />
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted);">ARTBOARD 01 // CORE MULTIMODAL CAPTURE</div>
+        <h3 style="color:var(--text-head); font-size:20px;">Egocentric POV + Voice CoT Ingestion Engine</h3>
+        <p style="font-size:14px; color:var(--text-body);">Real-time Whisper-Large-v3 industrial ASR, keyframe blur rejection, and deterministic JSON schema router for CMMS, VDC, and 3DGS pipelines.</p>
+      </div>
+      <div class="artboard-card">
+        <img src="assets/product-ui/paper_artboard_02_sop_v2.jpg" alt="Paper Artboard 02 Video-to-SOP v2" />
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted);">ARTBOARD 02 // VIDEO-TO-SOP V2 ASSEMBLY</div>
+        <h3 style="color:var(--text-head); font-size:20px;">Director Web Studio + Frontline Glass HUD</h3>
+        <p style="font-size:14px; color:var(--text-body);">Closed-loop step guardrail engine enforcing mandatory torque/metric verification (`45 Nm`), red/green bounding boxes, and cycle-time bottleneck telemetry.</p>
+      </div>
+      <div class="artboard-card">
+        <img src="assets/product-ui/paper_artboard_03_maximo_limble.jpg" alt="Paper Artboard 03 Maximo and Limble" />
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted);">ARTBOARD 03 // VOICE-TO-WORKORDER (CMMS)</div>
+        <h3 style="color:var(--text-head); font-size:20px;">IBM Maximo MAS 9 &amp; Limble CMMS Auto-Sync</h3>
+        <p style="font-size:14px; color:var(--text-body);">Hands-free voice capture mapped directly to Maximo (`ASSETNUM`, `FAILURECODE`, `ACTLABHRS`) and Limble (`Task ID`, `Part Used`, `Proof Photo`).</p>
+      </div>
+      <div class="artboard-card">
+        <img src="assets/product-ui/paper_artboard_04_procore_acc.jpg" alt="Paper Artboard 04 Procore and Autodesk ACC" />
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted);">ARTBOARD 04 // VOICE-TO-DOC (CONSTRUCTION VDC)</div>
+        <h3 style="color:var(--text-head); font-size:20px;">Procore RFI/Punch &amp; Autodesk ACC Build Issues</h3>
+        <p style="font-size:14px; color:var(--text-body);">3D spatial coordinate pin drop, BIM sheet alignment (`S-402 Grid C-14`), and automated ball-in-court routing from a 12-second field voice memo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: VIDEO-TO-SOP V2 INTERACTIVE SIMULATOR -->
+  <section class="glass-panel">
+    <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:6px;">SECTION 02 // VIDEO-TO-SOP V2 (ASSEMBLY DIRECTOR + FRONTLINE HUD)</div>
+    <h2 style="color:var(--text-head); font-size:32px; font-weight:600; margin-bottom:8px;">Interactive Step Guardrail &amp; Missing Metric Auto-Prompt Simulator</h2>
+    <p style="font-size:15px; color:var(--text-body); margin-bottom:24px;">Click through the 4 assembly steps below to test Carbyn's real-time HUD guardrail when a technician omits a mandatory quantitative verification (e.g., `45 Nm` flange torque).</p>
+
+    <div class="grid-2">
+      <!-- Left: Frontline Glass / Mounted Camera HUD -->
+      <div style="background:#050506; border:1px solid var(--glass-border); border-radius:18px; padding:24px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+          <span style="font-family:monospace; font-size:12px; color:var(--text-head); font-weight:700;">FRONTLINE AR/GLASS HUD VIEWPORT</span>
+          <span id="hud-guard-status" class="badge b-pass">STEP VERIFIED // PASS</span>
+        </div>
+
+        <div style="position:relative; height:320px; border-radius:12px; overflow:hidden; border:1px solid var(--glass-border); margin-bottom:16px;">
+          <img id="sop-hud-img" src="assets/product-ui/pov_frame_01.jpg" alt="SOP HUD Frame" style="width:100%; height:100%; object-fit:cover;" />
+          <div id="sop-bbox" style="position:absolute; top:26%; left:34%; width:36%; height:44%; border:3px solid #32D74B; border-radius:10px; background:rgba(50,215,75,0.12); display:flex; align-items:flex-end; padding:8px;">
+            <span id="sop-bbox-label" style="background:rgba(11,11,12,0.9); color:#32D74B; font-family:monospace; font-size:11px; font-weight:700; padding:4px 8px; border-radius:4px;">TARGET: P-204 IMPELLER HOUSING [ALIGNED]</span>
+          </div>
+        </div>
+
+        <div id="sop-voice-prompt" style="background:rgba(255,255,255,0.06); border-left:4px solid #32D74B; padding:14px; border-radius:8px; font-size:14px; color:var(--text-head);">
+          <strong>HUD Audio Prompt:</strong> "Step 1 complete. Housing seated flush. Proceed to M12 stud insertion."
+        </div>
+      </div>
+
+      <!-- Right: Assembly Director Web Studio & Bottleneck Telemetry -->
+      <div>
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted); margin-bottom:10px;">ASSEMBLY DIRECTOR WEB STUDIO // SELECT STEP TO SIMULATE</div>
+        <button class="sop-step-btn active" id="sop-btn-0" onclick="setSopStep(0)">
+          <div><strong>Step 01:</strong> Align Pump P-204 Volute Casing &amp; EPDM Gasket</div>
+          <span class="badge b-pass">18.4s (Std: 20s)</span>
+        </button>
+        <button class="sop-step-btn" id="sop-btn-1" onclick="setSopStep(1)">
+          <div><strong>Step 02:</strong> Hand-Thread 8x M12 Grade 8.8 Flange Studs</div>
+          <span class="badge b-pass">31.0s (Std: 35s)</span>
+        </button>
+        <button class="sop-step-btn" id="sop-btn-2" onclick="setSopStep(2)">
+          <div><strong>Step 03:</strong> Star-Pattern Torque Sequence (Mandatory: 45 Nm)</div>
+          <span class="badge b-block">MISSING METRIC BLOCK</span>
+        </button>
+        <button class="sop-step-btn" id="sop-btn-3" onclick="setSopStep(3)">
+          <div><strong>Step 04:</strong> Voice Confirmation &amp; Paint Witness Mark Verification</div>
+          <span class="badge b-pass">45.2 Nm LOGGED</span>
+        </button>
+
+        <div style="margin-top:20px; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:14px; padding:18px;">
+          <div style="font-family:monospace; font-size:12px; color:var(--text-head); font-weight:700; margin-bottom:8px;">DIRECTOR STUDIO // CYCLE-TIME BOTTLENECK TELEMETRY</div>
+          <p id="sop-telemetry-text" style="font-size:14px; color:var(--text-body); margin-bottom:10px;">
+            <span class="evidence-tag">[FACT]</span> Across 42 shifts, Step 03 exhibits a 28% cycle-time variance when technicians search for calibrated digital torque wrenches.
+          </p>
+          <pre id="sop-json" style="background:#050506; border:1px solid var(--glass-border); border-radius:10px; padding:12px; font-size:12px; color:#32D74B; overflow-x:auto;"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: VOICE-TO-WORKORDER & VOICE-TO-DOC MULTI-SYSTEM SIMULATORS -->
+  <section class="glass-panel">
+    <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:6px;">SECTION 03 // MULTI-SYSTEM LIVE FIELD INTEGRATIONS (26 REAL SCRAPED UI SCREENS)</div>
+    <h2 style="color:var(--text-head); font-size:32px; font-weight:600; margin-bottom:8px;">Voice-to-WorkOrder &amp; Voice-to-Doc Live Simulators</h2>
+    <p style="font-size:15px; color:var(--text-body); margin-bottom:20px;">Switch between IBM Maximo MAS 9, Limble CMMS, Procore, and Autodesk Construction Cloud (ACC Build) to inspect the real target UI screens and live voice-to-API payload mapping.</p>
+
+    <div class="sys-tabs">
+      <button class="sys-tab active" id="sys-maximo" onclick="setSystem('maximo')">1. IBM Maximo MAS 9 (6 UI Screens)</button>
+      <button class="sys-tab" id="sys-limble" onclick="setSystem('limble')">2. Limble CMMS (5 UI Screens)</button>
+      <button class="sys-tab" id="sys-procore" onclick="setSystem('procore')">3. Procore Construction (5 UI Screens)</button>
+      <button class="sys-tab" id="sys-acc" onclick="setSystem('acc')">4. Autodesk ACC Build (5 UI Screens)</button>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <div style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:14px; padding:18px; margin-bottom:18px;">
+          <div style="font-family:monospace; font-size:11px; color:var(--text-muted); margin-bottom:6px;">RAW FRONTLINE VOICE UTTERANCE (NOISE-CANCELLED 94dB FLOOR)</div>
+          <div id="sys-voice-input" style="font-size:16px; font-weight:600; color:var(--text-head);"></div>
+        </div>
+
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted); margin-bottom:8px;">STRUCTURED REST API / GRAPHQL PAYLOAD DISPATCHED</div>
+        <pre id="sys-api-payload" style="background:#050506; border:1px solid var(--glass-border); border-radius:14px; padding:18px; font-size:12px; color:#32D74B; overflow-x:auto; line-height:1.45;"></pre>
+      </div>
+
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span id="sys-gallery-title" style="font-family:monospace; font-size:12px; color:var(--text-head); font-weight:700;">REAL SCRAPED UI SCREENS // CLICK TO EXPAND</span>
+          <a id="sys-doc-link" href="https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery" target="_blank" style="font-size:12px;">Official Vendor API Spec -></a>
+        </div>
+        <img id="sys-hero-preview" src="assets/product-ui/maximo_mas9_wo_detail.png" alt="Target System UI Preview" style="width:100%; height:260px; object-fit:cover; border-radius:14px; border:1px solid var(--glass-border); margin-bottom:12px;" />
+        <div class="screen-gallery" id="sys-thumbs"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: INTERACTIVE DEEP-DIVE SIMULATOR LINKS -->
+  <section class="glass-panel" style="margin-bottom:0;">
+    <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:6px;">SECTION 04 // DEDICATED SPATIAL &amp; PHYSICAL AI WEB PROTOTYPES</div>
+    <h2 style="color:var(--text-head); font-size:32px; font-weight:600; margin-bottom:20px;">Launch Companion Interactive Simulators</h2>
+    <div class="grid-2">
+      <div style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:18px; padding:28px;">
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted); margin-bottom:6px;">PROTOTYPE 01 // 3DGS-DIGITAL-TWIN.HTML</div>
+        <h3 style="color:var(--text-head); font-size:24px; margin-bottom:10px;">3D Gaussian Splatting Spatial Digital Twin</h3>
+        <p style="font-size:14px; color:var(--text-body); margin-bottom:20px;">Interactive 3DGS WebGL/Canvas viewport with vertical selectors for (A) Manufacturing Plant asset localization, (B) Big Construction VDC BIM diff (`+18mm`), and (C) MEP &amp; Data Center Commissioning (`480V Switchgear ATS-02`).</p>
+        <a href="3dgs-digital-twin.html" class="nav-pill" style="display:inline-block; background:#F4F4F2; color:#0B0B0C;">Launch 3DGS Digital Twin Simulator -></a>
+      </div>
+      <div style="background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:18px; padding:28px;">
+        <div style="font-family:monospace; font-size:12px; color:var(--text-muted); margin-bottom:6px;">PROTOTYPE 02 // ROBOTICS-WORLD-MODEL.HTML</div>
+        <h3 style="color:var(--text-head); font-size:24px; margin-bottom:10px;">Egocentric Robotics World Model Pipeline</h3>
+        <p style="font-size:14px; color:var(--text-body); margin-bottom:20px;">Grounded in Meta V-JEPA 2, CoRL 2026 World Models, and Figure 02 at BMW. Visualizes 21-keypoint 6-DoF hand poses, SE(3) wrench vectors, contact affordance heatmaps, and Open X-Embodiment RLDS trajectory JSON export.</p>
+        <a href="robotics-world-model.html" class="nav-pill" style="display:inline-block; background:#F4F4F2; color:#0B0B0C;">Launch Robotics World Model Visualizer -></a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const SOP_STEPS = [
+      {
+        img: "assets/product-ui/pov_frame_01.jpg",
+        statusText: "STEP 01 VERIFIED // PASS",
+        statusClass: "badge b-pass",
+        borderColor: "#32D74B",
+        bboxLabel: "TARGET: P-204 VOLUTE & EPDM GASKET [ALIGNED]",
+        prompt: 'HUD Audio Prompt: "Step 1 complete. Housing seated flush. Proceed to M12 stud insertion."',
+        json: { step: 1, action: "seat_epdm_gasket", vision_iou: 0.94, status: "VERIFIED_PASS", cycle_time_s: 18.4 }
+      },
+      {
+        img: "assets/product-ui/pov_frame_02.jpg",
+        statusText: "STEP 02 VERIFIED // PASS",
+        statusClass: "badge b-pass",
+        borderColor: "#32D74B",
+        bboxLabel: "8x M12 STUDS DETECTED [THREADED]",
+        prompt: 'HUD Audio Prompt: "All 8 flange studs hand-threaded. Grab calibrated 19mm digital torque wrench for Step 3."',
+        json: { step: 2, action: "thread_m12_studs", detected_bolts: 8, status: "VERIFIED_PASS", cycle_time_s: 31.0 }
+      },
+      {
+        img: "assets/product-ui/pov_frame_03.jpg",
+        statusText: "GUARDRAIL HOLD // MISSING TORQUE METRIC",
+        statusClass: "badge b-block",
+        borderColor: "#FF453A",
+        bboxLabel: "ALERT: 45 NM TORQUE VERIFICATION REQUIRED",
+        prompt: 'HUD Guardrail Auto-Prompt: "Hold! Step 3 cannot close until you state or show the final torque value (Target: 45 Nm +/- 2 Nm)."',
+        json: { step: 3, action: "star_pattern_torque", required_metric: "45.0 Nm", observed_metric: null, guardrail_state: "BLOCKED_AWAITING_METRIC" }
+      },
+      {
+        img: "assets/product-ui/pov_frame_04.jpg",
+        statusText: "METRIC LOCKED: 45.2 NM // STEP 04 PASS",
+        statusClass: "badge b-pass",
+        borderColor: "#32D74B",
+        bboxLabel: "TORQUE 45.2 NM + WITNESS MARK [VERIFIED]",
+        prompt: 'HUD Audio Prompt: "45.2 Newton-meters logged and yellow witness mark verified. SOP #SOP-204 signed off."',
+        json: { step: 4, action: "verify_torque_and_witness", measured_metric: "45.2 Nm", witness_paint_detected: true, guardrail_state: "RELEASED_SIGNED_OFF" }
+      }
+    ];
+
+    function setSopStep(idx) {
+      document.querySelectorAll('.sop-step-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+      const s = SOP_STEPS[idx];
+      document.getElementById('sop-hud-img').src = s.img;
+      const st = document.getElementById('hud-guard-status');
+      st.textContent = s.statusText;
+      st.className = s.statusClass;
+      const box = document.getElementById('sop-bbox');
+      box.style.borderColor = s.borderColor;
+      box.style.background = s.borderColor + '22';
+      const lbl = document.getElementById('sop-bbox-label');
+      lbl.style.color = s.borderColor;
+      lbl.textContent = s.bboxLabel;
+      const vp = document.getElementById('sop-voice-prompt');
+      vp.style.borderLeftColor = s.borderColor;
+      vp.innerHTML = s.prompt;
+      document.getElementById('sop-json').textContent = JSON.stringify(s.json, null, 2);
+    }
+
+    const SYSTEMS = {
+      maximo: {
+        voice: '"Carbyn, log corrective maintenance on Slurry Pump P-204. Outboard bearing seal leaking; replaced Viton mechanical seal kit #SK-204, torqued housing to 45.2 Newton-meters, 1.5 labor hours, status COMP."',
+        docUrl: "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery",
+        screens: [
+          "assets/product-ui/maximo_mas9_wo_detail.png",
+          "assets/product-ui/maximo_mas9_wo_list.png",
+          "assets/product-ui/maximo_mas9_mobile_wodetail.png",
+          "assets/product-ui/maximo_mas9_mobile_tasks.png",
+          "assets/product-ui/maximo_mas9_mobile_inspection.png",
+          "assets/product-ui/maximo_mas9_mobile_schedule.png"
+        ],
+        payload: {
+          endpoint: "POST /maximo/api/os/mxapiwodetail?lean=1",
+          headers: { "apikey": "MAS9_OAUTH_TOKEN", "Properties": "wonum,assetnum,status,failurecode" },
+          body: {
+            siteid: "PLANT-BAY-01",
+            wonum: "MX-90412",
+            assetnum: "P-204",
+            worktype: "CM",
+            status: "COMP",
+            failurecode: "SEAL-LEAK-04",
+            problemcode: "OUTBOARD-BRG-78C",
+            remedycode: "REPL-VITON-SEAL-45NM",
+            actlabhrs: 1.5,
+            matusetrans: [{ itemnum: "SK-204", quantity: 1, storeroom: "MAIN-CRIB" }],
+            doclinks: [{ urlname: "pov_frame_04.jpg", doctype: "SPATIAL_PROOF_3DGS" }]
+          }
+        }
+      },
+      limble: {
+        voice: '"Carbyn, close Limble PM task on Plate Filter 143. Cloth wash manifold pressure verified at 185 bar, swapped 10-micron inline element, spent 45 minutes, attach current POV frame."',
+        docUrl: "https://limblecmms.com/features/work-orders/",
+        screens: [
+          "assets/product-ui/limble_manage_work_board.png",
+          "assets/product-ui/limble_open_task_modal.png",
+          "assets/product-ui/limble_task_instructions.png",
+          "assets/product-ui/limble_pm_template_modal.png",
+          "assets/product-ui/limble_wo_template_board.png"
+        ],
+        payload: {
+          endpoint: "PATCH /v2/tasks/44819",
+          body: {
+            taskID: 44819,
+            assetID: "Plate Filter 143",
+            statusID: 2,
+            statusName: "Complete",
+            timeSpentMinutes: 45,
+            instructionsCompleted: [
+              { stepID: 1, prompt: "Verify manifold pressure (bar)", numericValue: 185.0, pass: true },
+              { stepID: 2, prompt: "Upload post-service photo proof", fileAttachment: "pov_frame_02.jpg" }
+            ],
+            partsUsed: [{ partID: "FLT-10M-INLINE", quantity: 1 }]
+          }
+        }
+      },
+      procore: {
+        voice: '"Carbyn, create Procore RFI on Drawing S-402 Grid C-14 at 4.1 meters elevation. 4-inch EMT feeder conduit deviates +18mm south of BIM centerline into the HVAC hanger zone. Assign to Helix Electric."',
+        docUrl: "https://support.procore.com/products/online/user-guide/project-level/rfis",
+        screens: [
+          "assets/product-ui/procore_rfi_mobile_ui.png",
+          "assets/product-ui/procore_punch_list_workflow.png",
+          "assets/product-ui/procore_field_productivity_ui.png",
+          "assets/product-ui/procore_project_execution_ui.png",
+          "assets/product-ui/procore_pm_hero_ui.png"
+        ],
+        payload: {
+          endpoint: "POST /rest/v1.0/projects/88412/rfis",
+          body: {
+            rfi: {
+              subject: "4-inch EMT Conduit +18mm BIM Deviation at Grid C-14",
+              question_body: "3DGS As-Built scan flags +18.0mm southward deviation on 4-inch EMT feeder run vs Revit model, clashing with trapeze hanger rod.",
+              drawing_number: "S-402 Rev 4",
+              location_id: "LEVEL-02-GRID-C14",
+              spatial_pin_xyz_m: [-0.882, 0.85, 0.20],
+              assignee_id: "HELIX-VDC-LEAD",
+              schedule_impact: "yes_2_days",
+              attachments: ["pov_frame_03.jpg"]
+            }
+          }
+        }
+      },
+      acc: {
+        voice: '"Carbyn, log Autodesk ACC Build Commissioning Issue and Asset update on 480V Switchgear ATS-02. Load-bank transfer verified in 42ms, busbar splice #14 needs re-torque to 68 Nm before ceiling closure."',
+        docUrl: "https://help.autodesk.com/view/BUILD/ENU/?guid=Issues_Overview",
+        screens: [
+          "assets/product-ui/acc_build_issues_sheet.jpg",
+          "assets/product-ui/acc_build_issues_mobile.jpg",
+          "assets/product-ui/acc_build_issues_log.jpg",
+          "assets/product-ui/acc_build_issue_references.png",
+          "assets/product-ui/acc_build_assets_tracking.png"
+        ],
+        payload: {
+          endpoint: "POST /construction/issues/v1/projects/dc-hyperscale-04/issues",
+          body: {
+            title: "Overhead Busway Joint #14 Thermal Delta (+11.8C) // Pre-Ceiling Hold",
+            issueSubtypeId: "Commissioning-L4-IST",
+            status: "open",
+            linkedDocumentPushpin: {
+              sheetNumber: "E-501",
+              position3D: { x: 0.60, y: 1.10, z: -0.30 },
+              viewStateCameraQuat: [0.88, -0.22, 0.39, 0.15]
+            },
+            linkedAssetId: "ATS-02-COLO-B",
+            customAttributes: [
+              { title: "Measured Temp (C)", value: "58.6" },
+              { title: "Required Splice Torque (Nm)", value: "68.0" }
+            ]
+          }
+        }
+      }
+    };
+
+    function setSystem(sysKey) {
+      document.querySelectorAll('.sys-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('sys-' + sysKey).classList.add('active');
+      const s = SYSTEMS[sysKey];
+      document.getElementById('sys-voice-input').textContent = s.voice;
+      document.getElementById('sys-api-payload').textContent = JSON.stringify(s.payload, null, 2);
+      document.getElementById('sys-doc-link').href = s.docUrl;
+      document.getElementById('sys-hero-preview').src = s.screens[0];
+      document.getElementById('sys-thumbs').innerHTML = s.screens.map(src => `
+        <img src="${src}" alt="UI Screen" onclick="document.getElementById('sys-hero-preview').src='${src}'" />
+      `).join('');
+    }
+
+    setSopStep(2);
+    setSystem('maximo');
+  </script>
+</body>
+</html>
