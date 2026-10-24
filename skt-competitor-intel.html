@@ -1,551 +1,1044 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CARBYN COO | SKT Voice/Video-to-Doc Competitor & Word Intel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-canvas: #0B0B0C;
-      --text-head: #F4F4F2;
-      --text-body: #D3D3D1;
-      --text-muted: #8E8E93;
-      --accent: #FFD100;
-      --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-border: rgba(255, 255, 255, 0.16);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: var(--bg-canvas);
-      color: var(--text-body);
-      font-family: 'Inter', -apple-system, sans-serif;
-      padding: 48px 96px;
-      line-height: 1.5;
-    }
-    @media (max-width: 1100px) { body { padding: 28px 20px; } }
-    .nav-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
-    .nav-links a { color: var(--text-head); text-decoration: none; background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; margin-right: 8px; display: inline-block; }
-    h1 { font-size: 56px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; color: var(--text-head); margin-bottom: 14px; max-width: 900px; }
-    .lead { font-size: 22px; color: var(--text-body); max-width: 920px; margin-bottom: 36px; }
-    .top-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
-    @media (max-width: 1100px) { .top-grid { grid-template-columns: 1fr; } }
-    .focal-card { background: var(--accent); color: #000000; border-radius: 24px; padding: 40px; }
-    .focal-card * { color: #000000 !important; }
-    .glass-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 24px; padding: 36px; backdrop-filter: blur(16px); }
-    .card-kicker { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
-    .badge { background: rgba(255,255,255,0.12); color: var(--text-head); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; }
-    .cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
-    @media (max-width: 1100px) { .cards-grid { grid-template-columns: 1fr; } }
-    .word-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 14px 16px; margin-bottom: 16px; }
-    .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); display: block; margin-bottom: 4px; }
-    .kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 13.5px; }
-    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-    th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.09); vertical-align: top; }
-    th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); background: rgba(255,255,255,0.04); }
-    h2 { font-size: 32px; color: var(--text-head); margin-bottom: 20px; font-weight: 600; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARBYN COO · SKT Competitor & Word Intelligence Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1920px 1080px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #060608; color: #F5F5F3;
+    font-family: 'Helvetica Now Display', 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.web-mode { overflow-x: hidden; scroll-snap-type: y mandatory; }
+  .slide-viewport {
+    width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
+    scroll-snap-align: start; position: relative; overflow: hidden; background: #060608;
+  }
+  .slide {
+    width: 1920px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+    transform-origin: center center;
+    background: #0B0B0D url('assets/bg_cover.png') center/1920px 1080px no-repeat;
+    color: #F5F5F3; box-shadow: 0 24px 80px rgba(0,0,0,0.75);
+  }
+  .slide-bg-overlay {
+    position: absolute; inset: 0;
+    background: rgba(8, 9, 12, 0.58); z-index: 1;
+  }
+  .pad {
+    position: absolute; left: 96px; top: 60px; width: 1728px; bottom: 96px;
+    display: flex; flex-direction: column; z-index: 5;
+  }
+  .header-row {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; height: 36px; margin-bottom: 12px; flex-shrink: 0;
+  }
+  .label {
+    font-size: 17px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #B4B4AE;
+  }
+  .brand-logo { height: 30px; width: auto; display: block; }
+  h1 {
+    font-size: 64px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+    color: #F5F5F3; margin-bottom: 22px; flex-shrink: 0;
+  }
+  h1 .hl { color: #FFCD11; }
+  .card {
+    background: rgba(18, 20, 26, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 22px; padding: 26px 30px;
+    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .card.gold {
+    background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.86) 100%);
+    border: 1.5px solid rgba(255, 205, 17, 0.55);
+  }
+  .card.green {
+    background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
+    border: 1.5px solid rgba(16, 185, 129, 0.50);
+  }
+  .card.blue {
+    background: linear-gradient(155deg, rgba(59, 130, 246, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
+    border: 1.5px solid rgba(59, 130, 246, 0.48);
+  }
+  .kicker {
+    font-size: 14px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #9CA3AF; margin-bottom: 10px; flex-shrink: 0;
+  }
+  .card.gold .kicker { color: #FFCD11; }
+  .card.green .kicker { color: #34D399; }
+  .card.blue .kicker { color: #60A5FA; }
+  .huge {
+    font-size: 76px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
+    color: #FFF; margin-bottom: 10px;
+  }
+  .huge.hl { color: #FFCD11; }
+  .huge.green { color: #34D399; }
+  .shot-wrap {
+    width: 100%; height: 215px; border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.18); margin-bottom: 14px; flex-shrink: 0;
+    background: #000; position: relative;
+  }
+  .shot-wrap img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+  }
+  .shot-badge {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(11,11,12,0.88); border: 1px solid rgba(255,205,17,0.6);
+    color: #FFCD11; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+  }
+  .word-pill {
+    display: inline-block; padding: 6px 12px; border-radius: 8px;
+    font-size: 14px; font-weight: 700; background: rgba(255,205,17,0.15);
+    border: 1px solid rgba(255,205,17,0.45); color: #FFCD11; margin: 3px 4px 3px 0;
+  }
+  .pain-pill {
+    display: inline-block; padding: 6px 12px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.4); color: #FCA5A5; margin: 3px 4px 3px 0;
+  }
+  .win-pill {
+    display: inline-block; padding: 6px 12px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 700; background: rgba(16,185,129,0.16);
+    border: 1px solid rgba(16,185,129,0.45); color: #34D399; margin: 3px 4px 3px 0;
+  }
+  .ftr-rule {
+    position: absolute; left: 96px; top: 996px; width: 1728px; height: 1px;
+    background: rgba(255, 255, 255, 0.18); z-index: 5;
+  }
+  .ftr {
+    position: absolute; left: 96px; top: 1012px; width: 1728px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 15px; color: #8E8E89; z-index: 5; letter-spacing: 0.06em;
+  }
+  .ftr a { color: #FFCD11; text-decoration: none; font-weight: 700; }
+  .deck-hud {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    background: rgba(18, 18, 20, 0.92); border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px); padding: 8px 18px; border-radius: 999px;
+    display: flex; align-items: center; gap: 12px; z-index: 999; font-size: 13px; color: #E5E5E0;
+  }
+  .deck-hud button, .deck-hud a {
+    background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.15);
+    color: #fff; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 12px; font-weight: 600; text-decoration: none;
+  }
+  .deck-hud button:hover, .deck-hud a:hover { background: #FFCD11; color: #000; border-color: #FFCD11; }
+</style>
 </head>
-<body>
-  <div class="nav-bar">
-    <div class="nav-links">
-      <a href="./index.html">← Command Center</a>
-      <a href="https://docs.google.com/document/d/1-n8ubh1wPa9DJ2bNK8_tc4fCj8PFJEw1p9y43gbs9TA/edit" target="_blank">Google Doc (Carbyn Template) ↗</a>
-      <a href="https://docs.google.com/spreadsheets/d/1l1JNNR3AWr8BMSbNC8OCJQouXeodSekDeRJMkt7n6ws/edit" target="_blank">Master Google Sheet (4 Tabs) ↗</a>
+<body class="web-mode">
+
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">01 · COO COMPETITOR & WORD INTEL</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <span class="badge">COO DIVISION • AUDITOR VERIFIED [FACT]</span>
+    <h1>24 Competitors Audited. <span class="hl">Real UI & Exact Words.</span></h1>
+    
+<div style="display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:26px;flex:1;">
+  <div class="card gold">
+    <div class="kicker">01 · THE WHITE SPACE FOR SKT (OCT 26 LAUNCH)</div>
+    <div class="huge hl">60 Sec</div>
+    <div style="font-size:28px;font-weight:800;color:#FFF;margin-bottom:12px;">Kill the 9 PM 2-Hour Report Grind</div>
+    <div style="font-size:18px;color:#E5E5E0;line-height:1.45;margin-bottom:16px;">
+      <strong>Horizontal AI tools</strong> (Granola, Wispr Flow, Plaud) are built for Zoom/desk workers and cannot bind jobsite photos into custom inspection forms.<br><br>
+      <strong>Vertical ERPs</strong> (Xactimate, ServiceTitan, Spectora, CxAlloy) trap solo contractors in 8-click forms and $300+/mo enterprise bloat.
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto;">
+      <div class="shot-wrap" style="height:150px;margin:0;"><img src="assets/competitors/granola.jpg"><span class="shot-badge">Desk AI (Granola)</span></div>
+      <div class="shot-wrap" style="height:150px;margin:0;"><img src="assets/competitors/spectora.jpg"><span class="shot-badge">Vertical ERP (Spectora)</span></div>
+    </div>
   </div>
+  <div class="card">
+    <div class="kicker">02 · 24 COMPETITORS VISUALLY AUDITED</div>
+    <div class="huge">8 + 16</div>
+    <div style="font-size:24px;font-weight:700;color:#FFF;margin-bottom:10px;">8 Horizontal + 16 Vertical Leaders</div>
+    <div style="font-size:16px;color:#D4D4CE;line-height:1.4;margin-bottom:14px;">Zero-traction AI slop sites & App-Store-only review claims strictly excluded. Every tool verified via funding, founder LinkedIn/X, and organic Reddit threads.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto;">
+      <div class="shot-wrap" style="height:135px;margin:0;"><img src="assets/competitors/wisprflow.jpg"><span class="shot-badge">Wispr Flow</span></div>
+      <div class="shot-wrap" style="height:135px;margin:0;"><img src="assets/competitors/companycam.jpg"><span class="shot-badge">CompanyCam</span></div>
+      <div class="shot-wrap" style="height:135px;margin:0;"><img src="assets/competitors/tekmetric.jpg"><span class="shot-badge">Tekmetric</span></div>
+      <div class="shot-wrap" style="height:135px;margin:0;"><img src="assets/competitors/hardline.jpg"><span class="shot-badge">Hardline</span></div>
+    </div>
+  </div>
+  <div class="card green">
+    <div class="kicker">03 · 261 VERBATIM FIELD QUOTES & REAL FORMS</div>
+    <div class="huge green">261</div>
+    <div style="font-size:24px;font-weight:700;color:#FFF;margin-bottom:10px;">Primary Reddit & Trade Forum Evidence</div>
+    <div style="font-size:16px;color:#D4D4CE;line-height:1.4;margin-bottom:14px;">Extracted exact words contractors use in <code>r/adjusters</code>, <code>r/homeinspectors</code>, <code>r/Justrolledintotheshop</code>, <code>r/HVAC</code>, and <code>InterNACHI</code>.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto;">
+      <div class="shot-wrap" style="height:150px;margin:0;"><img src="assets/forms/IN01_mha_narrative_p1.jpg"><span class="shot-badge">Adjuster Narrative</span></div>
+      <div class="shot-wrap" style="height:150px;margin:0;"><img src="assets/forms/IN03_citizens_4pt_p1.jpg"><span class="shot-badge">4-Point Inspection</span></div>
+    </div>
+  </div>
+</div>
 
-  <h1>SKT Voice & Video-to-Doc Competitor & Word Intelligence</h1>
-  <p class="lead">Horizontal AI Note Tools (8) + Vertical Field Standards & Emerging AI Tools (16) + 261 Verbatim Field Quotes. Strict Exclusion of Zero-Traction Slop & App-Store-Only Reviews.</p>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> | <a href='https://docs.google.com/document/d/1-n8ubh1wPa9DJ2bNK8_tc4fCj8PFJEw1p9y43gbs9TA/edit' target='_blank'>GOOGLE DOC ↗</a> | <a href='https://docs.google.com/spreadsheets/d/1l1JNNR3AWr8BMSbNC8OCJQouXeodSekDeRJMkt7n6ws/edit' target='_blank'>GOOGLE SHEET ↗</a></span>
+    <span>01 / 10</span>
+  </div>
+</section></div>
 
-  <section class="top-grid">
-    <div class="focal-card">
-      <div class="card-kicker">THE WINNING SKT WORD LEXICON</div>
-      <div style="font-size:46px;font-weight:800;line-height:1.05;margin:10px 0 14px 0;">"Kill the 9 PM 2-Hour Report Grind."</div>
-      <p style="font-size:15px;font-weight:600;margin-bottom:10px;">Why Horizontal & Vertical Competitors Leave the Skateboard Wedge Wide Open:</p>
-      <p style="font-size:13.5px;">Horizontal tools (Granola, Wispr Flow, Plaud) are built for desk/Zoom workers and fail when a contractor needs photos + custom inspection/DVI/punch-list templates. Vertical ERPs (Xactimate, ServiceTitan, Spectora) trap solo operators in 8-click forms and $300+/mo enterprise bloat.</p>
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">02 · HORIZONTAL AI NOTE TOOLS (1/2)</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <div class="glass-card">
-      <div class="card-kicker">HORIZONTAL & VERTICAL COVERAGE</div>
-      <div style="font-size:52px;font-weight:800;color:#F4F4F2;margin:8px 0;">24 Tools</div>
-      <p style="font-size:14px;margin-bottom:14px;">8 Horizontal Voice/AI Note Leaders + 16 Vertical Field Standards & Funded/Traction-Verified Emerging AI Tools.</p>
-      <div style="font-size:13px;color:var(--text-muted);">
-        • Zero-traction slop websites excluded<br>
-        • App Store reviews excluded as traction proof<br>
-        • Funded / Active Founder LI & X / Organic Reddit verified
+    <h1>Desk AI Leaders: <span class="hl">Granola, Wispr Flow, Plaud, Otter.</span></h1>
+    <div style='display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;'>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">AI Notepad for Meetings</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Granola</div>
+        </div>
+        <a href="https://www.granola.ai" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Free trial (25 meeting ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/granola.jpg" alt="Granola">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">back-to-back meetings, raw notes,增强/enhance, no meeting bots, transcripts, action items</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> The AI notepad for people in back-to-back meetings</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Built for laptop desk meetings with system audio; no photo-to-voice timestamp binding, no gloves/offline basement capture, no structured form PDF
       </div>
     </div>
-    <div class="glass-card">
-      <div class="card-kicker">PRIMARY VOICE-OF-CUSTOMER CORPUS</div>
-      <div style="font-size:52px;font-weight:800;color:#F4F4F2;margin:8px 0;">261 Quotes</div>
-      <p style="font-size:14px;margin-bottom:14px;">Extracted from Reddit (r/adjusters, r/homeinspectors, r/HVAC, r/Contractor, r/Justrolledintotheshop), InterNACHI, and ContractorTalk.</p>
-      <div style="font-size:13px;color:var(--text-muted);">
-        • Every quote linked to exact source URL [FACT]<br>
-        • Psychology estimates explicitly tagged [추정]
+    
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Voice-to-Text Dictation OS</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Wispr Flow</div>
+        </div>
+        <a href="https://wisprflow.ai" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Free basic (2,000 word ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/wisprflow.jpg" alt="Wispr Flow">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">flow state, auto-edits, filler word removal, whisper mode, command mode, keyboard replacement</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Speak naturally, write 3x faster in every app</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Pure cursor dictation inside existing desktop/iOS text boxes; does not bind jobsite photos to line items or populate multi-field inspection templ
       </div>
     </div>
-  </section>
+    
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Hardware AI Voice Recorder</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Plaud Note</div>
+        </div>
+        <a href="https://www.plaud.ai" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$159-$169 hardware + $ ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/plaud.jpg" alt="Plaud Note">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">one-press recording, MagSafe call recording, AI summary templates, mind maps, speaker labels</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Wearable AI voice recorder that records, transcribes, and summarizes</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Requires carrying and charging secondary hardware + syncing files later; zero visual photo capture, cannot verify roof hail hits or cracked tiles
+      </div>
+    </div>
+    
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Meeting Transcription & Bot Assistant</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Otter.ai</div>
+        </div>
+        <a href="https://otter.ai" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Free (300 min/mo) / $8 ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/otter.jpg" alt="Otter.ai">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">OtterPilot, live summary, action items, meeting channels, speaker tagging</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Never take meeting notes again - automated transcripts and summaries</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Designed for multi-speaker conference calls; produces wall-of-text transcripts instead of code-compliant inspection checklists or Xactimate scope
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>02 / 10</span>
+  </div>
+</section></div>
 
-  <h2>1. Horizontal Voice-to-Doc Tools: Marketing 'Words' & User Gaps (8 Tools)</h2>
-  <section class="cards-grid">
-    
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">03 · HORIZONTAL AI NOTE TOOLS (2/2)</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Voice Capture Apps: <span class="hl">Voicenotes, AudioPen, Limitless, Notion.</span></h1>
+    <div style='display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;'>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
         <div>
-          <div class="card-kicker">AI Notepad for Meetings</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">Granola</h3>
+          <div class="kicker" style="margin-bottom:2px;">Consumer AI Voice Dump App</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Voicenotes</div>
         </div>
-        <span class="badge">Free trial (25 meetings) / $18/mo </span>
+        <a href="https://voicenotes.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$10/mo or $50/yr Belie ↗</a>
       </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">back-to-back meetings, raw notes,增强/enhance, no meeting bots, transcripts, action items</div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/voicenotes.jpg" alt="Voicenotes">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
       </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>The AI notepad for people in back-to-back meetings</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Knowledge workers, VCs, founders on Zoom/Meet/Teams</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Built for laptop desk meetings with system audio; no photo-to-voice timestamp binding, no gloves/offline basement capture, no structured form PDF output</p></div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">brain dump, ask your AI, to-do list creator, smart reminders, rambling to clarity</div>
       </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://www.granola.ai
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Dump your thoughts, let AI organize and remember everything</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Outputs prose summaries, blog posts, or simple to-dos; zero support for state-mandated forms (4-Point, Chimney, Septic, Change Orders) or photo e
       </div>
     </div>
     
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
         <div>
-          <div class="card-kicker">Voice-to-Text Dictation OS</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">Wispr Flow</h3>
+          <div class="kicker" style="margin-bottom:2px;">Voice-to-Clean-Prose Rewriter</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">AudioPen</div>
         </div>
-        <span class="badge">Free basic (2,000 words/wk) / $12-</span>
+        <a href="https://audiopen.ai" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Free (3 min notes) / $ ↗</a>
       </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">flow state, auto-edits, filler word removal, whisper mode, command mode, keyboard replacement</div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/audiopen.jpg" alt="AudioPen">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
       </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>Speak naturally, write 3x faster in every app</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Executives, developers, writers dictating into Slack/Email/Cursor</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Pure cursor dictation inside existing desktop/iOS text boxes; does not bind jobsite photos to line items or populate multi-field inspection templates</p></div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">fuzzy thought, clear text, writing style, voice memo rewrite, super-summary</div>
       </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://wisprflow.ai
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Go from fuzzy thought to clear text in seconds</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Rewrites speech into polished essays/emails; field pros hate 'flowery AI prose' and need exact measurements, part numbers, and liability-safe bul
       </div>
     </div>
     
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
         <div>
-          <div class="card-kicker">Hardware AI Voice Recorder</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">Plaud Note / NotePin</h3>
+          <div class="kicker" style="margin-bottom:2px;">Lifelogging Wearable & Desktop AI</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Limitless</div>
         </div>
-        <span class="badge">$159-$169 hardware + $79-$240/yr A</span>
+        <a href="https://www.limitless.ai" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$99 Pendant + $19-$29/ ↗</a>
       </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">one-press recording, MagSafe call recording, AI summary templates, mind maps, speaker labels</div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/limitless.jpg" alt="Limitless">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
       </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>Wearable AI voice recorder that records, transcribes, and summarizes</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Doctors, lawyers, field sales reps wanting hardware capture</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Requires carrying and charging secondary hardware + syncing files later; zero visual photo capture, cannot verify roof hail hits or cracked tiles</p></div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">Pendant, lifelogging, memory augmentation, meeting prep, continuous capture</div>
       </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://www.plaud.ai
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Personalized AI powered by what you've seen, said, and heard</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Continuous recording triggers severe homeowner privacy/legal pushback on jobsites and PI/adjuster confidentiality rules; no photo-linked report e
       </div>
     </div>
     
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
         <div>
-          <div class="card-kicker">Meeting Transcription & Bot Assistant</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">Otter.ai</h3>
+          <div class="kicker" style="margin-bottom:2px;">Workspace Knowledge & Doc Assistant</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Notion AI</div>
         </div>
-        <span class="badge">Free (300 min/mo) / $8.33-$16.99/m</span>
+        <a href="https://www.notion.com/product/ai" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$10/user/mo AI add-on  ↗</a>
       </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">OtterPilot, live summary, action items, meeting channels, speaker tagging</div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/notion_ai.jpg" alt="Notion AI">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
       </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>Never take meeting notes again - automated transcripts and summaries</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Corporate sales teams, remote project managers, students</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Designed for multi-speaker conference calls; produces wall-of-text transcripts instead of code-compliant inspection checklists or Xactimate scopes</p></div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">autofill tables, Q&A across docs, meeting notes block, wiki, database properties</div>
       </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://otter.ai
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> One workspace. Zero busywork. Write, plan, and organize with AI</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Requires cellular connection and complex block editing; tradesmen call desktop workspaces 'a glorified night class' that fails in dead basements
       </div>
     </div>
-    
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
-        <div>
-          <div class="card-kicker">Consumer AI Voice Dump App</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">Voicenotes</h3>
-        </div>
-        <span class="badge">$10/mo or $50/yr Believer plan</span>
-      </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">brain dump, ask your AI, to-do list creator, smart reminders, rambling to clarity</div>
-      </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>Dump your thoughts, let AI organize and remember everything</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Solo creators, founders, ADHD thinkers taking walking memos</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Outputs prose summaries, blog posts, or simple to-dos; zero support for state-mandated forms (4-Point, Chimney, Septic, Change Orders) or photo evidence</p></div>
-      </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://voicenotes.com
-      </div>
     </div>
-    
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
-        <div>
-          <div class="card-kicker">Voice-to-Clean-Prose Rewriter</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">AudioPen</h3>
-        </div>
-        <span class="badge">Free (3 min notes) / $99/yr or $15</span>
-      </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">fuzzy thought, clear text, writing style, voice memo rewrite, super-summary</div>
-      </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>Go from fuzzy thought to clear text in seconds</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Writers, newsletter authors, consultants drafting emails</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Rewrites speech into polished essays/emails; field pros hate 'flowery AI prose' and need exact measurements, part numbers, and liability-safe bullet points</p></div>
-      </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://audiopen.ai
-      </div>
-    </div>
-    
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
-        <div>
-          <div class="card-kicker">Lifelogging Wearable & Desktop AI</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">Limitless (formerly Rewind)</h3>
-        </div>
-        <span class="badge">$99 Pendant + $19-$29/mo Pro plan</span>
-      </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">Pendant, lifelogging, memory augmentation, meeting prep, continuous capture</div>
-      </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>Personalized AI powered by what you've seen, said, and heard</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Tech early adopters, executives wearing all-day audio pendants</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Continuous recording triggers severe homeowner privacy/legal pushback on jobsites and PI/adjuster confidentiality rules; no photo-linked report engine</p></div>
-      </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://www.limitless.ai
-      </div>
-    </div>
-    
-    <div class="glass-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;">
-        <div>
-          <div class="card-kicker">Workspace Knowledge & Doc Assistant</div>
-          <h3 style="font-size:22px;color:#F4F4F2;font-weight:600;">Notion AI</h3>
-        </div>
-        <span class="badge">$10/user/mo AI add-on on top of Pl</span>
-      </div>
-      <div class="word-box">
-        <div class="label">EXACT MARKETING 'WORDS' LEXICON [FACT]</div>
-        <div class="val" style="color:#F4F4F2;font-weight:600;">autofill tables, Q&A across docs, meeting notes block, wiki, database properties</div>
-      </div>
-      <div class="kv-grid">
-        <div><span class="label">CORE VALUE HOOK (EXACT COPY)</span><p>One workspace. Zero busywork. Write, plan, and organize with AI</p></div>
-        <div><span class="label">TARGET PERSONA & TRIGGER</span><p>Tech startups, product managers, digital operations teams</p></div>
-        <div style="grid-column: span 2;"><span class="label">WHY IT FAILS BLUE-COLLAR FIELD WORKERS (GAP FOR SKT)</span><p style="color:#32D74B;font-weight:600;">Requires cellular connection and complex block editing; tradesmen call desktop workspaces 'a glorified night class' that fails in dead basements</p></div>
-      </div>
-      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.1);font-size:12px;color:#64D2FF;">
-        [FACT] https://www.notion.com/product/ai
-      </div>
-    </div>
-    
-  </section>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>03 / 10</span>
+  </div>
+</section></div>
 
-  <section class="glass-card" style="margin-bottom:48px;overflow-x:auto;">
-    <h2>2. Vertical Standards & Emerging AI Tools: Environment, Psychology & 'Words' (16 Tools)</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Tool & Segment</th>
-          <th>Core Positioning & Copy</th>
-          <th>Exact Field Lexicon ('Words')</th>
-          <th>Pricing Model</th>
-          <th>Field Psychological Pain & Failure Mode</th>
-          <th>Carbyn SKT Wedge</th>
-          <th>Evidence [FACT / 추정]</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Xactimate (Verisk)</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Insurance Adjusters</span></td>
-      <td>Industry-standard property claims estimating software</td>
-      <td style="color:#F4F4F2;font-weight:600;">line items, sketch, macro, ESX file, desk review, supplement, depreciation, O&P</td>
-      <td>~$162/mo Pro or ~$1,900-$3,400/yr per seat</td>
-      <td style="color:#FF9F0A;">Mandatory carrier monopoly ('Only because all the Insurance company I do business with are using it'), crashes every 5-10 min, logs out across devices, forces 1-2 hrs of nightly re-typing from field notes</td>
-      <td style="color:#32D74B;font-weight:500;">Do NOT replace Xactimate; sit in front of it as the '60-second roof-to-room voice + photo scope capture' that outputs structured Xactimate-ready line items and Daily Narrative PDFs before leaving the driveway</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.capterra.com/p/214125/Xactimate/reviews/</td>
-    </tr>
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">04 · VERTICAL TOOLS: ADJUSTERS & INSPECTORS (1/4)</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Property & Claims Standards: <span class="hl">Xactimate, Encircle, magicplan, Spectora.</span></h1>
+    <div style='display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;'>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Insurance Adjusters</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Xactimate (Verisk)</div>
+        </div>
+        <a href="https://www.verisk.com/insurance/products/xactimate/" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">~$162/mo Pro or ~$1,90 ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/xactimate.jpg" alt="Xactimate (Verisk)">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">line items, sketch, macro, ESX file, desk review, supplement, depreciation, O&P</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Industry-standard property claims estimating software</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Do NOT replace Xactimate; sit in front of it as the '60-second roof-to-room voice + photo scope capture' that outputs structured Xactimate-ready 
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Encircle</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Insurance / Restoration</span></td>
-      <td>Field documentation software for restorers and claims pros</td>
-      <td style="color:#F4F4F2;font-weight:600;">hydro/moisture logs, room-by-room photo bucket, scope sheet, contents inventory, policyholder link</td>
-      <td>~$225+/mo team plans (custom enterprise pricing)</td>
-      <td style="color:#FF9F0A;">Heavy multi-tap room creation flow; independent adjusters paying out of pocket find it overpriced and still spend late nights writing narrative justifications for file reviewers</td>
-      <td style="color:#32D74B;font-weight:500;">Single-thumb voice+photo stream that auto-groups by elevation/room and drafts the exact carrier narrative criteria (ORM/MHA standard) without manual folder tapping</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.getencircle.com</td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Insurance / Restoration</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Encircle</div>
+        </div>
+        <a href="https://www.getencircle.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">~$225+/mo team plans ( ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/encircle.jpg" alt="Encircle">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">hydro/moisture logs, room-by-room photo bucket, scope sheet, contents inventory, policyholder link</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Field documentation software for restorers and claims pros</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Single-thumb voice+photo stream that auto-groups by elevation/room and drafts the exact carrier narrative criteria (ORM/MHA standard) without man
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">magicplan</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Restoration / Remodelers</span></td>
-      <td>Instant floor plans and field reports with AR & LiDAR</td>
-      <td style="color:#F4F4F2;font-weight:600;">AR scan, floor plan sketch, photo pins, material takeoff, Xactimate integration</td>
-      <td>$40/mo Sketch to $90-$185/mo Report/Estimate tiers</td>
-      <td style="color:#FF9F0A;">Scanning fails in cluttered basements/attics ('barely worked 10% of the time' on similar scan tools) and doesn't solve the narrative report writing bottleneck</td>
-      <td style="color:#32D74B;font-weight:500;">Pair fast photo+voice capture with instant scope narrative and change-order generation when LiDAR scanning is overkill</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.magicplan.app</td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Restoration / Remodelers</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">magicplan</div>
+        </div>
+        <a href="https://www.magicplan.app" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$40/mo Sketch to $90-$ ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/magicplan.jpg" alt="magicplan">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">AR scan, floor plan sketch, photo pins, material takeoff, Xactimate integration</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Instant floor plans and field reports with AR & LiDAR</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Pair fast photo+voice capture with instant scope narrative and change-order generation when LiDAR scanning is overkill
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Spectora</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Home Inspectors</span></td>
-      <td>Modern home inspection software that saves you time</td>
-      <td style="color:#F4F4F2;font-weight:600;">defect comment library, narrative template, repair request builder, 4-Point, Wind Mit, E&O liability</td>
-      <td>$99/mo or $999/yr per inspector</td>
-      <td style="color:#FF9F0A;">Inspectors still stop every 30 seconds to tap through rigid checklist trees ('breaks your inspection flow') and spend 1-2 hours at night editing templates</td>
-      <td style="color:#32D74B;font-weight:500;">Hands-free voice + photo defect capture while walking the roof/attic that maps directly into Spectora/4-Point/Wind Mit sections without hallucinating liability</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.capterra.com/p/157144/Spectora/reviews/?page=22</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">HomeGauge</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Home Inspectors</span></td>
-      <td>Trusted home inspection software and services for 20+ years</td>
-      <td style="color:#F4F4F2;font-weight:600;">desktop companion, cloud sync, comment key, summary page, Standards of Practice (SOP)</td>
-      <td>$79-$99/mo per inspector</td>
-      <td style="color:#FF9F0A;">Dated desktop-era UI requiring heavy manual syncing and repetitive clicking through hundreds of sub-items per property</td>
-      <td style="color:#32D74B;font-weight:500;">Zero-menu voice walkthrough that auto-fills SOP defect descriptions and attaches annotated photos in real time</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.homegauge.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Inspector Toolbelt</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Home Inspectors</span></td>
-      <td>Inspection software built by inspectors, for inspectors</td>
-      <td style="color:#F4F4F2;font-weight:600;">quick comments, speed-first checklists, client scheduler, narrative builder</td>
-      <td>$69/mo unlimited inspections</td>
-      <td style="color:#FF9F0A;">Still relies on pre-written canned comments; when a unique defect appears on an old house, inspectors must type custom narratives by hand</td>
-      <td style="color:#32D74B;font-weight:500;">Voice-to-structured defect card that keeps the inspector's exact factual observations while cleaning up grammar for E&O-safe delivery</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://inspectortoolbelt.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Tekmetric</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Auto Repair / Mechanics</span></td>
-      <td>Cloud-based auto repair shop management system</td>
-      <td style="color:#F4F4F2;font-weight:600;">RO (Repair Order), DVI (Digital Vehicle Inspection), labor guide, parts matrix, tech notes, concern-cause-correction (3 Cs)</td>
-      <td>$199-$379+/mo per shop</td>
-      <td style="color:#FF9F0A;">Built for service advisors at the front counter; mechanics in the bay hate typing 3-C ('Concern, Cause, Correction') notes with greasy gloves</td>
-      <td style="color:#32D74B;font-weight:500;">Bay-side voice + photo capture: mechanic speaks the 3 Cs while pointing at the worn part, outputting advisor-ready RO text + customer DVI card</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.tekmetric.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">AutoVitals</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Auto Repair / Mechanics</span></td>
-      <td>The complete shop success solution & Digital Vehicle Inspection</td>
-      <td style="color:#F4F4F2;font-weight:600;">DVI sheet, motorist approval, bay productivity, red/yellow/green inspection items</td>
-      <td>$250-$450+/mo per shop</td>
-      <td style="color:#FF9F0A;">Tablet UI requires constant tapping and photo uploading per checklist line, slowing down flat-rate technicians who only get paid for wrench time</td>
-      <td style="color:#32D74B;font-weight:500;">60-second walkaround voice-and-snap mode that completes the entire red/yellow/green DVI without touching dropdowns</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.autovitals.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Shop-Ware</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Auto Repair / Mechanics</span></td>
-      <td>Cloud shop management built for modern auto repair</td>
-      <td style="color:#F4F4F2;font-weight:600;">digital work order, live chat with customer, canned jobs, inspection findings</td>
-      <td>$249-$499+/mo per shop</td>
-      <td style="color:#FF9F0A;">Demands verbose written findings to justify repairs to skeptical motorists; techs write 3 words ('brakes worn') leaving service writers to rewrite everything</td>
-      <td style="color:#32D74B;font-weight:500;">Turns a mechanic's 10-second spoken diagnosis into a transparent, photo-backed customer explanation without hallucinating prices</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://getshopware.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Wrench Voice / Revv</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Auto Diagnostics / Voice</span></td>
-      <td>Voice-activated diagnostics and ADAS calibration notes</td>
-      <td style="color:#F4F4F2;font-weight:600;">OBD code, ADAS calibration, diagnostic trouble code (DTC), technician voice log</td>
-      <td>Custom shop subscription [추정: $99-$199/mo]</td>
-      <td style="color:#FF9F0A;">Narrowly focused on diagnostic codes rather than universal photo-backed RO narratives and warranty claim documentation</td>
-      <td style="color:#32D74B;font-weight:500;">Unified photo + voice proof package for both customer approval and OEM/aftermarket warranty reimbursement</td>
-      <td style="font-size:12px;color:#64D2FF;">[추정] Category benchmark from automotive voice tools</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">CompanyCam</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Roofing / Remodelers / Trades</span></td>
-      <td>The photo app every contractor needs - every photo organized by GPS</td>
-      <td style="color:#F4F4F2;font-weight:600;">before and after photos, GPS timestamp, project feed, photo report PDF, timeline proof</td>
-      <td>$79-$99/mo (3-user minimum effectively ~$85-$100/mo)</td>
-      <td style="color:#FF9F0A;">Glitchy in low-signal areas ('lost a lot of important work photos'), random 90/180-deg rotation bugs, and $85-$100/mo feels steep for solo/small crews who still have to type quotes separately</td>
-      <td style="color:#32D74B;font-weight:500;">100% offline-first photo + voice capture that not only timestamps CYA photos but immediately generates the quote, change order, or punch list PDF</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://play.google.com/store/apps/details?hl=en&id=com.agilx.companycam</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">ServiceTitan</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">HVAC / Plumbing / Electrical</span></td>
-      <td>The operating system that powers the trades</td>
-      <td style="color:#F4F4F2;font-weight:600;">dispatch board, pricebook, good-better-best options, ticket average, job closeout summary</td>
-      <td>$250-$500+/tech/mo + tens of thousands in onboarding</td>
-      <td style="color:#FF9F0A;">Techs despise it ('designed to make everyone else job easier, EXCEPT the technicians that use it'); bloated forms freeze when cell signal drops in mechanical rooms</td>
-      <td style="color:#32D74B;font-weight:500;">Lightweight tech-first companion that captures job closeout notes and photos offline in 30 seconds, ready to paste into ServiceTitan or send standalone</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://allbestapps.net/android/servicetitan-mobile</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Rilla</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">In-Home Sales / Trades Coaching</span></td>
-      <td>The #1 virtual ride-along software for outside sales & home services</td>
-      <td style="color:#F4F4F2;font-weight:600;">ride-along, talk-time ratio, objection handling, sales scorecard, Comfort Advisor</td>
-      <td>Enterprise per-rep seat (~$150-$250/rep/mo) [추정]</td>
-      <td style="color:#FF9F0A;">Built for sales managers policing reps ('big brother recording'), NOT for helping the field tech produce their actual customer quote, invoice, or inspection report</td>
-      <td style="color:#32D74B;font-weight:500;">Position SKT as the technician's own time-saver ('kills your 9 PM kitchen-table paperwork'), never as management surveillance</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.rilla.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Fieldwire (by Hilti)</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Commercial Construction / MEP</span></td>
-      <td>Jobsite management for construction teams - blueprints, tasks, punch lists</td>
-      <td style="color:#F4F4F2;font-weight:600;">plan markup, punch list item, RFI, daily report, manpower log, as-built</td>
-      <td>Free basic / $39-$89/user/mo Pro/Business</td>
-      <td style="color:#FF9F0A;">Requires pinning tasks on complex PDF blueprints; small builders and specialty subs find it too heavy when they just need a fast daily log or change order signed</td>
-      <td style="color:#32D74B;font-weight:500;">Speak and snap to generate a clean NAHB/NYC-style Change Order or Daily Report PDF in 20 seconds without blueprint setup</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://www.fieldwire.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">CxAlloy</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">MEP Commissioning / Data Centers</span></td>
-      <td>Commissioning and quality management software for critical facilities</td>
-      <td style="color:#F4F4F2;font-weight:600;">FPT (Functional Performance Test), PFC (Pre-Functional Checklist), issue log, observation, deficiency</td>
-      <td>Project/Enterprise licensing ($500+/mo per project) [추정]</td>
-      <td style="color:#FF9F0A;">Rigid table-by-table checklist entry in loud mechanical rooms; engineers carry iPads and still spend hotel nights formatting deficiency logs</td>
-      <td style="color:#32D74B;font-weight:500;">Voice-to-row deficiency capture with offline photo lock and equipment nameplate OCR</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://cxalloy.com</td>
-    </tr>
-    
-    <tr>
-      <td><strong style="color:#F4F4F2;font-size:15px;">Hardline / Handoff.ai / Joist</strong><br><span class="badge" style="margin-top:4px;display:inline-block;">Remodelers & Handyman Estimating</span></td>
-      <td>Instant AI construction estimates / mobile quoting & invoicing</td>
-      <td style="color:#F4F4F2;font-weight:600;">line-item estimate, markup, change order, client signature, deposit invoice, material list</td>
-      <td>Joist: $14-$38/mo; Handoff.ai: ~$99-$199/mo</td>
-      <td style="color:#FF9F0A;">Joist locks users out of data when subscription ends and deletes drafts when switching apps; AI estimators hallucinate local labor/material prices ('The wording? Fine... The prices? Wrong.')</td>
-      <td style="color:#32D74B;font-weight:500;">Never guess prices automatically: SKT locks your exact spoken numbers and field photos into a clean estimate/invoice and lets you export all data anytime</td>
-      <td style="font-size:12px;color:#64D2FF;">[FACT] https://goodhandshandyman.com.au/chatgpt-handyman-estimates-prices-were-wrong.html</td>
-    </tr>
-    
-      </tbody>
-    </table>
-  </section>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Home Inspectors</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Spectora</div>
+        </div>
+        <a href="https://www.spectora.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$99/mo or $999/yr per  ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/spectora.jpg" alt="Spectora">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">defect comment library, narrative template, repair request builder, 4-Point, Wind Mit, E&O liability</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Modern home inspection software that saves you time</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Hands-free voice + photo defect capture while walking the roof/attic that maps directly into Spectora/4-Point/Wind Mit sections without hallucina
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>04 / 10</span>
+  </div>
+</section></div>
 
-  <section class="glass-card" style="overflow-x:auto;">
-    <h2>3. Verbatim Field User Complaints & Weaponized Counter-Messaging</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Pain Category & Persona</th>
-          <th>Verbatim Field Complaint</th>
-          <th>Psychological Trigger & Fear</th>
-          <th>Forbidden SaaS Words</th>
-          <th>Winning SKT Counter-Copy</th>
-          <th>Product Requirement</th>
-          <th>Source</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-    <tr>
-      <td><strong style="color:#F4F4F2;">1. The 'Second Shift' (8 PM - 2 AM Re-Entry)</strong><br><span class="badge">Insurance Adjusters & Septic/Trades Owners</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?" (r/ClaimsAdjuster) / "Then when my three-year-old son goes to bed around 8 p.m. I start doing book work, sending out estimates" (Pumper Mag)</td>
-      <td>Stealing family time and sleep for unpaid admin work; typing in sleep at 3 AM</td>
-      <td style="color:#FF453A;">AI workflow automation, productivity suite, digital transformation, workspace</td>
-      <td style="color:#32D74B;font-weight:600;">"Stop working the unpaid 9 PM kitchen-table shift. Talk through the job on your walk back to the truck - your report is finished before you turn the key."</td>
-      <td>60-second voice + photo capture -> instant PDF/copy-paste blocks before leaving driveway</td>
-      <td style="font-size:12px;"><a href="https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">05 · VERTICAL TOOLS: INSPECTORS & AUTO DVI (2/4)</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Inspection & Bay Leaders: <span class="hl">HomeGauge, Toolbelt, Tekmetric, AutoVitals.</span></h1>
+    <div style='display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;'>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Home Inspectors</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">HomeGauge</div>
+        </div>
+        <a href="https://www.homegauge.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$79-$99/mo per inspect ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/homegauge.jpg" alt="HomeGauge">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">desktop companion, cloud sync, comment key, summary page, Standards of Practice (SOP)</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Trusted home inspection software and services for 20+ years</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Zero-menu voice walkthrough that auto-fills SOP defect descriptions and attaches annotated photos in real time
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;">2. AI Hallucination & Liability Terror</strong><br><span class="badge">Home Inspectors, Electricians, Handymen</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"Letting AI write a report and then having to go through it and fix it is more work than just writing a report unfortunately." (r/HomeInspections) / "The wording? Fine. Polite. Professional... The prices? Wrong." (Good Hands Handyman)</td>
-      <td>E&O insurance liability, getting sued for something AI made up, or losing 30% on a bid from hallucinated pricing</td>
-      <td style="color:#FF453A;">Autonomous AI agent, AI writes your whole report, magic pricing generator, smart estimator</td>
-      <td style="color:#32D74B;font-weight:600;">"Zero made-up prices. Zero AI fairy tales. It only formats the exact measurements, defects, and numbers you actually said out loud."</td>
-      <td>Strict fact-lock mode: never invent prices or unseen conditions; highlight any missing field for human review</td>
-      <td style="font-size:12px;"><a href="https://www.reddit.com/r/HomeInspections/comments/1vu9dfi/made_an_app_that_writes_the_inspection_report/p4zz28p/" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Home Inspectors</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Inspector Toolbelt</div>
+        </div>
+        <a href="https://inspectortoolbelt.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$69/mo unlimited inspe ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/inspectortoolbelt.jpg" alt="Inspector Toolbelt">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">quick comments, speed-first checklists, client scheduler, narrative builder</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Inspection software built by inspectors, for inspectors</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Voice-to-structured defect card that keeps the inspector's exact factual observations while cleaning up grammar for E&O-safe delivery
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;">3. Dead Signal / Offline Photo Loss</strong><br><span class="badge">Remodelers, Roofers, Commercial Trades</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"Really glitchy where there is limited service. They claim photos can be taken while you're offline. I don't believe that statement anymore. I have lost a lot of important work photos" (CompanyCam Google Play)</td>
-      <td>Climbing down a 2-story roof or crawling out of a basement only to discover 40 photos vanished</td>
-      <td style="color:#FF453A;">Cloud-native sync, real-time streaming, enterprise cloud platform</td>
-      <td style="color:#32D74B;font-weight:600;">"Built for dead basements, metal roofs, and rural crawlspaces. Saves 100% locally to your phone first - even in Airplane Mode."</td>
-      <td>Local-first SQLite/filesystem storage; zero blocking spinner on capture; background sync only after local PDF lock</td>
-      <td style="font-size:12px;"><a href="https://play.google.com/store/apps/details?hl=en&id=com.agilx.companycam" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Auto Repair / Mechanics</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Tekmetric</div>
+        </div>
+        <a href="https://www.tekmetric.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$199-$379+/mo per shop ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/tekmetric.jpg" alt="Tekmetric">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">RO (Repair Order), DVI (Digital Vehicle Inspection), labor guide, parts matrix, tech notes, concern-cause-correction (3 Cs)</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Cloud-based auto repair shop management system</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Bay-side voice + photo capture: mechanic speaks the 3 Cs while pointing at the worn part, outputting advisor-ready RO text + customer DVI card
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;">4. App-Switch Draft Wipe & Tiny Tap Targets</strong><br><span class="badge">Handymen, RV Inspectors, Field Techs</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"Every time you navigate to a different app during estimate editing mode... it closes the edit and doesn't save any changes" (Joist review) / "Is the tap target size big enough that you are not fumbling with controls while wearing gloves or sweating?" (WanderWise RV)</td>
-      <td>Losing 20 minutes of thumb-typing when a client calls mid-quote; fumbling tiny menus in 98-degree heat with gloves</td>
-      <td style="color:#FF453A;">Rich multi-tab editor, customizable dashboard, granular dropdown menus</td>
-      <td style="color:#32D74B;font-weight:600;">"One giant button you can hit with sweaty gloves. Switch apps, take a phone call, lock your screen - your draft never resets."</td>
-      <td>Full-screen gloved tap target + persistent auto-save state across OS interrupts</td>
-      <td style="font-size:12px;"><a href="https://apps.apple.com/us/app/joist-estimate-invoice-maker/id592163563?see-all=reviews" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Auto Repair / Mechanics</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">AutoVitals</div>
+        </div>
+        <a href="https://www.autovitals.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$250-$450+/mo per shop ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/autovitals.jpg" alt="AutoVitals">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">DVI sheet, motorist approval, bay productivity, red/yellow/green inspection items</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> The complete shop success solution & Digital Vehicle Inspection</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> 60-second walkaround voice-and-snap mode that completes the entire red/yellow/green DVI without touching dropdowns
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>05 / 10</span>
+  </div>
+</section></div>
+
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">06 · VERTICAL TOOLS: AUTO & TRADES (3/4)</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Emerging Voice & Photo Tools: <span class="hl">Shop-Ware, Wrench Voice, CompanyCam, ServiceTitan.</span></h1>
+    <div style='display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;'>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Auto Repair / Mechanics</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Shop-Ware</div>
+        </div>
+        <a href="https://www.shop-ware.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$249-$499+/mo per shop ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/shopware.jpg" alt="Shop-Ware">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">digital work order, live chat with customer, canned jobs, inspection findings</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Cloud shop management built for modern auto repair</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Turns a mechanic's 10-second spoken diagnosis into a transparent, photo-backed customer explanation without hallucinating prices
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;">5. CYA / False Damage Accusations</strong><br><span class="badge">Handymen, Roofers, Remodelers</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"got a call three months later from a client swearing we scratched their hardwood floors. pulled up the folder, found the timestamped photo from after we finished, floor was spotless. they backed off real quick" (r/handyman)</td>
-      <td>Homeowner withholding a $5,000 check claiming pre-existing damage was caused by the crew</td>
-      <td style="color:#FF453A;">Visual asset management, collaborative photo repository</td>
-      <td style="color:#32D74B;font-weight:600;">"Your 'Get Paid Without Arguments' receipt. Timestamped before-and-after photos locked to your spoken notes so clients can't blame you for old scratches."</td>
-      <td>Immutable timestamp + GPS watermark + side-by-side Before/After PDF proof sheet</td>
-      <td style="font-size:12px;"><a href="https://www.reddit.com/r/handyman/comments/1x7t4hy/how_do_you_keep_track_of_job_photos_in_case_a/ph72hpt/" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Auto Diagnostics / Voice</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Wrench Voice</div>
+        </div>
+        <a href="https://wrenchvoice.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Custom shop subscripti ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/wrenchvoice.jpg" alt="Wrench Voice">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">OBD code, ADAS calibration, diagnostic trouble code (DTC), technician voice log</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Voice-activated diagnostics and ADAS calibration notes</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Unified photo + voice proof package for both customer approval and OEM/aftermarket warranty reimbursement
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;">6. Subscription Hostage & 'Vibe Coder' Fatigue</strong><br><span class="badge">Solo Handymen, Small 2-3 Man Crews</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"Once your subscription ends, you no longer have access to any of your data." (Joist review) / "vibe coders, that make about 100 posts a day, in all the different trades subreddits, trying to do market research, for a fucking app that nobody needs." (r/handyman)</td>
-      <td>Being locked out of years of client history or talked down to by software devs who have never held a tool</td>
-      <td style="color:#FF453A;">We're disrupting the trades, AI SaaS subscription, book a demo with our sales team</td>
-      <td style="color:#32D74B;font-weight:600;">"No $100/mo bloatware. No hostage data - every report saves straight to your phone as a standard PDF and Word/Excel file you own forever."</td>
-      <td>Under-$39/mo solo pricing, instant local PDF/DOCX/CSV export, zero lock-in</td>
-      <td style="font-size:12px;"><a href="https://www.workyard.com/compare/joist-review" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Roofing / Remodelers / Trades</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">CompanyCam</div>
+        </div>
+        <a href="https://companycam.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$79-$99/mo (3-user min ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/companycam.jpg" alt="CompanyCam">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">before and after photos, GPS timestamp, project feed, photo report PDF, timeline proof</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> The photo app every contractor needs - every photo organized by GPS</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> 100% offline-first photo + voice capture that not only timestamps CYA photos but immediately generates the quote, change order, or punch list PDF
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;">7. Checklist Flow Interruption</strong><br><span class="badge">Home Inspectors & RV/Marine Techs</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"Most apps are basically digital checklists, which is fine but you're still stopping every 30 seconds to tap, type, or select options. That breaks your inspection flow." (r/HomeInspections)</td>
-      <td>Missing a real structural defect because your eyes were buried in a phone dropdown tree</td>
-      <td style="color:#FF453A;">Comprehensive 500-point digital checklist, interactive form wizard</td>
-      <td style="color:#32D74B;font-weight:600;">"Keep your eyes on the structure, not on dropdown menus. Just snap the photo, say what you see in 5 seconds, and keep walking."</td>
-      <td>Continuous walk-and-talk stream that maps spoken observations to checklist fields post-walk</td>
-      <td style="font-size:12px;"><a href="https://www.reddit.com/r/HomeInspections/comments/1mdneek/just_built_a_free_inspection_app_looking_for_real/ogvg285/" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">HVAC / Plumbing / Electrical</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">ServiceTitan</div>
+        </div>
+        <a href="https://www.servicetitan.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">$250-$500+/tech/mo + t ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/servicetitan.jpg" alt="ServiceTitan">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">dispatch board, pricebook, good-better-best options, ticket average, job closeout summary</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> The operating system that powers the trades</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Lightweight tech-first companion that captures job closeout notes and photos offline in 30 seconds, ready to paste into ServiceTitan or send stan
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>06 / 10</span>
+  </div>
+</section></div>
+
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">07 · VERTICAL TOOLS: MEP & CONSTRUCTION (4/4)</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Field & Commissioning Tools: <span class="hl">Rilla, Fieldwire, CxAlloy, Hardline.</span></h1>
+    <div style='display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;'>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">In-Home Sales / Trades Coaching</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Rilla</div>
+        </div>
+        <a href="https://www.rilla.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Enterprise per-rep sea ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/rilla.jpg" alt="Rilla">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">ride-along, talk-time ratio, objection handling, sales scorecard, Comfort Advisor</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> The #1 virtual ride-along software for outside sales & home services</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Position SKT as the technician's own time-saver ('kills your 9 PM kitchen-table paperwork'), never as management surveillance
+      </div>
+    </div>
     
-    <tr>
-      <td><strong style="color:#F4F4F2;">8. Tech-Hostile Boss Software</strong><br><span class="badge">HVAC, Plumbing, Auto Technicians</span></td>
-      <td style="font-style:italic;color:#F4F4F2;">"As a technician, the app is seemingly designed to make everyone else job easier, EXCEPT the technicians that use it." (ServiceTitan review) / "Called it a glorified night class disguised as software." (Buildertrend review)</td>
-      <td>Being forced by the office to fill out 40 mandatory fields before closing a ticket</td>
-      <td style="color:#FF453A;">Enterprise visibility, manager KPI tracking, technician compliance enforcement</td>
-      <td style="color:#32D74B;font-weight:600;">"Built for the guy holding the wrench, not the office manager. Turn a 15-second voice recap into the exact closeout notes the office demands."</td>
-      <td>Instant copy-to-clipboard formatted for ServiceTitan / Tekmetric / Xactimate paste</td>
-      <td style="font-size:12px;"><a href="https://allbestapps.net/android/servicetitan-mobile" target="_blank" style="color:#64D2FF;text-decoration:none;">Source URL ↗</a></td>
-    </tr>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Commercial Construction / MEP</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Fieldwire</div>
+        </div>
+        <a href="https://www.fieldwire.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Free basic / $39-$89/u ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/fieldwire.jpg" alt="Fieldwire">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">plan markup, punch list item, RFI, daily report, manpower log, as-built</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Jobsite management for construction teams - blueprints, tasks, punch lists</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Speak and snap to generate a clean NAHB/NYC-style Change Order or Daily Report PDF in 20 seconds without blueprint setup
+      </div>
+    </div>
     
-      </tbody>
-    </table>
-  </section>
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">MEP Commissioning / Data Centers</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">CxAlloy</div>
+        </div>
+        <a href="https://www.cxalloy.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Project/Enterprise lic ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/cxalloy.jpg" alt="CxAlloy">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">FPT (Functional Performance Test), PFC (Pre-Functional Checklist), issue log, observation, deficiency</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Commissioning and quality management software for critical facilities</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Voice-to-row deficiency capture with offline photo lock and equipment nameplate OCR
+      </div>
+    </div>
+    
+    <div class="card" style="padding:20px 22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div>
+          <div class="kicker" style="margin-bottom:2px;">Remodelers & Handyman Estimating</div>
+          <div style="font-size:24px;font-weight:800;color:#FFF;">Hardline</div>
+        </div>
+        <a href="https://www.hardlineapp.com" target="_blank" style="font-size:12px;color:#FFCD11;border:1px solid rgba(255,205,17,0.5);padding:4px 10px;border-radius:999px;text-decoration:none;font-weight:700;">Joist: $14-$38/mo; Han ↗</a>
+      </div>
+      <div class="shot-wrap" style="height:220px;">
+        <img src="assets/competitors/hardline.jpg" alt="Hardline">
+        <span class="shot-badge">REAL LIVE UI CAPTURE</span>
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-size:11px;font-weight:800;color:#9CA3AF;letter-spacing:0.1em;margin-bottom:4px;">EXACT MARKETING 'WORDS' [FACT]</div>
+        <div class="word-pill">line-item estimate, markup, change order, client signature, deposit invoice, material list</div>
+      </div>
+      <div style="font-size:14px;color:#D4D4CE;line-height:1.35;margin-bottom:8px;"><strong>Hero Claim:</strong> Instant AI construction estimates / mobile quoting & invoicing</div>
+      <div style="margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,0.12);font-size:13.5px;color:#34D399;font-weight:600;line-height:1.35;">
+        <span style="color:#FFCD11;">SKT Wedge:</span> Never guess prices automatically: SKT locks your exact spoken numbers and field photos into a clean estimate/invoice and lets you export all data
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>07 / 10</span>
+  </div>
+</section></div>
+
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">08 · FIELD PSYCHOLOGY & WORD LEXICON</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Forbidden SaaS Buzzwords vs. <span class="hl">Winning Field Words.</span></h1>
+    <div style='display:flex;flex-direction:column;gap:12px;flex:1;justify-content:space-between;'>
+    <div class="card" style="padding:18px 22px;display:grid;grid-template-columns:220px 1.2fr 1fr 1.2fr;gap:18px;align-items:center;">
+      <div>
+        <div class="kicker" style="margin-bottom:4px;">Insurance Adjusters & Septic/Trades Owners</div>
+        <div style="font-size:18px;font-weight:800;color:#FFF;">1. The 'Second Shift' (8 PM - 2 AM Re-Entry)</div>
+      </div>
+      <div style="font-size:14px;color:#E5E5E0;font-style:italic;border-left:3px solid #FFCD11;padding-left:12px;">"Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?" (r/ClaimsAdjuster) / "Then when my three-year-old son goes... <a href="https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/" target="_blank" style="color:#FFCD11;">[FACT ↗]</a></div>
+      <div><div style="font-size:11px;color:#FCA5A5;font-weight:800;margin-bottom:4px;">FORBIDDEN WORDS</div><span class="pain-pill">AI workflow automation, productivity suite, digital transformation, workspace</span></div>
+      <div><div style="font-size:11px;color:#34D399;font-weight:800;margin-bottom:4px;">WINNING SKT COUNTER-HOOK</div><span class="win-pill">"Stop working the unpaid 9 PM kitchen-table shift. Talk through the job on your walk back to the truck - your </span></div>
+    </div>
+    
+    <div class="card" style="padding:18px 22px;display:grid;grid-template-columns:220px 1.2fr 1fr 1.2fr;gap:18px;align-items:center;">
+      <div>
+        <div class="kicker" style="margin-bottom:4px;">Home Inspectors, Electricians, Handymen</div>
+        <div style="font-size:18px;font-weight:800;color:#FFF;">2. AI Hallucination & Liability Terror</div>
+      </div>
+      <div style="font-size:14px;color:#E5E5E0;font-style:italic;border-left:3px solid #FFCD11;padding-left:12px;">"Letting AI write a report and then having to go through it and fix it is more work than just writing a report unfortunately." (r/HomeInspections) / "The wording? Fine. Polite... <a href="https://www.reddit.com/r/HomeInspections/comments/1vu9dfi/made_an_app_that_writes_the_inspection_report/p4zz28p/" target="_blank" style="color:#FFCD11;">[FACT ↗]</a></div>
+      <div><div style="font-size:11px;color:#FCA5A5;font-weight:800;margin-bottom:4px;">FORBIDDEN WORDS</div><span class="pain-pill">Autonomous AI agent, AI writes your whole report, magic pricing generator, smart esti</span></div>
+      <div><div style="font-size:11px;color:#34D399;font-weight:800;margin-bottom:4px;">WINNING SKT COUNTER-HOOK</div><span class="win-pill">"Zero made-up prices. Zero AI fairy tales. It only formats the exact measurements, defects, and numbers you ac</span></div>
+    </div>
+    
+    <div class="card" style="padding:18px 22px;display:grid;grid-template-columns:220px 1.2fr 1fr 1.2fr;gap:18px;align-items:center;">
+      <div>
+        <div class="kicker" style="margin-bottom:4px;">Remodelers, Roofers, Commercial Trades</div>
+        <div style="font-size:18px;font-weight:800;color:#FFF;">3. Dead Signal / Offline Photo Loss</div>
+      </div>
+      <div style="font-size:14px;color:#E5E5E0;font-style:italic;border-left:3px solid #FFCD11;padding-left:12px;">"Really glitchy where there is limited service. They claim photos can be taken while you're offline. I don't believe that statement anymore. I have lost a lot of important wor... <a href="https://play.google.com/store/apps/details?hl=en&id=com.agilx.companycam" target="_blank" style="color:#FFCD11;">[FACT ↗]</a></div>
+      <div><div style="font-size:11px;color:#FCA5A5;font-weight:800;margin-bottom:4px;">FORBIDDEN WORDS</div><span class="pain-pill">Cloud-native sync, real-time streaming, enterprise cloud platform</span></div>
+      <div><div style="font-size:11px;color:#34D399;font-weight:800;margin-bottom:4px;">WINNING SKT COUNTER-HOOK</div><span class="win-pill">"Built for dead basements, metal roofs, and rural crawlspaces. Saves 100% locally to your phone first - even i</span></div>
+    </div>
+    
+    <div class="card" style="padding:18px 22px;display:grid;grid-template-columns:220px 1.2fr 1fr 1.2fr;gap:18px;align-items:center;">
+      <div>
+        <div class="kicker" style="margin-bottom:4px;">Handymen, RV Inspectors, Field Techs</div>
+        <div style="font-size:18px;font-weight:800;color:#FFF;">4. App-Switch Draft Wipe & Tiny Tap Targets</div>
+      </div>
+      <div style="font-size:14px;color:#E5E5E0;font-style:italic;border-left:3px solid #FFCD11;padding-left:12px;">"Every time you navigate to a different app during estimate editing mode... it closes the edit and doesn't save any changes" (Joist review) / "Is the tap target size big enoug... <a href="https://apps.apple.com/us/app/joist-estimate-invoice-maker/id592163563?see-all=reviews" target="_blank" style="color:#FFCD11;">[FACT ↗]</a></div>
+      <div><div style="font-size:11px;color:#FCA5A5;font-weight:800;margin-bottom:4px;">FORBIDDEN WORDS</div><span class="pain-pill">Rich multi-tab editor, customizable dashboard, granular dropdown menus</span></div>
+      <div><div style="font-size:11px;color:#34D399;font-weight:800;margin-bottom:4px;">WINNING SKT COUNTER-HOOK</div><span class="win-pill">"One giant button you can hit with sweaty gloves. Switch apps, take a phone call, lock your screen - your draf</span></div>
+    </div>
+    
+    <div class="card" style="padding:18px 22px;display:grid;grid-template-columns:220px 1.2fr 1fr 1.2fr;gap:18px;align-items:center;">
+      <div>
+        <div class="kicker" style="margin-bottom:4px;">Handymen, Roofers, Remodelers</div>
+        <div style="font-size:18px;font-weight:800;color:#FFF;">5. CYA / False Damage Accusations</div>
+      </div>
+      <div style="font-size:14px;color:#E5E5E0;font-style:italic;border-left:3px solid #FFCD11;padding-left:12px;">"got a call three months later from a client swearing we scratched their hardwood floors. pulled up the folder, found the timestamped photo from after we finished, floor was s... <a href="https://www.reddit.com/r/handyman/comments/1x7t4hy/how_do_you_keep_track_of_job_photos_in_case_a/ph72hpt/" target="_blank" style="color:#FFCD11;">[FACT ↗]</a></div>
+      <div><div style="font-size:11px;color:#FCA5A5;font-weight:800;margin-bottom:4px;">FORBIDDEN WORDS</div><span class="pain-pill">Visual asset management, collaborative photo repository</span></div>
+      <div><div style="font-size:11px;color:#34D399;font-weight:800;margin-bottom:4px;">WINNING SKT COUNTER-HOOK</div><span class="win-pill">"Your 'Get Paid Without Arguments' receipt. Timestamped before-and-after photos locked to your spoken notes so</span></div>
+    </div>
+    
+    <div class="card" style="padding:18px 22px;display:grid;grid-template-columns:220px 1.2fr 1fr 1.2fr;gap:18px;align-items:center;">
+      <div>
+        <div class="kicker" style="margin-bottom:4px;">Solo Handymen, Small 2-3 Man Crews</div>
+        <div style="font-size:18px;font-weight:800;color:#FFF;">6. Subscription Hostage & 'Vibe Coder' Fatigue</div>
+      </div>
+      <div style="font-size:14px;color:#E5E5E0;font-style:italic;border-left:3px solid #FFCD11;padding-left:12px;">"Once your subscription ends, you no longer have access to any of your data." (Joist review) / "vibe coders, that make about 100 posts a day, in all the different trades subre... <a href="https://www.workyard.com/compare/joist-review" target="_blank" style="color:#FFCD11;">[FACT ↗]</a></div>
+      <div><div style="font-size:11px;color:#FCA5A5;font-weight:800;margin-bottom:4px;">FORBIDDEN WORDS</div><span class="pain-pill">We're disrupting the trades, AI SaaS subscription, book a demo with our sales team</span></div>
+      <div><div style="font-size:11px;color:#34D399;font-weight:800;margin-bottom:4px;">WINNING SKT COUNTER-HOOK</div><span class="win-pill">"No $100/mo bloatware. No hostage data - every report saves straight to your phone as a standard PDF and Word/</span></div>
+    </div>
+    
+    <div class="card" style="padding:18px 22px;display:grid;grid-template-columns:220px 1.2fr 1fr 1.2fr;gap:18px;align-items:center;">
+      <div>
+        <div class="kicker" style="margin-bottom:4px;">Home Inspectors & RV/Marine Techs</div>
+        <div style="font-size:18px;font-weight:800;color:#FFF;">7. Checklist Flow Interruption</div>
+      </div>
+      <div style="font-size:14px;color:#E5E5E0;font-style:italic;border-left:3px solid #FFCD11;padding-left:12px;">"Most apps are basically digital checklists, which is fine but you're still stopping every 30 seconds to tap, type, or select options. That breaks your inspection flow." (r/Ho... <a href="https://www.reddit.com/r/HomeInspections/comments/1mdneek/just_built_a_free_inspection_app_looking_for_real/ogvg285/" target="_blank" style="color:#FFCD11;">[FACT ↗]</a></div>
+      <div><div style="font-size:11px;color:#FCA5A5;font-weight:800;margin-bottom:4px;">FORBIDDEN WORDS</div><span class="pain-pill">Comprehensive 500-point digital checklist, interactive form wizard</span></div>
+      <div><div style="font-size:11px;color:#34D399;font-weight:800;margin-bottom:4px;">WINNING SKT COUNTER-HOOK</div><span class="win-pill">"Keep your eyes on the structure, not on dropdown menus. Just snap the photo, say what you see in 5 seconds, a</span></div>
+    </div>
+    </div>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>08 / 10</span>
+  </div>
+</section></div>
+
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">09 · TANGIBLE FORM LIBRARY PROOF</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Why Desk AI Fails: <span class="hl">Contractors Need Real Forms Filled.</span></h1>
+    
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;flex:1;">
+  <div class="card gold">
+    <div class="kicker">01 · INSURANCE CAT / IA ADJUSTER</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">Narrative + Photo Log</div>
+    <div class="shot-wrap" style="height:380px;"><img src="assets/forms/IN01_mha_narrative_p1.jpg"><span class="shot-badge">REAL FORM: IN01</span></div>
+    <div style="font-size:15px;color:#E5E5E0;line-height:1.4;">Why Granola/Otter fail: Adjusters must bind timestamped hail/water photos directly into carrier narrative blocks.</div>
+  </div>
+  <div class="card">
+    <div class="kicker">02 · HOME & 4-POINT INSPECTOR</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">Citizens 4-Point Form</div>
+    <div class="shot-wrap" style="height:380px;"><img src="assets/forms/IN03_citizens_4pt_p1.jpg"><span class="shot-badge">REAL FORM: OIR-B1-1802</span></div>
+    <div style="font-size:15px;color:#E5E5E0;line-height:1.4;">Why Spectora users complain: Still spending 90 mins at night checking boxes and annotating crawlspace defect photos.</div>
+  </div>
+  <div class="card">
+    <div class="kicker">03 · MEP & SUBCONTRACTOR PUNCH LIST</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">Walkdown Punch & Daily Report</div>
+    <div class="shot-wrap" style="height:380px;"><img src="assets/forms/TR01_smartsheet_punch_p1.jpg"><span class="shot-badge">REAL FORM: PUNCH LIST</span></div>
+    <div style="font-size:15px;color:#E5E5E0;line-height:1.4;">Why CxAlloy/Fieldwire frustrate techs: 8 clicks per row with safety gloves on. SKT fills the exact PDF template by voice.</div>
+  </div>
+  <div class="card green">
+    <div class="kicker">04 · VEHICLE / HEAVY TRUCK DVI</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">Multi-Point Inspection Sheet</div>
+    <div class="shot-wrap" style="height:380px;"><img src="assets/forms/VH01_rvis_sample_p1.jpg"><span class="shot-badge">REAL FORM: DVI / 3C</span></div>
+    <div style="font-size:15px;color:#E5E5E0;line-height:1.4;">Mechanics hate typing Complaint-Cause-Correction with greasy hands. One 30-sec voice walkaround outputs the full 3C report.</div>
+  </div>
+</div>
+
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>09 / 10</span>
+  </div>
+</section></div>
+
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">10 · INTERACTIVE VERBATIM EVIDENCE CONSOLE</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Search 261 Verbatim Quotes & <span class="hl">Primary URLs.</span></h1>
+    
+<div style="display:grid;grid-template-columns:360px 1fr;gap:24px;flex:1;min-height:0;">
+  <div class="card" style="padding:22px;overflow-y:auto;">
+    <div class="kicker">FILTER 261 VERBATIM FIELD QUOTES [FACT]</div>
+    <input id="q-search" type="text" placeholder="Search keyword (e.g. Xactimate, 9pm, photos)..." style="width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:#0B0B0C;color:#FFF;font-size:15px;margin-bottom:16px;">
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;color:#D4D4CE;">
+      <div>• <strong>Total Primary Quotes:</strong> 261 verified</div>
+      <div>• <strong>Sources:</strong> Reddit, InterNACHI, ContractorTalk</div>
+      <div>• <strong>Full Google Sheet (4 Tabs):</strong><br><a href="https://docs.google.com/spreadsheets/d/1l1JNNR3AWr8BMSbNC8OCJQouXeodSekDeRJMkt7n6ws/edit" target="_blank" style="color:#FFCD11;">Open Master Sheet ↗</a></div>
+      <div>• <strong>Full Google Doc (Carbyn Template):</strong><br><a href="https://docs.google.com/document/d/1-n8ubh1wPa9DJ2bNK8_tc4fCj8PFJEw1p9y43gbs9TA/edit" target="_blank" style="color:#FFCD11;">Open Carbyn Doc ↗</a></div>
+    </div>
+  </div>
+  <div class="card" style="padding:22px;overflow-y:auto;" id="q-list"></div>
+</div>
+<script>
+  const QUOTES = [{"slide": 1, "section": "VOICE OF THE FIELD · 현장의 목소리", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/", "text": "“Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?” | u/miketheadjuster (post title) · r/ClaimsAdjuster · 2026-04 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 1, "section": "VOICE OF THE FIELD · 현장의 목소리", "url": "https://www.reddit.com/r/adjusters/comments/1wzw4vw/how_much_harder_is_it_being_a_claim_adjuster_than/pf7xdg3/", "text": "“I used to type in my sleep, catch myself walking to the office at 3am, almost pass out walking to my home office at the start of my shifts” | u/OneCowFarm · r/adjusters · 2026-10 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 1, "section": "VOICE OF THE FIELD · 현장의 목소리", "url": "https://au.news.yahoo.com/aussie-tradie-reveals-hidden-second-shift-after-work-like-the-clock-doesnt-exist-063952815.html", "text": "“Numerous times in the past I've been sitting on the computer, and the kids are sort of upstairs, and they're like, 'When are you going to stop working?'” | Daniel Lukic, Luxic Services (repairs to renovations), Sydney · Yahoo News Australia · 2026-08 | ✓ 원문 확인 | au.news.yahoo.com ↗"}, {"slide": 1, "section": "VOICE OF THE FIELD · 현장의 목소리", "url": "https://www.reddit.com/r/handyman/comments/1udn9di/anyone_else_spend_sunday_night_doing_paperwork/", "text": "“sunday night rolls around and im sitting at my kitchen table with a pile of receipts and notes. trying to figure out what i spent on materials. which jobs were profitable. which ones i need to invoice. my handwriting is terrible so half the notes dont even make sense.” | u/Holiday-Primary-4055 (handyman) · r/handyman · 2026-06 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 1, "section": "VOICE OF THE FIELD · 현장의 목소리", "url": "https://www.pumper.com/editorial/2025/02/small-crew-big-service", "text": "“Then when my three-year-old son goes to bed around 8 p.m. I start doing book work, sending out estimates, doing payroll, paying bills.” | Marcus J. Caplin, owner, MJC Septic Services (Ohio) · Pumper magazine interview · 2025-02 | ✓ 원문 확인 | pumper.com ↗"}, {"slide": 1, "section": "VOICE OF THE FIELD · 현장의 목소리", "url": "https://www.reddit.com/r/HomeInspections/comments/1vu9dfi/made_an_app_that_writes_the_inspection_report/p4zz28p/", "text": "“Letting AI write a report and then having to go through it and fix it is more work than just writing a report unfortunately.” | u/EmEhAreSeeOh · r/HomeInspections · 2026-08 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 5, "section": "결론 · INSIGHT 1 · 재입력", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/", "text": "“Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?” | r/ClaimsAdjuster · 2026-04 · | 원문 ↗"}, {"slide": 5, "section": "결론 · INSIGHT 1 · 재입력", "url": "https://www.reddit.com/r/handyman/comments/1udn9di/anyone_else_spend_sunday_night_doing_paperwork/", "text": "“sunday night rolls around and im sitting at my kitchen table with a pile of receipts and notes. trying to figure out what i spent on materials. which jobs were profi…” | r/handyman · 2026-06 · | 원문 ↗"}, {"slide": 5, "section": "결론 · INSIGHT 1 · 재입력", "url": "https://au.news.yahoo.com/aussie-tradie-reveals-hidden-second-shift-after-work-like-the-clock-doesnt-exist-063952815.html", "text": "“There are many a night where I've done a full day on the tools, and then I get home, I cook some dinner for the family, and then just spend hours and hours quoting.” | Yahoo News Australia · 2026-08 · | 원문 ↗"}, {"slide": 5, "section": "결론 · INSIGHT 1 · 재입력", "url": "https://www.pumper.com/editorial/2025/02/small-crew-big-service", "text": "“Then when my three-year-old son goes to bed around 8 p.m. I start doing book work, sending out estimates, doing payroll, paying bills.” | Pumper magazine interview · 2025-02 · | 원문 ↗"}, {"slide": 5, "section": "결론 · INSIGHT 1 · 재입력", "url": "https://www.linkedin.com/posts/claimspages_adjusters-share-realities-of-high-stress-activity-7197815783245197312-yhuu", "text": "“I would at stay up until 2am working to try to catch up.” | LinkedIn comment on Claims Pages post · 2024 · | 원문 ↗"}, {"slide": 7, "section": "결론 · INSIGHT 3 · AI 신뢰선", "url": "https://wanderwiservreports.com/blog/best-rv-inspection-software/", "text": "“This cuts my report writing time roughly in half because I am editing descriptions instead of writing them from scratch, especially at the end of a lo…” | WanderWise RV Reports blog · 2025-12 · | 원문 ↗"}, {"slide": 7, "section": "결론 · INSIGHT 3 · AI 신뢰선", "url": "https://goodhandshandyman.com.au/chatgpt-handyman-estimates-prices-were-wrong.html", "text": "“The wording? Fine. Polite. Professional. Better than my Sunday-night typing, honestly. The prices? Wrong.” | Good Hands Handyman blog · 2026-07 · | 원문 ↗"}, {"slide": 7, "section": "결론 · INSIGHT 3 · AI 신뢰선", "url": "https://forum.nachi.org/t/ai-tool-that-writes-your-inspection-report-in-60-seconds-first-3-reports-free/268725?page=5", "text": "“IMO using AI to proofread and rephrase to make the report more professional is a good thing. Writing the whole report from photos and a few comments i…” | InterNACHI Forum · 2026-06 · | 원문 ↗"}, {"slide": 7, "section": "결론 · INSIGHT 3 · AI 신뢰선", "url": "https://www.reddit.com/r/HomeInspections/comments/1vu9dfi/made_an_app_that_writes_the_inspection_report/p4zz28p/", "text": "“Letting AI write a report and then having to go through it and fix it is more work than just writing a report unfortunately.” | r/HomeInspections · 2026-08 · | 원문 ↗"}, {"slide": 7, "section": "결론 · INSIGHT 3 · AI 신뢰선", "url": "https://www.keysnews.com/news/national/claims-adjusters-really-dislike-ai-here-s-why-that-matters-to-you-insurify/article_bacbe119-3ded-5b8b-9b34-9164b3ebef95.html", "text": "“15–20 minutes per claim correcting AI-generated mistakes.” | Insurify via keysnews.com: 'Claims Adjusters Really Dislike AI' · 2026-10 · | 원문 ↗"}, {"slide": 7, "section": "결론 · INSIGHT 3 · AI 신뢰선", "url": "https://www.electriciantalk.com/threads/the-new-way-to-estimate-jobs.305240/", "text": "“I have spent a lot of time estimating with chatgpt. You can ask it 5 different ways and get 5 different answers. It will just make stuff up if it's 'n…” | Electrician Talk forum · 2025-08 · | 원문 ↗"}, {"slide": 8, "section": "결론 · INSIGHT 4 · 현장 조건", "url": "https://play.google.com/store/apps/details?hl=en&id=com.agilx.companycam", "text": "“Really glitchy where there is limited service. They claim photos can be taken while you're offline. I don't believe that statement anymore. I have lost a lot of impo…” | Google Play review of CompanyCam · 2026-08 · | 원문 ↗"}, {"slide": 8, "section": "결론 · INSIGHT 4 · 현장 조건", "url": "https://www.reddit.com/r/Construction/comments/1t9g7w1/got_tired_of_losing_paper_invoice_pads_in_my_van/", "text": "“I hated dealing with complex accounting apps that ask for a million details and need an internet connection (which is always completely dead in basements and new bui…” | r/Construction · 2026-05 · | 원문 ↗"}, {"slide": 8, "section": "결론 · INSIGHT 4 · 현장 조건", "url": "https://www.capterra.com/p/127994/Jobber/reviews/", "text": "“Specifically, when taking notes, capturing images, or filling out forms, I have lost a lot of time when they won't upload or sync successfully. It was such a problem…” | Capterra review of Jobber · 2026-02 · | 원문 ↗"}, {"slide": 8, "section": "결론 · INSIGHT 4 · 현장 조건", "url": "https://apps.apple.com/ca/app/buildertrend/id504370616?platform=iphone&see-all=reviews", "text": "“Reports keep crashing once I go to upload photos or videos. Have to copy and paste my reports in my notes until I can finally get the uploads to work. What use to be…” | App Store review of Buildertrend (Canada) · 2024-03 · | 원문 ↗"}, {"slide": 8, "section": "결론 · INSIGHT 4 · 현장 조건", "url": "https://wanderwiservreports.com/blog/best-rv-inspection-software/", "text": "“Is the tap target size big enough that you are not fumbling with controls while wearing gloves or sweating? These details sound minor until you are four hours into a…” | WanderWise RV Reports blog · 2025-12 · | 원문 ↗"}, {"slide": 9, "section": "결론 · INSIGHT 5 · 포지셔닝·가격", "url": "https://www.reddit.com/r/handyman/comments/1q9e77i/to_the_solo_handymen_how_much_time_are_you_losing/nyuq9m8/", "text": "“we mostly don't want \"admin tools\" because they don't make us look any more professional and don't make the work easier.” | r/handyman · 2026-01 · | 원문 ↗"}, {"slide": 9, "section": "결론 · INSIGHT 5 · 포지셔닝·가격", "url": "https://www.reddit.com/r/handyman/comments/1x7t4hy/how_do_you_keep_track_of_job_photos_in_case_a/ph72hpt/", "text": "“the one time i didn't do it immediately i got a call three months later from a client swearing we scratched their hardwood floors. pulled up the folder, found the ti…” | r/handyman · 2026-10 · | 원문 ↗"}, {"slide": 9, "section": "결론 · INSIGHT 5 · 포지셔닝·가격", "url": "https://apps.apple.com/us/app/companycam/id960043499", "text": "“Finishing up on one address, we were in the process of wanting to get paid. Homeowner said no and we needed to fix his window that was damaged?? WELL, with our Compa…” | App Store review of CompanyCam · 2025-07 · | 원문 ↗"}, {"slide": 9, "section": "결론 · INSIGHT 5 · 포지셔닝·가격", "url": "https://www.workyard.com/compare/joist-review", "text": "“Once your subscription ends, you no longer have access to any of your data.” | Workyard Joist review (aggregated app reviews) · 2026 · | 원문 ↗"}, {"slide": 9, "section": "결론 · INSIGHT 5 · 포지셔닝·가격", "url": "https://www.treebuzz.com/forum/threads/cel-phone-quoting-apps-or-program-suggestions.49584/", "text": "“I have a 2-3 man crew and myself so I’m not organizing multiple trucks. Hard to justify spending more than $50 a month to make my quoting and invoicing simpler. Whic…” | TreeBuzz forum · 2024-08 · | 원문 ↗"}, {"slide": 10, "section": "결론 · INSIGHT 6 · 진짜 경쟁자", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/ohu1ie3/", "text": "“I would suggest coming up with a standard format for your narration and to video record all of your walkthroughs, then run everything through something like Gemini t…” | r/ClaimsAdjuster · 2026-04 · | 원문 ↗"}, {"slide": 10, "section": "결론 · INSIGHT 6 · 진짜 경쟁자", "url": "https://community.getjobber.com/discussions/operations-forum/chatgpt-with-jobber/226", "text": "“I'll also take the notes from the guys in the field and get chat gpt to make it into a nice professional point form list as well.” | Jobber Home Service Community: ChatGPT with Jobber · 2024-09 · | 원문 ↗"}, {"slide": 10, "section": "결론 · INSIGHT 6 · 진짜 경쟁자", "url": "https://workingpimag.com/2026/07/16/ai-and-the-investigator-productivity-confidentiality-and-discovery/", "text": "“Claude is a much more robust system... To run our business and to use it in our field of investigation, Claude has a lot more features than [other mainstream models]…” | Working PI Magazine · 2026-07 · | 원문 ↗"}, {"slide": 10, "section": "결론 · INSIGHT 6 · 진짜 경쟁자", "url": "https://www.contractortalk.com/threads/estimate-help.464789/", "text": "“Most of my estimating and pricing is run through Claude for math and reality checks but I don't fully trust it's logic.” | Contractor Talk forum · 2026-09 · | 원문 ↗"}, {"slide": 10, "section": "결론 · INSIGHT 6 · 진짜 경쟁자", "url": "https://www.reddit.com/r/handyman/comments/1q9e77i/to_the_solo_handymen_how_much_time_are_you_losing/nyujbdv/", "text": "“Housecall Pro just added AI driven speech to text invoice generation they claim is under 60 seconds to build an invoice. They called me pushing a free trial. I haven…” | r/handyman · 2026-01 · | 원문 ↗"}, {"slide": 11, "section": "결론 · 2026년에도 안 풀렸나?", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/", "text": "“Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?” | r/ClaimsAdjuster · 2026-04 · | 원문 ↗"}, {"slide": 11, "section": "결론 · 2026년에도 안 풀렸나?", "url": "https://www.reddit.com/r/HomeInspections/comments/1mdneek/just_built_a_free_inspection_app_looking_for_real/ogvg285/", "text": "“The biggest pain point isn't the app itself, it's the data entry during the inspection. Most apps are basically digital checklists…” | r/HomeInspections · 2026-04 · | 원문 ↗"}, {"slide": 11, "section": "결론 · 2026년에도 안 풀렸나?", "url": "https://play.google.com/store/apps/details?hl=en&id=com.agilx.companycam", "text": "“Really glitchy where there is limited service. They claim photos can be taken while you're offline. I don't believe that statement…” | Google Play review of CompanyCam · 2026-08 · | 원문 ↗"}, {"slide": 11, "section": "결론 · 2026년에도 안 풀렸나?", "url": "https://www.reddit.com/r/HomeInspections/comments/x2om0j/inspection_writing_software/ok6rb4s/", "text": "“Downsides: the monthly pricing adds up, some inspectors find the template system rigid and report writing still takes significant …” | r/HomeInspections · 2026-05 · | 원문 ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/", "text": "“Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?” | r/ClaimsAdjuster · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://www.pumper.com/editorial/2025/02/small-crew-big-service", "text": "“Then when my three-year-old son goes to bed around 8 p.m. I start doing book work, sending out estimates, doing payroll,…” | Pumper magazine interview · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://allbestapps.net/android/servicetitan-mobile", "text": "“As a technician, the app is seemingly designed to make everyone else job easier, EXCEPT the technicians that use it.” | Google Play review of ServiceTitan Mobile (AllBestApps mirror) · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://leadershipknocks.substack.com/p/handoffai-vs-buildertrend-why-i-switched", "text": "“Because Buildertrend is a disaster. Bloated, overpriced, and designed for people who have entire teams to manage softwar…” | Leadership Knocks (Substack) · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://play.google.com/store/apps/details?hl=en&id=com.agilx.companycam", "text": "“Really glitchy where there is limited service. They claim photos can be taken while you're offline. I don't believe that…” | Google Play review of CompanyCam · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://www.reddit.com/r/Construction/comments/1t9g7w1/got_tired_of_losing_paper_invoice_pads_in_my_van/", "text": "“I hated dealing with complex accounting apps that ask for a million details and need an internet connection (which is al…” | r/Construction · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://www.reddit.com/r/handyman/comments/1x7t4hy/how_do_you_keep_track_of_job_photos_in_case_a/ph72hpt/", "text": "“the one time i didn't do it immediately i got a call three months later from a client swearing we scratched their hardwo…” | r/handyman · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://apps.apple.com/us/app/companycam/id960043499", "text": "“Finishing up on one address, we were in the process of wanting to get paid. Homeowner said no and we needed to fix his w…” | App Store review of CompanyCam · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://wanderwiservreports.com/blog/best-rv-inspection-software/", "text": "“This cuts my report writing time roughly in half because I am editing descriptions instead of writing them from scratch,…” | WanderWise RV Reports blog · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://www.reddit.com/r/HomeInspections/comments/1vu9dfi/made_an_app_that_writes_the_inspection_report/p4zz28p/", "text": "“Letting AI write a report and then having to go through it and fix it is more work than just writing a report unfortunat…” | r/HomeInspections · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://www.workyard.com/compare/joist-review", "text": "“Once your subscription ends, you no longer have access to any of your data.” | Workyard Joist review (aggregated app reviews) · | ↗"}, {"slide": 16, "section": "01 · PATTERNS · 세그먼트를 가로지르는 반복 패턴", "url": "https://www.capterra.com/p/70092/Buildertrend/", "text": "“I felt pressured to sign because I was told our pricing was increasing and that signing would keep our current rate. I s…” | Capterra review of Buildertrend · | ↗"}, {"slide": 17, "section": "02 · INSURANCE ADJUSTERS", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/", "text": "“Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?” | u/miketheadjuster (post title) · r/ClaimsAdjuster · 2026-04 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 17, "section": "02 · INSURANCE ADJUSTERS", "url": "https://www.linkedin.com/posts/stevenhelman_adjuster-burnout-doesnt-always-look-dramatic-activity-7478738057190629376-0hMy", "text": "“What I got in response was 3 different file reviewers giving me 3 different opinions on what I needed to change. One called my work sloppy in an email CCing the other file reviewers... Ultimately they dropped a week of insults, whining, and complaining on me to move the needle on the undisputed estimate by 3.2%.” | Commenting adjuster on Steven Helman post · LinkedIn post comment · 2026-07 | ✓ 원문 확인 | linkedin.com ↗"}, {"slide": 17, "section": "02 · INSURANCE ADJUSTERS", "url": "https://www.reddit.com/r/adjusters/comments/1wzw4vw/how_much_harder_is_it_being_a_claim_adjuster_than/pf7xdg3/", "text": "“I used to type in my sleep, catch myself walking to the office at 3am, almost pass out walking to my home office at the start of my shifts” | u/OneCowFarm · r/adjusters · 2026-10 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 19, "section": "02 · INSURANCE ADJUSTERS · 실제 서류", "url": "https://www.milehighadjusters.com/wp-content/uploads/2018/01/DailyNarrativeRep.pdf", "text": "Mile High Adjusters Daily Narrative Report (r… · 3p | Mile High Adjusters Daily Narrative Report (r… · 3p | THE OFFICE OF RISK MANAGEMENT (ORM) FIELD ADJ… · 5p"}, {"slide": 19, "section": "02 · INSURANCE ADJUSTERS · 실제 서류", "url": "https://www.milehighadjusters.com/wp-content/uploads/2018/01/DailyNarrativeRep.pdf", "text": "Mile High Adjusters Daily Narrative Report (r… · 3p | Mile High Adjusters Daily Narrative Report (r… · 3p | THE OFFICE OF RISK MANAGEMENT (ORM) FIELD ADJ… · 5p"}, {"slide": 19, "section": "02 · INSURANCE ADJUSTERS · 실제 서류", "url": "https://www.doa.la.gov/media/xdon44pt/property_program_field_adjuster_inspection_and_report_criteria.pdf", "text": "Mile High Adjusters Daily Narrative Report (r… · 3p | Mile High Adjusters Daily Narrative Report (r… · 3p | THE OFFICE OF RISK MANAGEMENT (ORM) FIELD ADJ… · 5p"}, {"slide": 19, "section": "02 · INSURANCE ADJUSTERS · 실제 서류", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/", "text": "“Anyone else spending 1-2 hours every night just re-entering field notes into Xactimate? How are you handling this?” | r/ClaimsAdjuster · | ↗"}, {"slide": 19, "section": "02 · INSURANCE ADJUSTERS · 실제 서류", "url": "https://www.youtube.com/watch?v=RS8Uc7IcX3I", "text": "“we are when we when we're working we're like working you know 10:00 at night 7 days a week right and we started probably at 6 or 7 o'clock in the morn…” | YouTube: Adjuster TV, 'How to handle adjuster burnout' · | ↗"}, {"slide": 19, "section": "02 · INSURANCE ADJUSTERS · 실제 서류", "url": "https://www.linkedin.com/posts/claimspages_adjusters-share-realities-of-high-stress-activity-7197815783245197312-yhuu", "text": "“I would at stay up until 2am working to try to catch up.” | LinkedIn comment on Claims Pages post · | ↗"}, {"slide": 20, "section": "02 · INSURANCE ADJUSTERS · 양식 필드 원문", "url": "https://www.milehighadjusters.com/wp-content/uploads/2018/01/DailyNarrativeRep.pdf", "text": "못 구한 것 | Xactimate 견적·스케치는 유료 소프트웨어 화면이라 원본 양식 없음. 서술 리포트와 보험사 작성 기준만 수록 | 원본 링크 ↗"}, {"slide": 21, "section": "02 · INSURANCE ADJUSTERS · 원문 1/6", "url": "https://insurancenewsnet.com/innarticle/insurance-adjusters-battle-low-pay-long-hours-declining-authority-trade-groups-say", "text": "“You can make that kind of money flipping burgers at McDonald's and not be subject to having to deal with people who have lost everything in their lives” | Chris Aldrich, president, National Association of Public Insurance Adjusters (on $75/report IA pay) · InsuranceNewsNet · 2023-06 | ✓ 원문 확인 | insurancenewsnet.com ↗"}, {"slide": 21, "section": "02 · INSURANCE ADJUSTERS · 원문 1/6", "url": "https://www.linkedin.com/posts/claimspages_adjusters-share-realities-of-high-stress-activity-7197815783245197312-yhuu", "text": "“I would at stay up until 2am working to try to catch up.” | Kathy Burrell, EKIA Claims Services LLC (adjuster) · LinkedIn comment on Claims Pages post · 2024 | ✓ 원문 확인 | linkedin.com ↗"}, {"slide": 21, "section": "02 · INSURANCE ADJUSTERS · 원문 1/6", "url": "https://www.linkedin.com/posts/claimspages_adjusters-share-realities-of-high-stress-activity-7197815783245197312-yhuu", "text": "“The files are piling up, No approved overtime, The insureds are complaining rightfully. DOI complaints are filed when you choose to breathe” | Esther Louis Washington, Independent Claims Adjuster (FL, TX, LA, AL, GA, NC...) · LinkedIn comment on Claims Pages post · 2024 | ✓ 원문 확인 | linkedin.com ↗"}, {"slide": 21, "section": "02 · INSURANCE ADJUSTERS · 원문 1/6", "url": "https://www.linkedin.com/posts/stevenhelman_adjuster-burnout-doesnt-always-look-dramatic-activity-7478738057190629376-0hMy", "text": "“Lots of adjusters I speak to don't move just because they have been offered more money. They move because the job has become unsustainable. Too many files. Too much admin. Not enough support around them.” | Steven Helman (claims recruiter/industry) · LinkedIn post · 2026-07 | ✓ 원문 확인 | linkedin.com ↗"}, {"slide": 21, "section": "02 · INSURANCE ADJUSTERS · 원문 1/6", "url": "https://www.reddit.com/r/adjusters/comments/1xa34zk/are_you_allowed_to_work_weekends_to_lighten_your/phqgiqs/", "text": "“if you work extra, you will just get extra work given to you.” | u/DoctorMarios · r/adjusters · 2026-10 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 21, "section": "02 · INSURANCE ADJUSTERS · 원문 1/6", "url": "https://www.youtube.com/watch?v=RS8Uc7IcX3I", "text": "“we are when we when we're working we're like working you know 10:00 at night 7 days a week right and we started probably at 6 or 7 o'clock in the morning right so 7 to 7 that's 12 hours and then you go to 10 o'clock or even midnight that's you know 16 17 18 hours right every single day” | Host, Adjuster TV (independent adjuster) · YouTube: Adjuster TV, 'How to handle adjuster burnout' · 2024-10 | ✓ 원문 확인 | youtube.com ↗"}, {"slide": 22, "section": "02 · INSURANCE ADJUSTERS · 원문 2/6", "url": "https://www.reddit.com/r/adjusters/comments/1wzw4vw/how_much_harder_is_it_being_a_claim_adjuster_than/pfgnr64/", "text": "“I have had times where I forgot to eat or shower for 70 hours at a time while trying to use my last brain cells on maybe 8-10 hours of sleep.” | u/According-Being3411 (IA, commercial & residential property) · r/adjusters · 2026-10 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 22, "section": "02 · INSURANCE ADJUSTERS · 원문 2/6", "url": "https://www.reddit.com/r/adjusters/comments/1wzw4vw/how_much_harder_is_it_being_a_claim_adjuster_than/peybmku/", "text": "“With adjusting you feel like you’re never done. Deadlines, trying to stay afloat . I sometimes wake up in the middle of the night thinking about claims I’m handling.” | u/CueTheChaos1 (FNOL to WC adjuster) · r/adjusters · 2026-10 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 22, "section": "02 · INSURANCE ADJUSTERS · 원문 2/6", "url": "https://www.linkedin.com/posts/claimspages_adjusters-share-realities-of-high-stress-activity-7197815783245197312-yhuu", "text": "“I've been an adjuster for going on 40 years, and I just laugh when people say it's a great job and you can make a lot of money! If I could do it all over again I definitely would have picked another profession” | Michael Rose, AIC, adjuster · LinkedIn comment on Claims Pages post · 2024 | ✓ 원문 확인 | linkedin.com ↗"}, {"slide": 22, "section": "02 · INSURANCE ADJUSTERS · 원문 2/6", "url": "https://pacesetterclaims.com/faqs-pcs-field-adjusters/", "text": "“I am an amazing photographer; do I really need to put down a description? Yes. And, please put the description in the description box; do not try to replace the photo label with a description, please.” | Pacesetter Claims storm leadership (IA firm FAQ to its field adjusters) · Pacesetter Claims: Hurricane Ian FAQs for field adjusters · 2024-10 | ✓ 원문 확인 | pacesetterclaims.com ↗"}, {"slide": 22, "section": "02 · INSURANCE ADJUSTERS · 원문 2/6", "url": "https://companycam.com/resources/blog/premier-claims-customer-story", "text": "“You really can win a claim based on photo documentation. It helps me better understand the claim and better explain it to the insurance company when I can send those pictures off.” | Jessica Randall, senior desk adjuster, Premier Claims · CompanyCam customer story · 2025-01 | ✓ 원문 확인 | companycam.com ↗"}, {"slide": 22, "section": "02 · INSURANCE ADJUSTERS · 원문 2/6", "url": "https://www.capterra.com/p/214125/Xactimate/reviews/", "text": "“Constant freezing and photo captions and upload failures. Lack of notifications of new updates or added jobs.” | Capterra reviewer (Xactimate, 2-10 employees) · Capterra review of Xactimate · 2025-11 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 23, "section": "02 · INSURANCE ADJUSTERS · 원문 3/6", "url": "https://www.reddit.com/r/Insurance/comments/1ur4bc7/adjuster_wants_me_to_send_3_photos_per_text_to/", "text": "“I tried to send a Google Drive link to the adjuster but he said I had to text him 3 photos at a time because security protocols don't allow them to accept links.” | u/Ok_Diamond_272 (policyholder) · r/Insurance · 2026-07 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 23, "section": "02 · INSURANCE ADJUSTERS · 원문 3/6", "url": "https://www.youtube.com/watch?v=RS8Uc7IcX3I", "text": "“I said 10 and I got texts from the admin I got texts from the managers little tiny man anybody involved and they're like are you sure you need to go and I was like I cried over a file review yesterday I have to go” | Guest independent adjuster, Adjuster TV · YouTube: Adjuster TV, 'How to handle adjuster burnout' · 2024-10 | ✓ 원문 확인 | youtube.com ↗"}, {"slide": 23, "section": "02 · INSURANCE ADJUSTERS · 원문 3/6", "url": "https://www.linkedin.com/posts/stevenhelman_adjuster-burnout-doesnt-always-look-dramatic-activity-7478738057190629376-0hMy", "text": "“You want to know why there's adjuster burnout? We're sick of this.” | Commenting adjuster on Steven Helman post · LinkedIn post comment · 2026-07 | ✓ 원문 확인 | linkedin.com ↗"}, {"slide": 23, "section": "02 · INSURANCE ADJUSTERS · 원문 3/6", "url": "https://insurancenewsnet.com/innarticle/insurance-adjusters-battle-low-pay-long-hours-declining-authority-trade-groups-say", "text": "“The insurance companies were directing the file reviewers to change my estimates to repair the roofs, rather than to replace a totaled roof... However, the insurance company was leaving my name on the estimates in a fraudulent effort to make it appear that I had written this bogus estimate” | Ben Mandel, independent field adjuster (Hurricane Ian) · InsuranceNewsNet · 2023-06 | ✓ 원문 확인 | insurancenewsnet.com ↗"}, {"slide": 23, "section": "02 · INSURANCE ADJUSTERS · 원문 3/6", "url": "https://insurancenewsnet.com/innarticle/insurance-adjusters-battle-low-pay-long-hours-declining-authority-trade-groups-say", "text": "“Over the past six months, we have noticed a significant increase in our workload accompanied by unrealistic deadlines and objectives... the current expectations have become overwhelming and impractical.” | Group of Nationwide staff claims adjusters (internal email) · InsuranceNewsNet · 2023-06 | ✓ 원문 확인 | insurancenewsnet.com ↗"}, {"slide": 23, "section": "02 · INSURANCE ADJUSTERS · 원문 3/6", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1ti0ugw/what_is_your_companys_expectation/", "text": "“I’ll be on roofs doing an inspections back to back then look and see I already missed the 4 hour window for a claim I got earlier that day. It’s madness and my management are going to write me up soon for it.” | u/Commercial_Pickle138 (property field inspector) · r/ClaimsAdjuster · 2026-05 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 24, "section": "02 · INSURANCE ADJUSTERS · 원문 4/6", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1ti0ugw/what_is_your_companys_expectation/omr8w9w/", "text": "“Frankly over the decade they’ve cut pay, increased workload, send their public shaming metrics spreadsheets to the whole team, and I just don’t care.” | u/Fosterpig (14-year IA) · r/ClaimsAdjuster · 2026-05 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 24, "section": "02 · INSURANCE ADJUSTERS · 원문 4/6", "url": "https://pacesetterclaims.com/faqs-pcs-field-adjusters/", "text": "“I've had to double-back on some rejected products. What should I be doing differently to make these one-and-done?” | Field adjuster question in Pacesetter Claims FAQ · Pacesetter Claims: Hurricane Ian FAQs for field adjusters · 2024-10 | ✓ 원문 확인 | pacesetterclaims.com ↗"}, {"slide": 24, "section": "02 · INSURANCE ADJUSTERS · 원문 4/6", "url": "https://insurancenewsnet.com/innarticle/insurance-adjusters-battle-low-pay-long-hours-declining-authority-trade-groups-say", "text": "“There's a lot of disgruntled adjusters for various reasons... And the freedom and authority that they enjoyed to settle claims as they saw fit, a lot of that has gone away.” | Caeden Tinklenberg, CEO, Swift Public Adjusters · InsuranceNewsNet · 2023-06 | ✓ 원문 확인 | insurancenewsnet.com ↗"}, {"slide": 24, "section": "02 · INSURANCE ADJUSTERS · 원문 4/6", "url": "https://companycam.com/resources/blog/premier-claims-customer-story", "text": "“Before CompanyCam, Premier Claims cycled through Google Drive, Dropbox, and photos shared over text... We were constantly running into issues where we didn't have the documents that we needed from the minute after the loss happened” | Kyle Maring, senior advisor and adjuster, Premier Claims (public adjuster) · CompanyCam customer story · 2025-01 | ✓ 원문 확인 | companycam.com ↗"}, {"slide": 24, "section": "02 · INSURANCE ADJUSTERS · 원문 4/6", "url": "https://www.capterra.com/p/214125/Xactimate/reviews/", "text": "“I am level 3 certified. Very easy program to use. But it crashes every 5 to 10 minutes. I hope they scrap X1 and start all over.” | Hector M., Owner, Insurance (2+ years) · Capterra review of Xactimate · 2022-01 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 24, "section": "02 · INSURANCE ADJUSTERS · 원문 4/6", "url": "https://www.capterra.com/p/214125/Xactimate/reviews/", "text": "“I am level 3 certified. Very easy program to use. But it crashes every 5 to 10 minutes... Reason for choosing Xactimate: Only because all the Insurance company I do business with are using it.” | Capterra reviewer, Adjuster, Construction · Capterra review of Xactimate · 2022-01 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 25, "section": "02 · INSURANCE ADJUSTERS · 원문 5/6", "url": "https://apps.apple.com/us/app/xactimate/id598636037?platform=watch&see-all=reviews", "text": "“It feels like with every update the app gets less responsive. It takes forever for the data to sync with the cloud (yes, even with a strong WiFi connection)... For the most part I only utilize the app to upload pictures directly into a claim, which is a small time saver.” | Guy2112 · App Store review of Xactimate · 2024-05 | ✓ 원문 확인 | apps.apple.com ↗"}, {"slide": 25, "section": "02 · INSURANCE ADJUSTERS · 원문 5/6", "url": "https://play.google.com/store/apps/details?id=com.xactware.xactimate&hl=en_US", "text": "“Logging in on one device, logs you out on another... when you go to log back in on the PC after having been logged in on another PC or on the Android it takes half an hour bc the software keeps freezing... Time is money.” | Sam McNeilson · Google Play review of Xactimate · 2022-06 | ✓ 원문 확인 | play.google.com ↗"}, {"slide": 25, "section": "02 · INSURANCE ADJUSTERS · 원문 5/6", "url": "https://www.capterra.com/p/214125/Xactimate/reviews/", "text": "“Only because all the Insurance company I do business with are using it.” | Hector M., Owner, Insurance (reason for choosing Xactimate) · Capterra review of Xactimate · 2022-01 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 25, "section": "02 · INSURANCE ADJUSTERS · 원문 5/6", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1ti0ugw/what_is_your_companys_expectation/omr0wut/", "text": "“I created a short cut in the work phone that once I added the customer to my contacts it would automatically run a routine that sad hi, it's me I'm your adjuster I will contact you within 24 hours via text message. I'd smash that routine while on a roof” | u/elbaldwino (former staff adjuster) · r/ClaimsAdjuster · 2026-05 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 25, "section": "02 · INSURANCE ADJUSTERS · 원문 5/6", "url": "https://www.keysnews.com/news/national/claims-adjusters-really-dislike-ai-here-s-why-that-matters-to-you-insurify/article_bacbe119-3ded-5b8b-9b34-9164b3ebef95.html", "text": "“15–20 minutes per claim correcting AI-generated mistakes.” | Glassdoor reviewer (claims adjuster), quoted by Insurify · Insurify via keysnews.com: 'Claims Adjusters Really Dislike AI' · 2026-10 | ✓ 원문 확인 | keysnews.com ↗"}, {"slide": 25, "section": "02 · INSURANCE ADJUSTERS · 원문 5/6", "url": "https://www.keysnews.com/news/national/claims-adjusters-really-dislike-ai-here-s-why-that-matters-to-you-insurify/article_bacbe119-3ded-5b8b-9b34-9164b3ebef95.html", "text": "“bottom of the barrel.” | Glassdoor reviewer (claims adjuster) on employer AI tool, quoted by Insurify · Insurify via keysnews.com: 'Claims Adjusters Really Dislike AI' · 2026-10 | ✓ 원문 확인 | keysnews.com ↗"}, {"slide": 26, "section": "02 · INSURANCE ADJUSTERS · 원문 6/6", "url": "https://www.keysnews.com/news/national/claims-adjusters-really-dislike-ai-here-s-why-that-matters-to-you-insurify/article_bacbe119-3ded-5b8b-9b34-9164b3ebef95.html", "text": "“An experienced professional would know when something deserves a closer look, even when every piece of the information given to them looks reasonable... it doesn't have the experience needed to know when to look closer.” | Alex Adekola, CEO/founder of Ready Adjuster · Insurify via keysnews.com · 2026-10 | ✓ 원문 확인 | keysnews.com ↗"}, {"slide": 26, "section": "02 · INSURANCE ADJUSTERS · 원문 6/6", "url": "https://www.reddit.com/r/ClaimsAdjuster/comments/1stlari/anyone_else_spending_12_hours_every_night_just/ohu1ie3/", "text": "“I would suggest coming up with a standard format for your narration and to video record all of your walkthroughs, then run everything through something like Gemini to transcribe your videos for you.” | u/Mr_Bristles · r/ClaimsAdjuster · 2026-04 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 27, "section": "03 · REMODELERS / SMALL BUILDERS", "url": "https://au.news.yahoo.com/aussie-tradie-reveals-hidden-second-shift-after-work-like-the-clock-doesnt-exist-063952815.html", "text": "“Numerous times in the past I've been sitting on the computer, and the kids are sort of upstairs, and they're like, 'When are you going to stop working?'” | Daniel Lukic, Luxic Services (repairs to renovations), Sydney · Yahoo News Australia · 2026-08 | ✓ 원문 확인 | au.news.yahoo.com ↗"}, {"slide": 27, "section": "03 · REMODELERS / SMALL BUILDERS", "url": "https://leadershipknocks.substack.com/p/handoffai-vs-buildertrend-why-i-switched", "text": "“Because Buildertrend is a disaster. Bloated, overpriced, and designed for people who have entire teams to manage software instead of, you know, actually building things.” | Mark Caples, small remodeling contractor · Leadership Knocks (Substack) · 2026-01 | ✓ 원문 확인 | leadershipknocks.substack.com ↗"}, {"slide": 27, "section": "03 · REMODELERS / SMALL BUILDERS", "url": "https://www.reddit.com/r/Construction/comments/1t9g7w1/got_tired_of_losing_paper_invoice_pads_in_my_van/", "text": "“I hated dealing with complex accounting apps that ask for a million details and need an internet connection (which is always completely dead in basements and new builds anyway).” | u/Over_Pipe7942 (tradesman-builder) · r/Construction · 2026-05 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 29, "section": "03 · REMODELERS / SMALL BUILDERS · 실제 서류", "url": "https://www.nyc.gov/assets/dca/downloads/pdf/businesses/Home-Improvement-Change-Order-Form.pdf", "text": "Home Improvement Contractor CHANGE ORDER · 2p | Home Improvement Contractor CHANGE ORDER · 2p | Construction Contractor Daily Report Template · 2p"}, {"slide": 29, "section": "03 · REMODELERS / SMALL BUILDERS · 실제 서류", "url": "https://www.nyc.gov/assets/dca/downloads/pdf/businesses/Home-Improvement-Change-Order-Form.pdf", "text": "Home Improvement Contractor CHANGE ORDER · 2p | Home Improvement Contractor CHANGE ORDER · 2p | Construction Contractor Daily Report Template · 2p"}, {"slide": 29, "section": "03 · REMODELERS / SMALL BUILDERS · 실제 서류", "url": "https://www.smartsheet.com/sites/default/files/2025-01/IC-Construction-Contractor-Daily-Report-Template-12294_PDF.pdf", "text": "Home Improvement Contractor CHANGE ORDER · 2p | Home Improvement Contractor CHANGE ORDER · 2p | Construction Contractor Daily Report Template · 2p"}, {"slide": 29, "section": "03 · REMODELERS / SMALL BUILDERS · 실제 서류", "url": "https://au.news.yahoo.com/aussie-tradie-reveals-hidden-second-shift-after-work-like-the-clock-doesnt-exist-063952815.html", "text": "“There are many a night where I've done a full day on the tools, and then I get home, I cook some dinner for the family, and then just spend hours and …” | Yahoo News Australia · | ↗"}, {"slide": 29, "section": "03 · REMODELERS / SMALL BUILDERS · 실제 서류", "url": "https://au.news.yahoo.com/aussie-tradie-reveals-hidden-second-shift-after-work-like-the-clock-doesnt-exist-063952815.html", "text": "“You'll think to yourself, 'Oh, this quote might take 30 minutes,' and then all of a sudden it's two hours.” | Yahoo News Australia · | ↗"}, {"slide": 29, "section": "03 · REMODELERS / SMALL BUILDERS · 실제 서류", "url": "https://apps.apple.com/ca/app/buildertrend/id504370616?platform=iphone&see-all=reviews", "text": "“Reports keep crashing once I go to upload photos or videos. Have to copy and paste my reports in my notes until I can finally get the uploads to work.…” | App Store review of Buildertrend (Canada) · | ↗"}, {"slide": 30, "section": "03 · REMODELERS / SMALL BUILDERS · 양식 필드 원문", "url": "https://www.nyc.gov/assets/dca/downloads/pdf/businesses/Home-Improvement-Change-Order-Form.pdf", "text": "못 구한 것 | 견적서는 표준 양식 없음 (Word·Excel·Buildertrend 등 각자) | 원본 링크 ↗"}, {"slide": 31, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 1/6", "url": "https://au.news.yahoo.com/aussie-tradie-reveals-hidden-second-shift-after-work-like-the-clock-doesnt-exist-063952815.html", "text": "“There are many a night where I've done a full day on the tools, and then I get home, I cook some dinner for the family, and then just spend hours and hours quoting.” | Daniel Lukic, Luxic Services (repairs to renovations), Sydney · Yahoo News Australia · 2026-08 | ✓ 원문 확인 | au.news.yahoo.com ↗"}, {"slide": 31, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 1/6", "url": "https://apps.apple.com/ca/app/buildertrend/id504370616?platform=iphone&see-all=reviews", "text": "“Reports keep crashing once I go to upload photos or videos. Have to copy and paste my reports in my notes until I can finally get the uploads to work. What use to be a 5 minute task takes me almost 20 minutes now.” | slurrey slums · App Store review of Buildertrend (Canada) · 2024-03 | ✓ 원문 확인 | apps.apple.com ↗"}, {"slide": 31, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 1/6", "url": "https://au.news.yahoo.com/aussie-tradie-reveals-hidden-second-shift-after-work-like-the-clock-doesnt-exist-063952815.html", "text": "“You'll think to yourself, 'Oh, this quote might take 30 minutes,' and then all of a sudden it's two hours.” | Daniel Lukic, Luxic Services (repairs to renovations), Sydney · Yahoo News Australia · 2026-08 | ✓ 원문 확인 | au.news.yahoo.com ↗"}, {"slide": 31, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 1/6", "url": "https://play.google.com/store/apps/details?hl=en_US&id=com.xactware.xactimate", "text": "“S...L...O...W... Also did a sketch free project for photos only, but photos came out blank in pdf, even though you can see them on the phone and in Desktop. Had to delete and reupload.” | A Google user · Google Play review of Xactimate · 2022-03 | ✓ 원문 확인 | play.google.com ↗"}, {"slide": 31, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 1/6", "url": "https://apps.apple.com/us/app/companycam/id960043499?platform=iphone&see-all=reviews", "text": "“The pictures are constantly oriented incorrectly. No matter how the phone is held the pictures will randomly be 90 deg or 180 deg off... Just had a price increase and no increase in product quality.” | Bf1002, App Store reviewer · App Store review of CompanyCam · 2025-08 | ✓ 원문 확인 | apps.apple.com ↗"}, {"slide": 31, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 1/6", "url": "https://apps.apple.com/us/app/companycam/id960043499", "text": "“Finishing up on one address, we were in the process of wanting to get paid. Homeowner said no and we needed to fix his window that was damaged?? WELL, with our Company Cam before and after pictures, we were able to see that the SO called damage was there BEFORE we did the Roofs” | Thurm (Doodie), Owner, All American Roofing & Restoration · App Store review of CompanyCam · 2025-07 | ✓ 원문 확인 | apps.apple.com ↗"}, {"slide": 32, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 2/6", "url": "https://www.bbb.org/ca/ab/edmonton/profile/computer-software/jobber-0017-214334/customer-reviews", "text": "“Jobber's system automatically refunded a $68,000 payment from a client, even though I have emails, texts, and documents proving they approved the quote and authorized the transaction.” | Yavon B, BBB reviewer · BBB review of Jobber · 2025-09 | ✓ 원문 확인 | bbb.org ↗"}, {"slide": 32, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 2/6", "url": "https://www.houzz.com/discussions/6215874/contractor-payment-questions", "text": "“Punch list completion, COO, lien waivers, and then he gets his 5%.” | Joseph Corlett, LLC (Pro) · Houzz discussions · 2022-01 | ✓ 원문 확인 | houzz.com ↗"}, {"slide": 32, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 2/6", "url": "https://www.reddit.com/r/Contractor/comments/1wqphnu/small_contractors_how_do_you_manage_a_job_from/ph5o7yp/", "text": "“every extra gets a text approval with the price and goes on a running list for the job” | u/Western_Audience_798 · r/Contractor · 2026-10 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 32, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 2/6", "url": "https://apps.apple.com/ca/app/buildertrend/id504370616?platform=iphone&see-all=reviews", "text": "“For a busy subcontractor it’s just more useless moving parts when Whatsapp or texting updates will do just fine. I would never subject my crews to this useless headache.” | vyyc75 · App Store review of Buildertrend (Canada) · 2023-02 | ✓ 원문 확인 | apps.apple.com ↗"}, {"slide": 32, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 2/6", "url": "https://leadershipknocks.substack.com/p/handoffai-vs-buildertrend-why-i-switched", "text": "“Last year I posted a video about Buildertrend. Called it a glorified night class disguised as software. Too expensive, too complicated, built for Fortune 500 general contractors instead of guys like me who wear every hat in the company” | Mark Caples, small remodeling contractor · Leadership Knocks (Substack) · 2026-01 | ✓ 원문 확인 | leadershipknocks.substack.com ↗"}, {"slide": 32, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 2/6", "url": "https://www.capterra.com/p/70092/Buildertrend/", "text": "“I felt pressured to sign because I was told our pricing was increasing and that signing would keep our current rate. I signed and regretted it almost immediately.” | Sadaf Yusuf M. · Capterra review of Buildertrend · 2026-09 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 33, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 3/6", "url": "https://www.contractortalk.com/threads/jobtread-anyone-using.463095/", "text": "“Yeah their great, we hated BuilderTrend to the point we went back to excel for almost a year then tried JobTread and after the setup Its great” | J.W. Mason · ContractorTalk · 2026-02 | ✓ 원문 확인 | contractortalk.com ↗"}, {"slide": 33, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 3/6", "url": "https://www.capterra.com/p/199689/Houzz-Pro/reviews/", "text": "“The scanning software barely worked (maybe 10% of the time), and I received maybe 2 leads per month, most of which were low quality. When I reached out to customer service to understand the $4,000 charge, I got zero support or resolution.” | David C, Owner, Construction, 2-10 employees · Capterra review of Houzz Pro · 2025-06 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 33, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 3/6", "url": "https://www.reddit.com/r/Construction/comments/1uqvor0/how_long_does_the_actual_quote_paperwork_take_you/owazgll/", "text": "“Just stop. There is no need or want for whatever you’re “building”” | u/CompetitivePilot4572 · r/Construction · 2026-07 | ✓ 원문 확인 | reddit.com ↗"}, {"slide": 33, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 3/6", "url": "https://www.softwareadvice.com/field-service/companycam-profile/reviews/", "text": "“Overall satisfied with the software just wish it was a little better price. We have a small company so paying around $100 a month is a lot for our budget.” | Software Advice reviewer, small company · Software Advice review of CompanyCam · 2025-11 | ✓ 원문 확인 | softwareadvice.com ↗"}, {"slide": 33, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 3/6", "url": "https://www.capterra.com/p/70092/Buildertrend/reviews/", "text": "“The price was too high for me. Im a small town remodeler.” | Alyx S., Business Owner, Construction · Capterra review of Buildertrend · 2025-02 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 33, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 3/6", "url": "https://justuseapp.com/en/app/504370616/buildertrend/contact", "text": "“We tried this product out two years ago and then after some time spent trying to learn it, decided it was too much of a learning curve to try and implement it at that time.” | AndrewRemodeler · App Store review of Buildertrend (via JustUseApp mirror) · 2022-05 | ✓ 원문 확인 | justuseapp.com ↗"}, {"slide": 34, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 4/6", "url": "https://www.capterra.com/p/218503/JobTread/reviews/", "text": "“We previously used builder trend and found it too difficult to set up and deploy and not well at interacting with other software” | Wes C., Owner, Construction · Capterra review of JobTread · 2025-10 | ✓ 원문 확인 | capterra.com ↗"}, {"slide": 34, "section": "03 · REMODELERS / SMALL BUILDERS · 원문 4/6", "url": "https://apps.apple.com/us/app/companycam/id960043499", "text": "“I don't see anything in this application that comes anywhere near worth $85 a month I'm a small business sure I work with subs and I sub as well... there is nothing that I can't do with my iPhone and iCloud account that comes near the cost.” | Vw_wildman, App Store reviewer · App Store review of CompanyCam · 2024-09 | ✓ 원문 확인 | apps.apple.com ↗"}];
+  function renderQuotes(filterText) {
+    const box = document.getElementById('q-list');
+    const q = (filterText || '').toLowerCase();
+    const items = QUOTES.filter(x => !q || (x.text && x.text.toLowerCase().includes(q)) || (x.section && x.section.toLowerCase().includes(q))).slice(0, 40);
+    box.innerHTML = items.map(x => `
+      <div style="padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;gap:16px;align-items:flex-start;">
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;margin-bottom:4px;">${x.section || 'FIELD VOICE'}</div>
+          <div style="font-size:15px;color:#F5F5F3;line-height:1.4;">${x.text}</div>
+        </div>
+        <a href="${x.url}" target="_blank" style="white-space:nowrap;font-size:12px;color:#34D399;border:1px solid rgba(52,211,153,0.4);padding:5px 10px;border-radius:8px;text-decoration:none;font-weight:700;">[FACT] Source ↗</a>
+      </div>
+    `).join('');
+  }
+  document.getElementById('q-search').addEventListener('input', (e) => renderQuotes(e.target.value));
+  renderQuotes('');
+</script>
+
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>10 / 10</span>
+  </div>
+</section></div>
+
+<div class="deck-hud">
+  <a href="./index.html">← Command Center</a>
+  <button onclick="goSlide(cur-1)">← Prev</button>
+  <span id="hud-ind">1 / 10</span>
+  <button onclick="goSlide(cur+1)">Next →</button>
+  <a href="https://docs.google.com/document/d/1-n8ubh1wPa9DJ2bNK8_tc4fCj8PFJEw1p9y43gbs9TA/edit" target="_blank">Google Doc ↗</a>
+  <a href="https://docs.google.com/spreadsheets/d/1l1JNNR3AWr8BMSbNC8OCJQouXeodSekDeRJMkt7n6ws/edit" target="_blank">Google Sheet ↗</a>
+</div>
+
+<script>
+  function fitSlides() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const scale = Math.min(vw / 1920, vh / 1080);
+    document.querySelectorAll('.slide').forEach(s => {
+      s.style.transform = `scale(${scale})`;
+    });
+  }
+  window.addEventListener('resize', fitSlides);
+  fitSlides();
+
+  const viewports = Array.from(document.querySelectorAll('.slide-viewport'));
+  let cur = 0;
+  function updateHud() {
+    const ind = document.getElementById('hud-ind');
+    if (ind) ind.textContent = `${cur + 1} / ${viewports.length}`;
+  }
+  function goSlide(idx) {
+    cur = Math.max(0, Math.min(viewports.length - 1, idx));
+    viewports[cur].scrollIntoView({ behavior: 'smooth' });
+    updateHud();
+  }
+  window.addEventListener('scroll', () => {
+    const idx = Math.round(window.scrollY / window.innerHeight);
+    if (idx >= 0 && idx < viewports.length) { cur = idx; updateHud(); }
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); goSlide(cur + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goSlide(cur - 1); }
+  });
+  updateHud();
+</script>
+
 </body>
 </html>

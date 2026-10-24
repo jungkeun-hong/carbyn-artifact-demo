@@ -1,481 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CARBYN | Multi-Agent Executive Command Center</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-canvas: #0B0B0C;
-      --text-head: #F4F4F2;
-      --text-body: #D3D3D1;
-      --text-muted: #8E8E93;
-      --accent: #FFD100;
-      --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-bg-hover: rgba(255, 255, 255, 0.12);
-      --glass-border: rgba(255, 255, 255, 0.16);
-      --green: #32D74B;
-      --blue: #0A84FF;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: var(--bg-canvas);
-      color: var(--text-body);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      padding: 48px 96px;
-      line-height: 1.5;
-      min-height: 100vh;
-    }
-    @media (max-width: 1100px) {
-      body { padding: 32px 24px; }
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 40px;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-    .brand-bar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-    .brand-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-    .brand-label {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-head);
-    }
-    h1 {
-      font-size: 56px;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      color: var(--text-head);
-      max-width: 780px;
-      margin-bottom: 14px;
-    }
-    .lead {
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--text-body);
-      max-width: 820px;
-    }
-    .top-grid {
-      display: grid;
-      grid-template-columns: 1.35fr 1fr 1fr;
-      gap: 32px;
-      margin-bottom: 32px;
-    }
-    @media (max-width: 1200px) {
-      .top-grid { grid-template-columns: 1fr; }
-    }
-    .glass-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      padding: 40px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-    /* ONE Yellow Focal Point Panel per Carbyn Design System */
-    .focal-card {
-      background: var(--accent);
-      color: #000000;
-      border: 1px solid var(--accent);
-      border-radius: 24px;
-      padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .focal-card h2, .focal-card .big-num, .focal-card p, .focal-card span {
-      color: #000000 !important;
-    }
-    .card-kicker {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 10px;
-      opacity: 0.8;
-    }
-    .big-num {
-      font-size: 64px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1;
-      color: var(--text-head);
-      margin-bottom: 12px;
-    }
-    .progress-track {
-      width: 100%;
-      height: 10px;
-      background: rgba(0, 0, 0, 0.22);
-      border-radius: 999px;
-      overflow: hidden;
-      margin: 14px 0;
-    }
-    .progress-fill-dark {
-      height: 100%;
-      background: #000000;
-      border-radius: 999px;
-      transition: width 0.5s ease;
-    }
-    .progress-track-glass {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
-      overflow: hidden;
-      margin: 12px 0 20px 0;
-    }
-    .progress-fill-light {
-      height: 100%;
-      background: var(--text-head);
-      border-radius: 999px;
-      transition: width 0.5s ease;
-    }
-    .stat-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
-      font-size: 15px;
-    }
-    .stat-list li {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      padding-bottom: 8px;
-    }
-    .stat-list li strong {
-      color: var(--text-head);
-    }
-    .divisions-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-bottom: 32px;
-    }
-    @media (max-width: 1200px) {
-      .divisions-grid { grid-template-columns: 1fr; }
-    }
-    .div-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 12px;
-    }
-    .div-title {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--text-head);
-      line-height: 1.25;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.12);
-      color: var(--text-head);
-      white-space: nowrap;
-    }
-    .badge.done {
-      background: rgba(50, 215, 75, 0.2);
-      color: #32D74B;
-      border: 1px solid rgba(50, 215, 75, 0.4);
-    }
-    .badge.running {
-      background: rgba(10, 132, 255, 0.2);
-      color: #64D2FF;
-      border: 1px solid rgba(10, 132, 255, 0.4);
-    }
-    .pipeline-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .pipe-step {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 10px 12px;
-      font-size: 12px;
-    }
-    .pipe-step .s-name {
-      font-weight: 700;
-      color: var(--text-head);
-      display: block;
-      margin-bottom: 4px;
-    }
-    .pipe-step .s-state {
-      color: var(--text-muted);
-      font-size: 11px;
-    }
-    .subagent-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
-    .subagent-table th, .subagent-table td {
-      text-align: left;
-      padding: 10px 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      vertical-align: top;
-    }
-    .subagent-table th {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-    }
-    .deliverables-box {
-      background: rgba(0, 0, 0, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 16px 20px;
-    }
-    .deliverables-box h4 {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-head);
-      margin-bottom: 10px;
-    }
-    .deliv-links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .deliv-link {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-decoration: none;
-      color: var(--text-head);
-      background: rgba(255, 255, 255, 0.06);
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 500;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: background 0.2s;
-    }
-    .deliv-link:hover {
-      background: rgba(255, 255, 255, 0.14);
-    }
-    .agenda-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 16px;
-    }
-    @media (max-width: 1100px) {
-      .agenda-grid { grid-template-columns: 1fr; }
-    }
-    .agenda-item {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 20px;
-    }
-    .agenda-item h4 {
-      color: var(--text-head);
-      font-size: 16px;
-      margin: 6px 0 8px 0;
-    }
-    footer {
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARBYN · Multi-Agent Executive Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page { size: 1920px 1080px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #060608; color: #F5F5F3;
+    font-family: 'Helvetica Now Display', 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body.web-mode { overflow-x: hidden; scroll-snap-type: y mandatory; }
+  .slide-viewport {
+    width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
+    scroll-snap-align: start; position: relative; overflow: hidden; background: #060608;
+  }
+  .slide {
+    width: 1920px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
+    transform-origin: center center;
+    background: #0B0B0D url('assets/bg_cover.png') center/1920px 1080px no-repeat;
+    color: #F5F5F3; box-shadow: 0 24px 80px rgba(0,0,0,0.75);
+  }
+  .slide-bg-overlay {
+    position: absolute; inset: 0;
+    background: rgba(8, 9, 12, 0.58); z-index: 1;
+  }
+  .pad {
+    position: absolute; left: 96px; top: 60px; width: 1728px; bottom: 96px;
+    display: flex; flex-direction: column; z-index: 5;
+  }
+  .header-row {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; height: 36px; margin-bottom: 12px; flex-shrink: 0;
+  }
+  .label {
+    font-size: 17px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #B4B4AE;
+  }
+  .brand-logo { height: 30px; width: auto; display: block; }
+  h1 {
+    font-size: 64px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
+    color: #F5F5F3; margin-bottom: 22px; flex-shrink: 0;
+  }
+  h1 .hl { color: #FFCD11; }
+  .card {
+    background: rgba(18, 20, 26, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 22px; padding: 26px 30px;
+    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .card.gold {
+    background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.86) 100%);
+    border: 1.5px solid rgba(255, 205, 17, 0.55);
+  }
+  .card.green {
+    background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
+    border: 1.5px solid rgba(16, 185, 129, 0.50);
+  }
+  .card.blue {
+    background: linear-gradient(155deg, rgba(59, 130, 246, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
+    border: 1.5px solid rgba(59, 130, 246, 0.48);
+  }
+  .kicker {
+    font-size: 14px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #9CA3AF; margin-bottom: 10px; flex-shrink: 0;
+  }
+  .card.gold .kicker { color: #FFCD11; }
+  .card.green .kicker { color: #34D399; }
+  .card.blue .kicker { color: #60A5FA; }
+  .huge {
+    font-size: 76px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
+    color: #FFF; margin-bottom: 10px;
+  }
+  .huge.hl { color: #FFCD11; }
+  .huge.green { color: #34D399; }
+  .shot-wrap {
+    width: 100%; height: 215px; border-radius: 14px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.18); margin-bottom: 14px; flex-shrink: 0;
+    background: #000; position: relative;
+  }
+  .shot-wrap img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+  }
+  .shot-badge {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(11,11,12,0.88); border: 1px solid rgba(255,205,17,0.6);
+    color: #FFCD11; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+  }
+  .word-pill {
+    display: inline-block; padding: 6px 12px; border-radius: 8px;
+    font-size: 14px; font-weight: 700; background: rgba(255,205,17,0.15);
+    border: 1px solid rgba(255,205,17,0.45); color: #FFCD11; margin: 3px 4px 3px 0;
+  }
+  .pain-pill {
+    display: inline-block; padding: 6px 12px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.4); color: #FCA5A5; margin: 3px 4px 3px 0;
+  }
+  .win-pill {
+    display: inline-block; padding: 6px 12px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 700; background: rgba(16,185,129,0.16);
+    border: 1px solid rgba(16,185,129,0.45); color: #34D399; margin: 3px 4px 3px 0;
+  }
+  .ftr-rule {
+    position: absolute; left: 96px; top: 996px; width: 1728px; height: 1px;
+    background: rgba(255, 255, 255, 0.18); z-index: 5;
+  }
+  .ftr {
+    position: absolute; left: 96px; top: 1012px; width: 1728px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 15px; color: #8E8E89; z-index: 5; letter-spacing: 0.06em;
+  }
+  .ftr a { color: #FFCD11; text-decoration: none; font-weight: 700; }
+  .deck-hud {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+    background: rgba(18, 18, 20, 0.92); border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px); padding: 8px 18px; border-radius: 999px;
+    display: flex; align-items: center; gap: 12px; z-index: 999; font-size: 13px; color: #E5E5E0;
+  }
+  .deck-hud button, .deck-hud a {
+    background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.15);
+    color: #fff; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 12px; font-weight: 600; text-decoration: none;
+  }
+  .deck-hud button:hover, .deck-hud a:hover { background: #FFCD11; color: #000; border-color: #FFCD11; }
+</style>
 </head>
-<body>
-  <header>
-    <div>
-      <div class="brand-bar">
-        <div class="brand-dot"></div>
-        <span class="brand-label">CARBYN EXECUTIVE COMMAND CENTER • LIVE TRACKER</span>
-      </div>
-      <h1>Multi-Agent Fleet Execution Tracker</h1>
-      <p class="lead">WhatsApp Master Orchestrator + Telegram C-Suite (CEO, COO, CRO, CPO) + Shanks Email Reporting. Auto-refreshes every 15 seconds.</p>
+<body class="web-mode">
+
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">01 · CARBYN MULTI-AGENT EXECUTIVE COMMAND CENTER</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
     </div>
-    <div style="text-align: right;">
-      <div class="badge running" id="phase-badge">LIVE SYNC ACTIVE</div>
-      <div style="margin-top: 8px; font-size: 13px; color: var(--text-muted);" id="updated-at">Updated: Loading...</div>
+    <h1>All 4 C-Suite Divisions <span class="hl">100% Audited &amp; Live.</span></h1>
+    
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;">
+  <div class="card gold">
+    <div class="kicker">01 · COO (TELEGRAM) · 100/100 AUDITED</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:8px;">SKT Competitor &amp; Word Intel</div>
+    <div class="shot-wrap" style="height:190px;"><img src="assets/competitors/spectora.jpg"><span class="shot-badge">24 Real Competitor UIs</span></div>
+    <div style="font-size:14.5px;color:#E5E5E0;line-height:1.4;margin-bottom:12px;">
+      • <strong>8 Horizontal + 16 Vertical Tools</strong> with live hero screenshots &amp; exact marketing words.<br>
+      • <strong>261 Verbatim Quotes</strong> (Reddit/Forums) + Real Field Forms.
     </div>
-  </header>
-
-  <section class="top-grid">
-    <!-- ONE Yellow Focal Point Panel -->
-    <div class="focal-card">
-      <div>
-        <div class="card-kicker">MASTER ORCHESTRATOR PROGRESS</div>
-        <div class="big-num" id="overall-progress">18%</div>
-        <div class="progress-track">
-          <div class="progress-fill-dark" id="overall-bar" style="width: 18%;"></div>
-        </div>
-      </div>
-      <div>
-        <p style="font-size: 15px; font-weight: 600; margin-bottom: 6px;">Architecture: Planner → 3+ Executors → JK Auditor → Overflow Handler</p>
-        <p style="font-size: 13px; opacity: 0.85;">Phase 0 (7-Day Memory Sync across WhatsApp, CEO, COO, CRO, CPO, Shanks + Granola Truth) 100% Complete. All 4 C-Suite fleets executing in parallel.</p>
-      </div>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;">
+      <a href="./skt-competitor-intel.html" style="background:#FFCD11;color:#000;padding:10px;border-radius:10px;font-weight:800;text-align:center;text-decoration:none;font-size:14px;">Open 10-Slide Visual Deck ↗</a>
+      <a href="https://docs.google.com/document/d/1-n8ubh1wPa9DJ2bNK8_tc4fCj8PFJEw1p9y43gbs9TA/edit" target="_blank" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">Carbyn Google Doc ↗</a>
+      <a href="https://docs.google.com/spreadsheets/d/1l1JNNR3AWr8BMSbNC8OCJQouXeodSekDeRJMkt7n6ws/edit" target="_blank" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">Master Google Sheet (4 Tabs) ↗</a>
     </div>
+  </div>
 
-    <div class="glass-card">
-      <div class="card-kicker" style="color: var(--text-head);">GUARDRAILS & API COST WATCHDOG</div>
-      <ul class="stat-list">
-        <li><span>OpenAI gpt-image-2 Spend</span><strong id="openai-spend">$0.00 / $50.00 Cap</strong></li>
-        <li><span>Shanks Email Alert Gate</span><strong>Armed (&lt; $50.00)</strong></li>
-        <li><span>Origami Connected Senders</span><strong id="origami-senders">17 Active (500/day)</strong></li>
-        <li><span>Origami Weekly / Monthly</span><strong>2,500/wk • 10,000/mo</strong></li>
-        <li><span>B2B Send Gate</span><strong style="color: #32D74B;">LOCKED (Draft Only)</strong></li>
-        <li><span>Bay Area Dedupe Filter</span><strong>386 Leads Excluded</strong></li>
-      </ul>
+  <div class="card">
+    <div class="kicker">02 · CEO (TELEGRAM) · OCT 26 LAUNCH</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:8px;">SKT First 500 Content Engine</div>
+    <div class="shot-wrap" style="height:190px;"><img src="assets/skt-hooks/hook_01.png" style="object-position:center;"><span class="shot-badge">6 Raw Smartphone Photos</span></div>
+    <div style="font-size:14.5px;color:#D4D4CE;line-height:1.4;margin-bottom:12px;">
+      • <strong>Lauft + Fastlane Playbooks:</strong> Helpful Lead Magnet -> 100% DM -> Rainbow Button Call.<br>
+      • <strong>14-Day Schedule + 42 Posts + 6 Video Scripts</strong> ($0.96 / $50 OpenAI cap).
     </div>
-
-    <div class="glass-card">
-      <div class="card-kicker" style="color: var(--text-head);">PHASE 0: 7-DAY MEMORY SYNC (GRANOLA SOT)</div>
-      <ul class="stat-list" id="sync-list">
-        <li><span>WhatsApp + Shanks Email</span><strong>Synced ✓</strong></li>
-        <li><span>Telegram CEO (SKT Content)</span><strong>Synced ✓</strong></li>
-        <li><span>Telegram COO (SKT Intel)</span><strong>Synced ✓</strong></li>
-        <li><span>Telegram CRO (B2B GTM)</span><strong>Synced ✓</strong></li>
-        <li><span>Telegram CPO (Product/Paper)</span><strong>Synced ✓</strong></li>
-        <li><span>Granola Notes (Oct 17-24)</span><strong>Synced (Lauft/Fastlane/Eric/Cortex/VIS) ✓</strong></li>
-      </ul>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;">
+      <a href="./skt-content-engine.html" style="background:#FFCD11;color:#000;padding:10px;border-radius:10px;font-weight:800;text-align:center;text-decoration:none;font-size:14px;">Open 8-Slide Content Deck ↗</a>
+      <a href="https://docs.google.com/document/d/1IMBtEAsP7ps-luDYcV99YPd9B8Mmaq1gZp6P2V95h10/edit" target="_blank" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">Carbyn Google Doc ↗</a>
+      <a href="https://docs.google.com/spreadsheets/d/18KWoB815g0-WdzewqZNn14UmHeYYzlV6i-3z94YtAJ0/edit" target="_blank" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">14-Day Master Sheet ↗</a>
     </div>
-  </section>
+  </div>
 
-  <section class="divisions-grid" id="divisions-container">
-    <!-- Populated dynamically from status.json -->
-  </section>
+  <div class="card green">
+    <div class="kicker">03 · CRO (TELEGRAM) · DRAFT LOCKED</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:8px;">B2B GTM 10,000/mo Pipeline</div>
+    <div class="shot-wrap" style="height:190px;"><img src="assets/product-ui/paper_artboard_04_procore_acc.jpg"><span class="shot-badge">970 Tier-1 Verified Leads</span></div>
+    <div style="font-size:14.5px;color:#D4D4CE;line-height:1.4;margin-bottom:12px;">
+      • <strong>17 Origami Senders (510/d):</strong> Big Construction (375), MEP/DC Cx (380), Assembly Mfg (385).<br>
+      • <strong>0% Bay Area Overlap · Zero Mail-Merge Slop.</strong>
+    </div>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;">
+      <a href="./b2b-gtm-pipeline.html" style="background:#FFCD11;color:#000;padding:10px;border-radius:10px;font-weight:800;text-align:center;text-decoration:none;font-size:14px;">Open 6-Slide GTM Deck ↗</a>
+      <a href="https://docs.google.com/spreadsheets/d/18NCIRraouSFOPAri2g0EZiccX90lnO81ubDvUaVowyo/edit" target="_blank" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">1,140-Lead Master Sheet ↗</a>
+      <a href="https://origami.chat/tables/4cdd9784-d8ee-4508-b58f-780b95085842" target="_blank" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">Origami Draft Table (0 Sent) ↗</a>
+    </div>
+  </div>
 
-  <section class="glass-card">
-    <div class="card-kicker" style="color: var(--text-head);">ORCHESTRATOR PROACTIVE AGENDAS (CROSS-AGENT SYNERGY)</div>
-    <h2 style="font-size: 24px; color: var(--text-head); margin-bottom: 8px;">Additional High-Leverage Agendas Assigned by WhatsApp Orchestrator</h2>
-    <div class="agenda-grid" id="agendas-container"></div>
-  </section>
+  <div class="card blue">
+    <div class="kicker">04 · CPO (TELEGRAM) · PAPER + 3DGS</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:8px;">B2B Product &amp; World Model</div>
+    <div class="shot-wrap" style="height:190px;"><img src="assets/product-ui/paper_artboard_03_maximo_limble.jpg"><span class="shot-badge">Paper MCP + 3DGS + Robotics</span></div>
+    <div style="font-size:14.5px;color:#D4D4CE;line-height:1.4;margin-bottom:12px;">
+      • <strong>Paper MCP (`01M5NVY...`):</strong> 4 High-Res UI Artboards (Maximo, Limble, Procore, ACC, SOP v2).<br>
+      • <strong>Interactive 3DGS &amp; Robotics World Model Simulators.</strong>
+    </div>
+    <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;">
+      <a href="./b2b-product-blueprint.html" style="background:#FFCD11;color:#000;padding:10px;border-radius:10px;font-weight:800;text-align:center;text-decoration:none;font-size:14px;">Open 10-Slide Product Deck ↗</a>
+      <a href="./3dgs-digital-twin.html" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">3DGS Digital Twin Sim ↗</a>
+      <a href="./robotics-world-model.html" style="background:rgba(255,255,255,0.08);color:#FFF;padding:8px;border-radius:10px;font-weight:600;text-align:center;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,0.16);">Robotics World Model Sim ↗</a>
+    </div>
+  </div>
+</div>
 
-  <footer>
-    <span>CARBYN AI INC. • Master Orchestrator (WhatsApp) + C-Suite Subagent Fleet</span>
-    <span>Evidence Standard: [FACT] Verified Primary URLs • [추정] Explicit Flags • Zero Em-Dashes</span>
-  </footer>
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>01 / 03</span>
+  </div>
+</section></div>
 
-  <script>
-    async function loadStatus() {
-      try {
-        const res = await fetch('./status.json?t=' + Date.now());
-        const data = await res.json();
-        renderDashboard(data);
-      } catch (e) {
-        console.error('Status fetch error:', e);
-      }
-    }
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">02 · VISUAL ARTIFACT GALLERY: PAPER MCP & MULTI-SYSTEM UI</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>High-Res Product Blueprints: <span class="hl">Maximo, Limble, Procore, ACC.</span></h1>
+    
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;">
+  <div class="card"><div class="kicker">PAPER ARTBOARD 01</div><div style="font-size:20px;font-weight:800;color:#FFF;margin-bottom:10px;">Carbyn Mobile &amp; Glasses Capture</div><div class="shot-wrap" style="height:480px;"><img src="assets/product-ui/paper_artboard_01_core_capture.jpg"></div><a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank" style="color:#FFCD11;font-weight:700;text-decoration:none;font-size:14px;">Open in Paper.design ↗</a></div>
+  <div class="card gold"><div class="kicker">PAPER ARTBOARD 02</div><div style="font-size:20px;font-weight:800;color:#FFF;margin-bottom:10px;">Video-to-SOP v2 (Assembly HUD)</div><div class="shot-wrap" style="height:480px;"><img src="assets/product-ui/paper_artboard_02_sop_v2.jpg"></div><a href="./b2b-product-blueprint.html" style="color:#FFCD11;font-weight:700;text-decoration:none;font-size:14px;">Open Interactive Blueprint ↗</a></div>
+  <div class="card"><div class="kicker">PAPER ARTBOARD 03</div><div style="font-size:20px;font-weight:800;color:#FFF;margin-bottom:10px;">IBM Maximo MAS 9 &amp; Limble Sync</div><div class="shot-wrap" style="height:480px;"><img src="assets/product-ui/paper_artboard_03_maximo_limble.jpg"></div><a href="./b2b-product-blueprint.html" style="color:#FFCD11;font-weight:700;text-decoration:none;font-size:14px;">Open Maximo/Limble Sim ↗</a></div>
+  <div class="card green"><div class="kicker">PAPER ARTBOARD 04</div><div style="font-size:20px;font-weight:800;color:#FFF;margin-bottom:10px;">Procore &amp; Autodesk ACC Sync</div><div class="shot-wrap" style="height:480px;"><img src="assets/product-ui/paper_artboard_04_procore_acc.jpg"></div><a href="./b2b-product-blueprint.html" style="color:#34D399;font-weight:700;text-decoration:none;font-size:14px;">Open Procore/ACC Sim ↗</a></div>
+</div>
 
-    function renderDashboard(data) {
-      document.getElementById('updated-at').textContent = 'Last Sync: ' + data.updated_at;
-      document.getElementById('phase-badge').textContent = data.phase;
-      document.getElementById('overall-progress').textContent = data.overall_progress + '%';
-      document.getElementById('overall-bar').style.width = data.overall_progress + '%';
-      if (data.guardrails) {
-        document.getElementById('openai-spend').textContent =
-          '$' + Number(data.guardrails.openai_image_spend_usd).toFixed(2) + ' / $' + Number(data.guardrails.openai_image_cap_usd).toFixed(2) + ' Cap';
-      }
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>02 / 03</span>
+  </div>
+</section></div>
 
-      const divContainer = document.getElementById('divisions-container');
-      divContainer.innerHTML = data.divisions.map(d => {
-        const badgeClass = d.status === 'COMPLETED' ? 'badge done' : 'badge running';
-        const subRows = (d.subagents || []).map(s => `
-          <tr>
-            <td style="font-weight: 600; color: #F4F4F2; white-space: nowrap;">${s.role}</td>
-            <td style="white-space: nowrap;"><span class="badge ${s.status === 'DONE' ? 'done' : 'running'}" style="font-size:10px; padding:3px 8px;">${s.status}</span></td>
-            <td>${s.task}</td>
-          </tr>
-        `).join('');
+<div class="slide-viewport"><section class="slide">
+  <div class="slide-bg-overlay"></div>
+  <div class="pad">
+    <div class="header-row">
+      <div class="label">03 · GUARDRAILS, MEMORY SYNC & MASTER DOC INDEX</div>
+      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+    </div>
+    <h1>Verified Quality Gate: <span class="hl">[FACT] URLs, Zero Slop, Zero Sends.</span></h1>
+    
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;flex:1;">
+  <div class="card gold">
+    <div class="kicker">GUARDRAILS &amp; COST WATCHDOG</div>
+    <div class="huge hl">$0.96</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:12px;">OpenAI gpt-image-2 Spend ($50.00 Cap)</div>
+    <div style="font-size:16px;color:#E5E5E0;line-height:1.5;">
+      • <strong>Shanks Cost Alert:</strong> Armed (&lt;$50.00 threshold)<br>
+      • <strong>Origami Senders:</strong> 17 Active (510/day · 2,550/wk · 10,200/mo)<br>
+      • <strong>B2B Outbound Gate:</strong> <span style="color:#34D399;font-weight:800;">LOCKED (0 Emails Sent)</span><br>
+      • <strong>Bay Area 386 Dedupe:</strong> 0.0% Overlap Verified
+    </div>
+  </div>
+  <div class="card">
+    <div class="kicker">PHASE 0: 7-DAY MEMORY &amp; GRANOLA SOT SYNC</div>
+    <div class="huge">100%</div>
+    <div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:12px;">6 Agent Channels + 147 Granola Notes</div>
+    <div style="font-size:16px;color:#D4D4CE;line-height:1.5;">
+      • <strong>Lauft (Jay Contino) &amp; Fastlane (Jock Ferguson):</strong> Playbooks operationalized into SKT 14-day launch.<br>
+      • <strong>Hustle Fund (Eric Bahn) &amp; Cortex CMMS:</strong> Real-World Model narrative + Data Center Cx wedge synced.<br>
+      • <strong>Amentum &amp; DaedalusIQ:</strong> Maximo iPad + Robotics pipeline synced.
+    </div>
+  </div>
+  <div class="card green">
+    <div class="kicker">MASTER GOOGLE DOCS &amp; SHEETS INDEX</div>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+      <a href="https://docs.google.com/document/d/1-n8ubh1wPa9DJ2bNK8_tc4fCj8PFJEw1p9y43gbs9TA/edit" target="_blank" style="background:rgba(255,255,255,0.07);padding:14px;border-radius:12px;color:#FFF;text-decoration:none;border:1px solid rgba(255,255,255,0.15);"><strong>01_SKT_Competitor_and_Word_Research</strong> (Google Doc ↗)</a>
+      <a href="https://docs.google.com/document/d/1IMBtEAsP7ps-luDYcV99YPd9B8Mmaq1gZp6P2V95h10/edit" target="_blank" style="background:rgba(255,255,255,0.07);padding:14px;border-radius:12px;color:#FFF;text-decoration:none;border:1px solid rgba(255,255,255,0.15);"><strong>02_SKT_First_500_Content_Playbook_and_Scripts</strong> (Google Doc ↗)</a>
+      <a href="https://docs.google.com/document/d/1rR4mtHd0SxeHpaVnLJEIHYoVRsP3Zy5M4JzK8F4kNOk/edit" target="_blank" style="background:rgba(255,255,255,0.07);padding:14px;border-radius:12px;color:#FFF;text-decoration:none;border:1px solid rgba(255,255,255,0.15);"><strong>03_B2B_Origami_10K_GTM_Strategy_and_Sequences</strong> (Google Doc ↗)</a>
+      <a href="https://docs.google.com/document/d/178ok15J00FJY2OcyPDB0vCnrzJMvvC2Y7DH1oYCOzgk/edit" target="_blank" style="background:rgba(255,255,255,0.07);padding:14px;border-radius:12px;color:#FFF;text-decoration:none;border:1px solid rgba(255,255,255,0.15);"><strong>04_B2B_Product_Blueprint_3DGS_Robotics</strong> (Google Doc ↗)</a>
+    </div>
+  </div>
+</div>
 
-        const delivRows = (d.deliverables || []).map(dl => `
-          <a class="deliv-link" href="${dl.url}" target="_blank" rel="noopener">
-            <span><strong>[${dl.type}]</strong> ${dl.label}</span>
-            <span class="badge ${dl.ready ? 'done' : 'running'}" style="font-size: 11px;">${dl.ready ? 'OPEN ARTIFACT ↗' : 'BUILDING...'}</span>
-          </a>
-        `).join('');
+  </div>
+  <div class="ftr-rule"></div>
+  <div class="ftr">
+    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
+    <span>03 / 03</span>
+  </div>
+</section></div>
 
-        return `
-          <div class="glass-card">
-            <div class="div-header">
-              <div>
-                <div class="card-kicker">${d.agent}</div>
-                <div class="div-title">${d.title}</div>
-              </div>
-              <span class="${badgeClass}">${d.progress}% • ${d.status}</span>
-            </div>
-            <div class="progress-track-glass">
-              <div class="progress-fill-light" style="width: ${d.progress}%;"></div>
-            </div>
-            <div class="pipeline-steps">
-              <div class="pipe-step"><span class="s-name">1. Planner</span><span class="s-state">${d.pipeline.planner}</span></div>
-              <div class="pipe-step"><span class="s-name">2. Executors</span><span class="s-state">${d.pipeline.executors}</span></div>
-              <div class="pipe-step"><span class="s-name">3. Auditor</span><span class="s-state">${d.pipeline.auditor}</span></div>
-              <div class="pipe-step"><span class="s-name">4. Recovery</span><span class="s-state">${d.pipeline.recovery}</span></div>
-            </div>
-            <table class="subagent-table">
-              <thead>
-                <tr><th>Role</th><th>State</th><th>Scope & Verification</th></tr>
-              </thead>
-              <tbody>${subRows}</tbody>
-            </table>
-            <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
-              <strong style="color: var(--text-head);">Blocker / Watchdog Status:</strong> ${d.blockers}
-            </div>
-            <div class="deliverables-box">
-              <h4>Tangible Deliverables (Google Doc • Sheet • Paper • Web)</h4>
-              <div class="deliv-links">${delivRows}</div>
-            </div>
-          </div>
-        `;
-      }).join('');
+<div class="deck-hud">
+  <button onclick="goSlide(cur-1)">← Prev</button>
+  <span id="hud-ind">1 / 3</span>
+  <button onclick="goSlide(cur+1)">Next →</button>
+  <a href="./skt-competitor-intel.html">1. COO Competitor Deck</a>
+  <a href="./skt-content-engine.html">2. CEO Content Deck</a>
+  <a href="./b2b-gtm-pipeline.html">3. CRO B2B GTM Deck</a>
+  <a href="./b2b-product-blueprint.html">4. CPO Product Deck</a>
+</div>
 
-      const agContainer = document.getElementById('agendas-container');
-      agContainer.innerHTML = (data.proactive_agendas || []).map(a => `
-        <div class="agenda-item">
-          <div class="card-kicker" style="color: var(--text-head);">${a.id} • ${a.owner}</div>
-          <h4>${a.title}</h4>
-          <p style="font-size: 14px; color: var(--text-body);">${a.detail}</p>
-        </div>
-      `).join('');
-    }
+<script>
+  function fitSlides() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const scale = Math.min(vw / 1920, vh / 1080);
+    document.querySelectorAll('.slide').forEach(s => {
+      s.style.transform = `scale(${scale})`;
+    });
+  }
+  window.addEventListener('resize', fitSlides);
+  fitSlides();
 
-    loadStatus();
-    setInterval(loadStatus, 15000);
-  </script>
+  const viewports = Array.from(document.querySelectorAll('.slide-viewport'));
+  let cur = 0;
+  function updateHud() {
+    const ind = document.getElementById('hud-ind');
+    if (ind) ind.textContent = `${cur + 1} / ${viewports.length}`;
+  }
+  function goSlide(idx) {
+    cur = Math.max(0, Math.min(viewports.length - 1, idx));
+    viewports[cur].scrollIntoView({ behavior: 'smooth' });
+    updateHud();
+  }
+  window.addEventListener('scroll', () => {
+    const idx = Math.round(window.scrollY / window.innerHeight);
+    if (idx >= 0 && idx < viewports.length) { cur = idx; updateHud(); }
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); goSlide(cur + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goSlide(cur - 1); }
+  });
+  updateHud();
+</script>
+
 </body>
 </html>
