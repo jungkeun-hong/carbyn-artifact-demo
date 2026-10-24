@@ -273,7 +273,7 @@
           "role": "Executor 1",
           "name": "3DGS-and-Robotics-World-Model-Builder",
           "status": "DONE",
-          "task": "Defined Mfg/Construction/MEP ROI for 3DGS Digital Twin & Robotics World Model + built interactive HTML5/WebGL simulators with real POV video (sve-demo.mp4)."
+          "task": "Defined Mfg/Construction/MEP ROI for 3DGS Digital Twin & Robotics World Model + built interactive HTML5/WebGL simulators with real POV video (pov_mfg_skid.mp4, pov_assembly_bench.mp4, pov_mep_panel.mp4)."
         },
         {
           "role": "Executor 2",
