@@ -296,6 +296,15 @@
   })();
   const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
   function coverRect(vw, vh, cw, ch) { const k = Math.max(cw / vw, ch / vh); const w = vw * k, h = vh * k; return { x: (cw - w) / 2, y: (ch - h) / 2, w, h }; }
+  // loop-stall watchdog: Chromium can stick at readyState 1 after a loop seek while frames are pulled for detection
+  let wdT = -1, wdAt = performance.now();
+  const fCvs = document.createElement('canvas'), fCtx = fCvs.getContext('2d', { willReadFrequently: true });
+  setInterval(() => {
+    if (rVid.paused || rVid.seeking) { wdAt = performance.now(); return; }
+    if (rVid.currentTime !== wdT) { wdT = rVid.currentTime; wdAt = performance.now(); return; }
+    if (performance.now() - wdAt > 1500) { wdAt = performance.now(); try { rVid.currentTime = 0.05; } catch (e) {} rVid.play().catch(()=>{}); }
+  }, 500);
+  rVid.addEventListener('ended', () => { rVid.currentTime = 0; rVid.play().catch(()=>{}); });
   function drawRobLoop() {
     const W = rCvs.width, H = rCvs.height;
     rCtx.fillStyle = '#07080B'; rCtx.fillRect(0, 0, W, H);
@@ -303,10 +312,12 @@
     let R = { x: 0, y: 0, w: W, h: H };
     if (ready) {
       R = coverRect(rVid.videoWidth, rVid.videoHeight, W, H);
-      rCtx.drawImage(rVid, R.x, R.y, R.w, R.h);
+      if (fCvs.width !== rVid.videoWidth) { fCvs.width = rVid.videoWidth; fCvs.height = rVid.videoHeight; }
+      fCtx.drawImage(rVid, 0, 0);
+      rCtx.drawImage(fCvs, R.x, R.y, R.w, R.h);
       if (landmarker && rVid.currentTime !== lastTs) {
         lastTs = rVid.currentTime;
-        try { lastRes = landmarker.detectForVideo(rVid, performance.now()); } catch (e) { lmStatus = 'detect error: ' + e.message; }
+        try { lastRes = landmarker.detectForVideo(fCvs, performance.now()); } catch (e) { lmStatus = 'detect error: ' + e.message; }
       }
     }
     const hands = (lastRes && lastRes.landmarks) || [];
