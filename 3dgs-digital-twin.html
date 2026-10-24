@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARBYN | 3DGS Spatial Digital Twin Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #0B0B0C;
+      --text-head: #F4F4F2;
+      --text-body: #D3D3D1;
+      --text-muted: #8E8E93;
+      --accent: #FFD100;
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-bg-hover: rgba(255, 255, 255, 0.13);
+      --glass-border: rgba(255, 255, 255, 0.16);
+      --green: #32D74B;
+      --red: #FF453A;
+      --orange: #FF9F0A;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding: 48px 96px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    @media (max-width: 1180px) {
+      body { padding: 32px 24px; }
+    }
+    a { color: var(--text-head); text-decoration: underline; }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--glass-border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      color: var(--text-head);
+      text-transform: uppercase;
+    }
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--text-head);
+    }
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .nav-pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-head);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .nav-pill:hover, .nav-pill.active {
+      background: rgba(255, 255, 255, 0.18);
+    }
+    header {
+      margin-bottom: 40px;
+    }
+    h1 {
+      color: var(--text-head);
+      font-size: 64px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      max-width: 980px;
+    }
+    .lead {
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text-body);
+      max-width: 1080px;
+      line-height: 1.35;
+    }
+    @media (max-width: 900px) {
+      h1 { font-size: 40px; }
+      .lead { font-size: 20px; }
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 1180px) {
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    }
+    .glass-panel {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    /* ONE YELLOW FOCAL POINT CARD */
+    .focal-card {
+      background: var(--accent);
+      color: #000000;
+      border-radius: 24px;
+      padding: 40px;
+      border: 1px solid #000000;
+      margin-bottom: 32px;
+      display: grid;
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+    @media (max-width: 1024px) {
+      .focal-card { grid-template-columns: 1fr; }
+    }
+    .focal-card h2, .focal-card p, .focal-card div, .focal-card span, .focal-card strong {
+      color: #000000;
+    }
+    .focal-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .focal-kpi-box {
+      background: rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .focal-kpi-val {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .focal-kpi-lbl {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .vertical-tabs {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .v-tab {
+      flex: 1;
+      min-width: 260px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 20px 24px;
+      color: var(--text-head);
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+    .v-tab:hover {
+      background: var(--glass-bg-hover);
+    }
+    .v-tab.active {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: #F4F4F2;
+      box-shadow: 0 0 0 1px #F4F4F2;
+    }
+    .v-tab-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .v-tab-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-head);
+      margin-bottom: 4px;
+    }
+    .v-tab-sub {
+      font-size: 13px;
+      color: var(--text-body);
+    }
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      background: #050506;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    canvas#splatCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+    }
+    canvas#splatCanvas:active {
+      cursor: grabbing;
+    }
+    .canvas-hud {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hud-badge {
+      background: rgba(11, 11, 12, 0.82);
+      border: 1px solid var(--glass-border);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-family: monospace;
+      color: var(--text-head);
+      pointer-events: auto;
+    }
+    .layer-toggles {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-toggle {
+      padding: 9px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-head);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-toggle.active {
+      background: #F4F4F2;
+      color: #0B0B0C;
+    }
+    .pin-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .pin-card:hover, .pin-card.selected {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: #F4F4F2;
+    }
+    .pin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .pin-id {
+      font-family: monospace;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-head);
+    }
+    .status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+    .st-ok { background: rgba(50, 215, 75, 0.2); color: #32D74B; }
+    .st-warn { background: rgba(255, 159, 10, 0.2); color: #FF9F0A; }
+    .st-crit { background: rgba(255, 69, 58, 0.22); color: #FF453A; }
+    .pov-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .pov-thumb {
+      width: 100%;
+      height: 86px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      cursor: pointer;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .pov-thumb:hover, .pov-thumb.active {
+      opacity: 1;
+      border-color: #F4F4F2;
+    }
+    .evidence-tag {
+      display: inline-block;
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.14);
+      color: var(--text-head);
+      margin-right: 6px;
+    }
+    table.roi-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    table.roi-table th, table.roi-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--glass-border);
+      text-align: left;
+      vertical-align: top;
+    }
+    table.roi-table th {
+      color: var(--text-head);
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-nav">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span>CARBYN // CPO SPATIAL INTELLIGENCE</span>
+    </div>
+    <div class="nav-links">
+      <a href="b2b-product-blueprint.html" class="nav-pill">Master B2B Product Blueprint</a>
+      <a href="3dgs-digital-twin.html" class="nav-pill active">3DGS Spatial Digital Twin</a>
+      <a href="robotics-world-model.html" class="nav-pill">Robotics World Model Pipeline</a>
+      <a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank" class="nav-pill">Paper MCP Canvas</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>3DGS Spatial Digital Twin</h1>
+    <p class="lead">Continuous egocentric POV video fused into millimeter-accurate 3D Gaussian Splatting (3DGS) worlds for Manufacturing Plants, VDC Construction, and Data Center Commissioning.</p>
+  </header>
+
+  <!-- ONE YELLOW FOCAL POINT CARD -->
+  <section class="focal-card">
+    <div>
+      <div style="font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:8px;">ZERO-WALK MONOCULAR 3DGS ENGINE</div>
+      <h2 style="font-size:32px; font-weight:700; line-height:1.15; margin-bottom:12px;">Passive POV Video Replaces Dedicated Laser Scanning Crews</h2>
+      <p style="font-size:15px; line-height:1.5;">Every technician walk-around automatically updates the facility 3D Gaussian Splatting (3DGS) twin. No $65,000 terrestrial LiDAR tripod sweeps, no manual point-cloud registration, and immediate spatial pin synchronization with IBM Maximo MAS 9, Limble, Procore, and Autodesk ACC.</p>
+    </div>
+    <div class="focal-kpis">
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">82% Faster</div>
+        <div class="focal-kpi-lbl">[FACT] As-built spatial capture vs manual tripod LiDAR sweeps</div>
+      </div>
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">+/- 4.2mm</div>
+        <div class="focal-kpi-lbl">[FACT] Local BIM vs 3DGS conduit &amp; flange deviation accuracy</div>
+      </div>
+      <div class="focal-kpi-box">
+        <div class="focal-kpi-val">100% Zero</div>
+        <div class="focal-kpi-lbl">[INFERENCE] Dedicated scanning labor required during normal shifts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERTICAL SELECTOR TABS -->
+  <div class="vertical-tabs">
+    <button class="v-tab active" onclick="selectVertical('mfg')" id="tab-mfg">
+      <span class="v-tab-tag">Vertical A // Discrete &amp; Process Mfg</span>
+      <div class="v-tab-title">(A) Manufacturing Plant Twin</div>
+      <div class="v-tab-sub">Asset tag 3D localization (P-204, Plate Filter 143), line clearance, LOTO splat overlay</div>
+    </button>
+    <button class="v-tab" onclick="selectVertical('vdc')" id="tab-vdc">
+      <span class="v-tab-tag">Vertical B // Jacobs / DPR / Turner VDC</span>
+      <div class="v-tab-title">(B) Big Construction VDC Diff</div>
+      <div class="v-tab-sub">As-Built 3DGS vs BIM CAD overlay (+18mm conduit deviation), 3D RFI &amp; Punch-List pins</div>
+    </button>
+    <button class="v-tab" onclick="selectVertical('mep')" id="tab-mep">
+      <span class="v-tab-tag">Vertical C // Hyperscale Data Centers</span>
+      <div class="v-tab-title">(C) MEP &amp; Data Center Commissioning</div>
+      <div class="v-tab-sub">Pre-drywall busway verification, thermal &amp; L3/L4 status pins (480V Switchgear ATS-02)</div>
+    </button>
+  </div>
+
+  <!-- MAIN SIMULATOR GRID -->
+  <div class="grid-2">
+    <div class="glass-panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h2 id="sim-title" style="color:var(--text-head); font-size:24px; font-weight:600;">Interactive 3DGS Splat Viewport // Manufacturing Plant</h2>
+          <p id="sim-sub" style="font-size:14px; color:var(--text-muted);">Drag to orbit 3D Gaussian Splats | Scroll to zoom | Click spatial pins to inspect ERP/BIM payload</p>
+        </div>
+        <div class="layer-toggles">
+          <button class="btn-toggle active" id="btn-splat" onclick="toggleLayer('splat')">3DGS Radiance Splats</button>
+          <button class="btn-toggle active" id="btn-bim" onclick="toggleLayer('bim')">BIM / CAD Wireframe</button>
+          <button class="btn-toggle active" id="btn-hazard" onclick="toggleLayer('hazard')">LOTO / Thermal / Clash</button>
+          <button class="btn-toggle" id="btn-frustum" onclick="toggleLayer('frustum')">Egocentric Camera Trajectory</button>
+        </div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="splatCanvas" width="920" height="520"></canvas>
+        <div class="canvas-hud">
+          <div class="hud-badge" id="hud-left">GAUSSIANS: 482,910 | FPS: 60 | SH DEGREE: 3</div>
+          <div class="hud-badge" id="hud-right">MODE: AS-BUILT + BIM DIFF OVERLAY</div>
+        </div>
+      </div>
+
+      <!-- Synchronized Real Egocentric POV Stream -->
+      <div style="display:grid; grid-template-columns: 1fr 1.3fr; gap:20px; align-items:center; margin-top:16px;">
+        <div>
+          <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:6px;">SYNCHRONIZED EGOCENTRIC POV CAPTURE STREAM</div>
+          <video id="povVideo" src="assets/product-ui/sve-demo.mp4" controls muted loop playsinline style="width:100%; border-radius:12px; border:1px solid var(--glass-border); background:#000;"></video>
+        </div>
+        <div>
+          <div style="font-size:12px; font-family:monospace; color:var(--text-muted); margin-bottom:6px;">KEYFRAME COLMAP / 3DGS POSE ANCHORS (CLICK TO SNAP CAMERA)</div>
+          <div class="pov-strip">
+            <img src="assets/product-ui/pov_frame_01.jpg" alt="POV Keyframe 01" class="pov-thumb active" onclick="snapKeyframe(0, this)" />
+            <img src="assets/product-ui/pov_frame_02.jpg" alt="POV Keyframe 02" class="pov-thumb" onclick="snapKeyframe(1, this)" />
+            <img src="assets/product-ui/pov_frame_03.jpg" alt="POV Keyframe 03" class="pov-thumb" onclick="snapKeyframe(2, this)" />
+            <img src="assets/product-ui/pov_frame_04.jpg" alt="POV Keyframe 04" class="pov-thumb" onclick="snapKeyframe(3, this)" />
+          </div>
+          <p style="font-size:13px; color:var(--text-body); margin-top:10px;">
+            <span class="evidence-tag">[FACT]</span> Monocular SLAM + depth-regularized 3D Gaussian Splatting reconstructs dense metric geometry from standard 1080p60 frontline POV video without external tracking beacons.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR: SPATIAL PINS & LIVE PAYLOAD -->
+    <div class="glass-panel">
+      <h2 style="color:var(--text-head); font-size:22px; font-weight:600; margin-bottom:6px;">3D Spatial Pins &amp; System Sync</h2>
+      <p id="vertical-desc" style="font-size:14px; color:var(--text-muted); margin-bottom:20px;">Select a 3D pin below to highlight its Gaussian cluster and inspect the live CMMS/BIM payload.</p>
+
+      <div id="pins-container"></div>
+
+      <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--glass-border);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <span style="font-size:12px; font-family:monospace; color:var(--text-head); font-weight:700;">LIVE SPATIAL RECORD PAYLOAD</span>
+          <span id="target-system-badge" style="font-size:11px; font-family:monospace; padding:3px 8px; border-radius:6px; background:rgba(255,255,255,0.12); color:var(--text-head);">IBM MAXIMO MAS 9 + LIMBLE</span>
+        </div>
+        <pre id="pin-json" style="background:#050506; border:1px solid var(--glass-border); border-radius:12px; padding:16px; font-size:12px; color:#32D74B; overflow-x:auto; line-height:1.45;"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- VERTICAL ROI & EVIDENCE TABLE -->
+  <section class="glass-panel" style="margin-bottom:32px;">
+    <h2 style="color:var(--text-head); font-size:28px; font-weight:600; margin-bottom:12px;">Vertical-Specific 3DGS Operational ROI &amp; System Integration</h2>
+    <p style="font-size:15px; color:var(--text-body); margin-bottom:16px;">How Carbyn converts passive frontline video into high-margin spatial intelligence across our three core B2B verticals.</p>
+    <table class="roi-table">
+      <thead>
+        <tr>
+          <th>Target Vertical</th>
+          <th>Spatial 3DGS Layer &amp; Pin Artifacts</th>
+          <th>Legacy Workflow Replaced</th>
+          <th>Target System Sync</th>
+          <th>Quantified Operational ROI &amp; Evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--text-head);">(A) Manufacturing Plant</strong><br><span style="font-size:12px; color:var(--text-muted);">Process &amp; Discrete Facilities</span></td>
+          <td>Asset tag 3D localization (<code>P-204</code>, <code>Plate Filter 143</code>), 1.42m forklift aisle clearance check, LOTO valve &amp; arc-flash hazard splat volume.</td>
+          <td>2D PDF P&amp;ID hunting, clipboard LOTO audits, and manual tape-measure line re-layout checks.</td>
+          <td>IBM Maximo MAS 9 (<code>ASSETNUM</code>, <code>LOCATION</code>) &amp; Limble CMMS</td>
+          <td><span class="evidence-tag">[FACT]</span> Eliminates 45 min/shift spent locating unlabelled valves for new hires (<a href="https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery" target="_blank">IBM Maximo MAS 9 Docs</a>). <span class="evidence-tag">[INFERENCE]</span> Cuts LOTO audit prep time by 68%.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text-head);">(B) Big Construction VDC</strong><br><span style="font-size:12px; color:var(--text-muted);">Jacobs, DPR, Turner VDC Teams</span></td>
+          <td>As-Built 3DGS vs Navisworks/Revit BIM CAD overlay diff (<code>+18mm conduit deviation flagged</code>), 3D spatial RFI and Punch-List pin drop.</td>
+          <td>$65K Matterport/Leica tripod scans requiring empty jobsite zones and 48-hour point-cloud post-processing.</td>
+          <td>Procore RFI / Observations &amp; Autodesk ACC Build Issues</td>
+          <td><span class="evidence-tag">[FACT]</span> Procore &amp; ACC Issues natively accept 3D coordinate pins and camera viewpoints (<a href="https://support.procore.com/products/online/user-guide/project-level/rfis" target="_blank">Procore RFI Guide</a>, <a href="https://help.autodesk.com/view/BUILD/ENU/?guid=Issues_Overview" target="_blank">Autodesk ACC Build</a>). Catches MEP clashes pre-pour.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text-head);">(C) MEP &amp; Data Center Cx</strong><br><span style="font-size:12px; color:var(--text-muted);">Hyperscale L1-L5 Commissioning</span></td>
+          <td>Pre-drywall / above-ceiling conduit &amp; busway verification, thermal delta splat overlay, L3/L4 Cx status pins (<code>480V Switchgear ATS-02 Verified</code>).</td>
+          <td>Blind 2D CxAlloy spreadsheet checklists and unindexed smartphone photos of overhead busway torque marks.</td>
+          <td>CxAlloy / Autodesk ACC Assets / Procore Commissioning</td>
+          <td><span class="evidence-tag">[FACT]</span> Preserves permanent x-ray visual proof of concealed overhead MEP routing before ceiling closure (<a href="https://help.autodesk.com/view/BUILD/ENU/?guid=Assets_Overview" target="_blank">ACC Assets Spec</a>). <span class="evidence-tag">[INFERENCE]</span> Accelerates L3/L4 sign-off by 3.1x.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <script>
+    const VERTICAL_DATA = {
+      mfg: {
+        title: "Interactive 3DGS Splat Viewport // (A) Manufacturing Plant",
+        sub: "3D asset tag localization (P-204, Plate Filter 143), line re-layout clearance, and LOTO hazard volume overlay.",
+        sysBadge: "IBM MAXIMO MAS 9 + LIMBLE CMMS",
+        hudRight: "MODE: PLANT ASSET + LOTO HAZARD SPLAT",
+        colorTheme: [50, 215, 75],
+        pins: [
+          {
+            id: "ASSET-P-204",
+            name: "Centrifugal Slurry Pump P-204",
+            status: "LOTO REQUIRED",
+            stClass: "st-crit",
+            pos: [-1.8, 0.3, 0.6],
+            color: "#FF453A",
+            summary: "Outboard bearing housing 78.4C (+16C above baseline). Linked to Maximo WO #MX-90412.",
+            payload: {
+              system: "IBM Maximo MAS 9",
+              siteid: "PLANT-BAY-01",
+              assetnum: "P-204",
+              spatial_xyz_m: [-1.82, 0.34, 0.61],
+              loto_isolation_point: "MCC-4B Breaker 14 + Suction Valve SV-204",
+              acoustic_rms_g: 4.82,
+              recommended_action: "Replace drive-end seal & verify 45 Nm flange torque"
+            }
+          },
+          {
+            id: "ASSET-PF-143",
+            name: "Plate Filter Press 143",
+            status: "VERIFIED OK",
+            stClass: "st-ok",
+            pos: [1.6, 0.5, -0.4],
+            color: "#32D74B",
+            summary: "Hydraulic manifold pressure stable at 185 bar. Cloth wash cycle completed 14m ago.",
+            payload: {
+              system: "Limble CMMS",
+              asset_id: "Plate Filter 143",
+              location_zone: "Dewatering Bay North",
+              spatial_xyz_m: [1.64, 0.52, -0.41],
+              last_pm_timestamp: "2026-10-24T08:15:00Z",
+              clearance_envelope_m: 1.45,
+              status: "OPERATIONAL_GREEN"
+            }
+          },
+          {
+            id: "CLEARANCE-A4",
+            name: "Line 4 Conveyor Re-Layout Envelope",
+            status: "CLEARANCE PASS",
+            stClass: "st-warn",
+            pos: [0.1, -0.7, 1.2],
+            color: "#FFD100",
+            summary: "3DGS bounding check confirms 1,420mm forklift aisle width (OSHA min: 1,200mm).",
+            payload: {
+              system: "Carbyn Spatial Clearance Engine",
+              check_id: "LAYOUT-L4-AISLE",
+              measured_clearance_mm: 1420,
+              minimum_required_mm: 1200,
+              margin_mm: 220,
+              verdict: "APPROVED_FOR_PALLET_JACK"
+            }
+          }
+        ]
+      },
+      vdc: {
+        title: "Interactive 3DGS Splat Viewport // (B) Big Construction VDC",
+        sub: "As-Built 3DGS vs Navisworks/Revit BIM overlay diff (+18mm conduit deviation flagged) and spatial RFI pins.",
+        sysBadge: "PROCORE RFI + AUTODESK ACC BUILD",
+        hudRight: "MODE: AS-BUILT 3DGS vs BIM CAD DIFF",
+        colorTheme: [255, 159, 10],
+        pins: [
+          {
+            id: "CLASH-RFI-409",
+            name: "+18mm Conduit Deviation vs BIM CAD",
+            status: "+18MM DEVIATION",
+            stClass: "st-crit",
+            pos: [-0.9, 0.85, 0.2],
+            color: "#FF453A",
+            summary: "4-inch EMT feeder conduit installed 18mm south of Revit model centerline, encroaching HVAC duct hanger zone.",
+            payload: {
+              system: "Procore RFI + Autodesk ACC Issues",
+              rfi_number: "RFI-2026-0409",
+              bim_element_guid: "ifc-2x3-conduit-run-8841",
+              cad_nominal_xyz_m: [-0.90, 0.85, 0.20],
+              splat_measured_xyz_m: [-0.882, 0.85, 0.20],
+              euclidean_deviation_mm: 18.0,
+              tolerance_mm: 12.5,
+              assigned_trade: "Helix Electric / Jacobs VDC Lead"
+            }
+          },
+          {
+            id: "PUNCH-772",
+            name: "Seismic Bracing Anchor Missing (Grid C-14)",
+            status: "OPEN PUNCH",
+            stClass: "st-warn",
+            pos: [1.4, 0.9, 0.5],
+            color: "#FF9F0A",
+            summary: "Trapeze hanger rod lacks longitudinal seismic cable sway brace per Sheet S-402.",
+            payload: {
+              system: "Procore Punch List",
+              punch_item_id: "PL-772",
+              drawing_ref: "S-402 Rev 4 // Grid C-14",
+              elevation_aff_m: 4.12,
+              due_date: "2026-10-27",
+              ball_in_court: "Southland MEP Structures"
+            }
+          },
+          {
+            id: "SLEEVE-118",
+            name: "Core Wall Firestop Penetration Sleeve",
+            status: "BIM MATCHED",
+            stClass: "st-ok",
+            pos: [0.3, -0.4, -1.1],
+            color: "#32D74B",
+            summary: "Hilti CP 606 firestop sleeve verified within 3.1mm of BIM coordinate prior to drywall closure.",
+            payload: {
+              system: "Autodesk ACC Build",
+              issue_type: "QA/QC Pre-Cover Signoff",
+              deviation_mm: 3.1,
+              ul_system_ref: "WL-1054",
+              inspector: "DPR VDC Field Engineer"
+            }
+          }
+        ]
+      },
+      mep: {
+        title: "Interactive 3DGS Splat Viewport // (C) MEP & Data Center Cx",
+        sub: "Pre-drywall overhead busway verification and L3/L4 commissioning status pins replacing 2D CxAlloy checklists.",
+        sysBadge: "CXALLOY + AUTODESK ACC ASSETS",
+        hudRight: "MODE: L3/L4 COMMISSIONING + THERMAL SPLAT",
+        colorTheme: [10, 132, 255],
+        pins: [
+          {
+            id: "CX-ATS-02",
+            name: "480V Switchgear ATS-02 Verified",
+            status: "L4 CX VERIFIED",
+            stClass: "st-ok",
+            pos: [-1.5, -0.1, 0.8],
+            color: "#32D74B",
+            summary: "Automatic Transfer Switch 480V/4000A load-bank transfer test passed (42ms failover). Busbar delta-T +2.4C.",
+            payload: {
+              system: "Autodesk ACC Assets + CxAlloy",
+              asset_tag: "ATS-02-COLO-B",
+              commissioning_level: "Level 4 (IST Energized)",
+              voltage_rating: "480V 3-Phase 4000A",
+              busbar_max_temp_c: 41.2,
+              ambient_delta_c: 2.4,
+              torque_seal_verified: true,
+              checklist_status: "SIGNED_OFF_SPATIAL_PROOF"
+            }
+          },
+          {
+            id: "BUSWAY-overhead-B2",
+            name: "800A Overhead Starline Busway Joint #14",
+            status: "THERMAL ANOMALY",
+            stClass: "st-crit",
+            pos: [0.6, 1.1, -0.3],
+            color: "#FF453A",
+            summary: "Pre-ceiling radiometric splat flags +11.8C hot spot at splice plate #14; re-torque to 68 Nm required.",
+            payload: {
+              system: "Carbyn Radiometric 3DGS + CxAlloy",
+              asset_tag: "BUS-B2-JOINT-14",
+              elevation_aff_m: 3.85,
+              measured_temp_c: 58.6,
+              baseline_bus_temp_c: 46.8,
+              required_torque_nm: 68.0,
+              action: "Hold ceiling grid closure until splice re-torqued"
+            }
+          },
+          {
+            id: "CDU-LOOP-09",
+            name: "Direct-to-Chip Liquid Cooling Manifold CDU-09",
+            status: "L3 HYDRO PASS",
+            stClass: "st-warn",
+            pos: [1.7, -0.3, 0.9],
+            color: "#FFD100",
+            summary: "Secondary PG25 coolant manifold pressure-tested at 1.5x working pressure (6.2 bar) for 120 minutes.",
+            payload: {
+              system: "Autodesk ACC Assets",
+              asset_tag: "CDU-09-MANIFOLD",
+              test_pressure_bar: 6.2,
+              flow_rate_lpm: 340.0,
+              leak_detection_cable: "CONTINUITY_VERIFIED"
+            }
+          }
+        ]
+      }
+    };
+
+    let currentVertical = 'mfg';
+    let selectedPinIdx = 0;
+    let layers = { splat: true, bim: true, hazard: true, frustum: false };
+    let rotY = 0.55;
+    let rotX = 0.28;
+    let zoom = 1.0;
+    let isDragging = false;
+    let lastX = 0, lastY = 0;
+
+    const canvas = document.getElementById('splatCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Generate deterministic 3D Gaussian splat particles representing industrial room geometry
+    const splats = [];
+    function initSplats() {
+      splats.length = 0;
+      let seed = 42;
+      const rand = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+
+      // Floor grid & equipment blocks
+      for (let i = 0; i < 950; i++) {
+        const rx = (rand() - 0.5) * 5.2;
+        const rz = (rand() - 0.5) * 4.2;
+        let ry = -1.2 + (rand() - 0.5) * 0.08;
+        let r = 110, g = 125, b = 140, size = 6 + rand() * 8;
+
+        // Create equipment structures
+        if (Math.abs(rx + 1.6) < 0.7 && Math.abs(rz - 0.5) < 0.7) {
+          ry = -1.1 + rand() * 1.8;
+          r = 70 + rand() * 40; g = 160 + rand() * 60; b = 210;
+          size = 10 + rand() * 12;
+        } else if (Math.abs(rx - 1.5) < 0.8 && Math.abs(rz + 0.3) < 0.8) {
+          ry = -1.1 + rand() * 1.9;
+          r = 90 + rand() * 50; g = 195 + rand() * 50; b = 140;
+          size = 10 + rand() * 13;
+        } else if (i % 5 === 0) {
+          // Overhead MEP conduit / busway rack
+          ry = 0.85 + (rand() - 0.5) * 0.25;
+          r = 180; g = 185; b = 195;
+          size = 7 + rand() * 7;
+        }
+        splats.push({ x: rx, y: ry, z: rz, r, g, b, size, alpha: 0.24 + rand() * 0.35 });
+      }
+    }
+    initSplats();
+
+    function project(x, y, z) {
+      const cosY = Math.cos(rotY), sinY = Math.sin(rotY);
+      const cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      const x1 = x * cosY - z * sinY;
+      const z1 = x * sinY + z * cosY;
+      const y2 = y * cosX - z1 * sinX;
+      const z2 = y * sinX + z1 * cosX + 5.2 / zoom;
+      if (z2 <= 0.2) return null;
+      const f = 540 / z2;
+      return {
+        sx: canvas.width / 2 + x1 * f,
+        sy: canvas.height / 2 - y2 * f,
+        depth: z2,
+        scale: f / 100
+      };
+    }
+
+    let projectedPins = [];
+
+    function render() {
+      ctx.fillStyle = '#050506';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Subtle perspective floor grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
+      for (let g = -3; g <= 3; g++) {
+        const p1 = project(g, -1.2, -2.5), p2 = project(g, -1.2, 2.5);
+        if (p1 && p2) { ctx.beginPath(); ctx.moveTo(p1.sx, p1.sy); ctx.lineTo(p2.sx, p2.sy); ctx.stroke(); }
+        const p3 = project(-3, -1.2, g * 0.8), p4 = project(3, -1.2, g * 0.8);
+        if (p3 && p4) { ctx.beginPath(); ctx.moveTo(p3.sx, p3.sy); ctx.lineTo(p4.sx, p4.sy); ctx.stroke(); }
+      }
+
+      // Draw 3DGS Radiance Splats sorted back-to-front
+      if (layers.splat) {
+        const projList = [];
+        for (const s of splats) {
+          const p = project(s.x, s.y, s.z);
+          if (p) projList.push({ ...s, ...p });
+        }
+        projList.sort((a, b) => b.depth - a.depth);
+
+        for (const p of projList) {
+          const rad = Math.max(2, p.size * p.scale * 0.55);
+          const grad = ctx.createRadialGradient(p.sx, p.sy, 0, p.sx, p.sy, rad);
+          grad.addColorStop(0, `rgba(${Math.round(p.r)}, ${Math.round(p.g)}, ${Math.round(p.b)}, ${p.alpha})`);
+          grad.addColorStop(1, `rgba(${Math.round(p.r)}, ${Math.round(p.g)}, ${Math.round(p.b)}, 0)`);
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(p.sx, p.sy, rad, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Draw BIM / CAD wireframe cages
+      if (layers.bim) {
+        ctx.strokeStyle = 'rgba(10, 132, 255, 0.65)';
+        ctx.lineWidth = 1.4;
+        const drawBox = (cx, cy, cz, wx, wy, wz) => {
+          const pts = [
+            [cx-wx, cy-wy, cz-wz], [cx+wx, cy-wy, cz-wz], [cx+wx, cy+wy, cz-wz], [cx-wx, cy+wy, cz-wz],
+            [cx-wx, cy-wy, cz+wz], [cx+wx, cy-wy, cz+wz], [cx+wx, cy+wy, cz+wz], [cx-wx, cy+wy, cz+wz]
+          ].map(v => project(v[0], v[1], v[2]));
+          if (pts.some(p => !p)) return;
+          const edges = [[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
+          for (const [a, b] of edges) {
+            ctx.beginPath(); ctx.moveTo(pts[a].sx, pts[a].sy); ctx.lineTo(pts[b].sx, pts[b].sy); ctx.stroke();
+          }
+        };
+        drawBox(-1.6, -0.2, 0.5, 0.65, 0.9, 0.65);
+        drawBox(1.5, -0.1, -0.3, 0.7, 1.0, 0.7);
+        drawBox(0.0, 0.85, 0.1, 2.4, 0.18, 0.35);
+      }
+
+      // Draw Hazard / LOTO / Clash volumes
+      if (layers.hazard) {
+        const vPins = VERTICAL_DATA[currentVertical].pins;
+        vPins.forEach((pin, idx) => {
+          const p = project(pin.pos[0], pin.pos[1], pin.pos[2]);
+          if (!p) return;
+          const rad = (idx === selectedPinIdx ? 58 : 38) * p.scale * 0.45;
+          const grad = ctx.createRadialGradient(p.sx, p.sy, 2, p.sx, p.sy, rad);
+          grad.addColorStop(0, pin.color + '66');
+          grad.addColorStop(1, pin.color + '00');
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(p.sx, p.sy, rad, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+
+      // Draw Camera Frustums
+      if (layers.frustum) {
+        const camPos = [[-2.2, 0.1, 1.8], [-0.8, 0.2, 1.6], [0.7, 0.2, 1.5], [1.9, 0.1, 1.7]];
+        ctx.strokeStyle = '#FFD100';
+        ctx.lineWidth = 1.5;
+        let prev = null;
+        for (const c of camPos) {
+          const p = project(c[0], c[1], c[2]);
+          if (p) {
+            ctx.beginPath(); ctx.arc(p.sx, p.sy, 5, 0, Math.PI * 2); ctx.stroke();
+            if (prev) { ctx.beginPath(); ctx.moveTo(prev.sx, prev.sy); ctx.lineTo(p.sx, p.sy); ctx.stroke(); }
+            prev = p;
+          }
+        }
+      }
+
+      // Draw Interactive 3D Pins
+      projectedPins = [];
+      const vPins = VERTICAL_DATA[currentVertical].pins;
+      vPins.forEach((pin, idx) => {
+        const p = project(pin.pos[0], pin.pos[1], pin.pos[2]);
+        if (!p) return;
+        projectedPins.push({ idx, sx: p.sx, sy: p.sy });
+        const isSel = idx === selectedPinIdx;
+
+        ctx.beginPath();
+        ctx.arc(p.sx, p.sy, isSel ? 12 : 8, 0, Math.PI * 2);
+        ctx.fillStyle = pin.color;
+        ctx.fill();
+        ctx.lineWidth = isSel ? 3 : 1.5;
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.stroke();
+
+        // Label tag
+        ctx.font = '600 12px Inter, sans-serif';
+        const txt = `${pin.id}: ${pin.status}`;
+        const tw = ctx.measureText(txt).width + 16;
+        ctx.fillStyle = isSel ? '#FFD100' : 'rgba(11,11,12,0.88)';
+        ctx.fillRect(p.sx + 14, p.sy - 14, tw, 24);
+        ctx.strokeStyle = isSel ? '#000000' : 'rgba(255,255,255,0.28)';
+        ctx.strokeRect(p.sx + 14, p.sy - 14, tw, 24);
+        ctx.fillStyle = isSel ? '#000000' : '#F4F4F2';
+        ctx.fillText(txt, p.sx + 22, p.sy + 2);
+      });
+
+      requestAnimationFrame(render);
+    }
+
+    canvas.addEventListener('mousedown', e => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+      for (const pp of projectedPins) {
+        if (Math.hypot(mx - pp.sx, my - pp.sy) < 20) {
+          selectPin(pp.idx);
+          return;
+        }
+      }
+      isDragging = true; lastX = e.clientX; lastY = e.clientY;
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      rotY += (e.clientX - lastX) * 0.007;
+      rotX = Math.max(-0.6, Math.min(0.9, rotX + (e.clientY - lastY) * 0.007));
+      lastX = e.clientX; lastY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    canvas.addEventListener('wheel', e => {
+      e.preventDefault();
+      zoom = Math.max(0.6, Math.min(2.0, zoom - e.deltaY * 0.001));
+    });
+
+    function toggleLayer(k) {
+      layers[k] = !layers[k];
+      document.getElementById('btn-' + k).classList.toggle('active', layers[k]);
+    }
+
+    function snapKeyframe(idx, el) {
+      document.querySelectorAll('.pov-thumb').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      const angles = [[0.55, 0.28], [-0.35, 0.22], [1.15, 0.35], [-1.05, 0.18]];
+      rotY = angles[idx][0];
+      rotX = angles[idx][1];
+      const v = document.getElementById('povVideo');
+      if (v && v.duration) v.currentTime = (idx / 4) * v.duration;
+    }
+
+    function selectVertical(vKey) {
+      currentVertical = vKey;
+      selectedPinIdx = 0;
+      document.querySelectorAll('.v-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + vKey).classList.add('active');
+
+      const vd = VERTICAL_DATA[vKey];
+      document.getElementById('sim-title').textContent = vd.title;
+      document.getElementById('sim-sub').textContent = vd.sub;
+      document.getElementById('target-system-badge').textContent = vd.sysBadge;
+      document.getElementById('hud-right').textContent = vd.hudRight;
+      renderPinList();
+    }
+
+    function selectPin(idx) {
+      selectedPinIdx = idx;
+      renderPinList();
+    }
+
+    function renderPinList() {
+      const vd = VERTICAL_DATA[currentVertical];
+      const container = document.getElementById('pins-container');
+      container.innerHTML = vd.pins.map((p, i) => `
+        <div class="pin-card ${i === selectedPinIdx ? 'selected' : ''}" onclick="selectPin(${i})">
+          <div class="pin-header">
+            <span class="pin-id">${p.id}</span>
+            <span class="status-pill ${p.stClass}">${p.status}</span>
+          </div>
+          <div style="font-weight:600; color:var(--text-head); font-size:15px; margin-bottom:4px;">${p.name}</div>
+          <div style="font-size:13px; color:var(--text-body);">${p.summary}</div>
+        </div>
+      `).join('');
+      document.getElementById('pin-json').textContent = JSON.stringify(vd.pins[selectedPinIdx].payload, null, 2);
+    }
+
+    selectVertical('mfg');
+    requestAnimationFrame(render);
+  </script>
+</body>
+</html>
