@@ -1,5 +1,6 @@
 """Build splat-house/twin.html = real Spark 3DGS engine (index.html) + Carbyn spatial work-order / RFI pins + POV video."""
-import pathlib, json
+import pathlib, json, sys
+sys.exit('DEPRECATED (t_9206624f): this generator mapped industrial WO labels onto residential splats. twin.html is now hand-edited; do not re-run.')
 R = pathlib.Path('/home/a0/carbyn-artifact/splat-house')
 src = (R / 'index.html').read_text()
 

@@ -6,8 +6,9 @@ wait = int(sys.argv[3]) if len(sys.argv) > 3 else 8000
 js = sys.argv[4] if len(sys.argv) > 4 else ''
 PRESETS = {'freeze': 'window.__app && window.__app.freeze()', 'none': '',
            'walk': 'window.__app.setMode("walk")',
-           'mep': 'window.__app.openPin(window.__app.PINS[4])',
-           'con': 'window.__app.openPin(window.__app.PINS[2])'}
+           'mfg': 'window.__app.openVert("mfg")',
+           'mep': 'window.__app.openVert("mep")',
+           'res': 'window.__app.openVert("res")'}
 js = PRESETS.get(js, js)
 w = int(sys.argv[5]) if len(sys.argv) > 5 else 1920
 h = int(sys.argv[6]) if len(sys.argv) > 6 else 1080
