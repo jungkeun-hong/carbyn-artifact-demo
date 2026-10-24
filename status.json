@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-24 02:52 UTC",
+  "updated_at": "2026-10-24 02:53 UTC",
   "overall_progress": 84,
   "phase": "PHASE 2: OVERFLOW RECOVERY AGENTS & AUDITOR FINALIZATION (deleg_589216a0)",
   "memory_sync": {
@@ -16,7 +16,7 @@
     "truth_file": "~/brain/carbyn/2026-10-24-weekly-truth-sync.md"
   },
   "guardrails": {
-    "openai_image_spend_usd": 0.0,
+    "openai_image_spend_usd": 0.48,
     "openai_image_cap_usd": 50.0,
     "origami_senders_active": 17,
     "origami_daily_capacity": 500,
