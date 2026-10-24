@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-24 02:51 UTC",
-  "overall_progress": 81,
+  "updated_at": "2026-10-24 02:52 UTC",
+  "overall_progress": 84,
   "phase": "PHASE 2: OVERFLOW RECOVERY AGENTS & AUDITOR FINALIZATION (deleg_589216a0)",
   "memory_sync": {
     "status": "COMPLETED",
@@ -182,12 +182,12 @@
       "id": "cro-b2b-gtm",
       "agent": "CRO (Telegram) + Subagent Fleet",
       "title": "3. B2B GTM Pipeline & Origami 10,000/mo Engine (Draft Only)",
-      "progress": 78,
+      "progress": 90,
       "status": "IN_PROGRESS",
       "pipeline": {
         "planner": "DONE",
-        "executors": "DONE (Data & Paper MCP Ready)",
-        "auditor": "RUNNING",
+        "executors": "DONE",
+        "auditor": "VERIFYING",
         "recovery": "ACTIVE (Finalizing Docs/Sheets/Web)"
       },
       "subagents": [
@@ -228,7 +228,7 @@
           "type": "Web Artifact",
           "label": "B2B GTM Pipeline & Sequence Review Hub (Building)",
           "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/b2b-gtm-pipeline.html",
-          "ready": false
+          "ready": true
         },
         {
           "type": "Google Sheet",
