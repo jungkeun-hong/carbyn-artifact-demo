@@ -71,6 +71,13 @@ sub('@media (max-width:720px){', '''
 #card{width:min(360px,calc(100vw - 32px))}
 #map{width:min(250px,calc(100vw - 32px))}
 body.embed #help{display:none}
+body.embed #card,body.embed #map,body.embed .notice,body.embed #levels,body.embed #explode,body.embed #tour,body.embed #helpBtn,body.embed .brand small{display:none}
+body.embed #wo{top:56px;width:250px;padding:8px}
+body.embed #wo .pin small{display:none}
+body.embed #pov{top:56px;width:270px}
+body.embed #pov video{height:140px}
+body.embed #pov dl{display:none}
+body.embed #pov h4{font-size:13px}
 @media (max-width:720px){''')
 
 # ---------- HTML panels ----------
