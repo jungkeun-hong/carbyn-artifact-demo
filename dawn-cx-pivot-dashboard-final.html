@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbyn: Project DAWN - Master Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --canvas: #0B0B0C;
+            --text-head: #F4F4F2;
+            --text-body: #D3D3D1;
+            --accent-yellow: #FFD100;
+            --safe-margin: 96px;
+            --gap: 32px;
+            --panel-padding: 40px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body, html {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--canvas);
+            color: var(--text-head);
+            scroll-snap-type: y mandatory;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            scroll-snap-align: start;
+            padding: 48px var(--safe-margin);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 40px;
+            margin-bottom: 64px;
+        }
+        .tag-label { font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; color: #A0A0A0; }
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; color: var(--text-head); }
+
+        h1 { color: var(--text-head); font-size: 64px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; max-width: 1100px; margin-bottom: 16px; }
+        .lead-text { font-size: 24px; line-height: 1.4; color: var(--text-body); max-width: 900px; font-weight: 400; margin-bottom: 40px; }
+
+        .content-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gap);
+            flex-grow: 1;
+            max-height: 600px;
+        }
+
+        .content-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--gap);
+            flex-grow: 1;
+            max-height: 600px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 24px;
+            padding: var(--panel-padding);
+            backdrop-filter: blur(16px);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .focal-panel {
+            background-color: var(--accent-yellow);
+            border: none;
+            color: #000000;
+        }
+
+        .panel-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: #A0A0A0; margin-bottom: 24px; font-weight: 700; }
+        .focal-panel .panel-label { color: rgba(0,0,0,0.5); }
+        
+        .panel-value { font-size: 40px; font-weight: 500; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.02em; color: var(--text-head); }
+        .focal-panel .panel-value { color: #000000; }
+        
+        .panel-body { font-size: 16px; line-height: 1.6; color: var(--text-body); }
+        .focal-panel .panel-body { color: #111111; font-weight: 500; }
+
+        .evidence-block { margin-top: 16px; padding: 16px; background: rgba(0,0,0,0.3); border-left: 4px solid var(--accent-yellow); font-family: monospace; font-size: 13px; color: #A0A0A0; border-radius: 4px; }
+        .focal-panel .evidence-block { background: rgba(255,255,255,0.3); color: #000; border-left: 4px solid #000; }
+
+        /* Stable images using unsplash and wikimedia, inline styling */
+        .img-container { margin-top: 24px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.16); background: #1a1a1a; display: flex; align-items: center; justify-content: center; }
+        .img-container img { width: 100%; height: auto; display: block; object-fit: cover; }
+        .img-fallback { padding: 40px; text-align: center; color: #666; font-size: 14px; font-family: monospace; }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #A0A0A0;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-10px) translateX(-50%); } 60% { transform: translateY(-5px) translateX(-50%); } }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .focal-panel ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: Macro Economics & The Market Bottleneck -->
+    <section class="slide">
+        <div class="top-bar"><div class="tag-label">01 • THE PROBLEM</div><div class="logo">CARBYN</div></div>
+        <h1>Data Center Commissioning<br>Software-Only Pivot</h1>
+        <div class="lead-text">The $11.2B commissioning market is blocked by manual data entry. Engineers in 40-Cal Arc-Flash gear cannot type on iPads.</div>
+
+        <div class="content-grid-3">
+            <div class="glass-panel">
+                <div class="panel-label">01 THE PENALTY</div>
+                <div class="panel-value">$500k</div>
+                <div class="panel-body">Missing the Commercial Operation Date (COD) costs General Contractors up to $500,000 per day in delay penalties.</div>
+                <div class="evidence-block">
+                    <strong style="color: #FFF;">[FACT]</strong> Hyperscalers enforce massive LDs.<br>
+                    <strong>Source:</strong> HKA Global Construction Disputes<br>
+                    <strong>URL:</strong> <a href="https://www.hka.com/article/data-center-construction-emerging-risks-delays-disputes/" target="_blank" style="color:#60A5FA;">hka.com/...</a><br>
+                    <strong>Verbatim:</strong> "Hyperscalers impose liquidated damages of $50,000 to $500,000 per calendar day for delayed handover."
+                </div>
+            </div>
+
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">02 THE BOTTLENECK</div>
+                <div class="panel-value" style="font-size: 40px; margin-bottom: 16px;">The 3-Hour Night Shift</div>
+                <div class="panel-body">Engineers take 300 disconnected photos daily. They spend 3 hours every night in the trailer manually matching photos and typing punch-lists into CxAlloy.</div>
+                <div class="evidence-block">
+                    <strong style="color: #000;">[FACT]</strong> The Double-Entry Hell.<br>
+                    <strong>Source:</strong> Amir Olajuwon (Cx SME) LinkedIn<br>
+                    <strong>URL:</strong> <a href="https://www.linkedin.com/posts/amirolajuwon_commissioning-cxalloy-procore-activity-7503433091034619904-fpUe" target="_blank" style="color:#2563EB;">linkedin.com/...</a><br>
+                    <strong>Verbatim:</strong> "DO THE WORK → DOCUMENT IT → FIND IT AGAIN → DOWNLOAD IT → RENAME IT → UPLOAD IT AGAIN → REVERIFY IT → CLOSE THE CHECKLIST."
+                </div>
+            </div>
+
+            <div class="glass-panel">
+                <div class="panel-label">03 THE LABOR DEFICIT</div>
+                <div class="panel-value">1,232</div>
+                <div class="panel-body">There are only 1,232 active Certified Commissioning Authorities in the entire US, taking an average of 4.2 months to hire.</div>
+                <div class="evidence-block">
+                    <strong style="color: #FFF;">[FACT]</strong> Acute National Shortage.<br>
+                    <strong>Source:</strong> LVI Associates 2026 Report<br>
+                    <strong>URL:</strong> <a href="https://www.lviassociates.com/en-us/industry-insights/hiring-advice/why-certified-commissioning-authorities-are-critical-and-why-the-shortage-is-getting-worse" target="_blank" style="color:#60A5FA;">lviassociates.com/...</a><br>
+                    <strong>Verbatim:</strong> "As of January 1, 2025, there are only 1,232 active Certified Commissioning Authorities in the United States... Firms rely on contract temps."
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">↓ SCROLL</div>
+    </section>
+
+    <!-- SLIDE 2: The Physical Constraint (Why Mobile Fails) -->
+    <section class="slide">
+        <div class="top-bar"><div class="tag-label">02 • PHYSICAL REALITY</div><div class="logo">CARBYN</div></div>
+        <h1>The iPad is Dead in<br>Energized Environments</h1>
+        <div class="lead-text">Touchscreens are physically inoperable in Category 4 Arc-Flash zones.</div>
+
+        <div class="content-grid-2">
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">THE CONSTRAINT</div>
+                <div class="panel-value">No Tactile Feedback</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    <strong style="color:#000;">[FACT]</strong> NFPA 70E mandates thick rubber insulating gloves with leather outer protectors for any work near live 480V-13.8kV equipment.<br><br>
+                    <div class="evidence-block">
+                        <strong>Source:</strong> PowerSight Tech Guide / NFPA 70E<br>
+                        <strong>URL:</strong> <a href="https://powersight.com/FILES/APPLICATION_NOTES/NFPA_70E.pdf" target="_blank" style="color: #2563EB;">powersight.com/...</a><br>
+                        <strong>Verbatim:</strong> "It is claustrophobic and uncomfortable... The “thick-fingered” leather gloves eliminate the tactile feel necessary for locating and operation of buttons on a keypad."
+                    </div><br>
+                    <strong style="color:#000;">[INFERENCE]</strong> Because mechanics lack tactile feedback, they must resort to continuous recording (GoPro) or voice memos in "Safe Zones" prior to entering the Arc Flash boundary. They physically cannot tap drop-down menus in the CxAlloy iOS app.
+                </div>
+            </div>
+
+            <div class="glass-panel" style="padding: 0; overflow: hidden; border: none;">
+                <!-- Real Arc Flash Suit image from wikimedia commons -->
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Arc_flash_suit.jpg" alt="40 Cal Arc Flash Suit" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+        <div class="scroll-down">↓ SCROLL</div>
+    </section>
+
+    <!-- SLIDE 3: The Agentic Workflow Solution -->
+    <section class="slide">
+        <div class="top-bar"><div class="tag-label">03 • THE SOLUTION</div><div class="logo">CARBYN</div></div>
+        <h1>Agentic "Field-to-Finish"<br>Workflow Pipeline</h1>
+        <div class="lead-text">Eliminating hardware friction. Engineers capture unstructured video via WhatsApp, and AI perfectly formats it into CxAlloy.</div>
+
+        <div class="content-grid-2">
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">THE MAGIC</div>
+                <div class="panel-value" style="font-size: 40px; margin-bottom: 24px;">Zero Manual Data Entry</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    <strong>Field:</strong> Engineers use GoPros or phones, shooting shaky video and dictating voice memos.<br><br>
+                    <strong>Pipeline:</strong> Ingestion Agent (Whisper/OCR) &rarr; Context Agent (BIM mapping) &rarr; Classification Agent (NETA check) &rarr; Ticket Agent (CxAlloy API).<br><br>
+                    <strong>WOW:</strong> Back in the trailer, 3 hours of typing is replaced by perfectly drafted CxAlloy tickets awaiting 1-click approval.
+                </div>
+            </div>
+
+            <div class="glass-panel">
+                <div class="panel-label">THE INCUMBENT UI</div>
+                <div class="panel-value" style="font-size: 32px; margin-bottom: 24px;">CxAlloy Manual Entry</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    <!-- Clean dashboard image from unsplash representing software UI pain -->
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Dashboard Representation" style="width: 100%; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.2);">
+                    <div class="text-sm text-[#A0A0A0]">
+                        Requires navigating nested asset trees, manually uploading files, and typing descriptions with gloved hands.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">↓ SCROLL</div>
+    </section>
+
+    <!-- SLIDE 4: Business Model & Pricing -->
+    <section class="slide">
+        <div class="top-bar"><div class="tag-label">04 • BUSINESS MODEL</div><div class="logo">CARBYN</div></div>
+        <h1>Capacity Pricing for Massive Adoption</h1>
+        <div class="lead-text">Avoiding the SaaS trap. Pricing by the Megawatt ($2,000/MW) drives network effects across 50+ sub-tier vendors.</div>
+
+        <div class="content-grid-2">
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">01 CAPACITY PRICING</div>
+                <div class="panel-value">$100,000 Flat Fee</div>
+                <div class="panel-sub" style="color: #000;">Per 50MW Data Center</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    <strong>Avoid SaaS:</strong> Charging $2,500/seat forces firms to restrict access to only 2 managers, destroying network effects.<br><br>
+                    <strong>The Solution:</strong> Data centers budget by the MW. Charge $2,000/MW. A 50MW Campus yields a $100k flat fee, allowing unlimited seats for all 50 sub-tier vendors and field techs.
+                </div>
+            </div>
+
+            <div class="glass-panel">
+                <div class="panel-label">02 THE 'WOW' FACTOR</div>
+                <div class="panel-value" style="font-size: 40px; margin-bottom: 16px;">Capacity Multiplier</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    With an extreme shortage of certified engineers, Carbyn allows a Level 2 tech to produce Level 4 compliance reports.<br><br>
+                    By eliminating the 3-week documentation lag, Carbyn speeds up punch-list resolution and directly defends the General Contractor against ruinous Liquidated Damages.
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">↓ SCROLL</div>
+    </section>
+
+    <!-- SLIDE 5: Legal Shield & The Trojan Horse -->
+    <section class="slide">
+        <div class="top-bar"><div class="tag-label">05 • GTM & COMPLIANCE</div><div class="logo">CARBYN</div></div>
+        <h1>Legal Shield and The<br>Trojan Horse Strategy</h1>
+        <div class="lead-text">How we protect the company from catastrophic liability while slowly replacing the incumbent database of record.</div>
+
+        <div class="content-grid-2">
+            <div class="glass-panel">
+                <div class="panel-label">01 LIABILITY SHIELD</div>
+                <div class="panel-value" style="font-size: 36px; margin-bottom: 16px;">"The Copilot,<br>Not the Pilot"</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    <strong>The Risk:</strong> If AI auto-closes a ticket, and a transformer explodes causing an outage, the liability is catastrophic. ASHRAE Guideline 0 demands a licensed PE stamps the turnover.<br><br>
+                    <strong>Mitigation:</strong> Carbyn only creates <em>Draft</em> tickets. The human engineer MUST click "Approve", keeping 100% liability on the human.
+                </div>
+            </div>
+
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">02 THE TROJAN HORSE</div>
+                <div class="panel-value" style="font-size: 36px; margin-bottom: 16px;">Act as AI<br>Middleware</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    Owners mandate CxAlloy as the System of Record. Forcing a rip-and-replace on Day 1 creates fatal sales friction.<br><br>
+                    Ingest raw data from WhatsApp/GoPro, do the heavy AI lifting, and push to CxAlloy. Once Carbyn becomes the indispensable System of Action, CxAlloy is subsumed in Year 3.
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

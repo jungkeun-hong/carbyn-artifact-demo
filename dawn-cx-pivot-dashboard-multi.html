@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbyn: Project DAWN Deck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Carbyn Official Design System Elements */
+            --canvas: #0B0B0C;
+            --text-head: #F4F4F2;
+            --text-body: #D3D3D1;
+            --accent-yellow: #FFD100;
+            --safe-margin: 96px;
+            --gap: 32px;
+            --panel-padding: 40px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body, html {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--canvas);
+            color: var(--text-head);
+            /* Slide Scroll Snapping */
+            scroll-snap-type: y mandatory;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        /* Each slide takes up the full viewport height */
+        .slide {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            scroll-snap-align: start;
+            padding: 48px var(--safe-margin);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Bar Anatomy */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 40px;
+            margin-bottom: 84px;
+            flex-shrink: 0;
+        }
+        .tag-label { font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; color: #A0A0A0; }
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; color: var(--text-head); }
+
+        /* Typography */
+        h1 { color: var(--text-head); font-size: 64px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; max-width: 1100px; margin-bottom: 24px; }
+        .lead-text { font-size: 28px; line-height: 1.4; color: var(--text-body); max-width: 900px; font-weight: 400; margin-bottom: 48px; }
+
+        /* Grid Layouts */
+        .content-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--gap);
+            flex-grow: 1;
+            max-height: 500px;
+        }
+
+        .content-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--gap);
+            flex-grow: 1;
+            max-height: 500px;
+        }
+
+        /* Glass Panel */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 24px;
+            padding: var(--panel-padding);
+            backdrop-filter: blur(16px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Yellow Focal Panel */
+        .focal-panel {
+            background-color: var(--accent-yellow);
+            border: none;
+            color: #000000;
+        }
+
+        .panel-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: #A0A0A0; margin-bottom: 24px; font-weight: 700; }
+        .focal-panel .panel-label { color: rgba(0,0,0,0.5); }
+        
+        .panel-value { font-size: 56px; font-weight: 500; line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.02em; color: var(--text-head); }
+        .focal-panel .panel-value { color: #000000; }
+        
+        .panel-sub { font-size: 18px; font-weight: 700; margin-bottom: 32px; color: var(--text-head); }
+        .focal-panel .panel-sub { color: #000000; }
+        
+        .panel-body { font-size: 18px; line-height: 1.5; color: var(--text-body); }
+        .focal-panel .panel-body { color: #111111; font-weight: 500; }
+
+        .spacer { flex-grow: 1; }
+
+        /* Scroll indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #A0A0A0;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: Title & The Market Bottleneck -->
+    <section class="slide">
+        <div class="top-bar">
+            <div class="tag-label">01 • THE PROBLEM</div>
+            <div class="logo">CARBYN</div>
+        </div>
+
+        <h1>Data Center Commissioning<br>Software-Only Pivot</h1>
+        <div class="lead-text">
+            The $11.2B commissioning market is blocked by manual data entry. Engineers in 40-Cal Arc-Flash gear cannot type on iPads.
+        </div>
+
+        <div class="content-grid-3">
+            <div class="glass-panel">
+                <div class="panel-label">01 THE PENALTY</div>
+                <div class="panel-value">$500k</div>
+                <div class="panel-sub">Liquidated Damages (Per Day)</div>
+                <div class="spacer"></div>
+                <div class="panel-body">Missing the Commercial Operation Date (COD) costs General Contractors up to $500,000 per day in delay penalties.</div>
+            </div>
+
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">02 THE BOTTLENECK</div>
+                <div class="panel-value" style="font-size: 44px; margin-bottom: 24px;">The 3-Hour<br>Night Shift</div>
+                <div class="spacer"></div>
+                <div class="panel-body">Engineers take 300 disconnected photos daily. They spend 3 hours every night in the trailer manually matching photos and typing punch-lists into CxAlloy.</div>
+            </div>
+
+            <div class="glass-panel">
+                <div class="panel-label">03 THE INCUMBENT</div>
+                <div class="panel-value">70%</div>
+                <div class="panel-sub">Market Share (CxAlloy TQ)</div>
+                <div class="spacer"></div>
+                <div class="panel-body">CxAlloy is mandated by owners as the database of record. It requires 8 manual clicks just to log a single loose bolt and attach a photo.</div>
+            </div>
+        </div>
+        <div class="scroll-down">↓ SCROLL</div>
+    </section>
+
+    <!-- SLIDE 2: The Agentic Workflow Solution -->
+    <section class="slide">
+        <div class="top-bar">
+            <div class="tag-label">02 • THE SOLUTION</div>
+            <div class="logo">CARBYN</div>
+        </div>
+
+        <h1>Agentic "Field-to-Finish"<br>Workflow Pipeline</h1>
+        <div class="lead-text">
+            Engineers shoot shaky video on GoPros or smartphones. Carbyn's Multi-Agent pipeline auto-extracts, correlates, and pushes a perfect ticket.
+        </div>
+
+        <div class="content-grid-3">
+            <div class="glass-panel">
+                <div class="panel-label">01 INGEST & OCR</div>
+                <div class="panel-value" style="font-size: 32px; color: var(--text-head); margin-bottom: 16px;">Extract Audio & Nameplates</div>
+                <div class="spacer"></div>
+                <div class="panel-body">AI extracts audio via Whisper and reads panel nameplates from video frames. Normalizes shaky footage to exact keyframes.</div>
+            </div>
+
+            <div class="glass-panel">
+                <div class="panel-label">02 CONTEXT MATCHING</div>
+                <div class="panel-value" style="font-size: 32px; color: var(--text-head); margin-bottom: 16px;">BIM & Equipment Schedule</div>
+                <div class="spacer"></div>
+                <div class="panel-body">Cross-references field jargon ("Breaker 4B") against the building's BIM to map it to the exact asset ID: "Switchgear SG-02, Level 3".</div>
+            </div>
+
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">03 CXALLOY INTEGRATION</div>
+                <div class="panel-value" style="font-size: 40px; margin-bottom: 16px;">Zero Manual<br>Data Entry</div>
+                <div class="spacer"></div>
+                <div class="panel-body">Pushes a perfectly formatted Draft ticket, with severity flagged against ASHRAE standards and an annotated photo, directly into CxAlloy.</div>
+            </div>
+        </div>
+        <div class="scroll-down">↓ SCROLL</div>
+    </section>
+
+    <!-- SLIDE 3: Business Model & Pricing -->
+    <section class="slide">
+        <div class="top-bar">
+            <div class="tag-label">03 • BUSINESS MODEL</div>
+            <div class="logo">CARBYN</div>
+        </div>
+
+        <h1>Pricing for Network Effects<br>and Massive Adoption</h1>
+        <div class="lead-text">
+            Avoid per-seat SaaS friction. Price by the Megawatt (MW) to ensure every sub-tier vendor uses the platform.
+        </div>
+
+        <div class="content-grid-2">
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">01 CAPACITY PRICING</div>
+                <div class="panel-value">$2,000</div>
+                <div class="panel-sub" style="color: #000;">Per Megawatt (MW) of IT Load</div>
+                <div class="spacer"></div>
+                <div class="panel-body">A 50MW Data Center yields a flat $100,000 platform fee. This allows unlimited seats for all 50 sub-tier vendors and field techs, driving sticky network effects.</div>
+            </div>
+
+            <div class="glass-panel">
+                <div class="panel-label">02 THE 'WOW' FACTOR</div>
+                <div class="panel-value" style="font-size: 40px; margin-bottom: 16px;">Capacity Multiplier & LD Insulation</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    With < 1,300 certified CxAs in the US, firms cannot hire fast enough. Carbyn allows a Level 2 tech to produce Level 4 compliance reports.<br><br>Eliminating the 3-week documentation lag directly defends the General Contractor against ruinous Liquidated Damages.
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">↓ SCROLL</div>
+    </section>
+
+    <!-- SLIDE 4: Legal Shield & The Trojan Horse -->
+    <section class="slide">
+        <div class="top-bar">
+            <div class="tag-label">04 • GTM & COMPLIANCE</div>
+            <div class="logo">CARBYN</div>
+        </div>
+
+        <h1>Legal Shield and The<br>Trojan Horse Strategy</h1>
+        <div class="lead-text">
+            How we protect the company from catastrophic liability while slowly replacing the incumbent database of record.
+        </div>
+
+        <div class="content-grid-2">
+            <div class="glass-panel">
+                <div class="panel-label">01 LIABILITY SHIELD</div>
+                <div class="panel-value" style="font-size: 36px; margin-bottom: 16px;">"The Copilot,<br>Not the Pilot"</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    If AI auto-closes a ticket and a transformer explodes, liability is devastating. ASHRAE Guideline 0 demands a licensed PE stamps the turnover.<br><br>
+                    <strong>Mitigation:</strong> Carbyn only creates <em>Draft</em> tickets. The human engineer MUST click "Approve", keeping 100% liability on the human.
+                </div>
+            </div>
+
+            <div class="glass-panel focal-panel">
+                <div class="panel-label">02 THE TROJAN HORSE</div>
+                <div class="panel-value" style="font-size: 36px; margin-bottom: 16px;">Act as AI<br>Middleware</div>
+                <div class="spacer"></div>
+                <div class="panel-body">
+                    Owners mandate CxAlloy as the System of Record. Forcing a rip-and-replace on Day 1 creates fatal sales friction.<br><br>
+                    Ingest raw data, do the heavy AI lifting, and push to CxAlloy. Once Carbyn becomes the indispensable System of Action, CxAlloy is subsumed in Year 3.
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbyn: Project DAWN</title>
+    <!-- Use Inter as fallback for Helvetica Now Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Exactly from Color Guideline Slide */
+            --bg-color: #0B0B0C;
+            --text-primary: #F4F4F2;
+            --text-secondary: #D3D3D1;
+            --accent-yellow: #FFD100;
+            
+            /* Spacing from Layout Slide */
+            --safe-margin: 96px;
+            --gap: 32px;
+            --panel-padding: 40px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            width: 1920px; /* Base 1080p slide canvas size */
+            height: 1080px;
+            position: relative;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Bar Anatomy (y: 80px) */
+        .top-bar {
+            position: absolute;
+            top: 80px;
+            left: var(--safe-margin);
+            right: var(--safe-margin);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tag-label {
+            font-size: 16px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+        }
+
+        /* Hero Anatomy (y: 204px) */
+        /* Rule: Short concise english. 5-8 words. Maximum two lines. */
+        h1 {
+            position: absolute;
+            top: 204px;
+            left: var(--safe-margin);
+            font-size: 64px;
+            font-weight: 500;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            max-width: 1000px;
+        }
+
+        /* Rule: Max three lines for descriptive text */
+        .lead-text {
+            position: absolute;
+            top: 360px;
+            left: var(--safe-margin);
+            font-size: 28px;
+            line-height: 1.4;
+            color: var(--text-secondary);
+            max-width: 900px;
+            font-weight: 400;
+        }
+
+        /* Glass Panel Container (y: 520px) */
+        .content-grid {
+            position: absolute;
+            top: 520px;
+            left: var(--safe-margin);
+            right: var(--safe-margin);
+            display: flex;
+            gap: var(--gap); /* exactly 32px */
+            height: 464px; /* fixed height to fit 1080p canvas */
+        }
+
+        /* Shape Guideline: 24px inner radius */
+        .glass-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 24px;
+            padding: var(--panel-padding); /* exactly 40px */
+            backdrop-filter: blur(16px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* The SINGLE Focal Point (Rule: Highlight important stat with Accent Yellow) */
+        .focal-panel {
+            background-color: var(--accent-yellow);
+            border: none;
+            color: #000000;
+        }
+
+        .focal-panel .panel-label,
+        .focal-panel h2,
+        .focal-panel p {
+            color: #000000;
+        }
+
+        .panel-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #A0A0A0;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .panel-value {
+            font-size: 56px;
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .panel-sub {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+        }
+        
+        .focal-panel .panel-sub {
+            color: #000000;
+        }
+
+        .panel-body {
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+        
+        .focal-panel .panel-body {
+            color: #111111;
+            font-weight: 500;
+        }
+
+        .spacer { flex-grow: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="tag-label">01 • PIVOT STRATEGY</div>
+        <div class="logo">CARBYN</div>
+    </div>
+
+    <h1>Software-Only Pivot For<br>Data Center Commissioning</h1>
+    <div class="lead-text">
+        Eliminating the $11.2B commissioning bottleneck by moving from proprietary hardware to a purely Agentic AI workflow.
+    </div>
+
+    <div class="content-grid">
+        
+        <div class="glass-panel">
+            <div class="panel-label">01 THE BOTTLENECK</div>
+            <div class="panel-value">$500k</div>
+            <div class="panel-sub">Delay penalty per day</div>
+            <div class="spacer"></div>
+            <div class="panel-body">
+                Field engineers in 40-Cal Arc-Flash gear cannot type on iPads. They take 300 disconnected photos, spending 3 hours every night manually matching photos and typing punch-lists into CxAlloy.
+            </div>
+        </div>
+
+        <div class="glass-panel focal-panel">
+            <div class="panel-label" style="color: rgba(0,0,0,0.5);">02 THE SOLUTION</div>
+            <div class="panel-value" style="font-size: 40px; margin-bottom: 24px;">Turn field chaos into<br>structured compliance.</div>
+            <div class="spacer"></div>
+            <div class="panel-body">
+                Engineers shoot shaky video on GoPros/Phones. Carbyn's Multi-Agent pipeline auto-extracts audio, OCRs nameplates, correlates to BIM, and pushes a perfectly formatted ticket into CxAlloy.
+            </div>
+        </div>
+
+        <div class="glass-panel">
+            <div class="panel-label">03 BUSINESS MODEL</div>
+            <div class="panel-value">$2,000</div>
+            <div class="panel-sub">Capacity Pricing per MW</div>
+            <div class="spacer"></div>
+            <div class="panel-body">
+                Avoid SaaS friction. A 50MW Data Center yields a flat $100,000 platform fee, allowing unlimited seats for all sub-tier vendors.<br><br>
+                AI only drafts tickets. The licensed Engineer must click "Approve", keeping liability on the human.
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

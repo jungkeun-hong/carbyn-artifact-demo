@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-24 02:18 UTC (Oct 23 19:18 PDT)",
-  "overall_progress": 18,
+  "updated_at": "2026-10-24 02:22 UTC",
+  "overall_progress": 33,
   "phase": "PHASE 1: C-SUITE & SUBAGENT SWARM EXECUTION",
   "memory_sync": {
     "status": "COMPLETED",
@@ -16,8 +16,8 @@
     "truth_file": "~/brain/carbyn/2026-10-24-weekly-truth-sync.md"
   },
   "guardrails": {
-    "openai_image_spend_usd": 0.00,
-    "openai_image_cap_usd": 50.00,
+    "openai_image_spend_usd": 0.0,
+    "openai_image_cap_usd": 50.0,
     "origami_senders_active": 17,
     "origami_daily_capacity": 500,
     "origami_weekly_capacity": 2500,
@@ -50,7 +50,7 @@
       "id": "coo-skt-research",
       "agent": "COO (Telegram) + Subagent Fleet",
       "title": "1. SKT Voice/Video-to-Doc Competitor & Psychology Intel",
-      "progress": 20,
+      "progress": 33,
       "status": "IN_PROGRESS",
       "pipeline": {
         "planner": "DONE",
@@ -92,16 +92,31 @@
       ],
       "blockers": "None. Exa, Arctic Shift Reddit archive, and Apify active.",
       "deliverables": [
-        {"type": "Web Artifact", "label": "SKT Competitor & Word Intel Matrix (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/skt-competitor-intel.html", "ready": false},
-        {"type": "Google Doc", "label": "01_SKT_Competitor_and_Word_Research (Carbyn Template)", "url": "#", "ready": false},
-        {"type": "Google Sheet", "label": "SKT Competitor Lexicon & Reddit/X Evidence Sheet", "url": "#", "ready": false}
+        {
+          "type": "Web Artifact",
+          "label": "SKT Competitor & Word Intel Matrix (Building)",
+          "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/skt-competitor-intel.html",
+          "ready": false
+        },
+        {
+          "type": "Google Doc",
+          "label": "01_SKT_Competitor_and_Word_Research (Carbyn Template)",
+          "url": "#",
+          "ready": false
+        },
+        {
+          "type": "Google Sheet",
+          "label": "SKT Competitor Lexicon & Reddit/X Evidence Sheet",
+          "url": "#",
+          "ready": false
+        }
       ]
     },
     {
       "id": "ceo-skt-content",
       "agent": "CEO (Telegram) + Subagent Fleet",
       "title": "2. SKT First 100-500 Users Content & Oct 26 Launch Engine",
-      "progress": 20,
+      "progress": 33,
       "status": "IN_PROGRESS",
       "pipeline": {
         "planner": "DONE",
@@ -143,16 +158,31 @@
       ],
       "blockers": "None. OpenAI gpt-image-2 API verified ($0.00 / $50.00 spent).",
       "deliverables": [
-        {"type": "Web Artifact", "label": "SKT 14-Day Content Studio & Image Gallery (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/skt-content-engine.html", "ready": false},
-        {"type": "Google Sheet", "label": "SKT 14-Day Launch Calendar & Copy Bank (Oct 26 - Nov 8)", "url": "#", "ready": false},
-        {"type": "Google Doc", "label": "02_SKT_First_500_Content_Playbook_and_Scripts", "url": "#", "ready": false}
+        {
+          "type": "Web Artifact",
+          "label": "SKT 14-Day Content Studio & Image Gallery (Building)",
+          "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/skt-content-engine.html",
+          "ready": false
+        },
+        {
+          "type": "Google Sheet",
+          "label": "SKT 14-Day Launch Calendar & Copy Bank (Oct 26 - Nov 8)",
+          "url": "#",
+          "ready": false
+        },
+        {
+          "type": "Google Doc",
+          "label": "02_SKT_First_500_Content_Playbook_and_Scripts",
+          "url": "#",
+          "ready": false
+        }
       ]
     },
     {
       "id": "cro-b2b-gtm",
       "agent": "CRO (Telegram) + Subagent Fleet",
       "title": "3. B2B GTM Pipeline & Origami 10,000/mo Engine (Draft Only)",
-      "progress": 20,
+      "progress": 33,
       "status": "IN_PROGRESS",
       "pipeline": {
         "planner": "DONE",
@@ -194,16 +224,31 @@
       ],
       "blockers": "None. Outbound send lock engaged (Draft/Staging only).",
       "deliverables": [
-        {"type": "Web Artifact", "label": "B2B GTM Pipeline & Sequence Review Hub (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/b2b-gtm-pipeline.html", "ready": false},
-        {"type": "Google Sheet", "label": "B2B Master Lead List & Origami 17-Sender Schedule", "url": "#", "ready": false},
-        {"type": "Google Doc", "label": "03_B2B_Origami_10K_GTM_Strategy_and_Sequences", "url": "#", "ready": false}
+        {
+          "type": "Web Artifact",
+          "label": "B2B GTM Pipeline & Sequence Review Hub (Building)",
+          "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/b2b-gtm-pipeline.html",
+          "ready": false
+        },
+        {
+          "type": "Google Sheet",
+          "label": "B2B Master Lead List & Origami 17-Sender Schedule",
+          "url": "#",
+          "ready": false
+        },
+        {
+          "type": "Google Doc",
+          "label": "03_B2B_Origami_10K_GTM_Strategy_and_Sequences",
+          "url": "#",
+          "ready": false
+        }
       ]
     },
     {
       "id": "cpo-b2b-product",
       "agent": "CPO (Telegram) + Subagent Fleet",
       "title": "4. B2B Product Blueprint, Paper MCP & 3DGS / Robotics Web Prototypes",
-      "progress": 20,
+      "progress": 35,
       "status": "IN_PROGRESS",
       "pipeline": {
         "planner": "DONE",
@@ -245,9 +290,24 @@
       ],
       "blockers": "None. Paper MCP and GitHub Pages pipeline active.",
       "deliverables": [
-        {"type": "Web Artifact", "label": "B2B Product Blueprint & 3DGS / Robotics Interactive Hub (Building)", "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/b2b-product-blueprint.html", "ready": false},
-        {"type": "Paper MCP", "label": "Carbyn B2B Product Blueprint Canvas (Paper.design)", "url": "#", "ready": false},
-        {"type": "Google Doc", "label": "04_B2B_Product_Blueprint_3DGS_Robotics_and_Integrations", "url": "#", "ready": false}
+        {
+          "type": "Web Artifact",
+          "label": "B2B Product Blueprint & 3DGS / Robotics Interactive Hub (Building)",
+          "url": "https://jungkeun-hong.github.io/carbyn-artifact-demo/b2b-product-blueprint.html",
+          "ready": false
+        },
+        {
+          "type": "Paper MCP",
+          "label": "Carbyn B2B Product Blueprint Canvas (Paper.design)",
+          "url": "#",
+          "ready": false
+        },
+        {
+          "type": "Google Doc",
+          "label": "04_B2B_Product_Blueprint_3DGS_Robotics_and_Integrations",
+          "url": "#",
+          "ready": false
+        }
       ]
     }
   ]
