@@ -3,40 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oct 26 Weekly Sprint · JK & Neo</title>
+<title>Oct 26 Weekly Sprint · JK &amp; Neo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Quantico:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   :root {
-    --color-ground: #07080D;
-    --color-ground-deep: #0D1020;
-    --color-surface: #12162A;
-    --color-ink: #F1F4FA;
-    --color-ink-soft: #C3CAD9;
-    --color-ink-muted: #8790A6;
-    --color-line: rgba(170, 190, 255, 0.16);
-    --color-vesicle: #FF9F2E;
-    --color-vesicle-deep: #C96A0E;
-    --color-membrane: #4FC3F7;
-    --color-dendrite: #7C5CFF;
-    --color-receptor: #D6338A;
-    --color-go: #49D19A;
-    --color-glass-top: rgba(79, 195, 247, 0.14);
-    --color-glass-bottom: rgba(124, 92, 255, 0.16);
-    --font-display: Georgia, serif;
-    --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --color-bg: #0B0B0C;
+    --color-surface: #17171A;
+    --color-text: #F4F4F2;
+    --color-muted: #8C8C8A;
+    --color-line: rgb(255 255 255 / 12%);
+    --color-glass: rgb(255 255 255 / 7%);
+    --color-glass-border: rgb(255 255 255 / 16%);
+    --color-paper: #EEEEEE;
+    --color-ink: #0B0B0C;
+    --color-primary: #FFD100;
+    --color-amber: #FF7A1A;
+    --color-red: #E5322D;
+    --color-deck-body: #D3D3D1;
+    --color-deck-white: #FFFFFF;
+    --color-deck-black: #000000;
+    --color-deck-logo-core: #FFCD11;
+    --color-deck-scrim: rgb(11 11 12 / 82%);
+    --color-deck-panel-top: oklab(28.7% 0.002 -0.007 / 82%);
+    --color-deck-panel-bottom: oklab(20.1% 0.001 -0.004 / 90%);
+    --font-deck: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, 'Pretendard', -apple-system, sans-serif;
+    --font-deck-wordmark: 'Quantico', sans-serif;
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'Geist Mono', monospace;
-    --text-caption: 16px;
-    --text-label: 18px;
-    --text-body: 24px;
-    --text-lead: 32px;
-    --text-title: 64px;
-    --tracking-tight: -0.02em;
-    --tracking-caps: 0.22em;
-    --radius-card: 28px;
-    --radius-slide: 32px;
+    --text-deck-display: 96px;
+    --text-deck-title: 64px;
+    --text-deck-card: 34px;
+    --text-deck-body: 28px;
+    --text-deck-label: 18px;
+    --text-lead: 30px;
+    --radius-deck-panel: 24px;
   }
 
   * {
@@ -46,9 +49,9 @@
   }
 
   body {
-    background-color: #040508;
-    color: var(--color-ink);
-    font-family: var(--font-body);
+    background-color: #050506;
+    color: var(--color-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     padding: 36px 20px 80px;
@@ -64,15 +67,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 14px 24px;
-    background: var(--color-ground-deep);
+    background: var(--color-surface);
     border: 1px solid var(--color-line);
     border-radius: 999px;
     font-family: var(--font-mono);
     font-size: 14px;
-    color: var(--color-ink-soft);
+    color: var(--color-deck-body);
   }
   .topbar a {
-    color: var(--color-vesicle);
+    color: var(--color-primary);
     text-decoration: none;
   }
   .topbar a:hover {
@@ -95,111 +98,156 @@
   .slide {
     width: 1920px;
     height: 1080px;
-    background-color: var(--color-ground);
-    background-image:
-      radial-gradient(circle farthest-corner at 85% 100%, rgba(124, 92, 255, 0.12) 0%, transparent 70%),
-      linear-gradient(180deg, #07080D 0%, #0D1020 100%);
+    background-color: var(--color-bg);
     border: 1px solid var(--color-line);
-    border-radius: 20px;
-    padding: 104px 120px 64px;
-    display: flex;
-    flex-direction: column;
-    gap: 56px;
-    overflow: hidden;
+    border-radius: 16px;
     position: relative;
+    overflow: clip;
     transform-origin: top left;
   }
 
-  .slide.cover {
-    padding: 112px 120px 80px;
+  .wave-cover {
+    background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNDGGZ4MN67ANH66T5Z.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 1080px;
+    left: 0px;
+    opacity: 0.72;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+  }
+
+  .wave-slide {
+    background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNC4T445FRBWERWWCJE.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 1080px;
+    left: 0px;
+    opacity: 0.58;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+  }
+
+  .scrim {
+    background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%);
+    height: 1080px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+  }
+
+  .header-row {
+    left: 96px;
+    top: 80px;
+    width: 1728px;
+    position: absolute;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    background-image:
-      radial-gradient(circle farthest-corner at 78% 42%, rgba(124, 92, 255, 0.22) 0%, transparent 70%),
-      radial-gradient(circle farthest-corner at 92% 80%, rgba(79, 195, 247, 0.14) 0%, transparent 70%),
-      linear-gradient(180deg, #07080D 0%, #0D1020 100%);
+  }
+
+  .section-label {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
+  }
+
+  .wordmark {
+    align-items: baseline;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .wordmark-text {
+    color: var(--color-deck-white);
+    font-family: var(--font-deck-wordmark);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 42px;
+  }
+
+  .lead-block {
+    left: 96px;
+    top: 204px;
+    width: 1600px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .lead-title {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 64px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 78px;
+  }
+  .lead-sub {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
+  }
+
+  .glass-panel {
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    background-image: linear-gradient(in oklab 160deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--color-glass-border) 0px 1px 0px inset;
+    border-radius: var(--radius-deck-panel);
+  }
+
+  .solid-panel {
+    background-color: var(--color-primary);
+    color: var(--color-ink);
+    border-radius: var(--radius-deck-panel);
+  }
+
+  .footer-row {
+    left: 96px;
+    bottom: 64px;
+    width: 1728px;
+    position: absolute;
+    border-top: 1px solid var(--color-line);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .footer-right {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
   }
 
   .kr-board {
     width: 1920px;
-    background-color: var(--color-ground-deep);
+    background-color: var(--color-surface);
     border: 1px solid var(--color-line);
-    border-radius: 20px;
-    padding: 64px 120px;
+    border-radius: 24px;
+    padding: 56px 96px;
     display: flex;
     flex-direction: column;
     gap: 40px;
     transform-origin: top left;
   }
-
-  .slide-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-  }
-
-  .slide-header-left {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 1560px;
-  }
-
-  .mono-label {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: var(--tracking-caps);
-    color: var(--color-ink-muted);
-    line-height: 22px;
-  }
-
-  .slide-title {
-    font-family: var(--font-display);
-    font-size: 72px;
-    line-height: 80px;
-    letter-spacing: var(--tracking-tight);
-    color: var(--color-ink);
-    font-weight: 400;
-  }
-
-  .slide-lead {
-    font-family: var(--font-body);
-    font-size: var(--text-lead);
-    line-height: 44px;
-    color: var(--color-ink-soft);
-  }
-
-  .slide-counter {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-  }
-  .slide-counter .num {
-    font-family: var(--font-display);
-    font-size: 64px;
-    line-height: 64px;
-    color: var(--color-vesicle);
-  }
-  .slide-counter .den {
-    font-family: var(--font-mono);
-    font-size: var(--text-body);
-    line-height: 30px;
-    color: var(--color-ink-muted);
-  }
-
-  .slide-footer {
-    margin-top: auto;
-    padding-top: 22px;
-    border-top: 1px solid var(--color-line);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    font-family: var(--font-mono);
-    font-size: var(--text-caption);
-    color: var(--color-ink-muted);
-  }
-
   .kr-header {
     display: flex;
     align-items: baseline;
@@ -207,16 +255,18 @@
   }
   .kr-tag {
     font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.06em;
-    color: var(--color-vesicle);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
+    color: var(--color-primary);
   }
   .kr-title {
-    font-family: var(--font-body);
+    font-family: var(--font-sans);
     font-size: 36px;
     font-weight: 600;
     line-height: 44px;
-    color: var(--color-ink);
+    color: var(--color-text);
   }
   .kr-cols {
     display: flex;
@@ -229,169 +279,122 @@
     flex-direction: column;
     gap: 14px;
     padding-top: 20px;
-    border-top: 2px solid var(--color-vesicle);
+    border-top: 2px solid var(--color-primary);
   }
   .kr-col.mid {
     flex: 1.4;
-    border-top-color: var(--color-membrane);
+    border-top: 1px solid var(--color-line);
   }
   .kr-col.right {
-    border-top-color: var(--color-go);
+    border-top: 1px solid var(--color-line);
   }
   .kr-col-label {
+    font-family: var(--font-sans);
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
+    color: var(--color-text);
+  }
+  .kr-col:first-child .kr-col-label {
+    color: var(--color-primary);
   }
   .kr-col-text {
+    font-family: var(--font-sans);
     font-size: 22px;
     line-height: 36px;
-    color: var(--color-ink-soft);
+    color: var(--color-deck-body);
     word-break: keep-all;
   }
   .kr-col:first-child .kr-col-text {
     font-size: 24px;
     line-height: 38px;
-    color: var(--color-ink);
+    color: var(--color-text);
   }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div>CARBYN AI · OCT 26 WEEKLY SPRINT · NEO &amp; JK</div>
-  <div>Paper Project: <a href="https://app.paper.design/file/01M5VCG9CYQGKXBRBVZW844DXQ/p-2-0" target="_blank">01M5VCG9CYQGKXBRBVZW844DXQ / p-2-0</a></div>
+  <div>CARBYN AI · OCT 26 WEEKLY SPRINT · JK &amp; NEO</div>
+  <div>Paper Project: <a href="https://app.paper.design/file/01M5VCG9CYQGKXBRBVZW844DXQ/p-2-0" target="_blank">01M5VCG9CYQGKXBRBVZW844DXQ / p-2-0</a> · Design System: <a href="https://app.paper.design/file/01M4DBM7G6CHWH4ZGFCDCDJZPV/p-8-3" target="_blank">01M4DBM7G6CHWH4ZGFCDCDJZPV / p-8-3</a></div>
 </div>
 
-<!-- COVER -->
+<!-- COVER (1-0) -->
 <div class="slide-pair">
   <div class="artboard-wrap">
-    <div class="slide cover">
-      <div style="display:flex; align-items:center; gap:36px;">
-        <div class="mono-label">WEEKLY SPRINT · 2026-10-26</div>
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div style="width:10px; height:10px; border-radius:999px; background:var(--color-vesicle);"></div>
-          <div class="mono-label">JK &amp; NEO</div>
+    <div class="slide" id="slide-cover">
+      <div class="wave-cover"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">WEEKLY SPRINT · OCTOBER 26, 2026</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:40px; max-width:960px;">
-        <div style="font-family:var(--font-display); font-size:112px; line-height:118px; letter-spacing:-0.025em; color:var(--color-ink);">One Week. Two Tracks.</div>
-        <div style="font-family:var(--font-body); font-size:32px; line-height:46px; color:var(--color-ink-soft); max-width:780px;">Memo ships to the App Store. B2B starts the 10K engine.</div>
+      <div style="display: flex; flex-direction: column; gap: 32px; left: 96px; position: absolute; top: 280px; width: 1440px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 96px; font-weight: 500; letter-spacing: -0.03em; line-height: 104px;">One week.<br/>Two execution tracks.</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 34px; line-height: 41px;">Carbyn Memo ships to the App Store. Carbyn AI launches the 970-lead outbound engine.</div>
       </div>
-      <div style="display:flex; gap:36px; padding-top:24px; border-top:1px solid var(--color-line); width:760px; font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">
-        <div style="letter-spacing:var(--tracking-caps);">CARBYN AI · OCT 26 – OCT 30</div>
-        <div>Pilot = Carbyn AI ▲ · SKT = Carbyn Memo ⬢</div>
+      <div style="display: flex; gap: 72px; left: 96px; position: absolute; top: 824px; width: 1728px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 24px; font-weight: 500; line-height: 29px;">JK Hong · CEO</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 24px; font-weight: 500; line-height: 29px;">Neo Lee · CTO</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 24px; line-height: 29px;">Oct 26 – Oct 30, 2026 · Dual-Clock Execution</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · WEEKLY SPRINT</div>
+        <div class="footer-right">00</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- SLIDE 1 / 5 + 1K -->
+<!-- SLIDE 1 / 5 (1J-0) + 1K (TN-0) -->
 <div class="slide-pair">
   <div class="artboard-wrap">
-    <div class="slide">
-      <div class="slide-header">
-        <div class="slide-header-left">
-          <div class="mono-label">THE 2X2 SPRINT MAP</div>
-          <div class="slide-title">Two products. Two owners. Four clear lanes.</div>
-          <div class="slide-lead">Neo holds the golden path. JK fills the funnel.</div>
-        </div>
-        <div class="slide-counter"><span class="num">1</span><span class="den">/ 5</span></div>
-      </div>
-
-      <div style="background:linear-gradient(135deg, var(--color-glass-top) 0%, var(--color-glass-bottom) 100%); border:1px solid var(--color-line); border-radius:var(--radius-card); padding:40px 48px; height:520px; display:flex; flex-direction:column; justify-content:space-between;">
-        <!-- Table Header -->
-        <div style="display:flex; align-items:center; padding-bottom:20px; border-bottom:1px solid var(--color-line);">
-          <div style="width:340px; flex-shrink:0; font-family:var(--font-mono); font-size:16px; letter-spacing:var(--tracking-caps); color:var(--color-ink-muted);">TRACK</div>
-          <div style="flex:1; display:flex; align-items:center; gap:12px;">
-            <div style="width:12px; height:12px; border-radius:999px; background:var(--color-dendrite);"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:var(--tracking-caps);">NEO · CTO</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">engineering</div>
-          </div>
-          <div style="flex:1; display:flex; align-items:center; gap:12px;">
-            <div style="width:12px; height:12px; border-radius:999px; background:var(--color-membrane);"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:var(--tracking-caps);">JK · CEO</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">GTM &amp; demos</div>
-          </div>
-          <div style="flex:1; display:flex; align-items:center; gap:12px;">
-            <div style="width:12px; height:12px; border-radius:999px; background:var(--color-vesicle);"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:var(--tracking-caps);">THIS WEEK'S GATE</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">Friday target</div>
-          </div>
-        </div>
-
-        <!-- Row 1: SKT -->
-        <div style="display:flex; align-items:center; padding:28px 0; border-bottom:1px solid var(--color-line);">
-          <div style="width:340px; flex-shrink:0; display:flex; align-items:center; gap:20px;">
-            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <rect width="64" height="64" rx="15" fill="#FFFFFF"/>
-              <path d="M32 9 L52 20.5 L52 43.5 L46 47 L46 32 L32 24 L18 32 L18 47 L12 43.5 L12 20.5 Z" fill="#000000"/>
-              <path d="M32 33 L40 37.6 L40 46.8 L32 51.4 L24 46.8 L24 37.6 Z" fill="#FFCD12"/>
-            </svg>
-            <div style="display:flex; flex-direction:column; gap:4px;">
-              <div style="font-size:24px; font-weight:600;">SKT · Carbyn Memo</div>
-              <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">skt/ · Individual PLG</div>
-            </div>
-          </div>
-          <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-            <div style="font-size:30px; font-weight:600; line-height:36px;">App Store &amp; Backend</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">Prod deploy · wipe test DB · stop old Vercel</div>
-          </div>
-          <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-            <div style="font-size:30px; font-weight:600; line-height:36px;">First 25 Users</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">1:1 DM to 15 pros · free form magnets</div>
-          </div>
-          <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-            <div style="font-size:30px; font-weight:600; line-height:36px;">0% Drop · ≥70% Share</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">0% drop · ≥70% no-edit share</div>
-          </div>
-        </div>
-
-        <!-- Row 2: B2B -->
-        <div style="display:flex; align-items:center; padding:28px 0; border-bottom:1px solid var(--color-line);">
-          <div style="width:340px; flex-shrink:0; display:flex; align-items:center; gap:20px;">
-            <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-              <rect width="64" height="64" rx="15" fill="#FFFFFF"/>
-              <path d="M32 12 L52 52 L42 52 L32 32 L22 52 L12 52 Z" fill="#000000"/>
-              <path d="M32 38 L37.5 49 L26.5 49 Z" fill="#FFCD12"/>
-            </svg>
-            <div style="display:flex; flex-direction:column; gap:4px;">
-              <div style="font-size:24px; font-weight:600;">B2B · Carbyn AI</div>
-              <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">mobile/ · Enterprise Pilot</div>
-            </div>
-          </div>
-          <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-            <div style="font-size:30px; font-weight:600; line-height:36px;">Pilot &amp; SOC 2 (≤20%)</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">ENG-846 photo fix · Sprinto 6/20 · PR rule</div>
-          </div>
-          <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-            <div style="font-size:30px; font-weight:600; line-height:36px;">4 Tracks + New Demos</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">MEP, Cx, Assembly, Korea · SOP v2 &amp; ACC/Maximo demos</div>
-          </div>
-          <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-            <div style="font-size:30px; font-weight:600; line-height:36px;">970 Sends · 1-2 Pilots</div>
-            <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-muted);">970 Origami sends · 1-2 pilots</div>
-          </div>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:16px; padding-top:8px;">
-          <div style="width:10px; height:10px; border-radius:999px; background:var(--color-vesicle);"></div>
-          <div style="font-family:var(--font-mono); font-size:16px; color:var(--color-ink-soft);">Rule: Neo holds 80% on SKT golden path and ≤20% on B2B pilot + SOC 2. Zero scope creep.</div>
+    <div class="slide" id="slide-01">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">01 · SPRINT MAP</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-
-      <div style="display:flex; align-items:center; gap:16px; padding:0 8px;">
-        <div style="width:220px; flex-shrink:0; font-family:var(--font-mono); font-size:16px; letter-spacing:var(--tracking-caps); color:var(--color-ink-muted);">OTHERS THIS WEEK</div>
-        <div style="background:#FFFFFF12; border:1px solid var(--color-line); border-radius:999px; padding:12px 22px; font-size:18px; font-weight:500;">MDM Minneapolis (LI + Newsletter)</div>
-        <div style="background:#FFFFFF12; border:1px solid var(--color-line); border-radius:999px; padding:12px 22px; font-size:18px; font-weight:500;">NFMT Vegas (LI + Newsletter)</div>
-        <div style="background:#FFFFFF12; border:1px solid var(--color-line); border-radius:999px; padding:12px 22px; font-size:18px; font-weight:500;">YC Profile &amp; Equity Sign-Off</div>
-        <div style="background:#FF9F2E24; border:1px solid #FF9F2E66; border-radius:999px; padding:12px 22px; font-size:18px; font-weight:500;">Form Upload: Free vs Pro</div>
-        <div style="background:#FFFFFF12; border:1px solid var(--color-line); border-radius:999px; padding:12px 22px; font-size:18px; font-weight:500;">Hana Bank FX Report</div>
+      <div class="lead-block">
+        <div class="lead-title">Two products. Two owners. Four clear lanes.</div>
+        <div class="lead-sub">Neo protects the 80% SKT golden path. JK drives the first 25 pros and 970 B2B sends.</div>
       </div>
-
-      <div class="slide-footer">
-        <div style="letter-spacing:var(--tracking-caps);">WEEKLY SPRINT · OCT 26 – OCT 30</div>
-        <div>JK &amp; Neo · Dual-Track Execution</div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 14px; height: 196px; justify-content: center; left: 96px; padding: 28px 36px; position: absolute; top: 412px; width: 848px;">
+        <div style="color: var(--color-muted); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">SKT · NEO</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">App Store and backend clearing</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 24px; line-height: 32px;">Carbyn Memo release · wipe test DB · stop old Vercel · 0% drop</div>
+      </div>
+      <div class="solid-panel" style="display: flex; flex-direction: column; gap: 14px; height: 196px; justify-content: center; left: 976px; padding: 28px 36px; position: absolute; top: 412px; width: 848px;">
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">SKT · JK</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Capture first 25 early adopters</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 24px; line-height: 32px;">1:1 DM to 15 pros · free form magnets · 20 traces/night</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 14px; height: 196px; justify-content: center; left: 96px; padding: 28px 36px; position: absolute; top: 628px; width: 848px;">
+        <div style="color: var(--color-muted); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">B2B · NEO (&lt;=20% CAP)</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Pilot stability and Sprinto SOC 2</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 24px; line-height: 32px;">ENG-846 photo fix · clear 6 failed and 20 critical · PR approval rule</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 14px; height: 196px; justify-content: center; left: 976px; padding: 28px 36px; position: absolute; top: 628px; width: 848px;">
+        <div style="color: var(--color-muted); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">B2B · JK</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">MEP, Cx, Assembly, Korea + new demos</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 24px; line-height: 32px;">970 Origami sends · V-to-SOP v2 and Maximo/Limble/Procore/ACC demos</div>
+      </div>
+      <div style="align-items: start; display: flex; gap: 48px; left: 96px; padding-top: 16px; position: absolute; top: 852px; width: 1728px;">
+        <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 32px; width: 240px;">OTHERS THIS WEEK</div>
+        <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 32px; width: 1440px;">LinkedIn and Newsletter for Minneapolis (MDM Midwest) and Vegas (NFMT) · YC profile and Equity sign-off · Form upload Free vs Pro · Hana Bank FX report</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · WEEKLY SPRINT</div>
+        <div class="footer-right">01</div>
       </div>
     </div>
   </div>
@@ -404,15 +407,15 @@
       </div>
       <div class="kr-cols">
         <div class="kr-col">
-          <div class="kr-col-label" style="color:var(--color-vesicle);">한 줄로</div>
+          <div class="kr-col-label">한 줄로</div>
           <div class="kr-col-text">제품은 두 개이고 오너도 두 명이라, 이번 주 할 일이 네 칸으로 딱 나뉩니다.</div>
         </div>
         <div class="kr-col mid">
-          <div class="kr-col-label" style="color:var(--color-membrane);">쉽게 풀면</div>
+          <div class="kr-col-label">쉽게 풀면</div>
           <div class="kr-col-text">육각형(Carbyn Memo)은 현장 기술자 개인이 바로 쓰는 앱이고, 삼각형(Carbyn AI)은 공장·건설사에 파는 기업용입니다. Neo는 앱스토어 출시와 서버 안정화(80%) 및 파일럿·보안(20%)을 맡고, JK는 초기 유저 25명 확보와 기업 아웃바운드 970건·신규 데모를 맡습니다.</div>
         </div>
         <div class="kr-col right">
-          <div class="kr-col-label" style="color:var(--color-go);">우리가 할 일</div>
+          <div class="kr-col-label">우리가 할 일</div>
           <div class="kr-col-text">금요일까지 Memo는 녹음 유실 0%와 무수정 공유 70%를 달성하고, B2B는 970건 발송에서 파일럿 1~2건을 전환합니다.</div>
         </div>
       </div>
@@ -420,72 +423,42 @@
   </div>
 </div>
 
-<!-- SLIDE 2 / 5 + 2K -->
+<!-- SLIDE 2 / 5 (4N-0) + 2K (U3-0) -->
 <div class="slide-pair">
   <div class="artboard-wrap">
-    <div class="slide">
-      <div class="slide-header">
-        <div class="slide-header-left">
-          <div class="mono-label">SKT · CARBYN MEMO</div>
-          <div class="slide-title">Stop in the truck. Send in thirty seconds.</div>
-          <div class="slide-lead">Zero new features. Only the golden path matters this week.</div>
-        </div>
-        <div class="slide-counter"><span class="num">2</span><span class="den">/ 5</span></div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:28px; height:590px;">
-        <div style="display:flex; height:422px;">
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-vesicle); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-vesicle);">1 · DEPLOY</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">App Store + Wipe DB</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Ship Carbyn Memo to App Store, wipe test DB, stop old Vercel.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Neo · carbyn-prod</div>
-          </div>
-          <div style="width:44px; display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="20" viewBox="0 0 28 20"><path d="M0 10 L24 10 M16 2 L25 10 L16 18" fill="none" stroke="#8790A6" stroke-width="2"/></svg>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-membrane); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-membrane);">2 · RECORD</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">0% Drop on Lock</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Zero audio loss across screen lock, offline mode, and long notes.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">1-min AAC chunks</div>
-          </div>
-          <div style="width:44px; display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="20" viewBox="0 0 28 20"><path d="M0 10 L24 10 M16 2 L25 10 L16 18" fill="none" stroke="#8790A6" stroke-width="2"/></svg>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-dendrite); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-dendrite);">3 · OUTPUT</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">Trade PDF Under 30s</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Clean field PDF ready to share in under 30 seconds with ≥70% no-edit.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Soniox · Jev · Claude</div>
-          </div>
-          <div style="width:44px; display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="20" viewBox="0 0 28 20"><path d="M0 10 L24 10 M16 2 L25 10 L16 18" fill="none" stroke="#8790A6" stroke-width="2"/></svg>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-go); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-go);">4 · CAPTURE</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">1:1 DM + 20 Traces</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">JK DMs 15 pros for first 25 users; review 20 real traces nightly.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">JK + Neo nightly audit</div>
-          </div>
-        </div>
-
-        <div style="height:140px; background:var(--color-ground-deep); border:1px solid var(--color-receptor); border-radius:18px; padding:30px 36px; display:flex; align-items:center; justify-content:space-between;">
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-receptor);">DECISION TODAY</div>
-            <div style="font-size:26px; font-weight:600;">Decision today: Is custom form upload free or Pro-gated?</div>
-          </div>
-          <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Lock pricing gate before App Store traffic</div>
+    <div class="slide" id="slide-02">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">02 · SKT GOLDEN PATH</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-
-      <div class="slide-footer">
-        <div style="letter-spacing:var(--tracking-caps);">WEEKLY SPRINT · OCT 26 – OCT 30</div>
-        <div>SKT Track · Neo (80%) + JK (PLG)</div>
+      <div class="lead-block">
+        <div class="lead-title">Stop in the truck. Send in thirty seconds.</div>
+        <div class="lead-sub">Zero new features. Only the 30-second golden path and first 25 field users matter.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 416px; left: 96px; padding: 40px; position: absolute; top: 440px; width: 552px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 80px; font-weight: 300; line-height: 98px;">01</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 40px; font-weight: 500; line-height: 49px;">Deploy and Clear (Neo)</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 28px; line-height: 40px;">App Store release, wipe test users, stop old Vercel, 7-day video cap.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 416px; left: 684px; padding: 40px; position: absolute; top: 440px; width: 552px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 80px; font-weight: 300; line-height: 98px;">02</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 40px; font-weight: 500; line-height: 49px;">1:1 DM Capture (JK)</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 28px; line-height: 40px;">Hand-onboard 15 pros Mon-Tue, then scale to 100 trials Wed-Fri.</div>
+      </div>
+      <div class="solid-panel" style="display: flex; flex-direction: column; gap: 24px; height: 416px; left: 1272px; padding: 40px; position: absolute; top: 440px; width: 552px;">
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 80px; font-weight: 300; line-height: 98px;">03</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 40px; font-weight: 500; line-height: 49px;">20 Traces / Night</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 28px; line-height: 40px;">Review 20 real outputs nightly. Zero invented numbers, &gt;=70% no-edit share.</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · WEEKLY SPRINT</div>
+        <div class="footer-right">02</div>
       </div>
     </div>
   </div>
@@ -498,15 +471,15 @@
       </div>
       <div class="kr-cols">
         <div class="kr-col">
-          <div class="kr-col-label" style="color:var(--color-vesicle);">한 줄로</div>
+          <div class="kr-col-label">한 줄로</div>
           <div class="kr-col-text">새 기능은 하나도 넣지 않고, 녹음부터 PDF 공유까지 30초 골든 패스만 완벽히 잠급니다.</div>
         </div>
         <div class="kr-col mid">
-          <div class="kr-col-label" style="color:var(--color-membrane);">쉽게 풀면</div>
+          <div class="kr-col-label">쉽게 풀면</div>
           <div class="kr-col-text">Neo는 앱스토어 출시와 운영 DB의 테스트 계정 정리, 구형 Vercel 중단을 끝내고 화면 잠금·오프라인에서도 녹음이 끊기지 않게(0% 유실) 만듭니다. JK는 현장 기술자 15명에게 1:1 DM을 보내 첫 실제 유저 25명을 데려옵니다.</div>
         </div>
         <div class="kr-col right">
-          <div class="kr-col-label" style="color:var(--color-go);">우리가 할 일</div>
+          <div class="kr-col-label">우리가 할 일</div>
           <div class="kr-col-text">오늘 안에 양식 업로드(Form Upload)를 무료로 풀지 유료(Pro)로 잠글지 결정하고, 매일 밤 실제 세션 20건을 함께 검수합니다.</div>
         </div>
       </div>
@@ -514,63 +487,63 @@
   </div>
 </div>
 
-<!-- SLIDE 3 / 5 + 3K -->
+<!-- SLIDE 3 / 5 (AH-0) + 3K (UH-0) -->
 <div class="slide-pair">
   <div class="artboard-wrap">
-    <div class="slide">
-      <div class="slide-header">
-        <div class="slide-header-left">
-          <div class="mono-label">B2B · CARBYN AI</div>
-          <div class="slide-title">Four buyer tracks. Four live software demos.</div>
-          <div class="slide-lead">Show their own screen before asking for a pilot.</div>
-        </div>
-        <div class="slide-counter"><span class="num">3</span><span class="den">/ 5</span></div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:28px; height:590px;">
-        <div style="display:flex; gap:24px; height:422px;">
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-vesicle); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:20px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-vesicle);">TRACK 1 · MEP &amp; SUBCON</div>
-            <div style="font-size:30px; font-weight:600; line-height:38px;">Procore / ACC voice-to-doc</div>
-            <div style="font-size:22px; line-height:34px; color:var(--color-ink-soft);">Walk the mechanical room, speak observations, auto-fill Procore &amp; Autodesk ACC logs.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Paper UI + Live Demo</div>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-membrane); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:20px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-membrane);">TRACK 2 · DATA CENTER CX</div>
-            <div style="font-size:30px; font-weight:600; line-height:38px;">480V walkdown &amp; CxAlloy</div>
-            <div style="font-size:22px; line-height:34px; color:var(--color-ink-soft);">Hands-free Lvl 3–4 switchgear commissioning checklists and spatial 3DGS punch pins.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">CxAlloy + 3DGS Twin</div>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-dendrite); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:20px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-dendrite);">TRACK 3 · ASSEMBLY MFG</div>
-            <div style="font-size:30px; font-weight:600; line-height:38px;">V-to-SOP v2 overnight + Robotics</div>
-            <div style="font-size:22px; line-height:34px; color:var(--color-ink-soft);">Turn assembly POV video into cycle-time SOPs and ego-centric robotics world model data.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">SOP v2 + World Model</div>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-go); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:20px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-go);">TRACK 4 · KOREA B2B</div>
-            <div style="font-size:30px; font-weight:600; line-height:38px;">Facility &amp; plant outreach</div>
-            <div style="font-size:22px; line-height:34px; color:var(--color-ink-soft);">Direct Korean enterprise plant and facility maintenance outreach with localized CMMS flows.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Maximo / Limble KR</div>
-          </div>
-        </div>
-
-        <div style="height:140px; background:var(--color-ground-deep); border:1px solid var(--color-go); border-radius:18px; padding:30px 36px; display:flex; align-items:center; justify-content:space-between;">
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-go);">THIS WEEK'S OUTBOUND &amp; PILOT FUNNEL</div>
-            <div style="font-size:26px; font-weight:600;">970 verified leads staged in Origami · Close 1-2 active pilots from Dunmore, JW, Leitz, Nahanni, MaintainX</div>
-          </div>
-          <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">17 mailboxes · 500/day ramp</div>
+    <div class="slide" id="slide-03">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">03 · B2B TRACKS AND DEMOS</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-
-      <div class="slide-footer">
-        <div style="letter-spacing:var(--tracking-caps);">WEEKLY SPRINT · OCT 26 – OCT 30</div>
-        <div>B2B Track · 970 Origami Sends · 5 Active Pilots</div>
+      <div class="lead-block">
+        <div class="lead-title">Four buyer tracks. Four live software demos.</div>
+        <div class="lead-sub">Show each buyer their own screen before asking for a paid pilot.</div>
+      </div>
+      <div style="display: flex; flex-direction: column; left: 96px; position: absolute; top: 412px; width: 1728px;">
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 44px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 320px;">TRACK</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 420px;">TARGET PERSONA</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 520px;">LIVE DEMO WEAPON</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 468px;">WEEKLY GOAL</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 84px;">
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 320px;">1 · MEP and Subcon</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">VP Construction · MEP Super</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 520px;">Procore / ACC Voice-to-Doc</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 468px;">970 verified Origami sends · close 1-2 active pilots</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 84px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 320px;">2 · Data Center Cx</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">Commissioning Lead · Mission Critical</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 520px;">480V Walkdown and CxAlloy</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 468px;">Lvl 3-4 switchgear walkdown + 3DGS spatial punch pins</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 84px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 320px;">3 · Assembly Mfg</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">VP Ops · Mfg Engineering · Robotics</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 520px;">V-to-SOP v2 + Robotics Data</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 468px;">Cycle-time SOPs + ego-centric world model pipeline</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 84px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 320px;">4 · Korea B2B</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">Plant Director · Facility MRO Lead</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 520px;">Maximo MAS 9 / Limble Voice-to-WO</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 468px;">Localized Korean enterprise plant and facility outreach</div>
+        </div>
+      </div>
+      <div style="align-items: start; display: flex; gap: 48px; left: 96px; padding-top: 24px; position: absolute; top: 832px; width: 1728px;">
+        <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 30px; width: 240px;">ACTIVE PILOT TARGETS</div>
+        <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 34px; width: 1440px;">970 verified leads staged across 17 Origami mailboxes (500/day ramp). Convert 1-2 active evaluations from Dunmore, JW Aluminum, Leitz, Nahanni, and MaintainX.</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · WEEKLY SPRINT</div>
+        <div class="footer-right">03</div>
       </div>
     </div>
   </div>
@@ -583,15 +556,15 @@
       </div>
       <div class="kr-cols">
         <div class="kr-col">
-          <div class="kr-col-label" style="color:var(--color-vesicle);">한 줄로</div>
+          <div class="kr-col-label">한 줄로</div>
           <div class="kr-col-text">네 개의 구매자 트랙에 맞춰, 고객이 매일 쓰는 화면(Procore·Maximo·SOP)을 먼저 보여줍니다.</div>
         </div>
         <div class="kr-col mid">
-          <div class="kr-col-label" style="color:var(--color-membrane);">쉽게 풀면</div>
+          <div class="kr-col-label">쉽게 풀면</div>
           <div class="kr-col-text">MEP 하도급, 데이터센터 시운전(Cx), 조립 제조(Video-to-SOP v2 및 로보틱스 데이터), 한국 설비·공장까지 네 트랙으로 총 970건의 검증된 리드를 발송합니다. 말로 설명하는 대신 고객 시스템과 똑같은 데모를 먼저 제시합니다.</div>
         </div>
         <div class="kr-col right">
-          <div class="kr-col-label" style="color:var(--color-go);">우리가 할 일</div>
+          <div class="kr-col-label">우리가 할 일</div>
           <div class="kr-col-text">이번 주 970건 아웃바운드를 발송하고, 현재 논의 중인 5개 기업(Dunmore, JW, Leitz, Nahanni, MaintainX) 중 1~2곳을 유료 파일럿으로 전환합니다.</div>
         </div>
       </div>
@@ -599,69 +572,45 @@
   </div>
 </div>
 
-<!-- SLIDE 4 / 5 + 4K -->
+<!-- SLIDE 4 / 5 (10C-0) + 4K (15O-0) -->
 <div class="slide-pair">
   <div class="artboard-wrap">
-    <div class="slide">
-      <div class="slide-header">
-        <div class="slide-header-left">
-          <div class="mono-label">INFRA &amp; SECURITY</div>
-          <div class="slide-title">Clean trunk. Locked prod. Sprinto green.</div>
-          <div class="slide-lead">B2B engineering stays capped at twenty percent of Neo's week.</div>
-        </div>
-        <div class="slide-counter"><span class="num">4</span><span class="den">/ 5</span></div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:28px; height:590px;">
-        <div style="display:flex; height:422px;">
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-dendrite); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-dendrite);">1 · PILOT FIX</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">ENG-846 Photo Fix</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Fix 3+ photo capture crash and native gallery saves.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">mobile/ · Carbyn AI</div>
-          </div>
-          <div style="width:44px; display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="20" viewBox="0 0 28 20"><path d="M0 10 L24 10 M16 2 L25 10 L16 18" fill="none" stroke="#8790A6" stroke-width="2"/></svg>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-membrane); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-membrane);">2 · GIT &amp; DB</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">4 Branches &amp; Wipe DB</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">4 branches, wipe test users, stop old Vercel.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">main · carbyn-prod</div>
-          </div>
-          <div style="width:44px; display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="20" viewBox="0 0 28 20"><path d="M0 10 L24 10 M16 2 L25 10 L16 18" fill="none" stroke="#8790A6" stroke-width="2"/></svg>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-receptor); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-receptor);">3 · SPRINTO</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">Clear 6 &amp; 20 Checks</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Clear 6 failed checks &amp; 20 critical SOC 2 items.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Sprinto · GCP · GitHub</div>
-          </div>
-          <div style="width:44px; display:flex; align-items:center; justify-content:center;">
-            <svg width="28" height="20" viewBox="0 0 28 20"><path d="M0 10 L24 10 M16 2 L25 10 L16 18" fill="none" stroke="#8790A6" stroke-width="2"/></svg>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-vesicle); border-radius:var(--radius-card); padding:30px 26px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-vesicle);">4 · GOVERNANCE</div>
-            <div style="font-size:32px; font-weight:600; line-height:42px;">Main PR &amp; Prod Gate</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Enforce Main PR review &amp; Prod approval rule.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">SOC 2 audit trail</div>
-          </div>
-        </div>
-
-        <div style="height:140px; background:var(--color-ground-deep); border:1px solid var(--color-line); border-radius:18px; padding:30px 36px; display:flex; flex-direction:column; justify-content:center; gap:12px;">
-          <div style="font-size:24px; color:var(--color-ink);">Hard cap: B2B pilot fixes and SOC 2 work stay under 20% of Neo's engineering week.</div>
-          <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">80% protected for SKT Carbyn Memo golden path</div>
+    <div class="slide" id="slide-04">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">04 · INFRA AND SOC 2</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-
-      <div class="slide-footer">
-        <div style="letter-spacing:var(--tracking-caps);">WEEKLY SPRINT · OCT 26 – OCT 30</div>
-        <div>Prod approvals &amp; Sprinto checks are SOC 2 evidence</div>
+      <div class="lead-block">
+        <div class="lead-title">Clean trunk. Locked prod. Sprinto green.</div>
+        <div class="lead-sub">B2B engineering and SOC 2 compliance stay strictly capped at twenty percent of Neo's week.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 430px; left: 96px; padding: 40px; position: absolute; top: 432px; width: 680px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 132px; font-weight: 300; letter-spacing: -0.04em; line-height: 140px;">&lt;=20%</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">B2B engineering cap</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 24px; line-height: 34px;">ENG-846 3+ photo fix and Sessions gallery in prod</div>
+      </div>
+      <div class="solid-panel" style="display: flex; flex-direction: column; gap: 24px; height: 430px; left: 808px; padding: 40px; position: absolute; top: 432px; width: 480px;">
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 132px; font-weight: 300; letter-spacing: -0.04em; line-height: 140px;">6 / 20</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Sprinto checks cleared</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 24px; line-height: 34px;">6 failed + 20 critical checks resolved for SOC 2</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 430px; left: 1320px; padding: 40px; position: absolute; top: 432px; width: 504px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 132px; font-weight: 300; letter-spacing: -0.04em; line-height: 140px;">4</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Git branches kept</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 24px; line-height: 34px;">466 old branches archived as tags; Prod deploy requires approval</div>
+      </div>
+      <div style="left: 96px; position: absolute; top: 900px;">
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">SOC 2 audit trail: Main PR review + manual Prod deployment approval gate enforced across carbyn_guide.</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · WEEKLY SPRINT</div>
+        <div class="footer-right">04</div>
       </div>
     </div>
   </div>
@@ -674,15 +623,15 @@
       </div>
       <div class="kr-cols">
         <div class="kr-col">
-          <div class="kr-col-label" style="color:var(--color-vesicle);">한 줄로</div>
+          <div class="kr-col-label">한 줄로</div>
           <div class="kr-col-text">B2B 개발과 보안 작업은 Neo 시간의 20% 이내로 묶고, 코드·DB·Sprinto를 깔끔히 잠급니다.</div>
         </div>
         <div class="kr-col mid">
-          <div class="kr-col-label" style="color:var(--color-membrane);">쉽게 풀면</div>
+          <div class="kr-col-label">쉽게 풀면</div>
           <div class="kr-col-text">파일럿 앱에서는 사진 3장 이상 촬영 오류(ENG-846)만 빠르게 고칩니다. 동시에 브랜치 4개 체제 정리, 운영 DB 테스트 계정 삭제, 구형 Vercel 종료를 마치고 Sprinto의 실패 6건·치명 20건 항목을 해결합니다.</div>
         </div>
         <div class="kr-col right">
-          <div class="kr-col-label" style="color:var(--color-go);">우리가 할 일</div>
+          <div class="kr-col-label">우리가 할 일</div>
           <div class="kr-col-text">main 브랜치 PR 규칙과 운영(Prod) 배포 승인 게이트를 걸어 SOC 2 감사 증적을 자동으로 남깁니다.</div>
         </div>
       </div>
@@ -690,53 +639,71 @@
   </div>
 </div>
 
-<!-- SLIDE 5 / 5 + 5K -->
+<!-- SLIDE 5 / 5 (DE-0) + 5K (UV-0) -->
 <div class="slide-pair">
   <div class="artboard-wrap">
-    <div class="slide">
-      <div class="slide-header">
-        <div class="slide-header-left">
-          <div class="mono-label">OTHERS &amp; GATES</div>
-          <div class="slide-title">Two trade shows. One YC application.</div>
-          <div class="slide-lead">Turn field stories into inbound before Minneapolis and Vegas.</div>
-        </div>
-        <div class="slide-counter"><span class="num">5</span><span class="den">/ 5</span></div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:28px; height:590px;">
-        <div style="display:flex; gap:28px; height:422px;">
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-vesicle); border-radius:var(--radius-card); padding:36px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-vesicle);">CONFERENCE 1 · MINNEAPOLIS</div>
-            <div style="font-size:34px; font-weight:600; line-height:42px;">MDM Midwest · Minneapolis: LinkedIn + Newsletter</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Publish field takeaways on LinkedIn and ship the MDM subscriber newsletter follow-up.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Medical &amp; Precision Mfg</div>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-membrane); border-radius:var(--radius-card); padding:36px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-membrane);">CONFERENCE 2 · LAS VEGAS</div>
-            <div style="font-size:34px; font-weight:600; line-height:42px;">NFMT · Las Vegas: LinkedIn + Newsletter</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Drop pre-show LinkedIn hooks and newsletter issue with Greg Christensen (CMMS Radio).</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Facilities &amp; MRO Network</div>
-          </div>
-          <div style="flex:1; background:var(--color-surface); border:1px solid var(--color-go); border-radius:var(--radius-card); padding:36px; display:flex; flex-direction:column; gap:22px;">
-            <div style="font-family:var(--font-mono); font-size:18px; letter-spacing:0.06em; color:var(--color-go);">CO-FOUNDER &amp; ADMIN GATES</div>
-            <div style="font-size:34px; font-weight:600; line-height:42px;">Co-Founder &amp; Admin: YC profile sync, Equity sign-off, Hana Bank Yeoksam</div>
-            <div style="font-size:24px; line-height:36px; color:var(--color-ink-soft);">Complete JK + Neo YC profile sync, Clerky equity sign-off, and Hana Bank Yeoksam FX filing.</div>
-            <div style="flex:1;"></div>
-            <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">Close 100% by Friday Oct 30</div>
-          </div>
-        </div>
-
-        <div style="height:140px; background:var(--color-ground-deep); border:1px solid var(--color-line); border-radius:18px; padding:30px 36px; display:flex; align-items:center; justify-content:space-between;">
-          <div style="font-size:24px; color:var(--color-ink);">Every conference post, newsletter, and co-founder administrative gate closes before Friday evening.</div>
-          <div style="font-family:var(--font-mono); font-size:18px; color:var(--color-ink-muted);">JK &amp; Neo · Oct 26–30</div>
+    <div class="slide" id="slide-05">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">05 · CONFERENCES AND GATES</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-
-      <div class="slide-footer">
-        <div style="letter-spacing:var(--tracking-caps);">WEEKLY SPRINT · OCT 26 – OCT 30</div>
-        <div>Conferences · YC · Legal · Banking</div>
+      <div class="lead-block">
+        <div class="lead-title">Two trade shows. Four co-founder gates.</div>
+        <div class="lead-sub">Turn Minneapolis and Vegas into inbound, and close all YC, equity, pricing, and FX items by Friday.</div>
+      </div>
+      <div style="display: flex; flex-direction: column; left: 96px; position: absolute; top: 412px; width: 1728px;">
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 44px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 200px;">STATUS</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 420px;">ITEM</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 820px;">ACTION THIS WEEK</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 288px;">OWNER</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 68px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 200px;">CONF 01</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 26px; font-weight: 500; line-height: 32px; width: 420px;">MDM Midwest (Minneapolis)</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 820px;">Publish field takeaways on LinkedIn + subscriber newsletter follow-up</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 20px; line-height: 24px; width: 288px;">JK · Oct 26–30</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 68px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 200px;">CONF 02</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 26px; font-weight: 500; line-height: 32px; width: 420px;">NFMT (Las Vegas)</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 820px;">Drop pre-show LinkedIn hooks + newsletter issue with CMMS Radio</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 20px; line-height: 24px; width: 288px;">JK · Oct 26–30</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 68px;">
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 200px;">G1 · GATE</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 26px; font-weight: 500; line-height: 32px; width: 420px;">YC Application</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 820px;">Complete co-founder profile sync and final application submission</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 20px; line-height: 24px; width: 288px;">JK + Neo · Oct 30</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 68px;">
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 200px;">G2 · GATE</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 26px; font-weight: 500; line-height: 32px; width: 420px;">Co-Founder Equity Plan</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 820px;">Finalize Clerky equity paperwork sign-off (20M fully-diluted cap table)</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 20px; line-height: 24px; width: 288px;">JK + Neo · Oct 30</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 68px;">
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 200px;">G3 · DECIDE</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 26px; font-weight: 500; line-height: 32px; width: 420px;">Form Upload Gate (Free vs Pro)</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 820px;">Lock whether custom template upload is free magnet or Pro-gated</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 20px; line-height: 24px; width: 288px;">JK + Neo · Oct 26</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 68px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 200px;">ADMIN</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 26px; font-weight: 500; line-height: 32px; width: 420px;">Hana Bank Yeoksam FX Report</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 820px;">Complete foreign exchange filing with Hana Bank Yeoksam branch</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 20px; line-height: 24px; width: 288px;">JK + Neo · Oct 30</div>
+        </div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · WEEKLY SPRINT</div>
+        <div class="footer-right">05</div>
       </div>
     </div>
   </div>
@@ -749,15 +716,15 @@
       </div>
       <div class="kr-cols">
         <div class="kr-col">
-          <div class="kr-col-label" style="color:var(--color-vesicle);">한 줄로</div>
+          <div class="kr-col-label">한 줄로</div>
           <div class="kr-col-text">두 개의 대형 현장 박람회를 인바운드 엔진으로 만들고, YC 지원서와 지분·외환 행정을 끝냅니다.</div>
         </div>
         <div class="kr-col mid">
-          <div class="kr-col-label" style="color:var(--color-membrane);">쉽게 풀면</div>
+          <div class="kr-col-label">쉽게 풀면</div>
           <div class="kr-col-text">미니애폴리스 MDM과 라스베이거스 NFMT 박람회 참가를 링크드인과 뉴스레터 콘텐츠로 연결해 현장 리더들의 관심을 모읍니다. 동시에 JK와 Neo의 YC 프로필 동기화, 지분 서류 서명, 하나은행 역삼지점 외환 신고를 마무리합니다.</div>
         </div>
         <div class="kr-col right">
-          <div class="kr-col-label" style="color:var(--color-go);">우리가 할 일</div>
+          <div class="kr-col-label">우리가 할 일</div>
           <div class="kr-col-text">이번 주 금요일(10/30)까지 박람회 포스팅·뉴스레터 발행을 완료하고, YC·법무·은행 행정 잔여 과제를 0건으로 정리합니다.</div>
         </div>
       </div>
@@ -765,46 +732,49 @@
   </div>
 </div>
 
-<!-- SOURCES -->
+<!-- SLIDE 06 · SOURCES (WF-0) -->
 <div class="slide-pair">
   <div class="artboard-wrap">
-    <div class="slide">
-      <div class="slide-header">
-        <div class="slide-header-left">
-          <div class="mono-label">SOURCES</div>
-          <div class="slide-title">Where every sprint number comes from.</div>
-          <div class="slide-lead">Every target, lead count, and engineering ticket is linked below.</div>
+    <div class="slide" id="slide-06">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">06 · SOURCES</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-
-      <div style="display:flex; gap:48px; height:590px;">
-        <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
-          <div style="padding-bottom:10px; border-bottom:1px solid var(--color-line); font-family:var(--font-mono); font-size:16px; letter-spacing:var(--tracking-caps); color:var(--color-vesicle);">MASTER LOG &amp; PAPER · SOURCE OF TRUTH</div>
-          <pre style="font-family:var(--font-mono); font-size:17px; line-height:30px; color:var(--color-ink-soft); white-space:pre-wrap;">_LOG Sheet (1RbOnI606RRrR2kKmxdhuuLBJBRVhJt4DbytkN7wkx6I)
-Paper 01M5SJ30NSW89AF137CDSCFAKQ (Neo Product &amp; Dev Master Guide)
-Paper 01M5VCG9CYQGKXBRBVZW844DXQ (Oct 26 Weekly Sprint · JK &amp; Neo)
-
-Engineering &amp; Security
-  Linear ENG-846     3+ photo capture &amp; native gallery save
-  Sprinto SOC 2      6 failed checks · 20 critical items
-  GitHub carbyn_guide 4 branches · main PR &amp; prod approval gate</pre>
-        </div>
-        <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
-          <div style="padding-bottom:10px; border-bottom:1px solid var(--color-line); font-family:var(--font-mono); font-size:16px; letter-spacing:var(--tracking-caps); color:var(--color-membrane);">4 C-SUITE DELIVERABLES · OCT 26 SPRINT</div>
-          <pre style="font-family:var(--font-mono); font-size:17px; line-height:30px; color:var(--color-ink-soft); white-space:pre-wrap;">1. CPO · Product &amp; Demo Suite (SOP v2, ACC/Maximo, 3DGS, Robotics)
-   https://jungkeun-hong.github.io/carbyn-artifact-demo/oct26-weekly-sprint.html
+      <div class="lead-block">
+        <div class="lead-title">Where every sprint number comes from.</div>
+        <div class="lead-sub">Every target, lead count, and engineering ticket is linked to its primary source of truth.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; height: 430px; left: 96px; padding: 36px 40px; position: absolute; top: 432px; width: 848px;">
+        <div style="color: var(--color-primary); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">MASTER LOG &amp; ENGINEERING</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 28px; font-weight: 500; line-height: 36px;">Paper · Linear · Sprinto · GitHub</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-mono); font-size: 18px; line-height: 32px; white-space: pre-wrap;">_LOG Sheet: 1RbOnI606RRrR2kKmxdhuuLBJBRVhJt4DbytkN7wkx6I
+Design System: Paper 01M4DBM7G6CHWH4ZGFCDCDJZPV (p-8-3 / p-G-0)
+Sprint File: Paper 01M5VCG9CYQGKXBRBVZW844DXQ (p-2-0)
+Linear ENG-846: 3+ photo capture fix &amp; native gallery save
+Sprinto SOC 2: 6 failed checks · 20 critical items
+GitHub carbyn_guide: 4 branches kept · 466 archived as tags</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 20px; height: 430px; left: 976px; padding: 36px 40px; position: absolute; top: 432px; width: 848px;">
+        <div style="color: var(--color-primary); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">4 C-SUITE DELIVERABLES · OCT 26 SPRINT</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 28px; font-weight: 500; line-height: 36px;">Product · Outbound · Operations · PLG</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-mono); font-size: 18px; line-height: 32px; white-space: pre-wrap;">1. CPO · Product &amp; Demo Suite (SOP v2, ACC/Maximo, 3DGS)
+   jungkeun-hong.github.io/carbyn-artifact-demo/oct26-weekly-sprint.html
 2. CRO · B2B 970 Outbound Engine &amp; Origami Staged Leads
    Sheet 14tN_LM7flhef8MCMtOjOnD68BgF_ObaLsvRsZ7a-JG8
 3. COO · Master Sprint Log, SOC 2 &amp; Co-Founder Gates
    Sheet 1RbOnI606RRrR2kKmxdhuuLBJBRVhJt4DbytkN7wkx6I
 4. GTM · SKT Carbyn Memo PLG &amp; 73-Segment Form Library
-   Sheet 1HtjI55Ln4-byQvMHOV0bIfbmaY2l8t47GS8gUChe-LY</pre>
-        </div>
+   Sheet 1HtjI55Ln4-byQvMHOV0bIfbmaY2l8t47GS8gUChe-LY</div>
       </div>
-
-      <div class="slide-footer">
-        <div style="letter-spacing:var(--tracking-caps);">WEEKLY SPRINT · OCT 26 – OCT 30</div>
-        <div>_LOG Sheet · Paper · 4 C-Suite Deliverables</div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · WEEKLY SPRINT</div>
+        <div class="footer-right">06</div>
       </div>
     </div>
   </div>
