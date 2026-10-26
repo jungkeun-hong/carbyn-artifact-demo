@@ -1,491 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CARBYN CPO · Robotics World Model Pipeline Simulator</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Carbyn Robotics World Model · p-8-3 Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Quantico:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  @page { size: 1920px 1080px; margin: 0; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    background: #060608; color: #F5F5F3;
-    font-family: 'Helvetica Now Display', 'Inter', -apple-system, sans-serif;
+  :root {
+    --color-bg: #0B0B0C;
+    --color-surface: #17171A;
+    --color-text: #F4F4F2;
+    --color-muted: #8C8C8A;
+    --color-line: rgb(255 255 255 / 12%);
+    --color-glass: rgb(255 255 255 / 7%);
+    --color-glass-border: rgb(255 255 255 / 16%);
+    --color-paper: #EEEEEE;
+    --color-ink: #0B0B0C;
+    --color-primary: #FFD100;
+    --color-amber: #FF7A1A;
+    --color-red: #E5322D;
+    --color-deck-body: #D3D3D1;
+    --color-deck-white: #FFFFFF;
+    --color-deck-black: #000000;
+    --color-deck-logo-core: #FFCD11;
+    --color-deck-scrim: rgb(11 11 12 / 82%);
+    --color-deck-panel-top: oklab(28.7% 0.002 -0.007 / 82%);
+    --color-deck-panel-bottom: oklab(20.1% 0.001 -0.004 / 90%);
+    --font-deck: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, 'Pretendard', -apple-system, sans-serif;
+    --font-deck-wordmark: 'Quantico', sans-serif;
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --text-deck-display: 96px;
+    --text-deck-title: 64px;
+    --text-deck-card: 34px;
+    --text-deck-body: 28px;
+    --text-deck-label: 18px;
+    --text-lead: 30px;
+    --radius-deck-panel: 24px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #050506;
+    color: var(--color-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 36px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
   }
-  body.web-mode { overflow-x: hidden; scroll-snap-type: y mandatory; }
-  .slide-viewport {
-    width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
-    scroll-snap-align: start; position: relative; overflow: hidden; background: #060608;
+
+  .topbar {
+    width: min(1920px, 96vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-deck-body);
   }
+  .topbar a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .topbar a:hover {
+    text-decoration: underline;
+  }
+
+  .slide-pair {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .artboard-wrap {
+    width: min(1920px, 96vw);
+    position: relative;
+  }
+
   .slide {
-    width: 1920px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
-    transform-origin: center center;
-    background: #0B0B0D url('assets/bg_cover.png') center/1920px 1080px no-repeat;
-    color: #F5F5F3; box-shadow: 0 24px 80px rgba(0,0,0,0.75);
+    width: 1920px;
+    height: 1080px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    position: relative;
+    overflow: clip;
+    transform-origin: top left;
   }
-  .slide-bg-overlay {
-    position: absolute; inset: 0;
-    background: rgba(8, 9, 12, 0.58); z-index: 1;
+
+  .wave-slide {
+    background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNC4T445FRBWERWWCJE.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 1080px;
+    left: 0px;
+    opacity: 0.58;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
   }
-  .pad {
-    position: absolute; left: 96px; top: 60px; width: 1728px; bottom: 96px;
-    display: flex; flex-direction: column; z-index: 5;
+
+  .scrim {
+    background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%);
+    height: 1080px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
   }
+
   .header-row {
-    display: flex; justify-content: space-between; align-items: center;
-    width: 100%; height: 36px; margin-bottom: 12px; flex-shrink: 0;
+    left: 96px;
+    top: 80px;
+    width: 1728px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  .label {
-    font-size: 17px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: #B4B4AE;
+
+  .section-label {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
   }
-  .brand-logo { height: 30px; width: auto; display: block; }
-  h1 {
-    font-size: 64px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
-    color: #F5F5F3; margin-bottom: 22px; flex-shrink: 0;
+
+  .wordmark {
+    align-items: baseline;
+    display: flex;
+    flex-shrink: 0;
   }
-  h1 .hl { color: #FFCD11; }
-  .card {
-    background: rgba(18, 20, 26, 0.78);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 22px; padding: 26px 30px;
-    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
-    display: flex; flex-direction: column; overflow: hidden;
+  .wordmark-text {
+    color: var(--color-deck-white);
+    font-family: var(--font-deck-wordmark);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 42px;
   }
-  .card.gold {
-    background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.86) 100%);
-    border: 1.5px solid rgba(255, 205, 17, 0.55);
+
+  .lead-block {
+    left: 96px;
+    top: 204px;
+    width: 1600px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
-  .card.green {
-    background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
-    border: 1.5px solid rgba(16, 185, 129, 0.50);
+  .lead-title {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 64px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 78px;
   }
-  .card.blue {
-    background: linear-gradient(155deg, rgba(59, 130, 246, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
-    border: 1.5px solid rgba(59, 130, 246, 0.48);
+  .lead-sub {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
   }
-  .kicker {
-    font-size: 14px; font-weight: 800; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #9CA3AF; margin-bottom: 10px; flex-shrink: 0;
+
+  .glass-panel {
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    background-image: linear-gradient(in oklab 160deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--color-glass-border) 0px 1px 0px inset;
+    border-radius: var(--radius-deck-panel);
   }
-  .card.gold .kicker { color: #FFCD11; }
-  .card.green .kicker { color: #34D399; }
-  .card.blue .kicker { color: #60A5FA; }
-  .huge {
-    font-size: 76px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
-    color: #FFF; margin-bottom: 10px;
+
+  .task-pill {
+    appearance: none;
+    background: var(--color-glass);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    color: var(--color-deck-body);
+    cursor: pointer;
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    padding: 8px 18px;
+    transition: all 0.15s ease;
   }
-  .huge.hl { color: #FFCD11; }
-  .huge.green { color: #34D399; }
-  .shot-wrap {
-    width: 100%; height: 215px; border-radius: 14px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.18); margin-bottom: 14px; flex-shrink: 0;
-    background: #000; position: relative;
+  .task-pill.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-ink);
   }
-  .shot-wrap img {
-    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+
+  .footer-row {
+    left: 96px;
+    bottom: 64px;
+    width: 1728px;
+    position: absolute;
+    border-top: 1px solid var(--color-line);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .shot-badge {
-    position: absolute; bottom: 8px; right: 8px;
-    background: rgba(11,11,12,0.88); border: 1px solid rgba(255,205,17,0.6);
-    color: #FFCD11; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+  .footer-left {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    line-height: 22px;
   }
-  .word-pill {
-    display: inline-block; padding: 6px 12px; border-radius: 8px;
-    font-size: 14px; font-weight: 700; background: rgba(255,205,17,0.15);
-    border: 1px solid rgba(255,205,17,0.45); color: #FFCD11; margin: 3px 4px 3px 0;
+  .footer-right {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
   }
-  .pain-pill {
-    display: inline-block; padding: 6px 12px; border-radius: 8px;
-    font-size: 13px; font-weight: 600; background: rgba(239,68,68,0.15);
-    border: 1px solid rgba(239,68,68,0.4); color: #FCA5A5; margin: 3px 4px 3px 0;
+
+  .kr-board {
+    width: 1920px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 24px;
+    padding: 56px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    transform-origin: top left;
   }
-  .win-pill {
-    display: inline-block; padding: 6px 12px; border-radius: 8px;
-    font-size: 13.5px; font-weight: 700; background: rgba(16,185,129,0.16);
-    border: 1px solid rgba(16,185,129,0.45); color: #34D399; margin: 3px 4px 3px 0;
+  .kr-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
   }
-  .ftr-rule {
-    position: absolute; left: 96px; top: 996px; width: 1728px; height: 1px;
-    background: rgba(255, 255, 255, 0.18); z-index: 5;
+  .kr-tag {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
+    color: var(--color-primary);
   }
-  .ftr {
-    position: absolute; left: 96px; top: 1012px; width: 1728px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 15px; color: #8E8E89; z-index: 5; letter-spacing: 0.06em;
+  .kr-title {
+    font-family: var(--font-sans);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+    color: var(--color-text);
   }
-  .ftr a { color: #FFCD11; text-decoration: none; font-weight: 700; }
-  .deck-hud {
-    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
-    background: rgba(18, 18, 20, 0.92); border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px); padding: 8px 18px; border-radius: 999px;
-    display: flex; align-items: center; gap: 12px; z-index: 999; font-size: 13px; color: #E5E5E0;
+  .kr-cols {
+    display: flex;
+    gap: 48px;
+    width: 100%;
   }
-  .deck-hud button, .deck-hud a {
-    background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.15);
-    color: #fff; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 12px; font-weight: 600; text-decoration: none;
+  .kr-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 2px solid var(--color-primary);
   }
-  .deck-hud button:hover, .deck-hud a:hover { background: #FFCD11; color: #000; border-color: #FFCD11; }
+  .kr-col.mid {
+    flex: 1.4;
+    border-top: 1px solid var(--color-line);
+  }
+  .kr-col.right {
+    border-top: 1px solid var(--color-line);
+  }
+  .kr-col-label {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--color-text);
+  }
+  .kr-col:first-child .kr-col-label {
+    color: var(--color-primary);
+  }
+  .kr-col-text {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    line-height: 36px;
+    color: var(--color-deck-body);
+    word-break: keep-all;
+  }
+  .kr-col:first-child .kr-col-text {
+    font-size: 24px;
+    line-height: 38px;
+    color: var(--color-text);
+  }
 </style>
 </head>
-<body class="web-mode">
+<body>
 
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">01 · CPO ROBOTICS WORLD MODEL DATA PIPELINE SIMULATOR</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>1st-Person Worker POV → <span class="hl">Robotics World Model Data.</span></h1>
-    
-<div style="display:grid;grid-template-columns:340px 1fr 420px;gap:22px;flex:1;min-height:0;">
-  <!-- Col 1: Egocentric Stream & Task Selector -->
-  <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:12px;">
-    <div class="kicker">01 · SELECT INDUSTRIAL MANIPULATION TASK</div>
-    <button id="rbtn-0" onclick="setRobTask(0)" style="text-align:left;padding:12px 14px;border-radius:12px;border:1.5px solid #FFCD11;background:rgba(255,205,17,0.16);color:#FFF;cursor:pointer;">
-      <div style="font-size:11px;font-weight:800;color:#FFCD11;">TASK 01 · ASSEMBLY LINE</div>
-      <div style="font-size:15.5px;font-weight:800;margin-top:2px;">Bench Assembly · Driver Fastening</div>
-    </button>
-    <button id="rbtn-1" onclick="setRobTask(1)" style="text-align:left;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#FFF;cursor:pointer;">
-      <div style="font-size:11px;font-weight:800;color:#34D399;">TASK 02 · MEP SWITCHGEAR</div>
-      <div style="font-size:15.5px;font-weight:800;margin-top:2px;">480V Breaker Rack-In &amp; LOTO Latch</div>
-    </button>
-    <button id="rbtn-2" onclick="setRobTask(2)" style="text-align:left;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#FFF;cursor:pointer;">
-      <div style="font-size:11px;font-weight:800;color:#60A5FA;">TASK 03 · ASSEMBLY SEALING</div>
-      <div style="font-size:15.5px;font-weight:800;margin-top:2px;">Gasket Bead Seal &amp; Cover Seat</div>
-    </button>
+<div class="topbar">
+  <div>CARBYN AI · ROBOTICS WORLD MODEL DATA ENGINE</div>
+  <div><a href="b2b-product-blueprint.html">← B2B Product Blueprint</a> · <a href="3dgs-digital-twin.html">3DGS Spatial Twin ↗</a></div>
+</div>
 
-    <div class="kicker" style="margin-top:6px;">02 · RAW 1ST-PERSON GLASSES VIDEO</div>
-    <video id="rob-vid" crossorigin="anonymous" autoplay muted loop playsinline style="width:100%;height:195px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,205,17,0.45);background:#000;"></video>
-    <div style="font-size:12.5px;color:#D4D4CE;line-height:1.35;">
-      <strong>DaedalusIQ &amp; Figure/BMW Thesis:</strong> Harvest 10,000+ hours of real shop-floor manipulation via frontline SOP capture at 1/50th the cost of teleoperation rigs.
+<!-- SLIDE 01 · EGOCENTRIC HAND AND TOOL TRACKING + 1K -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-01">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">01 · EGOCENTRIC HAND AND TOOL TRACKING</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
+        </div>
+      </div>
+      <div class="lead-block">
+        <div class="lead-title">Real hands. Real tools. Labeled trajectories.</div>
+        <div class="lead-sub">Live 21-joint MediaPipe hand tracking on first-person assembly and panel work.</div>
+      </div>
+
+      <!-- Left Panel (x96 y416 W1072 H470) -->
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; height: 470px; left: 96px; padding: 32px 40px; position: absolute; top: 416px; width: 1072px;">
+        <div style="position: relative; width: 992px; height: 350px; border-radius: 16px; overflow: hidden; border: 1px solid var(--color-line); background: #07080B;">
+          <video id="rob-vid" crossorigin="anonymous" autoplay muted loop playsinline style="display: none;"></video>
+          <canvas id="rob-canvas" width="992" height="350" style="width: 992px; height: 350px; display: block;"></canvas>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 992px;">
+          <div style="display: flex; gap: 12px;">
+            <button class="task-pill active" id="rbtn-0" onclick="setRobTask(0)">Gasket Sealing</button>
+            <button class="task-pill" id="rbtn-1" onclick="setRobTask(1)">Continuity Test</button>
+            <button class="task-pill" id="rbtn-2" onclick="setRobTask(2)">480V Panel Work</button>
+            <button class="task-pill" id="rbtn-3" onclick="setRobTask(3)">Full Assembly</button>
+          </div>
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">CARBYN · 21-JOINT TRACKER</div>
+        </div>
+      </div>
+
+      <!-- Right Panel (x1200 y416 W624 H470) — ONLY 3 clean p-8-3 pairs -->
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 22px; height: 470px; justify-content: center; left: 1200px; padding: 40px; position: absolute; top: 416px; width: 624px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">TASK &amp; TOOL</div>
+          <div id="rob-task-val" style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Gasket bead press &amp; seat</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">LIVE HAND POSE</div>
+          <div id="rob-pose-val" style="color: var(--color-primary); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">21-joint wrist + pinch active</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">EPISODE EXPORT</div>
+          <div id="rob-export-val" style="color: var(--color-text); font-family: var(--font-deck); font-size: 28px; font-weight: 500; line-height: 34px;">RLDS / Open-X (s_t, a_t) verified</div>
+        </div>
+      </div>
+
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · ROBOTICS WORLD MODEL</div>
+        <div class="footer-right">01</div>
+      </div>
     </div>
   </div>
 
-  <!-- Col 2: Synchronized 6-DoF Hand-Object Pose & Contact Affordance Canvas -->
-  <div class="card gold" style="padding:18px;display:flex;flex-direction:column;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <div class="kicker" style="margin:0;">REAL-TIME 6-DOF HAND SKELETON + TOOL AFFORDANCE + V-JEPA 2 LATENT ROLLOUT</div>
-      <span class="word-pill" style="font-size:11px;padding:4px 10px;">(s_t, a_t, z_{t+1}) TRAJECTORY</span>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">1K · 한국어 설명</div>
+        <div class="kr-title">실시간 21개 손 관절 추적과 공구 파지 궤적 추출</div>
+      </div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">작업자의 1인칭 시점 영상에서 실제 손 관절(21-joint)과 공구 조작 궤적을 실시간으로 추출합니다.</div>
+        </div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">가스켓 실링, 멀티미터 도통 테스트, 480V 패널 작업, 벤치 조립 등 네 가지 실제 현장 영상 위에서 MediaPipe HandLandmarker가 양손의 손목 6-DoF 방향과 엄지·검지 파지 간격(Pinch)을 실시간으로 계산합니다.</div>
+        </div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">인위적인 모션 캡처 장갑 없이도 일반 작업 영상만으로 로봇 학습용 행동 궤적을 얻습니다.</div>
+        </div>
+      </div>
     </div>
-    <canvas id="rob-canvas" width="800" height="585" style="width:100%;height:585px;border-radius:14px;background:#07080B;border:1px solid rgba(255,255,255,0.16);"></canvas>
+  </div>
+</div>
+
+<!-- SLIDE 02 · FROM SOP VIDEO TO ROBOT POLICY + 2K -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-02">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">02 · FROM SOP VIDEO TO ROBOT POLICY</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
+        </div>
+      </div>
+      <div class="lead-block">
+        <div class="lead-title">Today's SOP video trains tomorrow's robot.</div>
+        <div class="lead-sub">First-person hand and tool trajectories captured during real work.</div>
+      </div>
+
+      <!-- 4-Row Hairline Table (p-G-0 layout) -->
+      <div style="display: flex; flex-direction: column; left: 96px; position: absolute; top: 412px; width: 1728px;">
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 48px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 380px;">STAGE</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 500px;">CAPTURED SIGNAL</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 420px;">FORMAT</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 428px;">BUYER VALUE</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">1 · Egocentric POV</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">Hands, tools, and parts in motion</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">1080p 60fps POV</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 428px;">Zero lab staging cost</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">2 · 6-DoF Pose</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">21-joint hand pose + tool contact</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">Metric trajectories</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 428px;">Real tactile edge cases</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">3 · Verified Outcome</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">Pass/fail check + torque spec</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">Reward-labeled episodes</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 428px;">Filters out bad demos</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">4 · World Model Export</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">State-action pairs (s_t, a_t)</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">RLDS / Open-X / V-JEPA 2</div>
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; font-weight: 500; line-height: 30px; width: 428px;">Data licensing for robotics labs</div>
+        </div>
+      </div>
+
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · ROBOTICS WORLD MODEL</div>
+        <div class="footer-right">02</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Col 3: VLA / World Model Policy JSON & Telemetry -->
-  <div class="card" style="padding:22px;display:flex;flex-direction:column;" id="rob-telemetry"></div>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">2K · 한국어 설명</div>
+        <div class="kr-title">현장 SOP 영상에서 로봇 정책(Policy)까지의 4단계 파이프라인</div>
+      </div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">오늘의 B2B SOP 고객이 내는 구독료가 내일의 로봇 파운데이션 모델 데이터셋을 구축합니다.</div>
+        </div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">1단계 1인칭 작업 영상 수집부터 2단계 6-DoF 손·공구 포즈 복원, 3단계 CMMS 합격/불합격 보상 라벨링, 4단계 RLDS·Open-X·V-JEPA 2 포맷 추출까지 전 과정이 자동화됩니다.</div>
+        </div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">제조 고객사는 자체 공정 자동화 자산을 쌓고, 로보틱스 연구소는 검증된 산업 현장 에피소드를 확보합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-  const ROB_TASKS = [
-    {
-      name: "Bench Assembly · Driver Fastening",
-      img: "assets/product-ui/pov_frame_03.jpg",
-      vla: `{
-  "episode_id": "carbyn_ego_88412",
-  "task": "m8_flange_bolt_star_torque",
-  "state_s_t": {
-    "object_pose_6dof": [0.42, -0.11, 0.68, 0.0, 1.57, 0.12],
-    "tool_id": "digital_torque_wrench_1_2in",
-    "contact_affordance": "bolt_head_hex_13mm"
-  },
-  "action_a_t": {
-    "right_hand_wrist_delta": [0.02, 0.08, -0.01],
-    "rotational_torque_nm": 45.0,
-    "grasp_force_n": 38.4
-  },
-  "world_model_z_next": {
-    "v_jepa2_surprise": 0.031,
-    "state_transition": "FASTENER_SEATED_OK"
-  }
-}`,
-      roi: "Trains humanoid/cobot policies on bimanual tool alignment + tactile torque termination cues."
-    },
-    {
-      name: "480V Breaker Rack-In & LOTO Latch",
-      img: "assets/product-ui/pov_frame_02.jpg",
-      vla: `{
-  "episode_id": "carbyn_ego_90145",
-  "task": "switchgear_loto_hasp_insertion",
-  "state_s_t": {
-    "object_pose_6dof": [0.51, 0.04, 0.55, 0.02, 0.0, -1.54],
-    "tool_id": "dielectric_padlock_red",
-    "contact_affordance": "breaker_disconnect_lever"
-  },
-  "action_a_t": {
-    "left_hand_stabilize": [-0.12, 0.02, 0.48],
-    "right_hand_insert_vec": [0.0, -0.04, 0.09],
-    "pull_test_verified": true
-  },
-  "world_model_z_next": {
-    "v_jepa2_surprise": 0.018,
-    "state_transition": "ZERO_ENERGY_LOCKED"
-  }
-}`,
-      roi: "Captures high-consequence safety verification preconditions that pure simulation (Isaac Gym) cannot synthesize."
-    },
-    {
-      name: "Gasket Bead Seal & Cover Seat",
-      img: "assets/product-ui/pov_frame_04.jpg",
-      vla: `{
-  "episode_id": "carbyn_ego_92310",
-  "task": "cover_gasket_press_seat",
-  "state_s_t": {
-    "object_pose_6dof": [0.38, -0.19, 0.72, 0.11, 0.78, 0.0],
-    "tool_id": "none_bare_glove",
-    "contact_affordance": "gasket_groove_perimeter"
-  },
-  "action_a_t": {
-    "right_hand_press_path": "groove_trace_cw",
-    "normal_force_n": 22.0,
-    "spoken_cot_rationale": "Seat gasket fully in groove before closing cover"
-  },
-  "world_model_z_next": {
-    "v_jepa2_surprise": 0.024,
-    "state_transition": "GASKET_SEATED"
-  }
-}`,
-      roi: "Pairs spoken technician Chain-of-Thought ('why I'm pressing here') with 6-DoF hand kinematics."
-    }
+  const TASKS = [
+    { clip: 'pov_gasket_sealing', label: 'Gasket bead press & seat', fallbackImg: 'assets/product-ui/pov_frame_04.jpg' },
+    { clip: 'pov_continuity_test', label: 'Multimeter probe continuity', fallbackImg: 'assets/product-ui/pov_frame_01.jpg' },
+    { clip: 'pov_mep_panel', label: '480V breaker lug inspection', fallbackImg: 'assets/product-ui/pov_frame_02.jpg' },
+    { clip: 'pov_assembly_bench', label: 'M8 flange driver fastening', fallbackImg: 'assets/product-ui/pov_frame_03.jpg' }
   ];
 
-  let curRT = 0, robTick = 0;
+  let curRT = 0;
+  const rVid = document.getElementById('rob-vid');
   const rCvs = document.getElementById('rob-canvas');
   const rCtx = rCvs.getContext('2d');
-  const bgImgs = ROB_TASKS.map(t => { const im = new Image(); im.src = t.img; return im; });
+  const fallbackImgs = TASKS.map(t => { const im = new Image(); im.src = t.fallbackImg; return im; });
+  let landmarker = null, lastRes = null, lastTs = -1, traj = [], stepN = 0;
 
   function setRobTask(idx) {
-    curRT = idx; loadVid(idx);
-    [0,1,2].forEach(i => {
+    curRT = idx;
+    [0, 1, 2, 3].forEach(i => {
       const b = document.getElementById('rbtn-' + i);
-      b.style.border = i === idx ? '1.5px solid #FFCD11' : '1px solid rgba(255,255,255,0.15)';
-      b.style.background = i === idx ? 'rgba(255,205,17,0.16)' : 'rgba(255,255,255,0.05)';
+      if (b) b.className = i === idx ? 'task-pill active' : 'task-pill';
     });
-    renderRobPanel();
+    document.getElementById('rob-task-val').textContent = TASKS[idx].label;
+    const c = TASKS[idx].clip;
+    rVid.innerHTML = `<source src="assets/product-ui/${c}.webm" type="video/webm"><source src="assets/product-ui/${c}.mp4" type="video/mp4">`;
+    rVid.load();
+    rVid.play().catch(() => {});
+    traj.length = 0;
   }
 
-  function renderRobPanel() {
-    const t = ROB_TASKS[curRT];
-    document.getElementById('rob-telemetry').innerHTML = `
-      <div class="kicker" style="color:#FFCD11;">EXPORTED VLA / WORLD-MODEL TENSOR PACKET</div>
-      <div style="font-size:21px;font-weight:800;color:#FFF;margin-bottom:8px;">${t.name}</div>
-      <div class="kicker" style="margin:0 0 4px;">LIVE (s_t, a_t, z_{t+1}) STREAM FROM TRACKER</div><pre id="rob-stream" style="white-space:pre-wrap;font-family:monospace;font-size:12px;background:rgba(0,0,0,0.6);padding:12px;border-radius:12px;border:1px solid rgba(52,211,153,0.45);color:#34D399;line-height:1.35;margin-bottom:10px;max-height:230px;overflow:hidden;">waiting for hands…</pre>
-      <div class="kicker">WHY ROBOTICS LABS &amp; OEMS BUY THIS DATA</div>
-      <div style="font-size:14px;color:#E5E5E0;line-height:1.45;margin-bottom:12px;">${t.roi}</div>
-      <div style="margin-top:auto;background:rgba(255,205,17,0.14);border:1px solid rgba(255,205,17,0.45);padding:12px 14px;border-radius:12px;font-size:13.5px;color:#FFCD11;font-weight:700;">
-        Aligned with VIS 2026 (Meta V-JEPA 2) &amp; CoRL 2026 World Models Workshop
-      </div>
-    `;
-  }
-
-
-  // ---- REAL hand tracking: MediaPipe HandLandmarker (21 keypoints, MANO-compatible topology) on the live POV <video> ----
-  const VIDS = ['assembly_bench', 'mep_panel', 'gasket_sealing'];
-  const rVid = document.getElementById('rob-vid');
-  function loadVid(i) { rVid.innerHTML = `<source src="assets/product-ui/pov_${VIDS[i]}.webm" type="video/webm"><source src="assets/product-ui/pov_${VIDS[i]}.mp4" type="video/mp4">`; rVid.load(); rVid.play().catch(()=>{}); traj.length = 0; }
-  let landmarker = null, lmStatus = 'loading MediaPipe HandLandmarker…', lastRes = null, lastTs = -1, traj = [], stepN = 0;
   (async () => {
     try {
       const vision = await import('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs');
       const fs = await vision.FilesetResolver.forVisionTasks('https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm');
-      const opts = (d) => ({ baseOptions: { modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task', delegate: d }, runningMode: 'VIDEO', numHands: 2, minHandDetectionConfidence: 0.35, minTrackingConfidence: 0.35 });
-      try { landmarker = await vision.HandLandmarker.createFromOptions(fs, opts('GPU')); } catch (e) { landmarker = await vision.HandLandmarker.createFromOptions(fs, opts('CPU')); }
-      lmStatus = 'HandLandmarker live';
-    } catch (e) { lmStatus = 'tracker failed to load: ' + e.message; }
+      const opts = (d) => ({
+        baseOptions: {
+          modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task',
+          delegate: d
+        },
+        runningMode: 'VIDEO',
+        numHands: 2,
+        minHandDetectionConfidence: 0.35,
+        minTrackingConfidence: 0.35
+      });
+      try { landmarker = await vision.HandLandmarker.createFromOptions(fs, opts('GPU')); }
+      catch (e) { landmarker = await vision.HandLandmarker.createFromOptions(fs, opts('CPU')); }
+    } catch (e) {}
   })();
+
   const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
-  function coverRect(vw, vh, cw, ch) { const k = Math.max(cw / vw, ch / vh); const w = vw * k, h = vh * k; return { x: (cw - w) / 2, y: (ch - h) / 2, w, h }; }
-  // loop-stall watchdog: Chromium can stick at readyState 1 after a loop seek while frames are pulled for detection
-  let wdT = -1, wdAt = performance.now();
-  const fCvs = document.createElement('canvas'), fCtx = fCvs.getContext('2d', { willReadFrequently: true });
-  setInterval(() => {
-    if (rVid.paused || rVid.seeking) { wdAt = performance.now(); return; }
-    if (rVid.currentTime !== wdT) { wdT = rVid.currentTime; wdAt = performance.now(); return; }
-    if (performance.now() - wdAt > 1500) { wdAt = performance.now(); wdT = -1; rVid.load(); rVid.play().catch(()=>{}); }
-  }, 500);
+  function coverRect(vw, vh, cw, ch) {
+    const k = Math.max(cw / vw, ch / vh);
+    const w = vw * k, h = vh * k;
+    return { x: (cw - w) / 2, y: (ch - h) / 2, w, h };
+  }
+
+  const fCvs = document.createElement('canvas');
+  const fCtx = fCvs.getContext('2d', { willReadFrequently: true });
+
   function drawRobLoop() {
     const W = rCvs.width, H = rCvs.height;
-    rCtx.fillStyle = '#07080B'; rCtx.fillRect(0, 0, W, H);
+    rCtx.fillStyle = '#07080B';
+    rCtx.fillRect(0, 0, W, H);
     const ready = rVid.readyState >= 2 && rVid.videoWidth;
     let R = { x: 0, y: 0, w: W, h: H };
     if (ready) {
       R = coverRect(rVid.videoWidth, rVid.videoHeight, W, H);
-      if (fCvs.width !== rVid.videoWidth) { fCvs.width = rVid.videoWidth; fCvs.height = rVid.videoHeight; }
+      if (fCvs.width !== rVid.videoWidth) {
+        fCvs.width = rVid.videoWidth;
+        fCvs.height = rVid.videoHeight;
+      }
       fCtx.drawImage(rVid, 0, 0);
       rCtx.drawImage(fCvs, R.x, R.y, R.w, R.h);
       if (landmarker && rVid.currentTime !== lastTs) {
         lastTs = rVid.currentTime;
-        try { lastRes = landmarker.detectForVideo(fCvs, performance.now()); } catch (e) { lmStatus = 'detect error: ' + e.message; }
+        try { lastRes = landmarker.detectForVideo(fCvs, performance.now()); } catch (e) {}
+      }
+    } else {
+      const fb = fallbackImgs[curRT];
+      if (fb && fb.complete && fb.naturalWidth) {
+        R = coverRect(fb.naturalWidth, fb.naturalHeight, W, H);
+        rCtx.drawImage(fb, R.x, R.y, R.w, R.h);
       }
     }
+
     const hands = (lastRes && lastRes.landmarks) || [];
     const P = (l) => ({ x: R.x + l.x * R.w, y: R.y + l.y * R.h, z: l.z });
     hands.forEach((lm, hi) => {
       const pts = lm.map(P);
-      // contact affordance: thumb-index pinch midpoint, radius by aperture
-      const a = pts[4], b = pts[8]; const cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2; const ap = Math.hypot(a.x - b.x, a.y - b.y);
-      const rad = Math.max(30, Math.min(110, ap * 1.1));
-      const g = rCtx.createRadialGradient(cx, cy, 4, cx, cy, rad); g.addColorStop(0, 'rgba(239,68,68,0.55)'); g.addColorStop(0.6, 'rgba(255,205,17,0.25)'); g.addColorStop(1, 'rgba(255,205,17,0)');
-      rCtx.fillStyle = g; rCtx.beginPath(); rCtx.arc(cx, cy, rad, 0, Math.PI * 2); rCtx.fill();
-      rCtx.strokeStyle = hi ? '#60A5FA' : '#34D399'; rCtx.lineWidth = 3;
-      BONES.forEach(([i, j]) => { rCtx.beginPath(); rCtx.moveTo(pts[i].x, pts[i].y); rCtx.lineTo(pts[j].x, pts[j].y); rCtx.stroke(); });
-      pts.forEach((q, k) => { rCtx.fillStyle = [4, 8, 12, 16, 20].includes(k) ? '#FFCD11' : '#FFFFFF'; rCtx.beginPath(); rCtx.arc(q.x, q.y, k ? 4 : 6, 0, Math.PI * 2); rCtx.fill(); });
-      // 6-DoF wrist frame from wrist (0), index MCP (5), pinky MCP (17)
-      const w = lm[0], i5 = lm[5], p17 = lm[17];
-      const ux = [i5.x - w.x, i5.y - w.y, i5.z - w.z], vx = [p17.x - w.x, p17.y - w.y, p17.z - w.z];
-      const n = [ux[1]*vx[2]-ux[2]*vx[1], ux[2]*vx[0]-ux[0]*vx[2], ux[0]*vx[1]-ux[1]*vx[0]];
-      const yaw = Math.atan2(ux[1], ux[0]), pitch = Math.atan2(n[2], Math.hypot(n[0], n[1])), roll = Math.atan2(vx[1], vx[0]) - yaw;
-      const W0 = pts[0];
+      const a = pts[4], b = pts[8];
+      const cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2;
+      const ap = Math.hypot(a.x - b.x, a.y - b.y);
+      const rad = Math.max(24, Math.min(90, ap * 1.1));
+      const g = rCtx.createRadialGradient(cx, cy, 4, cx, cy, rad);
+      g.addColorStop(0, 'rgba(255,209,0,0.55)');
+      g.addColorStop(1, 'rgba(255,209,0,0)');
+      rCtx.fillStyle = g;
+      rCtx.beginPath();
+      rCtx.arc(cx, cy, rad, 0, Math.PI * 2);
+      rCtx.fill();
+
+      rCtx.strokeStyle = hi ? '#F4F4F2' : '#FFD100';
       rCtx.lineWidth = 3;
-      [[Math.cos(yaw), Math.sin(yaw), '#EF4444'], [Math.cos(yaw + Math.PI / 2), Math.sin(yaw + Math.PI / 2), '#34D399']].forEach(([dx, dy, c]) => { rCtx.strokeStyle = c; rCtx.beginPath(); rCtx.moveTo(W0.x, W0.y); rCtx.lineTo(W0.x + dx * 50, W0.y + dy * 50); rCtx.stroke(); });
+      BONES.forEach(([i, j]) => {
+        rCtx.beginPath();
+        rCtx.moveTo(pts[i].x, pts[i].y);
+        rCtx.lineTo(pts[j].x, pts[j].y);
+        rCtx.stroke();
+      });
+      pts.forEach((q, k) => {
+        rCtx.fillStyle = [4, 8, 12, 16, 20].includes(k) ? '#FFD100' : '#FFFFFF';
+        rCtx.beginPath();
+        rCtx.arc(q.x, q.y, k ? 4 : 6, 0, Math.PI * 2);
+        rCtx.fill();
+      });
+
       if (hi === 0) {
-        const prev = traj[traj.length - 1];
-        const st = { t: +rVid.currentTime.toFixed(2), wrist: [+w.x.toFixed(3), +w.y.toFixed(3), +w.z.toFixed(3)], rpy: [+roll.toFixed(2), +pitch.toFixed(2), +yaw.toFixed(2)], aperture: +(ap / W).toFixed(3) };
-        if (!prev || st.t !== prev.t) { st.a = prev ? [+(st.wrist[0]-prev.wrist[0]).toFixed(3), +(st.wrist[1]-prev.wrist[1]).toFixed(3), +(st.wrist[2]-prev.wrist[2]).toFixed(3)] : [0,0,0]; traj.push(st); if (traj.length > 90) traj.shift(); stepN++; }
+        const w = lm[0];
+        const pinchMm = Math.round((ap / W) * 180);
+        traj.push({ x: w.x, y: w.y });
+        if (traj.length > 60) traj.shift();
+        stepN++;
+        const poseEl = document.getElementById('rob-pose-val');
+        if (poseEl) {
+          poseEl.textContent = `Wrist (${w.x.toFixed(2)}, ${w.y.toFixed(2)}) · Pinch ${pinchMm} mm`;
+        }
       }
-      rCtx.fillStyle = 'rgba(11,11,12,0.88)'; rCtx.fillRect(W0.x - 10, W0.y + 12, 250, 22);
-      rCtx.fillStyle = '#FFCD11'; rCtx.font = 'bold 12px Inter, sans-serif';
-      rCtx.fillText(`${(lastRes.handedness[hi]||[{}])[0].categoryName || 'Hand'} · 21 kp · 6-DoF wrist`, W0.x - 4, W0.y + 27);
     });
-    // wrist trajectory trail
-    if (traj.length > 1) { rCtx.strokeStyle = 'rgba(255,205,17,0.8)'; rCtx.lineWidth = 2; rCtx.beginPath(); traj.forEach((q, k) => { const x = R.x + q.wrist[0] * R.w, y = R.y + q.wrist[1] * R.h; k ? rCtx.lineTo(x, y) : rCtx.moveTo(x, y); }); rCtx.stroke(); }
-    // HUD
-    rCtx.fillStyle = 'rgba(11,11,12,0.85)'; rCtx.fillRect(10, 10, 430, 26);
-    rCtx.fillStyle = hands.length ? '#34D399' : '#FFCD11'; rCtx.font = 'bold 13px monospace';
-    rCtx.fillText(`${lmStatus} · hands=${hands.length} · t=${ready ? rVid.currentTime.toFixed(2) : '-'}s · steps=${stepN}`, 18, 28);
-    const el = document.getElementById('rob-stream');
-    if (el && traj.length) { const q = traj[traj.length - 1]; el.textContent = JSON.stringify({ step: stepN, s_t: { wrist_xyz: q.wrist, wrist_rpy: q.rpy, pinch_aperture: q.aperture }, a_t: { d_wrist: q.a }, z_t1: 'V-JEPA 2 encoder slot (offline)' }, null, 1); }
+
+    if (traj.length > 1) {
+      rCtx.strokeStyle = 'rgba(255,209,0,0.85)';
+      rCtx.lineWidth = 2.5;
+      rCtx.beginPath();
+      traj.forEach((q, k) => {
+        const x = R.x + q.x * R.w, y = R.y + q.y * R.h;
+        k ? rCtx.lineTo(x, y) : rCtx.moveTo(x, y);
+      });
+      rCtx.stroke();
+    }
+
     requestAnimationFrame(drawRobLoop);
   }
-  renderRobPanel();
-  loadVid(0);
-  drawRobLoop();
-</script>
 
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr">
-    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> | <a href='./b2b-product-blueprint.html'>← PRODUCT BLUEPRINT DECK</a></span>
-    <span>01 / 03</span>
-  </div>
-</section></div>
-
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">02 · WHY FRONT-LINE SOP CAPTURE WINS THE ROBOTICS DATA RACE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Paid by Today's SOP Buyer. <span class="hl">Trains Tomorrow's Robot Policy.</span></h1>
-    
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;flex:1;">
-  <div class="card gold">
-    <div class="kicker">01 · THE DATA BOTTLENECK IN PHYSICAL AI</div>
-    <div class="huge hl">0 Hrs</div>
-    <div style="font-size:26px;font-weight:800;color:#FFF;margin-bottom:10px;">Internet Video Lacks Physics &amp; Tactile Intent</div>
-    <div style="font-size:15.5px;color:#E5E5E0;line-height:1.45;">
-      • YouTube has zero videos of inside a 480V data center switchgear or an assembly line torque sequence.<br>
-      • Dedicated teleoperation booths cost $150+/hr per operator. Carbyn harvests egocentric manipulation data as a <strong>paid byproduct</strong> of B2B SOP &amp; Work Order automation.
-    </div>
-  </div>
-  <div class="card">
-    <div class="kicker">02 · 4-MODALITY SYNCHRONIZED STREAM</div>
-    <div class="huge">4-in-1</div>
-    <div style="font-size:26px;font-weight:800;color:#FFF;margin-bottom:10px;">Vision + MANO Hand Pose + Audio CoT + Spec</div>
-    <div style="font-size:15.5px;color:#D4D4CE;line-height:1.45;">
-      1. <strong>Egocentric Stereo/Mono RGB:</strong> Tool-object occlusion &amp; contact affordance.<br>
-      2. <strong>6-DoF Hand &amp; Wrist Kinematics:</strong> HaMeR / MANO mesh recovery.<br>
-      3. <strong>Spoken Chain-of-Thought:</strong> Technician narrating *why* they adjust torque.<br>
-      4. <strong>Outcome Verification:</strong> CMMS pass/fail &amp; sensor gauge reading.
-    </div>
-  </div>
-  <div class="card green">
-    <div class="kicker">03 · MONETIZATION &amp; STRATEGIC VALUE</div>
-    <div class="huge green">2x Moat</div>
-    <div style="font-size:26px;font-weight:800;color:#FFF;margin-bottom:10px;">Customer Automation + Foundation Licensing</div>
-    <div style="font-size:15.5px;color:#E5E5E0;line-height:1.45;">
-      • <strong>For Assembly &amp; Mfg Customers:</strong> Pre-structures their own proprietary task library so they can deploy humanoids/cobots 3x faster.<br>
-      • <strong>For Foundation Labs (Meta, NVIDIA, Physical Intelligence):</strong> Anonymized physical world-model pretraining corpus (Eric Bahn / Hustle Fund thesis).
-    </div>
-  </div>
-</div>
-
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr">
-    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
-    <span>02 / 03</span>
-  </div>
-</section></div>
-
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">03 · EGOCENTRIC POST-PROCESSING PIPELINE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>From Raw Glasses Video to <span class="hl">RLDS / Isaac Lab Policy Tensors.</span></h1>
-    
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;">
-  <div class="card"><div class="kicker">STEP 01 · DE-IDENTIFICATION</div><div style="font-size:22px;font-weight:800;color:#FFF;margin-bottom:10px;">BIPA &amp; PII Zero-Buffer</div><div class="shot-wrap" style="height:220px;"><img src="assets/product-ui/pov_frame_01.jpg"></div><div style="font-size:14px;color:#D4D4CE;line-height:1.4;">Automatic face/badge blurring and voiceprint stripping before cloud ingestion.</div></div>
-  <div class="card gold"><div class="kicker">STEP 02 · MANO &amp; 6-DOF</div><div style="font-size:22px;font-weight:800;color:#FFF;margin-bottom:10px;">Hand-Object Mesh</div><div class="shot-wrap" style="height:220px;"><img src="assets/product-ui/pov_frame_02.jpg"></div><div style="font-size:14px;color:#E5E5E0;line-height:1.4;">Extracts 21-joint 3D hand skeleton + 6-DoF tool pose in camera &amp; world coordinates.</div></div>
-  <div class="card"><div class="kicker">STEP 03 · ACTION SEGMENTATION</div><div style="font-size:22px;font-weight:800;color:#FFF;margin-bottom:10px;">V-JEPA 2 Latent Token</div><div class="shot-wrap" style="height:220px;"><img src="assets/product-ui/pov_frame_03.jpg"></div><div style="font-size:14px;color:#D4D4CE;line-height:1.4;">Slices continuous video into atomic `(s_t, a_t, z_{t+1})` manipulation primitives aligned with SOP steps.</div></div>
-  <div class="card green"><div class="kicker">STEP 04 · RLDS / OPEN-X EXPORT</div><div style="font-size:22px;font-weight:800;color:#FFF;margin-bottom:10px;">Sim &amp; Policy Ready</div><div class="shot-wrap" style="height:220px;"><img src="assets/product-ui/pov_frame_04.jpg"></div><div style="font-size:14px;color:#E5E5E0;line-height:1.4;">Exports standardized RLDS / Isaac Lab trajectories ready for VLA fine-tuning.</div></div>
-</div>
-
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr">
-    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
-    <span>03 / 03</span>
-  </div>
-</section></div>
-
-<div class="deck-hud">
-  <a href="./index.html">← Command Center</a>
-  <button onclick="goSlide(cur-1)">← Prev</button>
-  <span id="hud-ind">1 / 3</span>
-  <button onclick="goSlide(cur+1)">Next →</button>
-  <a href="./b2b-product-blueprint.html">Product Blueprint Deck ↗</a>
-  <a href="./3dgs-digital-twin.html">3DGS Digital Twin Sim ↗</a>
-</div>
-
-<script>
-  function fitSlides() {
-    const vw = window.innerWidth, vh = window.innerHeight;
-    const scale = Math.min(vw / 1920, vh / 1080);
-    document.querySelectorAll('.slide').forEach(s => {
-      s.style.transform = `scale(${scale})`;
+  function fitArtboards() {
+    document.querySelectorAll('.artboard-wrap').forEach(wrap => {
+      const box = wrap.firstElementChild;
+      if (!box) return;
+      const scale = Math.min(1, wrap.clientWidth / 1920);
+      box.style.transform = `scale(${scale})`;
+      wrap.style.height = (box.offsetHeight * scale) + 'px';
     });
   }
-  window.addEventListener('resize', fitSlides);
-  fitSlides();
-
-  const viewports = Array.from(document.querySelectorAll('.slide-viewport'));
-  let cur = 0;
-  function updateHud() {
-    const ind = document.getElementById('hud-ind');
-    if (ind) ind.textContent = `${cur + 1} / ${viewports.length}`;
-  }
-  function goSlide(idx) {
-    cur = Math.max(0, Math.min(viewports.length - 1, idx));
-    viewports[cur].scrollIntoView({ behavior: 'smooth' });
-    updateHud();
-  }
-  window.addEventListener('scroll', () => {
-    const idx = Math.round(window.scrollY / window.innerHeight);
-    if (idx >= 0 && idx < viewports.length) { cur = idx; updateHud(); }
+  window.addEventListener('resize', fitArtboards);
+  window.addEventListener('DOMContentLoaded', () => {
+    setRobTask(0);
+    fitArtboards();
+    drawRobLoop();
   });
-  window.addEventListener('keydown', (e) => {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); goSlide(cur + 1); }
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goSlide(cur - 1); }
-  });
-  updateHud();
+  setRobTask(0);
+  fitArtboards();
+  drawRobLoop();
 </script>
-
 </body>
 </html>

@@ -1,428 +1,623 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CARBYN CPO · 3DGS Spatial Digital Twin Simulator</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<title>Carbyn 3DGS Spatial Digital Twin · p-8-3 Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Quantico:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  @page { size: 1920px 1080px; margin: 0; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    background: #060608; color: #F5F5F3;
-    font-family: 'Helvetica Now Display', 'Inter', -apple-system, sans-serif;
+  :root {
+    --color-bg: #0B0B0C;
+    --color-surface: #17171A;
+    --color-text: #F4F4F2;
+    --color-muted: #8C8C8A;
+    --color-line: rgb(255 255 255 / 12%);
+    --color-glass: rgb(255 255 255 / 7%);
+    --color-glass-border: rgb(255 255 255 / 16%);
+    --color-paper: #EEEEEE;
+    --color-ink: #0B0B0C;
+    --color-primary: #FFD100;
+    --color-amber: #FF7A1A;
+    --color-red: #E5322D;
+    --color-deck-body: #D3D3D1;
+    --color-deck-white: #FFFFFF;
+    --color-deck-black: #000000;
+    --color-deck-logo-core: #FFCD11;
+    --color-deck-scrim: rgb(11 11 12 / 82%);
+    --color-deck-panel-top: oklab(28.7% 0.002 -0.007 / 82%);
+    --color-deck-panel-bottom: oklab(20.1% 0.001 -0.004 / 90%);
+    --font-deck: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, 'Pretendard', -apple-system, sans-serif;
+    --font-deck-wordmark: 'Quantico', sans-serif;
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --text-deck-display: 96px;
+    --text-deck-title: 64px;
+    --text-deck-card: 34px;
+    --text-deck-body: 28px;
+    --text-deck-label: 18px;
+    --text-lead: 30px;
+    --radius-deck-panel: 24px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #050506;
+    color: var(--color-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 36px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
   }
-  body.web-mode { overflow-x: hidden; scroll-snap-type: y mandatory; }
-  .slide-viewport {
-    width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
-    scroll-snap-align: start; position: relative; overflow: hidden; background: #060608;
+
+  .topbar {
+    width: min(1920px, 96vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-deck-body);
   }
+  .topbar a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .topbar a:hover {
+    text-decoration: underline;
+  }
+
+  .slide-pair {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .artboard-wrap {
+    width: min(1920px, 96vw);
+    position: relative;
+  }
+
   .slide {
-    width: 1920px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
-    transform-origin: center center;
-    background: #0B0B0D url('assets/bg_cover.png') center/1920px 1080px no-repeat;
-    color: #F5F5F3; box-shadow: 0 24px 80px rgba(0,0,0,0.75);
+    width: 1920px;
+    height: 1080px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    position: relative;
+    overflow: clip;
+    transform-origin: top left;
   }
-  .slide-bg-overlay {
-    position: absolute; inset: 0;
-    background: rgba(8, 9, 12, 0.58); z-index: 1;
+
+  .wave-slide {
+    background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNC4T445FRBWERWWCJE.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 1080px;
+    left: 0px;
+    opacity: 0.58;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
   }
-  .pad {
-    position: absolute; left: 96px; top: 60px; width: 1728px; bottom: 96px;
-    display: flex; flex-direction: column; z-index: 5;
+
+  .scrim {
+    background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%);
+    height: 1080px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
   }
+
   .header-row {
-    display: flex; justify-content: space-between; align-items: center;
-    width: 100%; height: 36px; margin-bottom: 12px; flex-shrink: 0;
+    left: 96px;
+    top: 80px;
+    width: 1728px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  .label {
-    font-size: 17px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: #B4B4AE;
+
+  .section-label {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
   }
-  .brand-logo { height: 30px; width: auto; display: block; }
-  h1 {
-    font-size: 64px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
-    color: #F5F5F3; margin-bottom: 22px; flex-shrink: 0;
+
+  .wordmark {
+    align-items: baseline;
+    display: flex;
+    flex-shrink: 0;
   }
-  h1 .hl { color: #FFCD11; }
-  .card {
-    background: rgba(18, 20, 26, 0.78);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 22px; padding: 26px 30px;
-    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
-    display: flex; flex-direction: column; overflow: hidden;
+  .wordmark-text {
+    color: var(--color-deck-white);
+    font-family: var(--font-deck-wordmark);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 42px;
   }
-  .card.gold {
-    background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.86) 100%);
-    border: 1.5px solid rgba(255, 205, 17, 0.55);
+
+  .lead-block {
+    left: 96px;
+    top: 204px;
+    width: 1600px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
-  .card.green {
-    background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
-    border: 1.5px solid rgba(16, 185, 129, 0.50);
+  .lead-title {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 64px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 78px;
   }
-  .card.blue {
-    background: linear-gradient(155deg, rgba(59, 130, 246, 0.16) 0%, rgba(18, 20, 26, 0.86) 100%);
-    border: 1.5px solid rgba(59, 130, 246, 0.48);
+  .lead-sub {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
   }
-  .kicker {
-    font-size: 14px; font-weight: 800; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #9CA3AF; margin-bottom: 10px; flex-shrink: 0;
+
+  .glass-panel {
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    background-image: linear-gradient(in oklab 160deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--color-glass-border) 0px 1px 0px inset;
+    border-radius: var(--radius-deck-panel);
   }
-  .card.gold .kicker { color: #FFCD11; }
-  .card.green .kicker { color: #34D399; }
-  .card.blue .kicker { color: #60A5FA; }
-  .huge {
-    font-size: 76px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
-    color: #FFF; margin-bottom: 10px;
+
+  .scene-pill {
+    appearance: none;
+    background: var(--color-glass);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    color: var(--color-deck-body);
+    cursor: pointer;
+    font-family: var(--font-deck);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 7px 14px;
+    white-space: nowrap;
+    transition: all 0.15s ease;
   }
-  .huge.hl { color: #FFCD11; }
-  .huge.green { color: #34D399; }
-  .shot-wrap {
-    width: 100%; height: 215px; border-radius: 14px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.18); margin-bottom: 14px; flex-shrink: 0;
-    background: #000; position: relative;
+  .scene-pill.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-ink);
   }
-  .shot-wrap img {
-    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+
+  .pin-marker {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    border-radius: 999px;
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 65%);
+    transition: all 0.15s ease;
   }
-  .shot-badge {
-    position: absolute; bottom: 8px; right: 8px;
-    background: rgba(11,11,12,0.88); border: 1px solid rgba(255,205,17,0.6);
-    color: #FFCD11; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+  .pin-marker.active {
+    background: var(--color-primary);
+    color: var(--color-ink);
+    font-weight: 600;
   }
-  .word-pill {
-    display: inline-block; padding: 6px 12px; border-radius: 8px;
-    font-size: 14px; font-weight: 700; background: rgba(255,205,17,0.15);
-    border: 1px solid rgba(255,205,17,0.45); color: #FFCD11; margin: 3px 4px 3px 0;
+  .pin-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-primary);
   }
-  .pain-pill {
-    display: inline-block; padding: 6px 12px; border-radius: 8px;
-    font-size: 13px; font-weight: 600; background: rgba(239,68,68,0.15);
-    border: 1px solid rgba(239,68,68,0.4); color: #FCA5A5; margin: 3px 4px 3px 0;
+  .pin-marker.active .pin-dot {
+    background: var(--color-ink);
   }
-  .win-pill {
-    display: inline-block; padding: 6px 12px; border-radius: 8px;
-    font-size: 13.5px; font-weight: 700; background: rgba(16,185,129,0.16);
-    border: 1px solid rgba(16,185,129,0.45); color: #34D399; margin: 3px 4px 3px 0;
+
+  .footer-row {
+    left: 96px;
+    bottom: 64px;
+    width: 1728px;
+    position: absolute;
+    border-top: 1px solid var(--color-line);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .ftr-rule {
-    position: absolute; left: 96px; top: 996px; width: 1728px; height: 1px;
-    background: rgba(255, 255, 255, 0.18); z-index: 5;
+  .footer-left {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    line-height: 22px;
   }
-  .ftr {
-    position: absolute; left: 96px; top: 1012px; width: 1728px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 15px; color: #8E8E89; z-index: 5; letter-spacing: 0.06em;
+  .footer-right {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
   }
-  .ftr a { color: #FFCD11; text-decoration: none; font-weight: 700; }
-  .deck-hud {
-    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
-    background: rgba(18, 18, 20, 0.92); border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px); padding: 8px 18px; border-radius: 999px;
-    display: flex; align-items: center; gap: 12px; z-index: 999; font-size: 13px; color: #E5E5E0;
+
+  .kr-board {
+    width: 1920px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 24px;
+    padding: 56px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    transform-origin: top left;
   }
-  .deck-hud button, .deck-hud a {
-    background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.15);
-    color: #fff; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 12px; font-weight: 600; text-decoration: none;
+  .kr-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
   }
-  .deck-hud button:hover, .deck-hud a:hover { background: #FFCD11; color: #000; border-color: #FFCD11; }
+  .kr-tag {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
+    color: var(--color-primary);
+  }
+  .kr-title {
+    font-family: var(--font-sans);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+    color: var(--color-text);
+  }
+  .kr-cols {
+    display: flex;
+    gap: 48px;
+    width: 100%;
+  }
+  .kr-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 2px solid var(--color-primary);
+  }
+  .kr-col.mid {
+    flex: 1.4;
+    border-top: 1px solid var(--color-line);
+  }
+  .kr-col.right {
+    border-top: 1px solid var(--color-line);
+  }
+  .kr-col-label {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--color-text);
+  }
+  .kr-col:first-child .kr-col-label {
+    color: var(--color-primary);
+  }
+  .kr-col-text {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    line-height: 36px;
+    color: var(--color-deck-body);
+    word-break: keep-all;
+  }
+  .kr-col:first-child .kr-col-text {
+    font-size: 24px;
+    line-height: 38px;
+    color: var(--color-text);
+  }
 </style>
 </head>
-<body class="web-mode">
+<body>
 
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">01 · CPO 3D GAUSSIAN SPLATTING (3DGS) DIGITAL TWIN SIMULATOR</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Egocentric POV Video → <span class="hl">Actionable 3DGS Spatial Twin.</span></h1>
-    
-<div style="display:grid;grid-template-columns:330px 1fr 410px;gap:22px;flex:1;min-height:0;">
-  <!-- Col 1: Vertical & Spatial Layer Controls -->
-  <div class="card" style="padding:22px;display:flex;flex-direction:column;gap:12px;">
-    <div class="kicker">01 · SELECT TARGET VERTICAL</div>
-    <button id="vbtn-0" onclick="set3dVert(0)" style="text-align:left;padding:12px 14px;border-radius:12px;border:1.5px solid #FFCD11;background:rgba(255,205,17,0.16);color:#FFF;cursor:pointer;">
-      <div style="font-size:11px;font-weight:800;color:#FFCD11;">VERTICAL 01 · MANUFACTURING</div>
-      <div style="font-size:16px;font-weight:800;margin-top:2px;">Plant Asset &amp; LOTO Twin</div>
-    </button>
-    <button id="vbtn-1" onclick="set3dVert(1)" style="text-align:left;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#FFF;cursor:pointer;">
-      <div style="font-size:11px;font-weight:800;color:#60A5FA;">VERTICAL 02 · BIG CONSTRUCTION</div>
-      <div style="font-size:16px;font-weight:800;margin-top:2px;">As-Built 3DGS vs. BIM Diff</div>
-    </button>
-    <button id="vbtn-2" onclick="set3dVert(2)" style="text-align:left;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#FFF;cursor:pointer;">
-      <div style="font-size:11px;font-weight:800;color:#34D399;">VERTICAL 03 · MEP &amp; DC CX</div>
-      <div style="font-size:16px;font-weight:800;margin-top:2px;">480V Switchgear &amp; Conduit Cx</div>
-    </button>
+<div class="topbar">
+  <div>CARBYN AI · 3DGS SPATIAL DIGITAL TWIN</div>
+  <div><a href="b2b-product-blueprint.html">← B2B Product Blueprint</a> · <a href="robotics-world-model.html">Robotics World Model ↗</a> · <a href="splat-house/twin.html" target="_blank">Full Screen 3DGS Viewer ↗</a></div>
+</div>
 
-    <div class="kicker" style="margin-top:8px;">02 · LIVE EGOCENTRIC POV INPUT</div>
-    <video id="v3-pov" autoplay muted loop playsinline style="width:100%;height:185px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,205,17,0.45);background:#000;"><source src="assets/product-ui/pov_mfg_skid.webm" type="video/webm"><source src="assets/product-ui/pov_mfg_skid.mp4" type="video/mp4"></video>
-    <div id="v3-nopov" style="height:185px;border-radius:12px;border:1px dashed rgba(255,255,255,0.3);display:none;align-items:center;justify-content:center;text-align:center;padding:14px;font-size:13px;color:#D4D4CE;background:rgba(0,0,0,0.35);">No first-person construction capture on file yet. Slot left empty.</div>
-    <div style="font-size:12.5px;color:#D4D4CE;line-height:1.35;">
-      <strong>Target [추정]:</strong> walk the floor once with smart glasses or phone, then COLMAP + 3D Gaussian Splatting rebuilds the space with pinned work orders. Not yet run on these industrial clips; accuracy not measured.
+<!-- SLIDE 01 · SPATIAL DIGITAL TWIN + 1K -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-01">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">01 · SPATIAL DIGITAL TWIN</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
+        </div>
+      </div>
+      <div class="lead-block">
+        <div class="lead-title">Click a pin. See the work order.</div>
+        <div class="lead-sub">Switch between MEP 480V Panel, Manufacturing Skid, and the live 3D Gaussian Splat room.</div>
+      </div>
+
+      <!-- Left Panel (x96 y416 W1072 H470) -->
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 16px; height: 470px; left: 96px; padding: 32px 40px; position: absolute; top: 416px; width: 1072px;">
+        <div style="position: relative; width: 992px; height: 350px; border-radius: 16px; overflow: hidden; border: 1px solid var(--color-line); background: #07080B;">
+          <img id="stage-img" src="assets/product-ui/twin_frame_mep.jpg" alt="Spatial Stage" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          <iframe id="stage-splat" src="about:blank" allow="autoplay; fullscreen" style="width: 100%; height: 100%; border: 0; display: none;"></iframe>
+          <div id="pins-layer" style="position: absolute; inset: 0;"></div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 992px;">
+          <div style="display: flex; gap: 12px;">
+            <button class="scene-pill active" id="scene-btn-0" onclick="selectScene(0)">MEP 480V Panel (POV Frame)</button>
+            <button class="scene-pill" id="scene-btn-1" onclick="selectScene(1)">Mfg Skid P-204 (POV Frame)</button>
+            <button class="scene-pill" id="scene-btn-2" onclick="selectScene(2)">Residential 3DGS Splat (295K Gaussians)</button>
+          </div>
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">CARBYN · SPATIAL TWIN</div>
+        </div>
+      </div>
+
+      <!-- Right Panel (x1200 y416 W624 H470) — ONLY 3 clean p-8-3 pairs -->
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 22px; height: 470px; justify-content: center; left: 1200px; padding: 40px; position: absolute; top: 416px; width: 624px;">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">SELECTED PIN</div>
+          <div id="pair-pin" style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">ATS-02B · 480V Lug Bus</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">FIELD FINDING</div>
+          <div id="pair-finding" style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Phase-B lug 68 Nm torque check</div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">SYSTEM OF RECORD</div>
+          <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <div id="pair-system" style="color: var(--color-text); font-family: var(--font-deck); font-size: 28px; font-weight: 500; line-height: 34px;">Autodesk ACC Issue #108</div>
+            <div id="pair-chip" style="background-color: var(--color-primary); border-radius: 999px; color: var(--color-ink); font-family: var(--font-deck); font-size: 18px; font-weight: 600; line-height: 22px; padding: 6px 16px;">SYNCED</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · 3DGS SPATIAL DIGITAL TWIN</div>
+        <div class="footer-right">01</div>
+      </div>
     </div>
   </div>
 
-  <!-- Col 2: Interactive 3D Gaussian Splatting Point-Cloud & Spatial Pin Canvas -->
-  <div class="card gold" style="padding:18px;position:relative;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <div class="kicker" id="canvas-title" style="margin:0;">RESIDENTIAL INSPECTION SPLAT (DEMO ENGINE) + REAL POV STILLS · CLICK PINS</div>
-      <span class="word-pill" style="font-size:11px;padding:4px 10px;">SPARK WEBGL SPLAT VIEWER</span>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">1K · 한국어 설명</div>
+        <div class="kr-title">공간 핀 클릭 한 번으로 확인하는 현장 작업지시서</div>
+      </div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">작업자가 현장을 걸으며 찍은 영상 속 위치에 설비 이슈와 작업지시서 핀이 그대로 꽂힙니다.</div>
+        </div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">왼쪽 뷰포트에서 MEP 480V 배전반, 제조 펌프 스키드(P-204), 또는 실제 29만 개 가우시안 스플랫(3DGS) 공간을 전환하고 핀을 눌러보세요. 오른쪽 패널에 선택된 설비 핀, 현장 발견 사항, 연동된 기록 시스템(Maximo·Procore·ACC)이 즉시 표시됩니다.</div>
+        </div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">텍스트로만 적힌 작업지시서 대신, 실제 설비의 어느 밸브·단자에서 문제가 났는지 1초 만에 파악합니다.</div>
+        </div>
+      </div>
     </div>
-    <div id="twin-none" style="display:none;position:absolute;left:18px;right:18px;top:58px;height:590px;z-index:3;border-radius:14px;background:#07080B;border:1px dashed rgba(255,255,255,0.3);align-items:center;justify-content:center;text-align:center;font-size:18px;color:#D4D4CE;padding:40px;">No construction capture yet. No splat, no pins for this vertical.</div>
-    <iframe id="splat-frame" src="splat-house/twin.html?embed&v=mfg" allow="autoplay; fullscreen" style="width:100%;height:590px;border-radius:14px;background:#07080B;border:1px solid rgba(255,255,255,0.16);"></iframe>
+  </div>
+</div>
+
+<!-- SLIDE 02 · WHERE SPATIAL PAYS OFF + 2K -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-02">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">02 · WHERE SPATIAL PAYS OFF</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
+        </div>
+      </div>
+      <div class="lead-block">
+        <div class="lead-title">Three verticals where spatial context matters.</div>
+        <div class="lead-sub">Walkthrough video anchors field findings to the physical room without dedicated laser scanners.</div>
+      </div>
+
+      <!-- Hairline Table (p-G-0 layout) -->
+      <div style="display: flex; flex-direction: column; left: 96px; position: absolute; top: 412px; width: 1728px;">
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 48px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 360px;">TRACK</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 480px;">SPATIAL ANCHOR</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 440px;">SYSTEM OF RECORD</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 448px;">ROI DRIVER</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 112px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 360px;">Manufacturing</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 480px;">Pump P-204 and LOTO isolation valves</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 440px;">IBM Maximo MAS 9 · Limble CMMS</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 448px;">Pre-stage parts before lockout</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 112px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 360px;">Big Construction</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 480px;">Conduit runs and slab sleeves vs BIM</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 440px;">Procore · Autodesk ACC Build</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 448px;">Catch clashes before concrete pour</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 112px;">
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 360px;">MEP Commissioning</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 480px;">Overhead valves and 480V switchgear</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 440px;">CxAlloy · Procore · Autodesk ACC</div>
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; font-weight: 500; line-height: 30px; width: 448px;">Visual proof before ceiling closure</div>
+        </div>
+      </div>
+
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · 3DGS SPATIAL DIGITAL TWIN</div>
+        <div class="footer-right">02</div>
+      </div>
+    </div>
   </div>
 
-  <!-- Col 3: Spatial Pin Inspector & System Sync -->
-  <div class="card" style="padding:22px;display:flex;flex-direction:column;" id="pin-inspector"></div>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">2K · 한국어 설명</div>
+        <div class="kr-title">3대 산업군별 3DGS 디지털 트윈 도입 효과</div>
+      </div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">제조 공장, 대형 건설, MEP 시운전(Cx) 현장에서 고가 스캐너 없이 공간 증빙을 남깁니다.</div>
+        </div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">제조에서는 펌프·LOTO 밸브 위치를 Maximo·Limble과 연결하고, 건설에서는 콘크리트 타설 전 배관 간섭을 Procore·ACC에 고정하며, MEP 시운전에서는 천장 마감 전 밸브와 480V 배전반 상태를 공간 기록으로 남깁니다.</div>
+        </div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">현장 재방문과 재시공 비용을 줄이고 시운전 승인 속도를 앞당깁니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-  const V_DATA = [
+  const SCENES = [
     {
-      name: "Manufacturing Plant · Pump & Assembly Bay",
-      roi: "$42K/yr saved per line by eliminating blind vendor site visits & pre-staging exact bearings before LOTO.",
-      img: "assets/product-ui/maximo_mas9_wo_detail.png",
-      sys: "IBM Maximo MAS 9 + Limble CMMS",
+      img: 'assets/product-ui/twin_frame_mep.jpg',
+      splatUrl: null,
       pins: [
-        { x: -120, y: -30, z: 40, color: "#FFCD11", code: "ASSET P-204", title: "Centrifugal Pump Seal Leak", detail: "Detected via 60s walkdown. Mechanical seal weeping 15mL/min. Auto-created Maximo WO #48291.", metric: "MTTR -42% · Parts Pre-Staged" },
-        { x: 95, y: 20, z: -60, color: "#EF4444", code: "LOTO GATE 04", title: "480V Isolation Valve Lockout", detail: "Mandatory spatial LOTO verification boundary before guard removal.", metric: "Zero OSHA Citation Risk" },
-        { x: 20, y: -80, z: 90, color: "#34D399", code: "CS-204", title: "Compressor Skid Discharge Check", detail: "6-step visual SOP pinned in 3D space. Discharge 125 psi verified.", metric: "Ramp Time -65%" }
+        { x: 38, y: 44, label: 'ATS-02B', pinTitle: 'ATS-02B · 480V Lug Bus', finding: 'Phase-B lug 68 Nm torque check', system: 'Autodesk ACC Issue #108', chip: 'SYNCED' },
+        { x: 64, y: 34, label: 'BRK-14', pinTitle: 'BRK-14 · Main Feeder', finding: 'Arc-flash boundary label verified', system: 'Procore Observation #412', chip: 'VERIFIED' },
+        { x: 52, y: 72, label: 'GND-04', pinTitle: 'GND-04 · Copper Busbar', finding: 'Continuity 0.02 Ohm pass', system: 'CxAlloy Checklist L4-09', chip: 'PASSED' }
       ]
     },
     {
-      name: "Big Construction · Jacobs / DPR / Turner VDC Core",
-      roi: "Eliminates $180K+ rework per floor by catching conduit/sleeves deviation before concrete pour or drywall close-in.",
-      img: "assets/product-ui/acc_build_issues_sheet.jpg",
-      sys: "Autodesk Construction Cloud (ACC) + Procore",
+      img: 'assets/product-ui/twin_frame_mfg.jpg',
+      splatUrl: null,
       pins: [
-        { x: -90, y: -50, z: 50, color: "#EF4444", code: "BIM DIFF #108", title: "+22mm Conduit Clash vs. Navisworks", detail: "3DGS splat overlaid on Revit/Navisworks BIM flagged 4-inch EMT conduit encroaching ductwork zone.", metric: "ACC Issue #108 Auto-Pinned" },
-        { x: 110, y: 35, z: -40, color: "#FFCD11", code: "RFI #412", title: "Structural Embed Plate Missing", detail: "Superintendent 15s voice note generated Procore RFI #412 with 3D coordinates.", metric: "RFI Turnaround 4d -> 3h" },
-        { x: -10, y: 70, z: 80, color: "#34D399", code: "POUR ZONE B", title: "Pre-Slab Sleeve QA/QC Passed", detail: "All 48 MEP penetrations verified against rev-14 drawing.", metric: "100% Timestamped Proof" }
+        { x: 42, y: 52, label: 'P-204', pinTitle: 'Pump P-204 · Mechanical Seal', finding: 'Seal weeping 15 mL/min on housing', system: 'IBM Maximo WO #48291', chip: 'OPEN WO' },
+        { x: 70, y: 38, label: 'LOTO-04', pinTitle: 'LOTO Gate 04 · Isolation Valve', finding: 'Lockout tagout point before teardown', system: 'Limble Task #14301', chip: 'LOCKED' },
+        { x: 26, y: 66, label: 'CS-204', pinTitle: 'Skid CS-204 · Discharge Gauge', finding: '125 psi operating pressure verified', system: 'Limble PM #8820', chip: 'SYNCED' }
       ]
     },
     {
-      name: "MEP & Data Center Commissioning · 480V Switchgear Hall",
-      roi: "Replaces 8-click CxAlloy tablet bottleneck inside arc-flash PPE, accelerating L3/L4 IST turnover by 3.2x.",
-      img: "assets/product-ui/procore_punch_list_workflow.png",
-      sys: "CxAlloy + Procore + Cortex CMMS",
+      img: null,
+      splatUrl: 'splat-house/twin.html?embed&v=res',
       pins: [
-        { x: -110, y: -20, z: 30, color: "#FFCD11", code: "ATS-02B", title: "480V Switchgear Thermal Hotspot (68°C)", detail: "Hands-free voice + thermal capture logged phase-B lug torque anomaly during L4 load bank test.", metric: "CxAlloy Checklist Auto-Filled" },
-        { x: 85, y: -60, z: -50, color: "#34D399", code: "CRAH-14", title: "Chilled Water Valve Stroke Verified", detail: "Nameplate OCR + airflow CFM spoken hands-free -> mapped into asset hierarchy.", metric: "Zero Evening Re-Typing" },
-        { x: 30, y: 65, z: 70, color: "#60A5FA", code: "BUSWAY-09", title: "Overhead Torque Seal Inspection", detail: "Above-ceiling 3DGS splat proves 100% torque-stripe completion prior to ceiling grid.", metric: "LDs Avoided ($50K/day)" }
+        { x: 30, y: 24, label: 'SPLAT-01', pinTitle: 'Room 01 · 295K Gaussians', finding: 'Interactive WebGL 3DGS room splat', system: 'Procore Spatial Observation', chip: 'LIVE 3DGS' },
+        { x: 68, y: 24, label: 'SPLAT-02', pinTitle: 'MEP Riser · Ceiling Void', finding: 'Pre-drywall valve clearance check', system: 'Autodesk ACC Asset #904', chip: 'PINNED' }
       ]
     }
   ];
 
-  let curV = 0, curPin = 0, rotY = 0.4, rotX = 0.25, dragging = false, lastX = 0, lastY = 0;
-  const VPOV = ['mfg_skid', null, 'mep_panel'];
-  const VTWIN = ['mfg', null, 'mep'];
-  function syncTwin(idx) {
-    const v = document.getElementById('v3-pov'), none = document.getElementById('v3-nopov');
-    if (!VPOV[idx]) { v.pause(); v.style.display = 'none'; none.style.display = 'flex'; }
-    else {
-      none.style.display = 'none'; v.style.display = 'block';
-      v.innerHTML = `<source src="assets/product-ui/pov_${VPOV[idx]}.webm" type="video/webm"><source src="assets/product-ui/pov_${VPOV[idx]}.mp4" type="video/mp4">`; v.load(); v.play().catch(()=>{});
+  let curScene = 0;
+  let curPin = 0;
+
+  function selectScene(sIdx) {
+    curScene = sIdx;
+    curPin = 0;
+    [0, 1, 2].forEach(i => {
+      const btn = document.getElementById('scene-btn-' + i);
+      if (btn) btn.className = i === sIdx ? 'scene-pill active' : 'scene-pill';
+    });
+    const sc = SCENES[sIdx];
+    const imgEl = document.getElementById('stage-img');
+    const splatEl = document.getElementById('stage-splat');
+    if (sc.splatUrl) {
+      imgEl.style.display = 'none';
+      splatEl.style.display = 'block';
+      if (splatEl.getAttribute('src') !== sc.splatUrl) {
+        splatEl.setAttribute('src', sc.splatUrl);
+      }
+    } else {
+      splatEl.style.display = 'none';
+      imgEl.style.display = 'block';
+      imgEl.src = sc.img;
     }
-    document.getElementById('twin-none').style.display = VTWIN[idx] ? 'none' : 'flex';
-    try { const app = document.getElementById('splat-frame').contentWindow.__app; if (app && VTWIN[idx]) app.openVert(VTWIN[idx]); } catch (e) {}
-  }
-  function set3dVert(idx) {
-    syncTwin(idx);
-    curV = idx; curPin = 0;
-    [0,1,2].forEach(i => {
-      const b = document.getElementById('vbtn-' + i);
-      b.style.border = i === idx ? '1.5px solid #FFCD11' : '1px solid rgba(255,255,255,0.15)';
-      b.style.background = i === idx ? 'rgba(255,205,17,0.16)' : 'rgba(255,255,255,0.05)';
-    });
-    renderPinPanel();
+    renderPins();
+    updateRightPanel();
   }
 
-  function renderPinPanel() {
-    const v = V_DATA[curV];
-    const p = v.pins[curPin];
-    document.getElementById('pin-inspector').innerHTML = `
-      <div class="kicker" style="color:#FFCD11;">SPATIAL PIN INSPECTOR · ${v.name} <span style="color:#F59E0B;">[추정] example scenario, figures unsourced</span></div>
-      <div style="display:flex;gap:8px;margin-bottom:12px;">
-        ${v.pins.map((px, idx) => `
-          <button onclick="curPin=${idx};renderPinPanel();" style="flex:1;padding:8px;border-radius:8px;font-weight:800;font-size:12px;cursor:pointer;border:1px solid ${idx===curPin?'#FFCD11':'rgba(255,255,255,0.15)'};background:${idx===curPin?'#FFCD11':'rgba(255,255,255,0.06)'};color:${idx===curPin?'#000':'#FFF'};">${px.code}</button>
-        `).join('')}
-      </div>
-      <div style="font-size:22px;font-weight:800;color:#FFF;margin-bottom:6px;">${p.code}: ${p.title}</div>
-      <div style="font-size:14.5px;color:#E5E5E0;line-height:1.42;margin-bottom:12px;">${p.detail}</div>
-      <div class="win-pill" style="margin-bottom:14px;">Impact: ${p.metric}</div>
-      <div class="kicker">AUTO-SYNCED SYSTEM OF RECORD (${v.sys})</div>
-      <div class="shot-wrap" style="height:210px;margin-bottom:12px;"><img src="${v.img}"><span class="shot-badge">EXAMPLE SCREEN</span></div>
-      <div style="font-size:13.5px;color:#34D399;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.35);padding:12px;border-radius:12px;margin-top:auto;">
-        <strong>Vertical ROI [추정]:</strong> ${v.roi}
-      </div>
-    `;
+  function selectPin(pIdx) {
+    curPin = pIdx;
+    renderPins();
+    updateRightPanel();
   }
 
-  renderPinPanel();
-</script>
+  function renderPins() {
+    const sc = SCENES[curScene];
+    const layer = document.getElementById('pins-layer');
+    layer.innerHTML = sc.pins.map((p, idx) => `
+      <button class="pin-marker ${idx === curPin ? 'active' : ''}" style="left: ${p.x}%; top: ${p.y}%;" onclick="selectPin(${idx})">
+        <span class="pin-dot"></span>
+        <span>${p.label}</span>
+      </button>
+    `).join('');
+  }
 
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr">
-    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> | <a href='./b2b-product-blueprint.html'>← PRODUCT BLUEPRINT DECK</a></span>
-    <span>01 / 04</span>
-  </div>
-</section></div>
+  function updateRightPanel() {
+    const p = SCENES[curScene].pins[curPin];
+    document.getElementById('pair-pin').textContent = p.pinTitle;
+    document.getElementById('pair-finding').textContent = p.finding;
+    document.getElementById('pair-system').textContent = p.system;
+    document.getElementById('pair-chip').textContent = p.chip;
+  }
 
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">02 · VERTICAL-SPECIFIC 3DGS ROI ARCHITECTURE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>How 3DGS Solves Real Pain for <span class="hl">Mfg, Construction &amp; MEP.</span></h1>
-    
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:26px;flex:1;">
-  <div class="card gold">
-    <div class="kicker">01 · MANUFACTURING PLANT DIGITAL TWIN</div>
-    <div style="font-size:28px;font-weight:800;color:#FFF;margin-bottom:10px;">Spatial Asset Tagging &amp; Zero-Trip Vendor Scoping</div>
-    <div class="shot-wrap" style="height:230px;"><img src="assets/product-ui/paper_artboard_03_maximo_limble.jpg"><span class="shot-badge">Maximo + 3DGS Pin</span></div>
-    <div style="font-size:15.5px;color:#E5E5E0;line-height:1.45;">
-      • <strong>Problem:</strong> Plant layouts change monthly; static CAD drawings are 5 years out of date.<br>
-      • <strong>Carbyn 3DGS Value:</strong> As technicians walk their PM route wearing glasses or carrying a phone, Carbyn passively updates the 3D splat and pins every Maximo/Limble work order (`P-204 Seal Leak`) to its exact 3D coordinate.
-    </div>
-  </div>
-  <div class="card blue">
-    <div class="kicker">02 · BIG CONSTRUCTION (JACOBS / DPR / TURNER VDC)</div>
-    <div style="font-size:28px;font-weight:800;color:#FFF;margin-bottom:10px;">Automated As-Built 3DGS vs. BIM Deviation</div>
-    <div class="shot-wrap" style="height:230px;"><img src="assets/product-ui/acc_build_issues_sheet.jpg"><span class="shot-badge">BIM vs As-Built Splat</span></div>
-    <div style="font-size:15.5px;color:#E5E5E0;line-height:1.45;">
-      • <strong>Problem:</strong> Laser scanning (Trimble/NavVis) requires a dedicated VDC engineer and $60K hardware, so scans happen only once a month.<br>
-      • <strong>Carbyn 3DGS Value:</strong> Superintendents' daily 60-sec walkdowns generate continuous 3DGS splats aligned to Navisworks/Revit BIM, catching `+18mm` conduit clashes before concrete pour.
-    </div>
-  </div>
-  <div class="card green">
-    <div class="kicker">03 · MEP SUBCONTRACTORS &amp; DATA CENTER CX</div>
-    <div style="font-size:28px;font-weight:800;color:#FFF;margin-bottom:10px;">Pre-Drywall &amp; Above-Ceiling Visual Proof</div>
-    <div class="shot-wrap" style="height:230px;"><img src="assets/product-ui/paper_artboard_04_procore_acc.jpg"><span class="shot-badge">CxAlloy + Procore Sync</span></div>
-    <div style="font-size:15.5px;color:#E5E5E0;line-height:1.45;">
-      • <strong>Problem:</strong> Once ceiling tiles or drywall close, proving that fire-stopping, torque stripes, and busway hangers were inspected is a nightmare.<br>
-      • <strong>Carbyn 3DGS Value:</strong> Creates a permanent, navigable 3D time-machine of every mechanical room and overhead rack tied directly to CxAlloy/Procore sign-offs.
-    </div>
-  </div>
-</div>
-
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr">
-    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
-    <span>02 / 04</span>
-  </div>
-</section></div>
-
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">03 · END-TO-END 3DGS TECHNICAL PIPELINE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>From 60-Sec Walkdown Video to <span class="hl">Metric 3D Splat in 4 Mins.</span></h1>
-    
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1;">
-  <div class="card"><div class="kicker">STAGE 01 · CAPTURE</div><div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">1st-Person POV + IMU</div><div class="shot-wrap" style="height:240px;"><img src="assets/product-ui/pov_frame_01.jpg"></div><div style="font-size:14.5px;color:#D4D4CE;line-height:1.4;">1080p/30fps egocentric video from Meta Z87.1+ glasses or smartphone + 6-axis IMU pose priors &amp; blur rejection.</div></div>
-  <div class="card gold"><div class="kicker">STAGE 02 · SPARSE POSE</div><div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">QR / AprilTag + Glomap</div><div class="shot-wrap" style="height:240px;"><img src="assets/product-ui/pov_frame_02.jpg"></div><div style="font-size:14.5px;color:#E5E5E0;line-height:1.4;">Asset QR codes &amp; room column markers lock metric scale (`1.0m = 1.0m`), eliminating monocular scale drift.</div></div>
-  <div class="card"><div class="kicker">STAGE 03 · 3DGS TRAINING</div><div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">NHN GPUaaS Splatting</div><div class="shot-wrap" style="height:240px;"><img src="assets/product-ui/pov_frame_03.jpg"></div><div style="font-size:14.5px;color:#D4D4CE;line-height:1.4;">Fast 3D Gaussian Splatting optimization in under 4 minutes per room on Carbyn's cloud GPU cluster.</div></div>
-  <div class="card green"><div class="kicker">STAGE 04 · SEMANTIC PINS</div><div style="font-size:24px;font-weight:800;color:#FFF;margin-bottom:10px;">VLM + CMMS/BIM Sync</div><div class="shot-wrap" style="height:240px;"><img src="assets/product-ui/pov_frame_04.jpg"></div><div style="font-size:14.5px;color:#E5E5E0;line-height:1.4;">Every spoken defect &amp; nameplate OCR reading is ray-cast into 3D space and synced to Maximo, Procore, or ACC.</div></div>
-</div>
-
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr">
-    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
-    <span>03 / 04</span>
-  </div>
-</section></div>
-
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">04 · CONTINUOUS PHYSICAL AI MOAT</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Scene Geometry (3DGS) + <span class="hl">Manipulation Trajectories (World Model).</span></h1>
-    
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1;">
-  <div class="card gold" style="padding:36px;">
-    <div class="kicker">NEXT STAGE IN CARBYN PHYSICAL AI ROADMAP</div>
-    <div class="huge hl">World Model</div>
-    <div style="font-size:28px;font-weight:800;color:#FFF;margin-bottom:14px;">3DGS Provides the Static Scene. Egocentric Hands Provide the Action Policy.</div>
-    <div style="font-size:17px;color:#E5E5E0;line-height:1.5;margin-bottom:24px;">
-      While 3DGS captures the 3D factory/jobsite environment geometry, our Robotics World Model pipeline extracts 6-DoF hand-tool trajectories `(s_t, a_t, z_{t+1})` from the exact same POV video stream.
-    </div>
-    <a href="./robotics-world-model.html" style="margin-top:auto;background:#FFCD11;color:#000;padding:16px 24px;border-radius:14px;font-weight:800;text-align:center;text-decoration:none;font-size:18px;">Open Robotics World Model Simulator ↗</a>
-  </div>
-  <div class="card green" style="padding:36px;">
-    <div class="kicker">MULTI-SYSTEM CMMS &amp; CONSTRUCTION BLUEPRINT</div>
-    <div class="huge green">4 Systems</div>
-    <div style="font-size:28px;font-weight:800;color:#FFF;margin-bottom:14px;">IBM Maximo MAS 9 · Limble · Procore · Autodesk ACC</div>
-    <div style="font-size:17px;color:#E5E5E0;line-height:1.5;margin-bottom:24px;">
-      Explore all 4 Paper MCP Blueprint Artboards and live Voice-to-WorkOrder / Voice-to-Doc simulators.
-    </div>
-    <a href="./b2b-product-blueprint.html" style="margin-top:auto;background:#34D399;color:#000;padding:16px 24px;border-radius:14px;font-weight:800;text-align:center;text-decoration:none;font-size:18px;">Open Master B2B Product Blueprint Deck ↗</a>
-  </div>
-</div>
-
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr">
-    <span>CARBYN · <a href="./index.html">COMMAND CENTER</a> </span>
-    <span>04 / 04</span>
-  </div>
-</section></div>
-
-<div class="deck-hud">
-  <a href="./index.html">← Command Center</a>
-  <button onclick="goSlide(cur-1)">← Prev</button>
-  <span id="hud-ind">1 / 4</span>
-  <button onclick="goSlide(cur+1)">Next →</button>
-  <a href="./b2b-product-blueprint.html">Product Blueprint Deck ↗</a>
-  <a href="./robotics-world-model.html">Robotics World Model Sim ↗</a>
-</div>
-
-<script>
-  function fitSlides() {
-    const vw = window.innerWidth, vh = window.innerHeight;
-    const scale = Math.min(vw / 1920, vh / 1080);
-    document.querySelectorAll('.slide').forEach(s => {
-      s.style.transform = `scale(${scale})`;
+  function fitArtboards() {
+    document.querySelectorAll('.artboard-wrap').forEach(wrap => {
+      const box = wrap.firstElementChild;
+      if (!box) return;
+      const scale = Math.min(1, wrap.clientWidth / 1920);
+      box.style.transform = `scale(${scale})`;
+      wrap.style.height = (box.offsetHeight * scale) + 'px';
     });
   }
-  window.addEventListener('resize', fitSlides);
-  fitSlides();
-
-  const viewports = Array.from(document.querySelectorAll('.slide-viewport'));
-  let cur = 0;
-  function updateHud() {
-    const ind = document.getElementById('hud-ind');
-    if (ind) ind.textContent = `${cur + 1} / ${viewports.length}`;
-  }
-  function goSlide(idx) {
-    cur = Math.max(0, Math.min(viewports.length - 1, idx));
-    viewports[cur].scrollIntoView({ behavior: 'smooth' });
-    updateHud();
-  }
-  window.addEventListener('scroll', () => {
-    const idx = Math.round(window.scrollY / window.innerHeight);
-    if (idx >= 0 && idx < viewports.length) { cur = idx; updateHud(); }
+  window.addEventListener('resize', fitArtboards);
+  window.addEventListener('DOMContentLoaded', () => {
+    selectScene(0);
+    fitArtboards();
   });
-  window.addEventListener('keydown', (e) => {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
-    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); goSlide(cur + 1); }
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goSlide(cur - 1); }
-  });
-  updateHud();
+  selectScene(0);
+  fitArtboards();
 </script>
-
 </body>
 </html>

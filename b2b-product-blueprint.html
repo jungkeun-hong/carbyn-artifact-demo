@@ -1,880 +1,709 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CARBYN · B2B Product Blueprint &amp; UI Architecture</title>
+<title>Carbyn B2B Product Blueprint · SOP v2, Maximo, Limble, Procore, ACC, 3DGS, Robotics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Quantico:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-  @page { size: 1920px 1080px; margin: 0; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body {
-    background: #060608; color: #F5F5F3;
-    font-family: 'Helvetica Now Display', 'Inter', -apple-system, sans-serif;
+  :root {
+    --color-bg: #0B0B0C;
+    --color-surface: #17171A;
+    --color-text: #F4F4F2;
+    --color-muted: #8C8C8A;
+    --color-line: rgb(255 255 255 / 12%);
+    --color-glass: rgb(255 255 255 / 7%);
+    --color-glass-border: rgb(255 255 255 / 16%);
+    --color-paper: #EEEEEE;
+    --color-ink: #0B0B0C;
+    --color-primary: #FFD100;
+    --color-amber: #FF7A1A;
+    --color-red: #E5322D;
+    --color-deck-body: #D3D3D1;
+    --color-deck-white: #FFFFFF;
+    --color-deck-black: #000000;
+    --color-deck-logo-core: #FFCD11;
+    --color-deck-scrim: rgb(11 11 12 / 82%);
+    --color-deck-panel-top: oklab(28.7% 0.002 -0.007 / 82%);
+    --color-deck-panel-bottom: oklab(20.1% 0.001 -0.004 / 90%);
+    --font-deck: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, 'Pretendard', -apple-system, sans-serif;
+    --font-deck-wordmark: 'Quantico', sans-serif;
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+    --text-deck-display: 96px;
+    --text-deck-title: 64px;
+    --text-deck-card: 34px;
+    --text-deck-body: 28px;
+    --text-deck-label: 18px;
+    --text-lead: 30px;
+    --radius-deck-panel: 24px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #050506;
+    color: var(--color-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 36px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
   }
-  body.web-mode { overflow-x: hidden; scroll-snap-type: y mandatory; }
-  a { color: #FFCD11; text-decoration: none; }
-  .slide-viewport {
-    width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
-    scroll-snap-align: start; position: relative; overflow: hidden; background: #060608;
+
+  .topbar {
+    width: min(1920px, 96vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-deck-body);
   }
-  .slide {
-    width: 1920px; height: 1080px; position: relative; overflow: hidden; flex-shrink: 0;
-    transform-origin: center center;
-    background: #0B0B0D url('assets/bg_cover.png') center/1920px 1080px no-repeat;
-    color: #F5F5F3; box-shadow: 0 24px 80px rgba(0,0,0,0.75);
-  }
-  .slide-bg-overlay {
-    position: absolute; inset: 0;
-    background: rgba(8, 9, 12, 0.58); z-index: 1;
-  }
-  .pad {
-    position: absolute; left: 96px; top: 64px; width: 1728px; bottom: 104px;
-    display: flex; flex-direction: column; z-index: 5;
-  }
-  .header-row {
-    display: flex; justify-content: space-between; align-items: center;
-    width: 100%; height: 38px; margin-bottom: 14px; flex-shrink: 0;
-  }
-  .label {
-    font-size: 18px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: #B4B4AE;
-  }
-  .brand-logo { height: 32px; width: auto; display: block; }
-  h1 {
-    font-size: 72px; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em;
-    color: #F5F5F3; margin-bottom: 26px; flex-shrink: 0;
-  }
-  h1 .hl { color: #FFCD11; }
-  .card {
-    background: rgba(18, 20, 26, 0.74);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 24px; padding: 30px 34px;
-    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
-    display: flex; flex-direction: column;
-  }
-  .card.gold {
-    background: linear-gradient(155deg, rgba(255, 205, 17, 0.17) 0%, rgba(18, 20, 26, 0.84) 100%);
-    border: 1.5px solid rgba(255, 205, 17, 0.55);
-  }
-  .card.green {
-    background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(18, 20, 26, 0.84) 100%);
-    border: 1.5px solid rgba(16, 185, 129, 0.50);
-  }
-  .card.blue {
-    background: linear-gradient(155deg, rgba(59, 130, 246, 0.16) 0%, rgba(18, 20, 26, 0.84) 100%);
-    border: 1.5px solid rgba(59, 130, 246, 0.48);
-  }
-  .kicker {
-    font-size: 16px; font-weight: 800; letter-spacing: 0.12em;
-    text-transform: uppercase; color: #9CA3AF; margin-bottom: 14px; flex-shrink: 0;
-  }
-  .card.gold .kicker { color: #FFCD11; }
-  .card.green .kicker { color: #34D399; }
-  .card.blue .kicker { color: #60A5FA; }
-  .huge {
-    font-size: 84px; font-weight: 800; line-height: 0.98; letter-spacing: -0.04em;
-    color: #FFF; margin-bottom: 12px;
-  }
-  .huge.hl { color: #FFCD11; }
-  .huge.green { color: #34D399; }
-  .tag-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 14px; }
-  .tag {
-    padding: 9px 18px; border-radius: 12px; font-size: 19px; font-weight: 600;
-    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: #E5E5E0;
-  }
-  .tag.gold { background: rgba(255,205,17,0.16); border-color: rgba(255,205,17,0.5); color: #FFCD11; }
-  .tag.green { background: rgba(16,185,129,0.16); border-color: rgba(16,185,129,0.5); color: #34D399; }
-  .tag.red { background: rgba(239,68,68,0.18); border-color: rgba(239,68,68,0.55); color: #F87171; }
-  .mono { font-family: 'JetBrains Mono', monospace; }
-  .btn-pill {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 12px 22px; border-radius: 999px; font-size: 17px; font-weight: 700;
-    background: #FFCD11; color: #0B0B0D; border: 1.5px solid #FFCD11; cursor: pointer;
-    text-decoration: none; transition: all 0.15s;
-  }
-  .btn-pill:hover { background: #FFE066; }
-  .btn-pill.ghost {
-    background: rgba(255,255,255,0.08); color: #F5F5F3; border-color: rgba(255,255,255,0.22);
-  }
-  .btn-pill.ghost.active, .btn-pill.ghost:hover {
-    background: rgba(255,205,17,0.2); color: #FFCD11; border-color: #FFCD11;
-  }
-  .artboard-frame {
-    width: 100%; height: 100%; object-fit: cover; border-radius: 18px;
-    border: 1.5px solid rgba(255, 255, 255, 0.22); display: block;
-    box-shadow: 0 18px 48px rgba(0,0,0,0.65);
-  }
-  .ftr-rule {
-    position: absolute; left: 96px; top: 992px; width: 1728px; height: 1px;
-    background: rgba(255, 255, 255, 0.18); z-index: 5;
-  }
-  .ftr {
-    position: absolute; left: 96px; top: 1008px; width: 1728px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 17px; color: #8E8E89; z-index: 5; letter-spacing: 0.08em;
-  }
-  .deck-hud {
-    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
-    background: rgba(18, 18, 20, 0.90); border: 1px solid rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(12px); padding: 8px 16px; border-radius: 999px;
-    display: flex; align-items: center; gap: 12px; z-index: 999; font-size: 13px; color: #E5E5E0;
-  }
-  .deck-hud button, .deck-hud a {
-    background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.15);
-    color: #fff; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 12px; font-weight: 600;
+  .topbar a {
+    color: var(--color-primary);
     text-decoration: none;
   }
-  .deck-hud button:hover, .deck-hud a:hover { background: #FFCD11; color: #000; border-color: #FFCD11; }
-  @media print {
-    body.web-mode { scroll-snap-type: none; }
-    .slide-viewport { width: 1920px; height: 1080px; page-break-after: always; }
-    .slide { transform: none !important; box-shadow: none; }
-    .deck-hud { display: none !important; }
+  .topbar a:hover {
+    text-decoration: underline;
+  }
+
+  .slide-pair {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .artboard-wrap {
+    width: min(1920px, 96vw);
+    position: relative;
+  }
+
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    position: relative;
+    overflow: clip;
+    transform-origin: top left;
+  }
+
+  .wave-cover {
+    background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNDGGZ4MN67ANH66T5Z.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 1080px;
+    left: 0px;
+    opacity: 0.72;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+  }
+
+  .wave-slide {
+    background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNC4T445FRBWERWWCJE.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 1080px;
+    left: 0px;
+    opacity: 0.58;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+  }
+
+  .scrim {
+    background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%);
+    height: 1080px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 1920px;
+  }
+
+  .header-row {
+    left: 96px;
+    top: 80px;
+    width: 1728px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .section-label {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
+  }
+
+  .wordmark {
+    align-items: baseline;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .wordmark-text {
+    color: var(--color-deck-white);
+    font-family: var(--font-deck-wordmark);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 42px;
+  }
+
+  .lead-block {
+    left: 96px;
+    top: 204px;
+    width: 1600px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .lead-title {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 64px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 78px;
+  }
+  .lead-sub {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 37px;
+  }
+
+  .glass-panel {
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    background-image: linear-gradient(in oklab 160deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--color-glass-border) 0px 1px 0px inset;
+    border-radius: var(--radius-deck-panel);
+  }
+
+  .solid-panel {
+    background-color: var(--color-primary);
+    color: var(--color-ink);
+    border-radius: var(--radius-deck-panel);
+  }
+
+  .footer-row {
+    left: 96px;
+    bottom: 64px;
+    width: 1728px;
+    position: absolute;
+    border-top: 1px solid var(--color-line);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left {
+    color: var(--color-deck-body);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .footer-right {
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+
+  .kr-board {
+    width: 1920px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 24px;
+    padding: 56px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    transform-origin: top left;
+  }
+  .kr-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .kr-tag {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 22px;
+    color: var(--color-primary);
+  }
+  .kr-title {
+    font-family: var(--font-sans);
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+    color: var(--color-text);
+  }
+  .kr-cols {
+    display: flex;
+    gap: 48px;
+    width: 100%;
+  }
+  .kr-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 2px solid var(--color-primary);
+  }
+  .kr-col.mid {
+    flex: 1.4;
+    border-top: 1px solid var(--color-line);
+  }
+  .kr-col.right {
+    border-top: 1px solid var(--color-line);
+  }
+  .kr-col-label {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--color-text);
+  }
+  .kr-col:first-child .kr-col-label {
+    color: var(--color-primary);
+  }
+  .kr-col-text {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    line-height: 36px;
+    color: var(--color-deck-body);
+    word-break: keep-all;
+  }
+  .kr-col:first-child .kr-col-text {
+    font-size: 24px;
+    line-height: 38px;
+    color: var(--color-text);
   }
 </style>
 </head>
-<body class="web-mode">
+<body>
 
-<!-- ==================== SLIDE 1: 4-STAGE ARCHITECTURE ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">01 · CPO PRODUCT ARCHITECTURE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>From Point Tool to <span class="hl">Physical AI Backbone.</span></h1>
+<div class="topbar">
+  <div>CARBYN AI · B2B PRODUCT BLUEPRINT · SOP V2 · MAXIMO · LIMBLE · PROCORE · ACC · 3DGS · ROBOTICS</div>
+  <div>Paper Project: <a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB/p-1-0" target="_blank">01M5NVYBYXA70J8V9T9CP2APHB / p-1-0</a> · <a href="3dgs-digital-twin.html">3DGS Twin ↗</a> · <a href="robotics-world-model.html">Robotics World Model ↗</a></div>
+</div>
 
-    <!-- Top 4-Stage Pipeline Banner -->
-    <div class="card" style="padding: 24px 36px; margin-bottom: 24px;">
-      <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
-        <div style="border-left: 4px solid #FFCD11; padding-left: 18px;">
-          <div style="font-size:15px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;">STAGE 01 · NOW</div>
-          <div style="font-size:26px;font-weight:800;color:#FFF;margin-top:4px;">Core Capture</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:2px;">Phone &amp; Glasses → 5-Field Doc</div>
-        </div>
-        <div style="border-left: 4px solid #FFCD11; padding-left: 18px;">
-          <div style="font-size:15px;font-weight:800;color:#FFCD11;letter-spacing:0.1em;">STAGE 02 · NOW</div>
-          <div style="font-size:26px;font-weight:800;color:#FFF;margin-top:4px;">CMMS &amp; VDC Sync</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:2px;">Maximo · Limble · Procore · ACC</div>
-        </div>
-        <div style="border-left: 4px solid #34D399; padding-left: 18px;">
-          <div style="font-size:15px;font-weight:800;color:#34D399;letter-spacing:0.1em;">STAGE 03 · 2027</div>
-          <div style="font-size:26px;font-weight:800;color:#FFF;margin-top:4px;">3DGS Spatial Twin</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:2px;">Zero-Walk Monocular BIM Diff</div>
-        </div>
-        <div style="border-left: 4px solid #60A5FA; padding-left: 18px;">
-          <div style="font-size:15px;font-weight:800;color:#60A5FA;letter-spacing:0.1em;">STAGE 04 · 2028</div>
-          <div style="font-size:26px;font-weight:800;color:#FFF;margin-top:4px;">Robotics World Model</div>
-          <div style="font-size:19px;color:#D4D4CE;margin-top:2px;">6-DoF Hand + Action Corpus</div>
+<!-- 00 · COVER (CP-0) -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-00">
+      <div class="wave-cover"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">B2B PRODUCT BLUEPRINT</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; flex: 1; min-height: 0;">
-      <div class="card gold">
-        <div class="kicker">01 · CORE CAPTURE &amp; SOP V2</div>
-        <img src="assets/product-ui/paper_artboard_01_core_capture.jpg" alt="Core Capture" style="width:100%; height:230px; object-fit:cover; border-radius:14px; border:1px solid rgba(255,205,17,0.5); margin-bottom:16px;">
-        <div style="font-size:28px;font-weight:800;color:#FFF;">30-Sec Field Closeout</div>
-        <div style="font-size:20px;color:#D4D4CE;margin-top:8px;line-height:1.38;">94dB denoised ASR + POV keyframe extraction into custom PDFs &amp; assembly SOPs.</div>
-        <div class="tag-grid">
-          <span class="tag gold">Paper Artboard 01-02</span>
-        </div>
+      <div style="display: flex; flex-direction: column; gap: 32px; left: 96px; position: absolute; top: 280px; width: 1480px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 96px; font-weight: 500; letter-spacing: -0.03em; line-height: 104px;">From field voice<br/>to system of record.</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 34px; line-height: 41px;">SOP v2, Maximo, Limble, Procore, Autodesk ACC, 3DGS, and Robotics.</div>
       </div>
-
-      <div class="card">
-        <div class="kicker">02 · MULTI-SYSTEM ERP SYNC</div>
-        <img src="assets/product-ui/paper_artboard_03_maximo_limble.jpg" alt="ERP Sync" style="width:100%; height:230px; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,0.2); margin-bottom:16px;">
-        <div style="font-size:28px;font-weight:800;color:#FFF;">4 Enterprise APIs</div>
-        <div style="font-size:20px;color:#D4D4CE;margin-top:8px;line-height:1.38;">Direct REST/OSLC writeback to IBM Maximo MAS 9, Limble, Procore, and Autodesk ACC.</div>
-        <div class="tag-grid">
-          <span class="tag">26 Real UI Screens</span>
-        </div>
+      <div style="display: flex; gap: 72px; left: 96px; position: absolute; top: 824px; width: 1728px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 24px; font-weight: 500; line-height: 29px;">JK Hong · CEO</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 24px; font-weight: 500; line-height: 29px;">Neo Lee · CTO</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 24px; line-height: 29px;">Carbyn AI · Enterprise Field Intelligence</div>
       </div>
-
-      <div class="card green">
-        <div class="kicker">03 · 3DGS DIGITAL TWIN</div>
-        <img src="assets/product-ui/pov_frame_02.jpg" alt="3DGS Twin" style="width:100%; height:230px; object-fit:cover; border-radius:14px; border:1px solid rgba(16,185,129,0.5); margin-bottom:16px;">
-        <div style="font-size:28px;font-weight:800;color:#FFF;">Single-Photo 3DGS Demo</div>
-        <div style="font-size:20px;color:#D4D4CE;margin-top:8px;line-height:1.38;">Passive technician walkarounds update facility 3D Gaussian Splats &amp; flag BIM clashes.</div>
-        <div class="tag-grid">
-          <a href="3dgs-digital-twin.html" class="tag green">Open 3DGS Sim ↗</a>
-        </div>
-      </div>
-
-      <div class="card blue">
-        <div class="kicker">04 · ROBOTICS WORLD MODEL</div>
-        <img src="assets/product-ui/pov_frame_03.jpg" alt="Robotics World Model" style="width:100%; height:230px; object-fit:cover; border-radius:14px; border:1px solid rgba(59,130,246,0.5); margin-bottom:16px;">
-        <div style="font-size:28px;font-weight:800;color:#FFF;">6-DoF + Audio CoT</div>
-        <div style="font-size:20px;color:#D4D4CE;margin-top:8px;line-height:1.38;">V-JEPA 2 &amp; Open X-Embodiment trajectories subsidized by B2B SaaS contracts.</div>
-        <div class="tag-grid">
-          <a href="robotics-world-model.html" class="tag gold">Open Robotics Sim ↗</a>
-        </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · B2B PRODUCT BLUEPRINT</div>
+        <div class="footer-right">00</div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · MASTER B2B PRODUCT BLUEPRINT</span><span>01 / 10</span></div>
-</section></div>
+</div>
 
-<!-- ==================== SLIDE 2: PAPER BLUEPRINT 01 ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">02 · PAPER BLUEPRINT 01 · CORE CAPTURE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Mobile &amp; Glasses <span class="hl">Core Capture Blueprint.</span></h1>
-
-    <div style="display: grid; grid-template-columns: 1.38fr 0.62fr; gap: 26px; flex: 1; min-height: 0;">
-      <div class="card" style="padding: 18px;">
-        <img class="artboard-frame" src="assets/product-ui/paper_artboard_01_core_capture.jpg" alt="Paper Artboard 01 Core Capture">
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:20px;">
-        <div class="card gold" style="flex:1; justify-content:center;">
-          <div class="kicker">01 · ZERO-TYPING EXTRACTION</div>
-          <div style="font-size:44px;font-weight:800;color:#FFCD11;line-height:1.05;">45m → 30s</div>
-          <div style="font-size:21px;color:#E5E5E0;margin-top:10px;line-height:1.38;">15-second voice + POV video extracts Asset ID, ISO-14224 Failure Class, 45.2 Nm Torque, and Labor Hours.</div>
-        </div>
-
-        <div class="card green" style="flex:1; justify-content:center;">
-          <div class="kicker">02 · CUSTOM FORM DROP-IN</div>
-          <div style="font-size:40px;font-weight:800;color:#34D399;line-height:1.05;">Zero Re-Templating</div>
-          <div style="font-size:21px;color:#E5E5E0;margin-top:10px;line-height:1.38;">Populates existing customer PDF/Excel forms (MHA Narrative `IN01`, Smartsheet Punch `TR01`).</div>
-        </div>
-
-        <div class="card" style="padding: 24px 28px; justify-content:space-between;">
-          <div class="kicker">LIVE PAPER MCP DESIGN FILE</div>
-          <div class="mono" style="font-size:16px;color:#D4D4CE;margin-bottom:14px;">File ID: 01M5NVYBYXA70J8V9T9CP2APHB</div>
-          <a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank" class="btn-pill" style="width:100%;">Open Paper MCP Canvas ↗</a>
+<!-- 01 · VIDEO-TO-SOP V2 (CQ-0) + 1K (CV-0) -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-01">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">01 · VIDEO-TO-SOP V2</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · PAPER ARTBOARD 01</span><span>02 / 10</span></div>
-</section></div>
-
-<!-- ==================== SLIDE 3: PAPER BLUEPRINT 02 (SOP V2 + INTERACTIVE HUD TOGGLE) ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">03 · PAPER BLUEPRINT 02 · VIDEO-TO-SOP V2</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Assembly Line HUD <span class="hl">&amp; Missing Metric Guardrail.</span></h1>
-
-    <div style="display: grid; grid-template-columns: 1.18fr 0.82fr; gap: 26px; flex: 1; min-height: 0;">
-      <div class="card" style="padding: 18px;">
-        <img class="artboard-frame" src="assets/product-ui/paper_artboard_02_sop_v2.jpg" alt="Paper Artboard 02 Video-to-SOP v2">
+      <div class="lead-block">
+        <div class="lead-title">Turn one walkthrough into a verified SOP.</div>
+        <div class="lead-sub">Veteran technicians record once. Operators get hands-free guidance.</div>
       </div>
-
-      <!-- Interactive HUD Guardrail Simulator -->
-      <div class="card gold" style="justify-content: space-between;">
-        <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span class="kicker" style="margin:0;">INTERACTIVE AR HUD GUARDRAIL TESTER</span>
-            <span id="sop-badge" class="tag red" style="font-size:14px; padding:5px 12px;">GUARDRAIL HOLD · 45 NM</span>
-          </div>
-
-          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; margin-bottom:14px;">
-            <button class="btn-pill ghost" id="sop-tab-0" onclick="setSop(0)" style="padding:10px; font-size:15px;">Step 01</button>
-            <button class="btn-pill ghost" id="sop-tab-1" onclick="setSop(1)" style="padding:10px; font-size:15px;">Step 02</button>
-            <button class="btn-pill ghost active" id="sop-tab-2" onclick="setSop(2)" style="padding:10px; font-size:15px;">Step 03 (!)</button>
-            <button class="btn-pill ghost" id="sop-tab-3" onclick="setSop(3)" style="padding:10px; font-size:15px;">Step 04</button>
-          </div>
-
-          <div style="position:relative; height:290px; border-radius:16px; overflow:hidden; border:2px solid #EF4444; margin-bottom:14px;" id="sop-frame-wrap">
-            <video id="sop-img" autoplay muted loop playsinline src="assets/product-ui/pov_assembly_bench.mp4" style="width:100%; height:100%; object-fit:cover;"></video>
-            <div id="sop-box" style="position:absolute; top:22%; left:26%; width:48%; height:52%; border:3px dashed #EF4444; border-radius:12px; background:rgba(239,68,68,0.18);"></div>
-            <div id="sop-caption" style="position:absolute; bottom:12px; left:12px; right:12px; background:rgba(11,11,13,0.92); border:1.5px solid #EF4444; padding:10px 14px; border-radius:10px; font-size:16px; font-weight:800; color:#FFF;">
-              MISSING METRIC: Confirm M8 Bolt Torque = 45 Nm
-            </div>
-          </div>
-
-          <div id="sop-audio" style="background:rgba(0,0,0,0.5); border-left:4px solid #FFCD11; padding:14px 16px; border-radius:12px; font-size:17px; color:#FFF; font-weight:600; line-height:1.38;">
-            HUD Audio: "Hold! Step 3 cannot close until you state or show 45 Nm torque."
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 470px; left: 96px; padding: 40px; position: absolute; top: 416px; width: 1072px;">
+        <div style="display: flex; gap: 24px; height: 340px; width: 992px;">
+          <img src="assets/product-ui/pov_frame_03.jpg" alt="SOP v2 POV Frame" style="border: 1px solid var(--color-line); border-radius: 16px; height: 340px; object-fit: cover; width: 616px;">
+          <div style="background-color: var(--color-bg); border: 1px solid var(--color-line); border-radius: 16px; display: flex; flex-direction: column; justify-content: space-between; padding: 28px; width: 352px;">
+            <div style="color: var(--color-muted); font-family: var(--font-mono); font-size: 16px; letter-spacing: 0.08em; line-height: 20px;">STEP 03 / 04 · GUARDRAIL</div>
+            <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 28px; font-weight: 500; line-height: 34px;">M8 flange bolt star torque</div>
+            <div style="background-color: var(--color-primary); border-radius: 12px; color: var(--color-ink); font-family: var(--font-deck); font-size: 20px; font-weight: 600; line-height: 26px; padding: 14px 18px;">Hold: Verify 45 Nm torque</div>
           </div>
         </div>
-
-        <pre id="sop-json-out" class="mono" style="background:#050507; border:1px solid rgba(255,255,255,0.16); border-radius:14px; padding:12px 16px; font-size:13px; color:#34D399; line-height:1.4;"></pre>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">CARBYN · VIDEO-TO-SOP V2</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 470px; left: 1200px; padding: 40px; position: absolute; top: 416px; width: 624px;">
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">CAPTURE</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Hands-free POV video</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">GUARDRAIL</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Flags missing torque and specs</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">OUTPUT</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Step-by-step visual guide</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · B2B PRODUCT BLUEPRINT</div>
+        <div class="footer-right">01</div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · PAPER ARTBOARD 02 · VIDEO-TO-SOP V2</span><span>03 / 10</span></div>
-</section></div>
 
-<!-- ==================== SLIDE 4: PAPER BLUEPRINT 03 (MAXIMO MAS 9 & LIMBLE) ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">04 · PAPER BLUEPRINT 03 · CMMS VOICE-TO-WORKORDER</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>IBM Maximo MAS 9 <span class="hl">&amp; Limble CMMS Auto-Sync.</span></h1>
-
-    <div style="display: grid; grid-template-columns: 1.24fr 0.76fr; gap: 26px; flex: 1; min-height: 0;">
-      <div class="card" style="padding: 18px;">
-        <img class="artboard-frame" src="assets/product-ui/paper_artboard_03_maximo_limble.jpg" alt="Paper Artboard 03 Maximo and Limble">
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">1K · 한국어 설명</div>
+        <div class="kr-title">영상 한 번으로 완성하는 작업 표준서 (Video-to-SOP v2)</div>
       </div>
-
-      <div style="display:flex; flex-direction:column; gap:18px;">
-        <div class="card gold" style="flex:1; padding:22px 26px;">
-          <div class="kicker">01 · IBM MAXIMO MAS 9 (`MXAPIWODETAIL`)</div>
-          <img src="assets/product-ui/maximo_mas9_wo_detail.png" alt="Maximo MAS 9" style="width:100%; height:195px; object-fit:cover; border-radius:12px; border:1px solid rgba(255,205,17,0.5); margin-bottom:12px;">
-          <div style="font-size:23px;font-weight:800;color:#FFF;">Asset P-204 · Failure SEAL-LEAK-04</div>
-          <div style="font-size:18px;color:#D4D4CE;margin-top:4px;">Auto-fills `ASSETNUM`, `FAILURECODE`, `ACTLABHRS` (1.5h), and `DOCLINKS` photo proof.</div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">숙련공이 작업하며 찍은 1인칭 영상 한 편이 곧바로 검증된 단계별 작업 표준서(SOP)가 됩니다.</div>
         </div>
-
-        <div class="card green" style="flex:1; padding:22px 26px;">
-          <div class="kicker">02 · LIMBLE CMMS REST API V2 (`/V2/TASKS`)</div>
-          <img src="assets/product-ui/limble_manage_work_board.png" alt="Limble Work Board" style="width:100%; height:195px; object-fit:cover; border-radius:12px; border:1px solid rgba(16,185,129,0.5); margin-bottom:12px;">
-          <div style="font-size:23px;font-weight:800;color:#FFF;">Task #14301 · Compressor Skid CS-204</div>
-          <div style="font-size:18px;color:#D4D4CE;margin-top:4px;">Closes PM checklist (125 psi discharge verified), deducts filter `FLT-10M-INLINE`, logs 45m wrench time.</div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">스마트글래스나 휴대폰으로 조립 과정을 촬영하면 핵심 동작과 부품 프레임을 자동으로 분할합니다. 토크 수치(45 Nm 등)나 필수 규격이 빠지면 AI 가드레일이 즉시 표시해 현장 오류를 막습니다.</div>
+        </div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">수주 걸리던 매뉴얼 문서 작업을 없애고 신입 작업자가 양손을 쓰며 바로 따라 할 수 있습니다.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · PAPER ARTBOARD 03 · MAXIMO &amp; LIMBLE</span><span>04 / 10</span></div>
-</section></div>
+</div>
 
-<!-- ==================== SLIDE 5: PAPER BLUEPRINT 04 (PROCORE & AUTODESK ACC) ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">05 · PAPER BLUEPRINT 04 · CONSTRUCTION &amp; MEP CX</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Procore &amp; Autodesk ACC <span class="hl">Live Walkdown Sync.</span></h1>
-
-    <div style="display: grid; grid-template-columns: 1.24fr 0.76fr; gap: 26px; flex: 1; min-height: 0;">
-      <div class="card" style="padding: 18px;">
-        <img class="artboard-frame" src="assets/product-ui/paper_artboard_04_procore_acc.jpg" alt="Paper Artboard 04 Procore and ACC">
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:18px;">
-        <div class="card gold" style="flex:1; padding:22px 26px;">
-          <div class="kicker">01 · PROCORE PUNCH LIST &amp; RFI API</div>
-          <img src="assets/product-ui/procore_punch_list_workflow.png" alt="Procore Punch List" style="width:100%; height:195px; object-fit:cover; border-radius:12px; border:1px solid rgba(255,205,17,0.5); margin-bottom:12px;">
-          <div style="font-size:23px;font-weight:800;color:#FFF;">Sheet S-402 Grid C-14 · +18mm Clash</div>
-          <div style="font-size:18px;color:#D4D4CE;margin-top:4px;">Drops 3D spatial pin, attaches walkdown keyframe, assigns Ball-in-Court to Helix Electric.</div>
+<!-- 02 · MAXIMO & LIMBLE CMMS (CR-0) + 2K (CW-0) -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-02">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">02 · VOICE TO WORK ORDER</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
+      </div>
+      <div class="lead-block">
+        <div class="lead-title">Speak once. Fill Maximo and Limble.</div>
+        <div class="lead-sub">No more eight-tap dropdowns in front of a panel.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 470px; left: 96px; padding: 40px; position: absolute; top: 416px; width: 1072px;">
+        <div style="display: flex; gap: 24px; height: 340px; width: 992px;">
+          <img src="assets/product-ui/maximo_mas9_mobile_wodetail.png" alt="IBM Maximo MAS 9 Mobile Work Order" style="border: 1px solid var(--color-line); border-radius: 16px; height: 340px; object-fit: cover; object-position: top center; width: 484px;">
+          <img src="assets/product-ui/limble_manage_work_board.png" alt="Limble CMMS Manage Work Board" style="border: 1px solid var(--color-line); border-radius: 16px; height: 340px; object-fit: cover; object-position: top left; width: 484px;">
+        </div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">IBM MAXIMO MAS 9 · LIMBLE CMMS</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 470px; left: 1200px; padding: 40px; position: absolute; top: 416px; width: 624px;">
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">VOICE INPUT</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">"Seal leak on pump P-204"</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">EXTRACTED</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Asset, failure code, labor hours</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">APPROVAL</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">One tap before CMMS commit</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · B2B PRODUCT BLUEPRINT</div>
+        <div class="footer-right">02</div>
+      </div>
+    </div>
+  </div>
 
-        <div class="card blue" style="flex:1; padding:22px 26px;">
-          <div class="kicker">02 · AUTODESK ACC BUILD ISSUES &amp; ASSETS</div>
-          <img src="assets/product-ui/acc_build_assets_tracking.png" alt="Autodesk ACC Assets" style="width:100%; height:195px; object-fit:cover; border-radius:12px; border:1px solid rgba(59,130,246,0.5); margin-bottom:12px;">
-          <div style="font-size:23px;font-weight:800;color:#FFF;">Switchgear ATS-02 · L4 IST Verified</div>
-          <div style="font-size:18px;color:#D4D4CE;margin-top:4px;">Updates data center commissioning state (42ms transfer pass, 68 Nm busbar splice check).</div>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">2K · 한국어 설명</div>
+        <div class="kr-title">음성 한마디로 채우는 Maximo · Limble 작업지시서</div>
+      </div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">설비 앞에서 말 한마디만 하면 IBM Maximo와 Limble CMMS 필수 입력란이 자동으로 채워집니다.</div>
+        </div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">장갑을 낀 채로 작은 드롭다운 메뉴를 여덟 번씩 누를 필요가 없습니다. "펌프 P-204 씰 누수"라고 말하면 설비 번호, 고장 코드, 작업 시간, 증빙 사진을 구조화해 전송 전 1회 승인만 받습니다.</div>
+        </div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">퇴근 전 밀린 수기 입력을 없애고 공장 설비 이력 데이터의 정확도를 높입니다.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · PAPER ARTBOARD 04 · PROCORE &amp; AUTODESK ACC</span><span>05 / 10</span></div>
-</section></div>
+</div>
 
-<!-- ==================== SLIDE 6: INTERACTIVE MULTI-SYSTEM SIMULATOR ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">06 · INTERACTIVE MULTI-SYSTEM FIELD SIMULATOR</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>One Voice Note. <span class="hl">Four Enterprise Systems.</span></h1>
-
-    <!-- System Selector Row -->
-    <div style="display:flex; gap:14px; margin-bottom:20px;">
-      <button class="btn-pill ghost active" id="tab-sys-maximo" onclick="switchSys('maximo')">01 · IBM Maximo MAS 9 (6 Screens)</button>
-      <button class="btn-pill ghost" id="tab-sys-limble" onclick="switchSys('limble')">02 · Limble CMMS (5 Screens)</button>
-      <button class="btn-pill ghost" id="tab-sys-procore" onclick="switchSys('procore')">03 · Procore Construction (5 Screens)</button>
-      <button class="btn-pill ghost" id="tab-sys-acc" onclick="switchSys('acc')">04 · Autodesk ACC Build (5 Screens)</button>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 0.88fr 1.12fr; gap: 26px; flex: 1; min-height: 0;">
-      <!-- Left: Voice Input + Live Payload -->
-      <div class="card gold" style="justify-content: space-between;">
-        <div>
-          <div class="kicker">RAW FRONTLINE VOICE CAPTURE (94dB FLOOR)</div>
-          <div id="sim-voice-box" style="background:rgba(0,0,0,0.55); border:1.5px solid #FFCD11; border-radius:16px; padding:18px 20px; font-size:21px; font-weight:700; color:#FFF; line-height:1.38; margin-bottom:18px;"></div>
-          <div class="kicker">AUTO-GENERATED REST / GRAPHQL PAYLOAD</div>
-          <pre id="sim-json-box" class="mono" style="background:#050507; border:1px solid rgba(255,255,255,0.18); border-radius:16px; padding:18px; font-size:14px; color:#34D399; line-height:1.42; overflow-x:auto;"></pre>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span class="tag gold" id="sim-endpoint-tag">POST /maximo/api/os/mxapiwodetail</span>
-          <a id="sim-vendor-link" href="https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery" target="_blank" style="font-size:17px; font-weight:700;">Vendor API Spec ↗</a>
+<!-- 03 · PROCORE & AUTODESK ACC (CS-0) + 3K (CX-0) -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-03">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">03 · VOICE TO CONSTRUCTION DOC</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
-
-      <!-- Right: Hero UI Preview + Clickable Screen Strip -->
-      <div class="card" style="justify-content: space-between; padding: 22px 26px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-          <span class="kicker" style="margin:0;">VERIFIED TARGET SYSTEM UI (CLICK THUMBNAILS TO INSPECT)</span>
-          <span class="tag green">AUTO-POPULATED</span>
+      <div class="lead-block">
+        <div class="lead-title">Walk the site. Close the punch list.</div>
+        <div class="lead-sub">Voice and photo become Procore observations and ACC issues.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 470px; left: 96px; padding: 40px; position: absolute; top: 416px; width: 1072px;">
+        <div style="display: flex; gap: 24px; height: 340px; width: 992px;">
+          <img src="assets/product-ui/procore_observations_list.png" alt="Procore Observations List" style="border: 1px solid var(--color-line); border-radius: 16px; height: 340px; object-fit: cover; object-position: top center; width: 484px;">
+          <img src="assets/product-ui/acc_issues_sheet_pin.png" alt="Autodesk ACC Issues Sheet Pin" style="border: 1px solid var(--color-line); border-radius: 16px; height: 340px; object-fit: cover; object-position: center; width: 484px;">
         </div>
-        <div style="height: 410px; border-radius: 16px; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.22); background:#050507; margin-bottom: 14px;">
-          <img id="sim-main-img" src="assets/product-ui/maximo_mas9_wo_detail.png" alt="System Screen" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-        <div id="sim-thumb-strip" style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px;"></div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">PROCORE · AUTODESK ACC BUILD</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 470px; left: 1200px; padding: 40px; position: absolute; top: 416px; width: 624px;">
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">FIELD WALK</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Pin photo and voice to location</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">EXTRACTED</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Trade, severity, due date</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">SYSTEM SYNC</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 34px; font-weight: 500; line-height: 41px;">Draft observation in Procore or ACC</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · B2B PRODUCT BLUEPRINT</div>
+        <div class="footer-right">03</div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · MULTI-SYSTEM SIMULATOR</span><span>06 / 10</span></div>
-</section></div>
 
-<!-- ==================== SLIDE 7: 3DGS SPATIAL DIGITAL TWIN ROI BY VERTICAL ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">07 · 3D GAUSSIAN SPLATTING (3DGS) SPATIAL DIGITAL TWIN</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Zero-Walk 3DGS Twin <span class="hl">Across 3 Core Verticals.</span></h1>
-
-    <div style="display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 26px; flex: 1; min-height: 0;">
-      <!-- Left: Live Synchronized Egocentric Video + Keyframes -->
-      <div class="card gold" style="justify-content: space-between;">
-        <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span class="kicker" style="margin:0;">REAL 1ST-PERSON POV · PLANT FLOOR / ELECTRICAL ENCLOSURE</span>
-            <span class="tag green">Splat accuracy: not measured</span>
-          </div>
-          <video autoplay muted loop playsinline controls style="width:100%; height:340px; object-fit:cover; border-radius:16px; border:1.5px solid #FFCD11; background:#000; margin-bottom:14px;"><source src="assets/product-ui/pov_mep_panel.webm" type="video/webm"><source src="assets/product-ui/pov_mep_panel.mp4" type="video/mp4"></video>
-          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;">
-            <img src="assets/product-ui/pov_frame_01.jpg" alt="F1" style="width:100%; height:92px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,0.25);">
-            <img src="assets/product-ui/pov_frame_02.jpg" alt="F2" style="width:100%; height:92px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,0.25);">
-            <img src="assets/product-ui/pov_frame_03.jpg" alt="F3" style="width:100%; height:92px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,0.25);">
-            <img src="assets/product-ui/pov_frame_04.jpg" alt="F4" style="width:100%; height:92px; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,0.25);">
-          </div>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px;">
-          <div style="font-size:20px; font-weight:700; color:#FFF;">Goal: phone / glasses capture, no LiDAR rig [추정]</div>
-          <a href="3dgs-digital-twin.html" class="btn-pill">Launch Full 3DGS Simulator ↗</a>
-        </div>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">3K · 한국어 설명</div>
+        <div class="kr-title">현장 순찰 즉시 생성되는 Procore · Autodesk ACC 이슈</div>
       </div>
-
-      <!-- Right: 3 Vertical ROI Cards -->
-      <div style="display:flex; flex-direction:column; gap:18px;">
-        <div class="card" style="flex:1; justify-content:center; padding: 24px 30px;">
-          <div class="kicker" style="color:#34D399;">VERTICAL A · MANUFACTURING PLANT (MAXIMO &amp; LIMBLE)</div>
-          <div style="font-size:32px;font-weight:800;color:#FFF;">Asset Localization &amp; LOTO Hazard Volumes</div>
-          <div style="font-size:20px;color:#D4D4CE;margin-top:6px;">3D pins on `Pump P-204` &amp; `Compressor Skid CS-204` + forklift aisle clearance check. [추정] example scenario.</div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">현장을 걸으며 찍은 사진과 음성이 곧바로 Procore Observation과 Autodesk ACC Issue가 됩니다.</div>
         </div>
-
-        <div class="card gold" style="flex:1; justify-content:center; padding: 24px 30px;">
-          <div class="kicker">VERTICAL B · BIG CONSTRUCTION VDC (JACOBS · DPR · TURNER)</div>
-          <div style="font-size:32px;font-weight:800;color:#FFCD11;">As-Built 3DGS vs. Revit BIM Diff (+18mm Clash)</div>
-          <div style="font-size:20px;color:#E5E5E0;margin-top:6px;">Flags 4-inch EMT conduit deviation at `Sheet S-402 Grid C-14` before concrete pour and pushes 3D RFI pin to Procore.</div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">배관 간섭이나 마감 불량을 보며 말하면 도면 위치 핀, 담당 공종(Trade), 심각도, 완료 기한을 자동으로 추출해 Procore 및 ACC 초안으로 즉시 동기화합니다.</div>
         </div>
-
-        <div class="card blue" style="flex:1; justify-content:center; padding: 24px 30px;">
-          <div class="kicker">VERTICAL C · MEP &amp; HYPERSCALE DATA CENTER CX</div>
-          <div style="font-size:32px;font-weight:800;color:#60A5FA;">Pre-Drywall Overhead Busway &amp; L3/L4 Cx Proof</div>
-          <div style="font-size:20px;color:#D4D4CE;margin-top:6px;">Permanent x-ray visual twin of overhead Starline busway joints (`+11.8C` thermal delta) &amp; `480V Switchgear ATS-02` sign-off.</div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">현장 소장과 시운전(Cx) 엔지니어가 사무실로 돌아가 사진을 재분류하는 시간을 없앱니다.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · 3DGS SPATIAL DIGITAL TWIN</span><span>07 / 10</span></div>
-</section></div>
+</div>
 
-<!-- ==================== SLIDE 8: EGOCENTRIC POV TO ROBOTICS WORLD MODEL PIPELINE ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">08 · EGOCENTRIC POV TO ROBOTICS WORLD MODEL PIPELINE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>B2B SaaS Wedge <span class="hl">→ Physical AI Action Corpus.</span></h1>
-
-    <div style="display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 26px; flex: 1; min-height: 0;">
-      <!-- Left: 4-Stage Trajectory Extraction Visual + Live Launch -->
-      <div class="card gold" style="justify-content: space-between;">
-        <div>
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-            <span class="kicker" style="margin:0;">STATE-ACTION-OBSERVATION TUPLE: (s_t, a_t, z_{t+1})</span>
-            <span class="tag gold">Open X-Embodiment RLDS</span>
-          </div>
-
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-bottom:14px;">
-            <div style="position:relative; height:210px; border-radius:14px; overflow:hidden; border:2px solid #34D399;">
-              <img src="assets/product-ui/pov_frame_02.jpg" alt="6-DoF Hand Pose" style="width:100%; height:100%; object-fit:cover;">
-              <div style="position:absolute; bottom:8px; left:8px; right:8px; background:rgba(8,9,12,0.9); padding:6px 10px; border-radius:8px; font-size:13px; font-weight:800; color:#34D399;">
-                t=1.40s · 21-Keypoint MANO 6-DoF Grasp
-              </div>
-            </div>
-            <div style="position:relative; height:210px; border-radius:14px; overflow:hidden; border:2px solid #FFCD11;">
-              <img src="assets/product-ui/pov_frame_03.jpg" alt="SE3 Torque Vector" style="width:100%; height:100%; object-fit:cover;">
-              <div style="position:absolute; bottom:8px; left:8px; right:8px; background:rgba(8,9,12,0.9); padding:6px 10px; border-radius:8px; font-size:13px; font-weight:800; color:#FFCD11;">
-                t=3.10s · SE(3) Wrench τ = 45.2 Nm Click
-              </div>
-            </div>
-          </div>
-
-          <pre class="mono" style="background:#050507; border:1px solid rgba(255,255,255,0.18); border-radius:14px; padding:14px; font-size:13px; color:#34D399; line-height:1.4;">{
-  "episode_id": "carbyn_mfg_p204_flange_0089",
-  "vjepa2_latent_dim": [16, 16, 1024],
-  "right_hand_mano_6dof": {"xyz_m": [0.22, -0.02, 0.29], "quat": [0.76, -0.31, 0.52, 0.24]},
-  "action_delta_se3": {"angular_vel_radps": [0, 0, 1.85], "applied_torque_nm": 45.2},
-  "language_cot": "Execute clockwise torque sweep until 45 Nm click; verify witness mark.",
-  "cmms_ground_truth_reward": 1.0
-}</pre>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px;">
-          <div style="font-size:20px; font-weight:700; color:#FFF;">$0 Hardware CapEx · Paid by SaaS</div>
-          <a href="robotics-world-model.html" class="btn-pill">Launch Robotics World Model Sim ↗</a>
+<!-- 04 · 3DGS SPATIAL DIGITAL TWIN (CT-0) + 4K (CY-0) -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-04">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">04 · SPATIAL DIGITAL TWIN</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
         </div>
       </div>
+      <div class="lead-block">
+        <div class="lead-title">Every work order pinned in 3D space.</div>
+        <div class="lead-sub">Walkthrough footage anchors issues to the physical room.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 416px; left: 96px; padding: 40px; position: absolute; top: 440px; width: 552px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 80px; font-weight: 300; line-height: 98px;">01</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 40px; font-weight: 500; line-height: 49px;">Manufacturing</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 28px; line-height: 40px;">Pin LOTO points and pump faults on the floor.</div>
+      </div>
+      <div class="glass-panel" style="display: flex; flex-direction: column; gap: 24px; height: 416px; left: 684px; padding: 40px; position: absolute; top: 440px; width: 552px;">
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 80px; font-weight: 300; line-height: 98px;">02</div>
+        <div style="color: var(--color-text); font-family: var(--font-deck); font-size: 40px; font-weight: 500; line-height: 49px;">Construction</div>
+        <div style="color: var(--color-deck-body); font-family: var(--font-deck); font-size: 28px; line-height: 40px;">Compare yesterday's conduit against the BIM model.</div>
+      </div>
+      <div class="solid-panel" style="display: flex; flex-direction: column; gap: 24px; height: 416px; left: 1272px; padding: 40px; position: absolute; top: 440px; width: 552px;">
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 80px; font-weight: 300; line-height: 98px;">03</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 40px; font-weight: 500; line-height: 49px;">MEP Commissioning</div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 28px; line-height: 40px;">Verify ceiling valves and 480V panels before closure.</div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · B2B PRODUCT BLUEPRINT</div>
+        <div class="footer-right">04</div>
+      </div>
+    </div>
+  </div>
 
-      <!-- Right: 2x2 Benchmark & Commercial Grounding -->
-      <div style="display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap:18px;">
-        <div class="card">
-          <div class="kicker" style="color:#FFCD11;">01 · META V-JEPA 2 (VIS 2026)</div>
-          <div style="font-size:44px;font-weight:800;color:#FFCD11;">&lt;1,000 Hrs</div>
-          <div style="font-size:21px;font-weight:700;color:#FFF;margin-top:6px;">Action-Conditioned Alignment</div>
-          <div style="font-size:17px;color:#D4D4CE;margin-top:8px;line-height:1.38;">Pre-trained latent video dynamics `z_{t+1} = F(z_t, a_t)` fine-tuned on Carbyn's 6-DoF tool trajectories.</div>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">4K · 한국어 설명</div>
+        <div class="kr-title">3D 공간에 그대로 꽂히는 현장 작업지시서 (3DGS Digital Twin)</div>
+      </div>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">작업자가 걸으며 찍은 영상이 설비와 이슈를 실제 물리적 3D 공간 좌표에 고정합니다.</div>
         </div>
-
-        <div class="card green">
-          <div class="kicker">02 · FIGURE 02 AT BMW SPARTANBURG</div>
-          <div style="font-size:44px;font-weight:800;color:#34D399;">7x Accuracy</div>
-          <div style="font-size:21px;font-weight:700;color:#FFF;margin-top:6px;">Failure-Recovery Clips</div>
-          <div style="font-size:17px;color:#D4D4CE;margin-top:8px;line-height:1.38;">SOP v2 guardrail blocks automatically isolate rare bolt-alignment recovery clips missed in lab teleop.</div>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">별도의 고가 라이다 스캐너 없이도 일상 점검 영상만으로 제조 공장의 LOTO 위치, 건설 현장의 배관 시공 오차, MEP 천장 마감 전 밸브·480V 패널 상태를 공간 핀으로 남깁니다.</div>
         </div>
-
-        <div class="card blue">
-          <div class="kicker">03 · CORL 2026 WORLD MODELS</div>
-          <div style="font-size:44px;font-weight:800;color:#60A5FA;">Audio CoT</div>
-          <div style="font-size:21px;font-weight:700;color:#FFF;margin-top:6px;">Causal Intent Conditioning</div>
-          <div style="font-size:17px;color:#D4D4CE;margin-top:8px;line-height:1.38;">Technicians speak diagnostic reasoning aloud while hands manipulate valves, eliminating VLA causal confusion.</div>
-        </div>
-
-        <div class="card">
-          <div class="kicker" style="color:#FFCD11;">04 · DAEDALUSIQ DATA FLYWHEEL</div>
-          <div style="font-size:44px;font-weight:800;color:#FFF;">CMMS Truth</div>
-          <div style="font-size:21px;font-weight:700;color:#FFF;margin-top:6px;">Verified Terminal Reward</div>
-          <div style="font-size:17px;color:#D4D4CE;margin-top:8px;line-height:1.38;">Every episode is tagged with real Maximo/Limble pass/fail work order sign-off for high-margin data licensing.</div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">도면 텍스트만으로는 알기 어려운 현장 위치를 3D 뷰포트에서 클릭 한 번으로 확인합니다.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ROBOTICS WORLD MODEL PIPELINE</span><span>08 / 10</span></div>
-</section></div>
+</div>
 
-<!-- ==================== SLIDE 9: EDGE-TO-CLOUD DEPLOYMENT & SECURITY ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">09 · ENTERPRISE EDGE-TO-CLOUD ARCHITECTURE</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
+<!-- 05 · ROBOTICS WORLD MODEL (CU-0) + 5K (CZ-0) -->
+<div class="slide-pair">
+  <div class="artboard-wrap">
+    <div class="slide" id="slide-05">
+      <div class="wave-slide"></div>
+      <div class="scrim"></div>
+      <div class="header-row">
+        <div class="section-label">05 · ROBOTICS DATA ENGINE</div>
+        <div class="wordmark">
+          <div class="wordmark-text">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg>
+          <div class="wordmark-text">RBYN</div>
+        </div>
+      </div>
+      <div class="lead-block">
+        <div class="lead-title">Today's SOP video trains tomorrow's robot.</div>
+        <div class="lead-sub">First-person hand and tool trajectories captured during real work.</div>
+      </div>
+      <div style="display: flex; flex-direction: column; left: 96px; position: absolute; top: 412px; width: 1728px;">
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 48px;">
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 380px;">STAGE</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 500px;">CAPTURED SIGNAL</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 420px;">FORMAT</div>
+          <div style="color: var(--color-muted); flex-shrink: 0; font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px; width: 428px;">BUYER VALUE</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">1 · Egocentric POV</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">Hands, tools, and parts in motion</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">1080p 60fps POV</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 428px;">Zero lab staging cost</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">2 · 6-DoF Pose</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">21-joint hand pose + tool contact</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">Metric trajectories</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 428px;">Real tactile edge cases</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">3 · Verified Outcome</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">Pass/fail check + torque spec</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">Reward-labeled episodes</div>
+          <div style="color: var(--color-deck-body); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 428px;">Filters out bad demos</div>
+        </div>
+        <div style="align-items: center; border-bottom: 1px solid var(--color-line); display: flex; flex-shrink: 0; height: 92px;">
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 30px; font-weight: 500; line-height: 36px; width: 380px;">4 · World Model Export</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 500px;">State-action pairs (s_t, a_t)</div>
+          <div style="color: var(--color-text); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; line-height: 30px; width: 420px;">RLDS / Open-X / V-JEPA 2</div>
+          <div style="color: var(--color-primary); flex-shrink: 0; font-family: var(--font-deck); font-size: 24px; font-weight: 500; line-height: 30px; width: 428px;">Data licensing for robotics labs</div>
+        </div>
+      </div>
+      <div class="footer-row">
+        <div class="footer-left">CARBYN · B2B PRODUCT BLUEPRINT</div>
+        <div class="footer-right">05</div>
+      </div>
     </div>
-    <h1>Offline Plant Floor Ready. <span class="hl">Zero IT Friction.</span></h1>
+  </div>
 
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; flex: 1; min-height: 0;">
-      <div class="card gold">
-        <div class="kicker">01 · POINT-OF-WORK HARDWARE AGNOSTIC</div>
-        <div class="huge hl">Z87.1+</div>
-        <div style="font-size:30px;font-weight:800;color:#FFF;margin-top:6px;">Safety Glasses &amp; Rugged Mobile</div>
-        <div style="font-size:21px;color:#E5E5E0;margin-top:14px;line-height:1.42;">Runs natively on standard iOS/Android phones in chest mounts, AirPods Pro, and ANSI Z87.1+ smart glasses (Meta, Mentra, Viture).</div>
-        <div class="tag-grid">
-          <span class="tag gold">94dB Noise Suppression</span>
-          <span class="tag">Glove-Free Voice Wake</span>
-        </div>
+  <div class="artboard-wrap">
+    <div class="kr-board">
+      <div class="kr-header">
+        <div class="kr-tag">5K · 한국어 설명</div>
+        <div class="kr-title">오늘의 SOP 영상이 내일의 로봇을 학습시킵니다 (Robotics Data Engine)</div>
       </div>
-
-      <div class="card">
-        <div class="kicker">02 · DEAD-ZONE OFFLINE EDGE BUFFER</div>
-        <div class="huge">100%</div>
-        <div style="font-size:30px;font-weight:800;color:#FFF;margin-top:6px;">Basement &amp; Faraday Vault Resilience</div>
-        <div style="font-size:21px;color:#D4D4CE;margin-top:14px;line-height:1.42;">On-device quantized Whisper + keyframe ring buffer caches voice and POV clips in zero-bar switchgear rooms, syncing upon Wi-Fi/5G reconnect.</div>
-        <div class="tag-grid">
-          <span class="tag green">Local SQLite Queue</span>
-          <span class="tag">Idempotent Retry</span>
+      <div class="kr-cols">
+        <div class="kr-col">
+          <div class="kr-col-label">한 줄로</div>
+          <div class="kr-col-text">현장 SOP와 작업지시서 자동화 과정에서 수집된 1인칭 손·공구 궤적이 로봇 파운데이션 모델의 핵심 학습 데이터가 됩니다.</div>
         </div>
-      </div>
-
-      <div class="card green">
-        <div class="kicker">03 · ENTERPRISE SECURITY &amp; PII SCRUBBING</div>
-        <div class="huge green">PII</div>
-        <div style="font-size:30px;font-weight:800;color:#FFF;margin-top:6px;">Automated Face &amp; Badge Redaction</div>
-        <div style="font-size:21px;color:#E5E5E0;margin-top:14px;line-height:1.42;">Planned [추정]: before any 3DGS or robotics trajectory enters training storage, blur filters strip worker faces, badges, and serial plates.</div>
-        <div class="tag-grid">
-          <span class="tag green">Zero-Trust OAuth 2.0</span>
-          <span class="tag gold">Tenant Isolation</span>
+        <div class="kr-col mid">
+          <div class="kr-col-label">쉽게 풀면</div>
+          <div class="kr-col-text">유튜브에는 없는 공장 내부의 실제 조립 영상에서 21개 손 관절 포즈(6-DoF)와 공구 접촉, 합격/불합격 판정 결과를 추출해 RLDS·Open-X·V-JEPA 2 포맷의 상태-행동 쌍(s_t, a_t)으로 변환합니다.</div>
+        </div>
+        <div class="kr-col right">
+          <div class="kr-col-label">구매자 가치</div>
+          <div class="kr-col-text">B2B SaaS 도입만으로 별도 실험실 구축 비용 없이 로봇 정책 학습용 실세계 데이터를 확보합니다.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · ENTERPRISE DEPLOYMENT ARCHITECTURE</span><span>09 / 10</span></div>
-</section></div>
-
-<!-- ==================== SLIDE 10: COMPANION PROTOTYPES LAUNCHPAD ==================== -->
-<div class="slide-viewport"><section class="slide">
-  <div class="slide-bg-overlay"></div>
-  <div class="pad">
-    <div class="header-row">
-      <div class="label">10 · INTERACTIVE DELIVERABLES &amp; PROTOTYPES</div>
-      <img class="brand-logo" src="assets/carbyn_logo.png" alt="CARBYN">
-    </div>
-    <h1>Explore Live <span class="hl">CPO Interactive Artifacts.</span></h1>
-
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; flex: 1; min-height: 0;">
-      <div class="card gold" style="justify-content: space-between;">
-        <div>
-          <div class="kicker">PROTOTYPE 01 · PAPER MCP CANVAS</div>
-          <img src="assets/product-ui/paper_artboard_01_core_capture.jpg" alt="Paper MCP" style="width:100%; height:260px; object-fit:cover; border-radius:14px; border:1.5px solid #FFCD11; margin-bottom:18px;">
-          <div style="font-size:32px;font-weight:800;color:#FFF;">4 Master UI Artboards</div>
-          <div style="font-size:20px;color:#E5E5E0;margin-top:8px;line-height:1.38;">Inspect Core Capture, Video-to-SOP v2, IBM Maximo/Limble, and Procore/ACC artboards directly in Paper.</div>
-        </div>
-        <a href="https://app.paper.design/file/01M5NVYBYXA70J8V9T9CP2APHB" target="_blank" class="btn-pill" style="width:100%;">Open Paper.design File ↗</a>
-      </div>
-
-      <div class="card green" style="justify-content: space-between;">
-        <div>
-          <div class="kicker">PROTOTYPE 02 · 3DGS-DIGITAL-TWIN.HTML</div>
-          <img src="assets/product-ui/pov_frame_01.jpg" alt="3DGS Simulator" style="width:100%; height:260px; object-fit:cover; border-radius:14px; border:1.5px solid #34D399; margin-bottom:18px;">
-          <div style="font-size:32px;font-weight:800;color:#FFF;">3DGS Spatial Digital Twin</div>
-          <div style="font-size:20px;color:#E5E5E0;margin-top:8px;line-height:1.38;">Orbit 482K Gaussian splats, toggle Revit BIM wireframe diff (`+18mm`), and inspect 3D spatial pins.</div>
-        </div>
-        <a href="3dgs-digital-twin.html" class="btn-pill" style="width:100%;">Launch 3DGS Simulator ↗</a>
-      </div>
-
-      <div class="card blue" style="justify-content: space-between;">
-        <div>
-          <div class="kicker">PROTOTYPE 03 · ROBOTICS-WORLD-MODEL.HTML</div>
-          <img src="assets/product-ui/pov_frame_03.jpg" alt="Robotics World Model" style="width:100%; height:260px; object-fit:cover; border-radius:14px; border:1.5px solid #60A5FA; margin-bottom:18px;">
-          <div style="font-size:32px;font-weight:800;color:#FFF;">Robotics World Model</div>
-          <div style="font-size:20px;color:#E5E5E0;margin-top:8px;line-height:1.38;">Interactive 21-keypoint MANO 6-DoF hand skeleton, SE(3) wrench vectors, and V-JEPA 2 / RLDS export.</div>
-        </div>
-        <a href="robotics-world-model.html" class="btn-pill" style="width:100%;">Launch Robotics Simulator ↗</a>
-      </div>
-    </div>
-  </div>
-  <div class="ftr-rule"></div>
-  <div class="ftr"><span>CARBYN · CPO PRODUCT BLUEPRINT DECK</span><span>10 / 10</span></div>
-</section></div>
-
-<div class="deck-hud">
-  <a href="index.html">⌂ Command Center</a>
-  <button onclick="navSlide(-1)">◀ Prev</button>
-  <span id="hud-counter" style="font-weight:700;min-width:56px;text-align:center;">01 / 10</span>
-  <button onclick="navSlide(1)">Next ▶</button>
-  <a href="3dgs-digital-twin.html">3DGS Sim</a>
-  <a href="robotics-world-model.html">Robotics Sim</a>
-  <button onclick="toggleFS()">Fullscreen (F)</button>
 </div>
 
 <script>
-  const SOP_DATA = [
-    {
-      img: "assets/product-ui/pov_assembly_bench.mp4",
-      badge: "STEP 01 PASS · ALIGNED",
-      badgeClass: "tag green",
-      color: "#10B981",
-      caption: "TARGET: P-204 VOLUTE & EPDM GASKET [SEATED]",
-      audio: 'HUD Audio: "Step 1 verified in 18.4s. Proceed to M12 flange stud threading."',
-      json: { step: 1, action: "seat_epdm_gasket", iou: 0.94, status: "VERIFIED_PASS", cycle_s: 18.4 }
-    },
-    {
-      img: "assets/product-ui/pov_gasket_sealing.mp4",
-      badge: "STEP 02 PASS · 8x STUDS",
-      badgeClass: "tag green",
-      color: "#10B981",
-      caption: "8x M12 GRADE 8.8 STUDS [HAND-THREADED]",
-      audio: 'HUD Audio: "All 8 studs seated. Grab calibrated 19mm torque wrench for Step 3."',
-      json: { step: 2, action: "thread_m12_studs", bolts: 8, status: "VERIFIED_PASS", cycle_s: 31.0 }
-    },
-    {
-      img: "assets/product-ui/pov_continuity_test.mp4",
-      badge: "GUARDRAIL HOLD · 45 NM",
-      badgeClass: "tag red",
-      color: "#EF4444",
-      caption: "MISSING METRIC: Confirm M8 Bolt Torque = 45 Nm",
-      audio: 'HUD Audio: "Hold! Step 3 cannot close until you state or show 45 Nm torque."',
-      json: { step: 3, action: "star_pattern_torque", required: "45.0 Nm", observed: null, guardrail: "BLOCKED_MISSING_METRIC" }
-    },
-    {
-      img: "assets/product-ui/pov_assembly_bench.mp4",
-      badge: "STEP 04 UNLOCKED · 45.2 NM",
-      badgeClass: "tag green",
-      color: "#10B981",
-      caption: "45.2 NM TORQUE + YELLOW WITNESS MARK [VERIFIED]",
-      audio: 'HUD Audio: "45.2 Newton-meters logged and witness mark verified. SOP signed off."',
-      json: { step: 4, action: "verify_torque_witness", measured: "45.2 Nm", witness_mark: true, guardrail: "RELEASED_SIGNED_OFF" }
-    }
-  ];
-
-  function setSop(idx) {
-    for (let i = 0; i < 4; i++) {
-      document.getElementById('sop-tab-' + i).classList.toggle('active', i === idx);
-    }
-    const d = SOP_DATA[idx];
-    { const v = document.getElementById('sop-img'); if (!v.src.endsWith(d.img)) { v.src = d.img; v.play().catch(()=>{}); } }
-    const b = document.getElementById('sop-badge');
-    b.textContent = d.badge;
-    b.className = d.badgeClass;
-    document.getElementById('sop-frame-wrap').style.borderColor = d.color;
-    const box = document.getElementById('sop-box');
-    box.style.borderColor = d.color;
-    box.style.background = d.color + '28';
-    const cap = document.getElementById('sop-caption');
-    cap.style.borderColor = d.color;
-    cap.textContent = d.caption;
-    document.getElementById('sop-audio').textContent = d.audio;
-    document.getElementById('sop-json-out').textContent = JSON.stringify(d.json, null, 2);
-  }
-
-  const SYS_DATA = {
-    maximo: {
-      voice: '"Carbyn, log corrective maintenance on Slurry Pump P-204. Outboard bearing seal leaking; replaced Viton seal kit #SK-204, torqued housing to 45.2 Nm, 1.5 labor hours, status COMP."',
-      endpoint: "POST /maximo/api/os/mxapiwodetail?lean=1",
-      url: "https://www.ibm.com/docs/en/masv-and-l/maximo-manage/continuous-delivery",
-      screens: [
-        "assets/product-ui/maximo_mas9_wo_detail.png",
-        "assets/product-ui/maximo_mas9_mobile_wodetail.png",
-        "assets/product-ui/maximo_mas9_wo_list.png",
-        "assets/product-ui/maximo_mas9_mobile_tasks.png",
-        "assets/product-ui/maximo_mas9_mobile_inspection.png",
-        "assets/product-ui/maximo_mas9_mobile_schedule.png"
-      ],
-      payload: {
-        siteid: "PLANT-BAY-01",
-        wonum: "MX-90412",
-        assetnum: "P-204",
-        status: "COMP",
-        failurecode: "SEAL-LEAK-04",
-        remedycode: "REPL-VITON-SEAL-45NM",
-        actlabhrs: 1.5,
-        matusetrans: [{ itemnum: "SK-204", qty: 1 }],
-        doclinks: ["pov_frame_04.jpg"]
-      }
-    },
-    limble: {
-      voice: '"Carbyn, close Limble PM task 14301 on Compressor Skid CS-204. Discharge pressure verified at 125 psi, swapped 10-micron inline element, 45 minutes labor, attach current POV photo."',
-      endpoint: "PATCH /v2/tasks/14301",
-      url: "https://limblecmms.com/features/work-orders/",
-      screens: [
-        "assets/product-ui/limble_manage_work_board.png",
-        "assets/product-ui/limble_open_task_modal.png",
-        "assets/product-ui/limble_task_instructions.png",
-        "assets/product-ui/limble_pm_template_modal.png",
-        "assets/product-ui/limble_wo_template_board.png"
-      ],
-      payload: {
-        taskID: 14301,
-        assetID: "Compressor Skid CS-204",
-        statusName: "Complete",
-        timeSpentMinutes: 45,
-        instructions: [{ step: "Discharge pressure (psi)", val: 125.0, pass: true }],
-        partsUsed: [{ partID: "FLT-10M-INLINE", qty: 1 }],
-        proofPhoto: "pov_frame_01.jpg"
-      }
-    },
-    procore: {
-      voice: '"Carbyn, create Procore RFI & Punch item on Sheet S-402 Grid C-14. 4-inch EMT feeder conduit deviates +18mm south of BIM centerline into HVAC hanger zone. Assign Helix Electric."',
-      endpoint: "POST /rest/v1.0/projects/88412/rfis",
-      url: "https://support.procore.com/products/online/user-guide/project-level/rfis",
-      screens: [
-        "assets/product-ui/procore_punch_list_workflow.png",
-        "assets/product-ui/procore_rfi_mobile_ui.png",
-        "assets/product-ui/procore_field_productivity_ui.png",
-        "assets/product-ui/procore_project_execution_ui.png",
-        "assets/product-ui/procore_pm_hero_ui.png"
-      ],
-      payload: {
-        subject: "4-inch EMT Conduit +18mm BIM Deviation at Grid C-14",
-        drawing_number: "S-402 Rev 4",
-        location_id: "LEVEL-02-GRID-C14",
-        spatial_pin_xyz_m: [-0.882, 0.85, 0.20],
-        ball_in_court: "Helix Electric VDC Lead",
-        attachments: ["pov_frame_03.jpg"]
-      }
-    },
-    acc: {
-      voice: '"Carbyn, log Autodesk ACC Build Issue and Asset update on 480V Switchgear ATS-02. Load-bank transfer verified in 42ms, busbar splice #14 needs re-torque to 68 Nm before ceiling closure."',
-      endpoint: "POST /construction/issues/v1/projects/dc-04/issues",
-      url: "https://help.autodesk.com/view/BUILD/ENU/?guid=Issues_Overview",
-      screens: [
-        "assets/product-ui/acc_build_issues_mobile.jpg",
-        "assets/product-ui/acc_build_assets_tracking.png",
-        "assets/product-ui/acc_build_issues_sheet.jpg",
-        "assets/product-ui/acc_build_issues_log.jpg",
-        "assets/product-ui/acc_build_issue_references.png"
-      ],
-      payload: {
-        title: "Overhead Busway Joint #14 Thermal Delta (+11.8C)",
-        issueSubtypeId: "Commissioning-L4-IST",
-        linkedAssetId: "ATS-02-COLO-B",
-        sheetPushpin: { sheet: "E-501", xyz: [0.60, 1.10, -0.30] },
-        customAttributes: [{ title: "Required Torque", value: "68.0 Nm" }]
-      }
-    }
-  };
-
-  function switchSys(k) {
-    ['maximo', 'limble', 'procore', 'acc'].forEach(id => {
-      document.getElementById('tab-sys-' + id).classList.toggle('active', id === k);
+  function fitArtboards() {
+    document.querySelectorAll('.artboard-wrap').forEach(wrap => {
+      const box = wrap.firstElementChild;
+      if (!box) return;
+      const scale = Math.min(1, wrap.clientWidth / 1920);
+      box.style.transform = `scale(${scale})`;
+      wrap.style.height = (box.offsetHeight * scale) + 'px';
     });
-    const s = SYS_DATA[k];
-    document.getElementById('sim-voice-box').textContent = s.voice;
-    document.getElementById('sim-json-box').textContent = JSON.stringify(s.payload, null, 2);
-    document.getElementById('sim-endpoint-tag').textContent = s.endpoint;
-    document.getElementById('sim-vendor-link').href = s.url;
-    document.getElementById('sim-main-img').src = s.screens[0];
-    document.getElementById('sim-thumb-strip').innerHTML = s.screens.map(src => `
-      <img src="${src}" alt="Thumb" onclick="document.getElementById('sim-main-img').src='${src}'" style="width:100%; height:64px; object-fit:cover; border-radius:8px; border:1px solid rgba(255,255,255,0.25); cursor:pointer;">
-    `).join('');
   }
-
-  setSop(2);
-  switchSys('maximo');
-
-  const viewports = Array.from(document.querySelectorAll('.slide-viewport'));
-  const slides = Array.from(document.querySelectorAll('.slide'));
-  const counter = document.getElementById('hud-counter');
-  function fitSlides() {
-    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-    slides.forEach(s => { s.style.transform = `scale(${scale})`; });
-  }
-  window.addEventListener('resize', fitSlides);
-  fitSlides();
-  function currentIdx() { return Math.round(window.scrollY / window.innerHeight); }
-  function navSlide(delta) {
-    const next = Math.max(0, Math.min(viewports.length - 1, currentIdx() + delta));
-    viewports[next].scrollIntoView({ behavior: 'smooth' });
-  }
-  window.addEventListener('scroll', () => {
-    const idx = Math.max(0, Math.min(viewports.length - 1, currentIdx()));
-    counter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(viewports.length).padStart(2, '0');
-  });
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); navSlide(1); }
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); navSlide(-1); }
-    else if (e.key === 'f' || e.key === 'F') { toggleFS(); }
-  });
-  function toggleFS() {
-    if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-    else document.exitFullscreen();
-  }
+  window.addEventListener('resize', fitArtboards);
+  window.addEventListener('DOMContentLoaded', fitArtboards);
+  fitArtboards();
 </script>
 </body>
 </html>
