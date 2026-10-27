@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27 16:37 PDT",
+  "updated_at": "2026-10-27 16:42 PDT",
   "links": {
     "playbook_doc": "https://docs.google.com/document/d/1Hsl95is01No1m_SWEapIpJ5n106Dd0dQY4niIytDKp0/edit",
     "drive_folder": "https://drive.google.com/drive/folders/1v0g-lKPURaRzO80tWFJSJ4K3TkMfvCBr",
@@ -22,7 +22,7 @@
     "total_ooo": 13,
     "total_meetings": 3,
     "meeting_rate": 1.0,
-    "total_touch2_sent": 36,
+    "total_touch2_sent": 28,
     "total_touch2_target": 28
   },
   "sectors": [
@@ -42,7 +42,7 @@
       "reply_rate_del": 6.7,
       "ooo": 6,
       "meetings": 1,
-      "touch2_sent": 30
+      "touch2_sent": 28
     },
     {
       "key": "1. Mechanical / HVAC / Electrical Contractor",
@@ -60,7 +60,7 @@
       "reply_rate_del": 3.1,
       "ooo": 2,
       "meetings": 2,
-      "touch2_sent": 4
+      "touch2_sent": 0
     },
     {
       "key": "2. Food & Beverage Manufacturing Plant",
@@ -78,7 +78,7 @@
       "reply_rate_del": 2.2,
       "ooo": 3,
       "meetings": 0,
-      "touch2_sent": 2
+      "touch2_sent": 0
     },
     {
       "key": "3. Heavy Mfg / Packaging / Materials / Industrial",
@@ -207,8 +207,8 @@
       "cmms": "IBM TRIRIGA",
       "sent": true,
       "sent_date": "2026-10-20",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Positive Reply",
       "reply_type": "Human Reply",
       "reply_date": "Wed, 21 Oct 2026",
@@ -575,8 +575,8 @@
       "cmms": "unknown",
       "sent": true,
       "sent_date": "2026-10-20",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Meeting Set",
       "reply_type": "Human Reply",
       "reply_date": "Wed, 21 Oct 2026",
@@ -1062,8 +1062,8 @@
       "cmms": "To confirm",
       "sent": true,
       "sent_date": "2026-10-26",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Positive Reply",
       "reply_type": "Human Reply",
       "reply_date": "Mon, 26 Oct 2026",
@@ -1637,8 +1637,8 @@
       "cmms": "Maximo",
       "sent": true,
       "sent_date": "2026-10-24",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Meeting Set",
       "reply_type": "Human Reply",
       "reply_date": "Mon, 26 Oct 2026",
@@ -2101,8 +2101,8 @@
       "cmms": "Procore",
       "sent": true,
       "sent_date": "2026-10-22",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Positive Reply",
       "reply_type": "Human Reply",
       "reply_date": "Thu, 22 Oct 2026",
@@ -3596,8 +3596,8 @@
       "cmms": "To confirm",
       "sent": true,
       "sent_date": "2026-10-22",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Meeting Set",
       "reply_type": "Human Reply",
       "reply_date": "Thu, 22 Oct 2026",
@@ -5693,8 +5693,8 @@
       "cmms": "To confirm",
       "sent": true,
       "sent_date": "2026-10-27 (redirected from bert@rusticbakery.com)",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Positive Reply",
       "reply_type": "Human Reply",
       "reply_date": "Tue, 27 Oct 2026",
@@ -5785,8 +5785,8 @@
       "cmms": "To confirm",
       "sent": true,
       "sent_date": "REPLIED 2026-10-26 (Requested 15-30m demo) |  2026-10-26",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
+      "touch2_sent": false,
+      "touch2_date": "",
       "stage": "Positive Reply",
       "reply_type": "Human Reply",
       "reply_date": "Mon, 26 Oct 2026",
