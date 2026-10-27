@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-27 14:56 PDT",
+  "updated_at": "2026-10-27 15:02 PDT",
   "links": {
     "playbook_doc": "https://docs.google.com/document/d/1Hsl95is01No1m_SWEapIpJ5n106Dd0dQY4niIytDKp0/edit",
     "drive_folder": "https://drive.google.com/drive/folders/1v0g-lKPURaRzO80tWFJSJ4K3TkMfvCBr",
@@ -20,8 +20,8 @@
     "reply_rate_sent": 2.6,
     "reply_rate_del": 2.7,
     "total_ooo": 12,
-    "total_meetings": 1,
-    "meeting_rate": 0.3
+    "total_meetings": 3,
+    "meeting_rate": 1.0
   },
   "sectors": [
     {
@@ -50,7 +50,7 @@
       "reply_rate_sent": 3.0,
       "reply_rate_del": 3.1,
       "ooo": 2,
-      "meetings": 0
+      "meetings": 2
     },
     {
       "key": "2. Food & Beverage Manufacturing Plant",
@@ -1486,11 +1486,14 @@
       "cmms": "Maximo",
       "sent": true,
       "sent_date": "2026-10-24",
-      "stage": "Positive Reply",
+      "stage": "Meeting Set",
       "reply_type": "Human Reply",
       "reply_date": "Sat, 24 Oct 2026",
       "reply_snippet": "Hi Jungkeun, I would definitely like to see how it works! However, is there any integration with existing CMMS systems? Get Outlook for Android From: Jungkeun Hong <jungkeun_hong@b",
-      "meeting_info": null
+      "meeting_info": {
+        "summary": "CBRE Parkmerced (Jonathan Baldwin) <> Carbyn (JK)",
+        "start": "2026-11-05 12:00"
+      }
     },
     {
       "campaign": "Bay Area Industrial",
@@ -3271,11 +3274,14 @@
       "cmms": "To confirm",
       "sent": true,
       "sent_date": "2026-10-22",
-      "stage": "Positive Reply",
+      "stage": "Meeting Set",
       "reply_type": "Human Reply",
       "reply_date": "Thu, 22 Oct 2026",
       "reply_snippet": "Good afternoon Jungkeun, I'm looping in our Opps Manager @Doug Schmid as we are both interested to have a meeting to discuss your Hands-Free AI. We have some availability next week",
-      "meeting_info": null
+      "meeting_info": {
+        "summary": "Therma (Mark, Doug) <> Carbyn (JK)",
+        "start": "2026-10-30 12:30"
+      }
     },
     {
       "campaign": "Bay Area Industrial",
