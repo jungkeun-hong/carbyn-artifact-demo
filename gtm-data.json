@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-28 16:22 PDT",
+  "updated_at": "2026-10-28 16:25 PDT",
   "links": {
     "playbook_doc": "https://docs.google.com/document/d/1Hsl95is01No1m_SWEapIpJ5n106Dd0dQY4niIytDKp0/edit",
     "drive_folder": "https://drive.google.com/drive/folders/1v0g-lKPURaRzO80tWFJSJ4K3TkMfvCBr",
@@ -16,12 +16,12 @@
     "total_delivered": 365,
     "deliverability_rate": 98.1,
     "total_bounced": 7,
-    "total_replied": 9,
-    "reply_rate_sent": 2.4,
-    "reply_rate_del": 2.5,
+    "total_replied": 8,
+    "reply_rate_sent": 2.2,
+    "reply_rate_del": 2.2,
     "total_ooo": 16,
-    "total_meetings": 4,
-    "meeting_rate": 1.1,
+    "total_meetings": 3,
+    "meeting_rate": 0.8,
     "total_touch2_sent": 28,
     "total_touch2_target": 28
   },
@@ -55,11 +55,11 @@
       "delivered": 135,
       "bounced": 5,
       "queued": 318,
-      "replied": 5,
-      "reply_rate_sent": 3.6,
-      "reply_rate_del": 3.7,
+      "replied": 4,
+      "reply_rate_sent": 2.9,
+      "reply_rate_del": 3.0,
       "ooo": 2,
-      "meetings": 3,
+      "meetings": 2,
       "touch2_sent": 0
     },
     {
@@ -3648,15 +3648,11 @@
       "sent_date": "2026-10-24",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Meeting Set",
-      "reply_type": "Human Reply",
+      "stage": "Sent",
+      "reply_type": null,
       "reply_date": "",
-      "reply_snippet": "",
-      "meeting_info": {
-        "summary": "Therma (Mark, Doug) <> Carbyn (JK)",
-        "start": "2026-10-30 12:30",
-        "location": "1601 Las Plumas Ave, San Jose, CA 95133"
-      }
+      "reply_snippet": "Added to Therma 10/30 meeting invite alongside VP Mark Goupil & Ops Mgr Doug Schmid",
+      "meeting_info": null
     },
     {
       "campaign": "Bay Area Industrial",
