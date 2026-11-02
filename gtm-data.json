@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02 12:49 PDT",
+  "updated_at": "2026-11-02 12:51 PDT",
   "links": {
     "playbook_doc": "https://docs.google.com/document/d/1Hsl95is01No1m_SWEapIpJ5n106Dd0dQY4niIytDKp0/edit",
     "drive_folder": "https://drive.google.com/drive/folders/1v0g-lKPURaRzO80tWFJSJ4K3TkMfvCBr",
@@ -13,16 +13,16 @@
     "enrichment_rate": 82.9,
     "total_sent": 597,
     "total_queued": 111,
-    "total_delivered": 588,
-    "deliverability_rate": 98.5,
-    "total_bounced": 9,
-    "total_replied": 4,
-    "reply_rate_sent": 0.7,
-    "reply_rate_del": 0.7,
-    "total_ooo": 19,
+    "total_delivered": 589,
+    "deliverability_rate": 98.7,
+    "total_bounced": 8,
+    "total_replied": 6,
+    "reply_rate_sent": 1.0,
+    "reply_rate_del": 1.0,
+    "total_ooo": 6,
     "total_meetings": 3,
     "meeting_rate": 0.5,
-    "total_touch2_sent": 29,
+    "total_touch2_sent": 28,
     "total_touch2_target": 28
   },
   "sectors": [
@@ -37,12 +37,12 @@
       "delivered": 30,
       "bounced": 0,
       "queued": 0,
-      "replied": 1,
-      "reply_rate_sent": 3.3,
-      "reply_rate_del": 3.3,
-      "ooo": 6,
+      "replied": 2,
+      "reply_rate_sent": 6.7,
+      "reply_rate_del": 6.7,
+      "ooo": 3,
       "meetings": 1,
-      "touch2_sent": 29
+      "touch2_sent": 28
     },
     {
       "key": "1. Mechanical / HVAC / Electrical Contractor",
@@ -52,13 +52,13 @@
       "desc": "Therma, ACCO, CBRE GWS, Devcon, Critchfield, Marelich",
       "verified": 420,
       "sent": 361,
-      "delivered": 354,
-      "bounced": 7,
+      "delivered": 355,
+      "bounced": 6,
       "queued": 59,
-      "replied": 3,
-      "reply_rate_sent": 0.8,
-      "reply_rate_del": 0.8,
-      "ooo": 7,
+      "replied": 4,
+      "reply_rate_sent": 1.1,
+      "reply_rate_del": 1.1,
+      "ooo": 3,
       "meetings": 2,
       "touch2_sent": 0
     },
@@ -76,7 +76,7 @@
       "replied": 0,
       "reply_rate_sent": 0.0,
       "reply_rate_del": 0.0,
-      "ooo": 3,
+      "ooo": 0,
       "meetings": 0,
       "touch2_sent": 0
     },
@@ -94,7 +94,7 @@
       "replied": 0,
       "reply_rate_sent": 0.0,
       "reply_rate_del": 0.0,
-      "ooo": 3,
+      "ooo": 0,
       "meetings": 0,
       "touch2_sent": 0
     }
@@ -207,12 +207,12 @@
       "cmms": "IBM TRIRIGA",
       "sent": true,
       "sent_date": "2026-10-20",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "touch2_sent": false,
+      "touch2_date": "",
+      "stage": "Positive Reply",
+      "reply_type": "Human Reply",
+      "reply_date": "Wed, 21 Oct 2026",
+      "reply_snippet": "Hi JK. Congratulations on launching Carbyn! Let me touch base with our Director of Building Maintenance to see if there is interest and time for a demo. I'll be back in touch soon. Christina M",
       "meeting_info": null
     },
     {
@@ -256,9 +256,9 @@
       "touch2_sent": true,
       "touch2_date": "2026-10-27",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Tue, 20 Oct 2026",
-      "reply_snippet": "I will be attending a conference through Thursday October 22, with intermittent access to email. For urgent matters please contact the Facilities front office a",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -279,9 +279,9 @@
       "touch2_sent": true,
       "touch2_date": "2026-10-27",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Tue, 27 Oct 2026",
-      "reply_snippet": "Thank you for your email. I am away from the office Monday 10/26 and Tuesday 10/27. If you need immediate assistance, please reach out to my Executive Assistant",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -394,9 +394,9 @@
       "touch2_sent": true,
       "touch2_date": "2026-10-27",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Tue, 27 Oct 2026",
-      "reply_snippet": "\ufeff Thank you for your message. I will be away from office October 22 - October 29. During this time: For Capital Planning, Design and Construction matters, pleas",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -1064,10 +1064,10 @@
       "sent_date": "2026-10-26",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "stage": "Positive Reply",
+      "reply_type": "Human Reply",
+      "reply_date": "Mon, 26 Oct 2026",
+      "reply_snippet": "Hi JK, Do you have availability to come by one of our offices to discuss? We are located in either SF or Pleasanton, please let me know when you could be available and we can set up a meeting with our",
       "meeting_info": null
     },
     {
@@ -2080,10 +2080,10 @@
       "sent_date": "2026-10-26",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Bounced",
-      "reply_type": "Bounce",
-      "reply_date": "25 Oct 2026 19:2",
-      "reply_snippet": "The following message to <devinmorell@wndventures.com> was undeliverable. The reason for the problem: 5.1.0 - Unknown address error 550-'5.4.1 Recipient address rejected: Access de",
+      "stage": "Sent",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -2633,9 +2633,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Fri, 23 Oct 2026",
-      "reply_snippet": "\ufeff \ufeff Hello and thank you for your message. I am currently out of the office, returning Monday 10/26. For any urgent bid matters or MDC inquiries please contact o",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -3530,9 +3530,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Thu, 22 Oct 2026",
-      "reply_snippet": "\ufeff I am currently out of the office on PTO with limited access to email and will return Tuesday October 26th. If this is an emergency please contact our Service ",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -4247,9 +4247,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Fri, 23 Oct 2026",
-      "reply_snippet": "\ufeff I will be out of office until August 31",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -4408,9 +4408,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Fri, 23 Oct 2026",
-      "reply_snippet": "\ufeffI will be out of office starting on 10/20 and returning on 10/27. I will have access to my email and cell phone periodically during this time so please expect ",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -4592,9 +4592,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Fri, 23 Oct 2026",
-      "reply_snippet": "I will be out of the office, Please contact Erik Clancy if you have any questions or you need assistance. Erik Ciancy erik.clancy@dole.com cell: 302 602 0815 Do",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -6202,9 +6202,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Mon, 26 Oct 2026",
-      "reply_snippet": "\ufeffI will be out of office starting on Monday (10/19) and returning back on Tuesday (11/3). The content of this message is APPLIED MATERIALS CONFIDENTIAL. If you ",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -6409,9 +6409,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Tue, 27 Oct 2026",
-      "reply_snippet": "Eric Madera is no longer with the organization. This email, including any attachments, may contain information that is confidential or proprietary. It is intend",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -7858,9 +7858,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Wed, 28 Oct 2026",
-      "reply_snippet": "Hello I am out of the office on October 19th to October 30th. My responses will be delayed. For issues related to Facilities SJ1-SJ2-SJ4, please contact Gunjan ",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -10250,9 +10250,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Thu, 29 Oct 2026",
-      "reply_snippet": "Greetings, Thank you for your email. I will be out of the office for the afternoon of 28 Oct 2026 and all day for 29 and 30 Oct for onsite Commissioning activit",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -11584,9 +11584,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Fri, 30 Oct 2026",
-      "reply_snippet": "All, I will be out of office starting 10/26/26 and returning 11/2/26. In my absence, please contract the following team members if it relates to Electrical, Mec",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
