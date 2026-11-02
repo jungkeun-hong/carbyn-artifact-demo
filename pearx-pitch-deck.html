@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carbyn · PearX Investor Pitch Deck (November 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Quantico:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --color-bg: #0B0B0C;
+    --color-surface: #17171A;
+    --color-text: #F4F4F2;
+    --color-muted: #8C8C8A;
+    --color-line: rgb(255 255 255 / 12%);
+    --color-glass: rgb(255 255 255 / 7%);
+    --color-glass-border: rgb(255 255 255 / 16%);
+    --color-paper: #EEEEEE;
+    --color-ink: #0B0B0C;
+    --color-primary: #FFD100;
+    --color-amber: #FF7A1A;
+    --color-red: #E5322D;
+    --color-deck-body: #D3D3D1;
+    --color-deck-white: #FFFFFF;
+    --color-deck-black: #000000;
+    --color-deck-logo-core: #FFCD11;
+    --color-deck-scrim: rgb(11 11 12 / 82%);
+    --color-deck-panel-top: oklab(28.7% 0.002 -0.007 / 82%);
+    --color-deck-panel-bottom: oklab(20.1% 0.001 -0.004 / 90%);
+    --font-deck: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, 'Pretendard', -apple-system, sans-serif;
+    --font-deck-wordmark: 'Quantico', sans-serif;
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: #050506;
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    -webkit-font-smoothing: antialiased;
+    padding: 36px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+  .topbar {
+    width: min(1920px, 96vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-deck-body);
+  }
+  .topbar a { color: var(--color-primary); text-decoration: none; }
+  .artboard-wrap { width: min(1920px, 96vw); position: relative; }
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    position: relative;
+    overflow: clip;
+    transform-origin: top left;
+  }
+  .bg-wave {
+    background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEWNVND870MNJJWF0AVHMF.png);
+    background-position: 50%;
+    background-size: cover;
+    height: 1080px; left: 0; opacity: 0.58; position: absolute; top: 0; width: 1920px;
+  }
+  .bg-scrim {
+    background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%);
+    height: 1080px; left: 0; position: absolute; top: 0; width: 1920px;
+  }
+  .header-row {
+    align-items: center; display: flex; justify-content: space-between;
+    left: 96px; position: absolute; top: 80px; width: 1728px;
+  }
+  .header-label {
+    color: var(--color-deck-body); font-size: 18px; font-weight: 500;
+    letter-spacing: 0.08em; line-height: 22px;
+  }
+  .wordmark { align-items: baseline; display: flex; flex-shrink: 0; }
+  .wordmark span {
+    color: var(--color-deck-white); font-family: var(--font-deck-wordmark);
+    font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;
+  }
+  .footer-row {
+    align-items: center; border-top: 1px solid var(--color-line);
+    bottom: 64px; display: flex; justify-content: space-between;
+    left: 96px; padding-top: 16px; position: absolute; width: 1728px;
+    color: var(--color-deck-body); font-size: 18px; line-height: 22px;
+  }
+  .glass-card {
+    backdrop-filter: blur(30px);
+    background-image: linear-gradient(in oklab 145deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 24px;
+  }
+  .gold-card {
+    backdrop-filter: blur(30px);
+    background-image: linear-gradient(145deg, rgba(255,209,0,0.18) 0%, rgba(23,23,26,0.92) 100%);
+    border: 1.5px solid rgba(255,209,0,0.65);
+    border-radius: 24px;
+  }
+  @page { size: 1920px 1080px; margin: 0; }
+  @media print {
+    html, body {
+      width: 1920px !important; margin: 0 !important; padding: 0 !important;
+      background-color: #0B0B0C !important; gap: 0 !important; display: block !important;
+      -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
+    }
+    .topbar { display: none !important; }
+    .artboard-wrap {
+      width: 1920px !important; height: 1080px !important; margin: 0 !important; padding: 0 !important;
+      page-break-after: always !important; break-after: page !important;
+    }
+    .artboard-wrap:last-of-type { page-break-after: auto !important; break-after: auto !important; }
+    .slide { transform: none !important; border: none !important; border-radius: 0 !important; width: 1920px !important; height: 1080px !important; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div>CARBYN · PEARX INVESTOR PITCH DECK (7 VISUAL SLIDES · 1920×1080)</div>
+  <div>Format: <a href="https://app.paper.design/file/01M4DBM7G6CHWH4ZGFCDCDJZPV/p-C-3" target="_blank">Carbyn Official Investor Design System</a></div>
+</div>
+
+<div class="artboard-wrap"><div class="slide" id="slide-01">
+  <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNDGGZ4MN67ANH66T5Z.png);background-position:50%;background-size:cover;height:1080px;left:0;opacity:0.58;position:absolute;top:0;width:1920px;"></div>
+  <div class="bg-scrim"></div>
+  <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/66PP8CFJG9JKXYW7CRHYSF2Q23.png);background-position:50%;background-size:cover;height:860px;left:1140px;position:absolute;top:120px;width:780px;"></div>
+  <div style="background-image:linear-gradient(in oklab 90deg, #0B0B0C 0%, #0B0B0CE6 20%, #0B0B0C00 100%);height:860px;left:1140px;position:absolute;top:120px;width:260px;"></div>
+  <div style="background-image:linear-gradient(in oklab 0deg, #0B0B0C 0%, #0B0B0C00 100%);height:200px;left:1140px;position:absolute;top:780px;width:780px;"></div>
+  <div class="header-row"><div class="header-label">PEARX · INVESTOR PITCH</div><div class="wordmark"><span>C</span><svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;flex-shrink:0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg><span>RBYN</span></div></div>
+  <div style="left:96px;position:absolute;top:210px;width:1080px;">
+    <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:20px;letter-spacing:0.1em;margin-bottom:20px;">PHYSICAL AI FOR INDUSTRIAL OPERATIONS</div>
+    <div style="color:var(--color-text);font-size:88px;font-weight:500;letter-spacing:-0.03em;line-height:96px;">Hands-free AI that<br/>finishes fieldwork.</div>
+    <div style="color:var(--color-deck-body);font-size:32px;line-height:42px;margin-top:24px;">Augmenting industrial technicians today.<br/>Orchestrating humans and machines next.</div>
+  </div>
+  <!-- 3-Stage Evolution Visual Bar -->
+  <div style="left:96px;position:absolute;top:560px;width:1040px;display:flex;gap:16px;align-items:stretch;">
+    <div class="gold-card" style="flex:1;padding:24px 28px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:16px;letter-spacing:0.08em;">STAGE 1 · NOW</div>
+      <div style="color:var(--color-text);font-size:28px;font-weight:600;line-height:34px;margin-top:8px;">Done-for-You Work</div>
+      <div style="color:var(--color-deck-body);font-size:20px;line-height:26px;margin-top:6px;">Auto-completed reports, quotes &amp; SOPs</div>
+    </div>
+    <div class="glass-card" style="flex:1;padding:24px 28px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="color:var(--color-deck-body);font-family:var(--font-mono);font-size:16px;letter-spacing:0.08em;">STAGE 2 · 12–18M</div>
+      <div style="color:var(--color-text);font-size:28px;font-weight:500;line-height:34px;margin-top:8px;">Site Context Engine</div>
+      <div style="color:var(--color-deck-body);font-size:20px;line-height:26px;margin-top:6px;">System 1–2 VLM &amp; 4D spatial memory</div>
+    </div>
+    <div class="glass-card" style="flex:1;padding:24px 28px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="color:var(--color-deck-body);font-family:var(--font-mono);font-size:16px;letter-spacing:0.08em;">STAGE 3 · ENDGAME</div>
+      <div style="color:var(--color-text);font-size:28px;font-weight:500;line-height:34px;margin-top:8px;">Human-Machine OS</div>
+      <div style="color:var(--color-deck-body);font-size:20px;line-height:26px;margin-top:6px;">Global planner for techs &amp; site robots</div>
+    </div>
+  </div>
+  <!-- Backed By Row -->
+  <div style="left:96px;position:absolute;top:776px;display:flex;align-items:center;gap:40px;">
+    <div style="color:var(--color-muted);font-size:18px;font-weight:500;letter-spacing:0.08em;">BACKED BY</div>
+    <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/0C9CHFKA0QBVJY8GSTE6G0Z5GX.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:54px;width:165px;"></div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/39XBSNR5F6QYWB2CPVMJEJXHS0.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:38px;width:38px;"></div>
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/52E66473NDQ2ZJNYBM9CB3A867.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:24px;width:96px;"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/0ZG12MX0WM151EET4DESNKS4CA.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:56px;width:56px;"></div>
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/4RMWZDB77V884W0BY6FQ2A72MH.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:66px;width:205px;"></div>
+    </div>
+  </div>
+  <div class="footer-row"><div>CARBYN · PEARX PITCH · NOV 2026</div><div>01 / 07</div></div>
+</div></div>
+
+<div class="artboard-wrap"><div class="slide" id="slide-02">
+  <div class="bg-wave"></div><div class="bg-scrim"></div>
+  <div class="header-row"><div class="header-label">01 · THE BOTTLENECK</div><div class="wordmark"><span>C</span><svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;flex-shrink:0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg><span>RBYN</span></div></div>
+  <div style="left:96px;position:absolute;top:184px;width:1728px;">
+    <div style="color:var(--color-text);font-size:80px;font-weight:500;letter-spacing:-0.03em;line-height:88px;">Only 30% of a shift is spent on the tools.</div>
+    <div style="color:var(--color-deck-body);font-size:32px;line-height:40px;margin-top:16px;">200+ site visits proved why software tools fail: greasy gloves can’t type, so 90% of tickets just say “Fixed.”</div>
+  </div>
+
+  <!-- Stacked Bar 1: Today -->
+  <div style="left:96px;position:absolute;top:384px;width:1728px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+      <div style="color:var(--color-deck-body);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">TODAY · TYPICAL 8-HOUR TECHNICIAN SHIFT</div>
+      <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">70% LOST TO FRICTION, SEARCHING &amp; PAPERWORK</div>
+    </div>
+    <div style="display:flex;gap:4px;height:108px;width:1728px;">
+      <div style="width:518px;background:var(--color-primary);border-radius:14px 0 0 14px;padding:18px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-ink);font-size:16px;font-weight:600;letter-spacing:0.08em;">WRENCH TIME</div>
+        <div style="color:var(--color-ink);font-size:44px;font-weight:600;line-height:44px;">30%</div>
+      </div>
+      <div style="width:414px;background:rgba(244,244,242,0.28);padding:18px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-text);font-size:16px;font-weight:500;letter-spacing:0.08em;">TRAVEL &amp; WALKING</div>
+        <div style="color:var(--color-text);font-size:40px;font-weight:500;line-height:40px;">24%</div>
+      </div>
+      <div style="width:310px;background:rgba(244,244,242,0.20);padding:18px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-text);font-size:16px;font-weight:500;letter-spacing:0.08em;">PARTS</div>
+        <div style="color:var(--color-text);font-size:40px;font-weight:500;line-height:40px;">18%</div>
+      </div>
+      <div style="width:206px;background:rgba(244,244,242,0.14);border:2px solid var(--color-primary);padding:16px 20px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-primary);font-size:15px;font-weight:600;letter-spacing:0.06em;">INFO SEARCH</div>
+        <div style="color:var(--color-text);font-size:40px;font-weight:500;line-height:40px;">11%</div>
+      </div>
+      <div style="width:264px;background:rgba(244,244,242,0.10);border:2px solid var(--color-primary);border-radius:0 14px 14px 0;padding:16px 20px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-primary);font-size:15px;font-weight:600;letter-spacing:0.06em;">REPORTS &amp; ADMIN</div>
+        <div style="color:var(--color-text);font-size:40px;font-weight:500;line-height:40px;">17%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stacked Bar 2: With Carbyn -->
+  <div style="left:96px;position:absolute;top:568px;width:1728px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
+      <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">WITH CARBYN · HANDS-FREE DONE-FOR-YOU OUTCOME</div>
+      <div style="color:var(--color-text);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">2× WRENCH CAPACITY · ZERO VAN TYPING</div>
+    </div>
+    <div style="display:flex;gap:4px;height:108px;width:1728px;">
+      <div style="width:1054px;background:var(--color-primary);border-radius:14px 0 0 14px;padding:18px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-ink);font-size:16px;font-weight:600;letter-spacing:0.08em;">WRENCH TIME (WORLD-CLASS BENCHMARK)</div>
+        <div style="color:var(--color-ink);font-size:44px;font-weight:600;line-height:44px;">61%</div>
+      </div>
+      <div style="width:294px;background:rgba(244,244,242,0.28);padding:18px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-text);font-size:16px;font-weight:500;letter-spacing:0.08em;">TRAVEL</div>
+        <div style="color:var(--color-text);font-size:40px;font-weight:500;line-height:40px;">17%</div>
+      </div>
+      <div style="width:206px;background:rgba(244,244,242,0.18);padding:18px 24px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-text);font-size:16px;font-weight:500;letter-spacing:0.08em;">PARTS</div>
+        <div style="color:var(--color-text);font-size:40px;font-weight:500;line-height:40px;">12%</div>
+      </div>
+      <div style="width:162px;background:rgba(244,244,242,0.10);border-radius:0 14px 14px 0;padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="color:var(--color-deck-body);font-size:15px;font-weight:500;letter-spacing:0.06em;">AUTO-DOCS</div>
+        <div style="color:var(--color-text);font-size:40px;font-weight:500;line-height:40px;">10%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Bottom KPI Callouts -->
+  <div style="left:96px;position:absolute;top:748px;width:1728px;display:flex;gap:32px;">
+    <div class="glass-card" style="flex:1;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:16px;">REPORT &amp; QUOTE CLOSEOUT</div>
+        <div style="color:var(--color-text);font-size:26px;margin-top:4px;">Sitting in truck typing → Live voice</div>
+      </div>
+      <div style="color:var(--color-primary);font-size:48px;font-weight:600;">45m → 30s</div>
+    </div>
+    <div class="glass-card" style="flex:1;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:16px;">SOP &amp; TRAINING CREATION</div>
+        <div style="color:var(--color-text);font-size:26px;margin-top:4px;">1st-person POV → Multilingual SOP</div>
+      </div>
+      <div style="color:var(--color-primary);font-size:48px;font-weight:600;">2hr → Instant</div>
+    </div>
+    <div class="glass-card" style="flex:1;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:16px;">ON-DEVICE ROUTING LATENCY</div>
+        <div style="color:var(--color-text);font-size:26px;margin-top:4px;">Works in offline / noisy rooms</div>
+      </div>
+      <div style="color:var(--color-primary);font-size:48px;font-weight:600;">0.21 sec</div>
+    </div>
+  </div>
+  <div class="footer-row"><div>CARBYN · PEARX PITCH · NOV 2026</div><div>02 / 07</div></div>
+</div></div>
+
+<div class="artboard-wrap"><div class="slide" id="slide-03">
+  <div class="bg-wave"></div><div class="bg-scrim"></div>
+  <div class="header-row"><div class="header-label">02 · THE WEDGE · DONE-FOR-YOU OUTCOME</div><div class="wordmark"><span>C</span><svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;flex-shrink:0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg><span>RBYN</span></div></div>
+  <div style="left:96px;position:absolute;top:184px;width:1728px;">
+    <div style="color:var(--color-text);font-size:80px;font-weight:500;letter-spacing:-0.03em;line-height:88px;">Don’t ship a tool. Deliver finished work.</div>
+    <div style="color:var(--color-deck-body);font-size:32px;line-height:40px;margin-top:16px;">Customers don’t want another dashboard to learn. They buy completed reports, quotes, and SOPs.</div>
+  </div>
+
+  <!-- 3-Column Visual Flow Diagram -->
+  <div style="left:96px;position:absolute;top:372px;width:1728px;height:540px;display:flex;gap:28px;align-items:stretch;">
+    <!-- Col 1: Capture -->
+    <div class="glass-card" style="width:520px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">01 · POINT-OF-WORK CAPTURE</div>
+        <div style="color:var(--color-text);font-size:36px;font-weight:500;line-height:42px;margin-top:10px;">Smartphone or Z87+ Glasses</div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;justify-content:center;height:270px;background:rgba(255,255,255,0.04);border-radius:18px;padding:16px;">
+        <div style="background:#fff;border-radius:14px;padding:10px;width:220px;height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/4C7YZ23A0VKB6S8SW6558A7GGN.png);background-position:50%;background-repeat:no-repeat;background-size:contain;width:190px;height:140px;"></div>
+          <div style="color:#0B0B0C;font-size:16px;font-weight:600;margin-top:10px;">ANSI Z87.1+ GLASSES</div>
+        </div>
+        <div style="background:#111;border:1px solid var(--color-glass-border);border-radius:14px;padding:8px;width:210px;height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/61STBK8NFJVDM8K5QZFJESM8YG.png);background-position:50%;background-repeat:no-repeat;background-size:contain;width:180px;height:175px;"></div>
+          <div style="color:var(--color-text);font-size:16px;font-weight:500;margin-top:4px;">30s PHONE ONBOARD</div>
+        </div>
+      </div>
+      <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;">Zero developer mode. Works on any iPhone/Android or hands-free safety glasses.</div>
+    </div>
+
+    <!-- Arrow 1 -->
+    <div style="display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:44px;font-weight:600;">→</div>
+
+    <!-- Col 2: Engine -->
+    <div class="glass-card" style="width:520px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">02 · ON-DEVICE VLM ENGINE</div>
+        <div style="color:var(--color-text);font-size:36px;font-weight:500;line-height:42px;margin-top:10px;">Visual &amp; Voice Grounding</div>
+      </div>
+      <div style="display:flex;gap:14px;height:270px;">
+        <div style="flex:1;background:#111;border:1px solid var(--color-glass-border);border-radius:16px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="background-image:url(assets/sop/gauge_100psi.jpg);background-position:50%;background-repeat:no-repeat;background-size:contain;width:100%;height:190px;border-radius:10px;"></div>
+          <div style="background:var(--color-primary);color:#0B0B0C;font-family:var(--font-mono);font-size:15px;font-weight:600;padding:6px 10px;border-radius:8px;text-align:center;">PASS · 100 PSI VERIFIED</div>
+        </div>
+        <div style="flex:1;background:#111;border:1px solid var(--color-glass-border);border-radius:16px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="background-image:url(assets/sop/before_fitting.jpg);background-position:50%;background-repeat:no-repeat;background-size:contain;width:100%;height:190px;border-radius:10px;"></div>
+          <div style="background:rgba(255,255,255,0.12);color:var(--color-text);font-family:var(--font-mono);font-size:15px;font-weight:500;padding:6px 10px;border-radius:8px;text-align:center;">QUOTE · VALVE FLAGGED</div>
+        </div>
+      </div>
+      <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;">1.3B on-device router (0.21s) + VLM extracts gauges, nameplates &amp; steps automatically.</div>
+    </div>
+
+    <!-- Arrow 2 -->
+    <div style="display:flex;align-items:center;justify-content:center;color:var(--color-primary);font-size:44px;font-weight:600;">→</div>
+
+    <!-- Col 3: Finished Output -->
+    <div class="gold-card" style="flex:1;padding:32px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">03 · FINISHED DELIVERABLES</div>
+        <div style="color:var(--color-text);font-size:36px;font-weight:600;line-height:42px;margin-top:10px;">Pushed Directly to CMMS</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="background:#FFFFFF;color:#0B0B0C;border-radius:16px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:14px;font-weight:700;letter-spacing:0.06em;color:#555;">DELIVERABLE 01</div>
+            <div style="font-size:24px;font-weight:600;margin-top:2px;">1-Page Inline Photo Report</div>
+          </div>
+          <div style="background:#0B0B0C;color:#FFD100;font-family:var(--font-mono);font-size:18px;font-weight:600;padding:8px 14px;border-radius:10px;">PDF + API</div>
+        </div>
+        <div style="background:#FFFFFF;color:#0B0B0C;border-radius:16px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:14px;font-weight:700;letter-spacing:0.06em;color:#555;">DELIVERABLE 02</div>
+            <div style="font-size:24px;font-weight:600;margin-top:2px;">Same-Day Estimator Quote Packet</div>
+          </div>
+          <div style="background:#0B0B0C;color:#FFD100;font-family:var(--font-mono);font-size:18px;font-weight:600;padding:8px 14px;border-radius:10px;">AUTO-SPEC</div>
+        </div>
+        <div style="background:#FFFFFF;color:#0B0B0C;border-radius:16px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <div style="font-size:14px;font-weight:700;letter-spacing:0.06em;color:#555;">DELIVERABLE 03</div>
+            <div style="font-size:24px;font-weight:600;margin-top:2px;">Multilingual Video-to-SOP</div>
+          </div>
+          <div style="background:#0B0B0C;color:#FFD100;font-family:var(--font-mono);font-size:18px;font-weight:600;padding:8px 14px;border-radius:10px;">EN/ES/ZH/VI</div>
+        </div>
+      </div>
+      <div style="color:var(--color-text);font-size:20px;font-family:var(--font-mono);">10+ LIVE INTEGRATIONS: MAXIMO · MAINTAINX · PROCORE · BUILDOPS</div>
+    </div>
+  </div>
+  <div class="footer-row"><div>CARBYN · PEARX PITCH · NOV 2026</div><div>03 / 07</div></div>
+</div></div>
+
+<div class="artboard-wrap"><div class="slide" id="slide-04">
+  <div class="bg-wave"></div><div class="bg-scrim"></div>
+  <div class="header-row"><div class="header-label">03 · STRATEGIC MATRIX · WHY MAINTENANCE FIRST</div><div class="wordmark"><span>C</span><svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;flex-shrink:0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg><span>RBYN</span></div></div>
+  <div style="left:96px;position:absolute;top:184px;width:1728px;">
+    <div style="color:var(--color-text);font-size:72px;font-weight:500;letter-spacing:-0.03em;line-height:80px;">Start where robots are 10+ years away &amp; downtime hurts most.</div>
+    <div style="color:var(--color-deck-body);font-size:30px;line-height:38px;margin-top:12px;">Mapping the physical world by task structure (X-axis) and hourly downtime cost (Y-axis).</div>
+  </div>
+
+  <!-- 2x2 Chart Container -->
+  <div style="left:96px;position:absolute;top:356px;width:1728px;height:564px;display:flex;gap:32px;">
+    <!-- Y-Axis Label Column -->
+    <div style="width:64px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:24px 0;border-right:2px solid var(--color-line);">
+      <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:16px;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.1em;">HIGH COST ($50K–$260K/HR)</div>
+      <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:16px;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.1em;">DOWNTIME &amp; ERROR COST ▲</div>
+      <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:16px;writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:0.1em;">LOW COST (&lt;$1K/HR)</div>
+    </div>
+
+    <!-- 2x2 Grid -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:20px;">
+      <!-- Top Row (High Downtime Cost) -->
+      <div style="flex:1.25;display:flex;gap:24px;">
+        <!-- Top-Left: STAGE 1 BEACHHEAD -->
+        <div class="gold-card" style="flex:1;padding:28px 32px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="background:var(--color-primary);color:#0B0B0C;font-family:var(--font-mono);font-size:16px;font-weight:700;padding:6px 14px;border-radius:999px;">01 · BEACHHEAD TODAY (HUMAN 10× AUGMENTATION)</div>
+            <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;">ROBOTS: 10+ YRS</div>
+          </div>
+          <div>
+            <div style="color:var(--color-text);font-size:36px;font-weight:600;line-height:42px;">Plant Maintenance, MEP &amp; Data Centers</div>
+            <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;margin-top:6px;">Unstructured diagnostics inside ceiling plenums, furnaces &amp; chillers. Humans remain essential; we automate their reports, quotes &amp; tribal knowledge.</div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="background:rgba(255,255,255,0.14);color:#FFF;font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">JW Aluminum</span>
+            <span style="background:rgba(255,255,255,0.14);color:#FFF;font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">Therma (Legence)</span>
+            <span style="background:rgba(255,255,255,0.14);color:#FFF;font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">UCSF / CBRE</span>
+            <span style="background:rgba(255,255,255,0.14);color:#FFF;font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">Calpine / Imerys</span>
+          </div>
+        </div>
+
+        <!-- Top-Right: STAGE 2 EXPANSION -->
+        <div class="glass-card" style="flex:1;padding:28px 32px;display:flex;flex-direction:column;justify-content:space-between;border:1.5px solid rgba(255,255,255,0.32);">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div style="background:rgba(255,255,255,0.16);color:#FFF;font-family:var(--font-mono);font-size:16px;font-weight:600;padding:6px 14px;border-radius:999px;">02 · EXPANSION (VLM VERIFICATION &amp; PATROL)</div>
+            <div style="color:var(--color-text);font-family:var(--font-mono);font-size:18px;">AI / ROBOTS: NOW–5 YRS</div>
+          </div>
+          <div>
+            <div style="color:var(--color-text);font-size:36px;font-weight:500;line-height:42px;">Line Changeover, QA/QC &amp; Site Inspection</div>
+            <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;margin-top:6px;">Semi-structured setup recipes &amp; visual defect checks. Captured video SOPs directly train real-time VLM Pass/Fail inspectors &amp; patrol robots.</div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <span style="background:rgba(255,209,0,0.2);color:var(--color-primary);font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">Dunmore (K30 Line)</span>
+            <span style="background:rgba(255,209,0,0.2);color:var(--color-primary);font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">Seagate</span>
+            <span style="background:rgba(255,209,0,0.2);color:var(--color-primary);font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">E2E Mfg (Google F0)</span>
+            <span style="background:rgba(255,209,0,0.2);color:var(--color-primary);font-family:var(--font-mono);font-size:16px;padding:6px 14px;border-radius:8px;">Devcon GC</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row (Lower Downtime Cost / Commodity) -->
+      <div style="flex:0.75;display:flex;gap:24px;">
+        <!-- Bottom-Left: Deprioritized -->
+        <div class="glass-card" style="flex:1;padding:20px 32px;opacity:0.55;display:flex;flex-direction:column;justify-content:center;">
+          <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:15px;">LOW PRIORITY · RESIDENTIAL &amp; SMALL SHOPS</div>
+          <div style="color:var(--color-text);font-size:26px;font-weight:500;margin-top:4px;">Small Commercial / Residential Handyman</div>
+          <div style="color:var(--color-muted);font-size:19px;margin-top:4px;">Unstructured work, but low hourly downtime cost → low willingness to pay.</div>
+        </div>
+        <!-- Bottom-Right: STAGE 3 ENDGAME -->
+        <div class="glass-card" style="flex:1;padding:20px 32px;display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;justify-content:space-between;">
+            <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:15px;">03 · ENDGAME · HIGH-LEVEL ROBOT PLANNER</div>
+            <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:15px;">ROBOTS: NOW–3 YRS</div>
+          </div>
+          <div style="color:var(--color-text);font-size:26px;font-weight:500;margin-top:4px;">Repetitive Assembly, Civil Layout &amp; Fulfillment</div>
+          <div style="color:var(--color-deck-body);font-size:19px;margin-top:4px;">Carbyn’s 4D procedural task graph acts as the deployment layer for site robotics.</div>
+        </div>
+      </div>
+
+      <!-- X-Axis Footer Bar -->
+      <div style="border-top:2px solid var(--color-line);padding-top:10px;display:flex;justify-content:space-between;color:var(--color-muted);font-family:var(--font-mono);font-size:16px;letter-spacing:0.08em;">
+        <div>◀ UNSTRUCTURED ENVIRONMENT (10+ YR ROBOT HORIZON)</div>
+        <div>TASK STRUCTURE &amp; AUTOMATION READINESS</div>
+        <div>STRUCTURED / REPETITIVE (NEAR-TERM VLM &amp; ROBOTS) ▶</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-row"><div>CARBYN · PEARX PITCH · NOV 2026</div><div>04 / 07</div></div>
+</div></div>
+
+<div class="artboard-wrap"><div class="slide" id="slide-05">
+  <div class="bg-wave"></div><div class="bg-scrim"></div>
+  <div class="header-row"><div class="header-label">04 · LONG-TERM VISION &amp; DATA MOAT</div><div class="wordmark"><span>C</span><svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;flex-shrink:0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg><span>RBYN</span></div></div>
+  <div style="left:96px;position:absolute;top:184px;width:1728px;">
+    <div style="color:var(--color-text);font-size:72px;font-weight:500;letter-spacing:-0.03em;line-height:80px;">Robotics builds the hands. Carbyn builds the site brain.</div>
+    <div style="color:var(--color-deck-body);font-size:30px;line-height:38px;margin-top:12px;">Every completed report builds the procedural &amp; spatial task graph required to orchestrate humans and machines.</div>
+  </div>
+
+  <!-- Left: 3-Layer Architecture Stack | Right: Proprietary Data Moat Matrix -->
+  <div style="left:96px;position:absolute;top:364px;width:1728px;height:548px;display:flex;gap:36px;">
+    <!-- Left Column: Architecture Stack -->
+    <div style="width:820px;display:flex;flex-direction:column;gap:18px;justify-content:space-between;">
+      <div class="gold-card" style="padding:26px 32px;flex:1.15;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:17px;font-weight:600;">LAYER 3 · CARBYN HIGH-LEVEL PLANNER (OUR MOAT)</div>
+          <div style="background:var(--color-primary);color:#0B0B0C;font-family:var(--font-mono);font-size:14px;font-weight:700;padding:4px 12px;border-radius:999px;">GLOBAL SITE BRAIN</div>
+        </div>
+        <div style="color:var(--color-text);font-size:32px;font-weight:600;line-height:38px;">4D Spatial Twin + Procedural Task Graph</div>
+        <div style="color:var(--color-deck-body);font-size:21px;line-height:28px;">Knows every valve, gauge tolerance, and failure mode at the customer’s site. Routes complex diagnostics to humans and structured checks to AI/robots.</div>
+      </div>
+
+      <div class="glass-card" style="padding:24px 32px;flex:1;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:17px;">LAYER 2 · SYSTEM 1–2 MULTIMODAL ENGINE</div>
+          <div style="color:var(--color-deck-body);font-family:var(--font-mono);font-size:15px;">ON-DEVICE + CLOUD</div>
+        </div>
+        <div style="color:var(--color-text);font-size:30px;font-weight:500;line-height:36px;">0.21s Edge Router + Video QA Verification</div>
+        <div style="color:var(--color-deck-body);font-size:20px;line-height:27px;">System 1 reacts live in offline mechanical rooms; System 2 verifies completed repairs against SOP specs.</div>
+      </div>
+
+      <div class="glass-card" style="padding:22px 32px;flex:0.85;opacity:0.75;display:flex;flex-direction:column;justify-content:space-between;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:17px;">LAYER 1 · HARDWARE ENDPOINTS (COMMODITIZED)</div>
+          <div style="color:var(--color-muted);font-family:var(--font-mono);font-size:15px;">PLUG &amp; PLAY</div>
+        </div>
+        <div style="color:var(--color-text);font-size:28px;font-weight:500;">Smartphones · Z87+ Glasses · Fixed Cameras · Patrol Robots</div>
+      </div>
+    </div>
+
+    <!-- Right Column: The Data Only We Capture (Visual Matrix from p-E-1) -->
+    <div class="glass-card" style="flex:1;padding:32px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;letter-spacing:0.08em;">WHY GENERIC VLM &amp; CMMS VENDORS CAN’T COPY US</div>
+        <div style="color:var(--color-text);font-size:34px;font-weight:500;margin-top:8px;">Closed-Loop Field Data Flywheel</div>
+      </div>
+
+      <!-- Matrix Table -->
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="display:flex;border-bottom:1px solid var(--color-line);padding-bottom:12px;color:var(--color-muted);font-family:var(--font-mono);font-size:15px;">
+          <div style="flex:2.2;">DATA LAYER</div>
+          <div style="flex:1;text-align:center;">ONLY US</div>
+          <div style="flex:1;text-align:center;">EXPERT LABELED</div>
+          <div style="flex:1;text-align:center;">OUTCOME TIED</div>
+        </div>
+        <div style="display:flex;align-items:center;border-bottom:1px solid var(--color-line);height:88px;">
+          <div style="flex:2.2;">
+            <div style="color:var(--color-primary);font-size:26px;font-weight:600;">Fix + 30-Day Outcome Pairs</div>
+            <div style="color:var(--color-deck-body);font-size:18px;">What the tech did + whether the repair held</div>
+          </div>
+          <div style="flex:1;text-align:center;color:var(--color-primary);font-size:28px;">●</div>
+          <div style="flex:1;text-align:center;color:var(--color-primary);font-size:28px;">●</div>
+          <div style="flex:1;text-align:center;color:var(--color-primary);font-size:28px;">●</div>
+        </div>
+        <div style="display:flex;align-items:center;border-bottom:1px solid var(--color-line);height:88px;">
+          <div style="flex:2.2;">
+            <div style="color:var(--color-text);font-size:26px;font-weight:500;">1st-Person POV Work Video</div>
+            <div style="color:var(--color-deck-body);font-size:18px;">Hands-on gauge, valve &amp; tool sequences</div>
+          </div>
+          <div style="flex:1;text-align:center;color:var(--color-text);font-size:28px;">●</div>
+          <div style="flex:1;text-align:center;color:var(--color-text);font-size:28px;">●</div>
+          <div style="flex:1;text-align:center;color:var(--color-muted);font-size:28px;">○</div>
+        </div>
+        <div style="display:flex;align-items:center;border-bottom:1px solid var(--color-line);height:88px;">
+          <div style="flex:2.2;">
+            <div style="color:var(--color-text);font-size:26px;font-weight:500;">Graded Report Corrections</div>
+            <div style="color:var(--color-deck-body);font-size:18px;">Tech edits train trade-specific vocabulary</div>
+          </div>
+          <div style="flex:1;text-align:center;color:var(--color-muted);font-size:28px;">○</div>
+          <div style="flex:1;text-align:center;color:var(--color-text);font-size:28px;">●</div>
+          <div style="flex:1;text-align:center;color:var(--color-text);font-size:28px;">●</div>
+        </div>
+        <div style="display:flex;align-items:center;height:76px;opacity:0.45;">
+          <div style="flex:2.2;">
+            <div style="color:var(--color-text);font-size:24px;">Legacy CMMS Tickets (“Fixed”)</div>
+            <div style="color:var(--color-deck-body);font-size:17px;">Zero visual or procedural context</div>
+          </div>
+          <div style="flex:1;text-align:center;color:var(--color-muted);font-size:28px;">○</div>
+          <div style="flex:1;text-align:center;color:var(--color-muted);font-size:28px;">○</div>
+          <div style="flex:1;text-align:center;color:var(--color-muted);font-size:28px;">○</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-row"><div>CARBYN · PEARX PITCH · NOV 2026</div><div>05 / 07</div></div>
+</div></div>
+
+<div class="artboard-wrap"><div class="slide" id="slide-06">
+  <div class="bg-wave"></div><div class="bg-scrim"></div>
+  <div class="header-row"><div class="header-label">05 · TRACTION &amp; MARKET</div><div class="wordmark"><span>C</span><svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;flex-shrink:0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg><span>RBYN</span></div></div>
+  <div style="left:96px;position:absolute;top:184px;width:1728px;">
+    <div style="color:var(--color-text);font-size:76px;font-weight:500;letter-spacing:-0.03em;line-height:84px;">Built in 10 weeks. Live across factories &amp; MEP.</div>
+    <div style="color:var(--color-deck-body);font-size:30px;line-height:38px;margin-top:12px;">From first code in August 2026 to active deployments across manufacturing, data center MEP, and semiconductors.</div>
+  </div>
+
+  <!-- Left: Traction Stats & Bar Chart | Right: TAM/SAM/SOM Concentric Visual -->
+  <div style="left:96px;position:absolute;top:356px;width:1728px;height:560px;display:flex;gap:36px;">
+    <!-- Left Card: Traction Funnel & Active Logos -->
+    <div class="glass-card" style="flex:1.15;padding:32px 36px;display:flex;flex-direction:column;justify-content:space-between;">
+      <!-- Top 3 Big Numbers -->
+      <div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--color-line);padding-bottom:24px;">
+        <div>
+          <div style="color:var(--color-primary);font-size:84px;font-weight:600;line-height:84px;letter-spacing:-0.03em;">200+</div>
+          <div style="color:var(--color-deck-body);font-size:22px;margin-top:8px;">Onsite plant &amp; field visits</div>
+        </div>
+        <div>
+          <div style="color:var(--color-text);font-size:84px;font-weight:500;line-height:84px;letter-spacing:-0.03em;">27</div>
+          <div style="color:var(--color-deck-body);font-size:22px;margin-top:8px;">Signed LOIs ($480K ARR)</div>
+        </div>
+        <div>
+          <div style="color:var(--color-primary);font-size:84px;font-weight:600;line-height:84px;letter-spacing:-0.03em;">10+</div>
+          <div style="color:var(--color-deck-body);font-size:22px;margin-top:8px;">Live CMMS integrations</div>
+        </div>
+      </div>
+
+      <!-- Active Enterprise Deployments & Pilots -->
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:17px;letter-spacing:0.08em;">ACTIVE DEPLOYMENTS &amp; SCOPED PILOTS (NOV 2026)</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.06);padding:14px 20px;border-radius:14px;">
+          <div style="color:var(--color-text);font-size:25px;font-weight:600;">E2E Manufacturing <span style="color:var(--color-deck-body);font-weight:400;font-size:21px;">· Precision CNC / Google F0 supplier</span></div>
+          <span style="background:var(--color-primary);color:#0B0B0C;font-family:var(--font-mono);font-size:15px;font-weight:700;padding:5px 12px;border-radius:8px;">LIVE ON PROSHOP</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.06);padding:14px 20px;border-radius:14px;">
+          <div style="color:var(--color-text);font-size:25px;font-weight:600;">JW Aluminum &amp; Dunmore <span style="color:var(--color-deck-body);font-weight:400;font-size:21px;">· 70-tech mill &amp; aerospace film</span></div>
+          <span style="background:var(--color-primary);color:#0B0B0C;font-family:var(--font-mono);font-size:15px;font-weight:700;padding:5px 12px;border-radius:8px;">NOV ONSITE KICKOFF</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.06);padding:14px 20px;border-radius:14px;">
+          <div style="color:var(--color-text);font-size:25px;font-weight:600;">Therma (Legence) <span style="color:var(--color-deck-body);font-weight:400;font-size:21px;">· 80-tech commercial HVAC / MEP</span></div>
+          <span style="background:rgba(255,255,255,0.16);color:#FFF;font-family:var(--font-mono);font-size:15px;font-weight:600;padding:5px 12px;border-radius:8px;">$5.7K PILOT → $48K+ ROLLOUT</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.06);padding:14px 20px;border-radius:14px;">
+          <div style="color:var(--color-text);font-size:25px;font-weight:600;">Seagate &amp; UCSF <span style="color:var(--color-deck-body);font-weight:400;font-size:21px;">· Wafer fab PM &amp; campus facilities</span></div>
+          <span style="background:rgba(255,255,255,0.16);color:#FFF;font-family:var(--font-mono);font-size:15px;font-weight:600;padding:5px 12px;border-radius:8px;">SCOPING ($10K–$20K PILOTS)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Card: Market Concentric Circles + Revenue Model -->
+    <div class="glass-card" style="flex:0.85;padding:32px 36px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+      <div>
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:17px;letter-spacing:0.08em;">MARKET OPPORTUNITY ($1,800/YR BASE SEAT)</div>
+        <div style="color:var(--color-text);font-size:32px;font-weight:500;margin-top:6px;">$42B+ Global Physical Operations</div>
+      </div>
+
+      <!-- Concentric Circles Visual -->
+      <div style="position:relative;height:320px;display:flex;align-items:center;justify-content:center;">
+        <div style="width:310px;height:310px;border-radius:999px;background:radial-gradient(circle, rgba(255,122,26,0.28) 0%, rgba(255,122,26,0.05) 100%);border:1px solid rgba(255,122,26,0.45);position:absolute;left:420px;display:flex;flex-direction:column;justify-content:center;padding-left:36px;">
+          <div style="color:var(--color-deck-body);font-family:var(--font-mono);font-size:16px;">TAM · GLOBAL</div>
+          <div style="color:var(--color-text);font-size:56px;font-weight:600;line-height:60px;">$42B+</div>
+          <div style="color:var(--color-deck-body);font-size:18px;">23M+ industrial workers</div>
+        </div>
+        <div style="width:230px;height:230px;border-radius:999px;background:linear-gradient(145deg, rgba(255,209,0,0.32), rgba(255,122,26,0.22));border:1.5px solid rgba(255,209,0,0.6);position:absolute;left:210px;display:flex;flex-direction:column;justify-content:center;padding-left:28px;">
+          <div style="color:var(--color-text);font-family:var(--font-mono);font-size:15px;">SAM · US</div>
+          <div style="color:var(--color-text);font-size:46px;font-weight:600;line-height:50px;">$12B+</div>
+          <div style="color:var(--color-deck-body);font-size:16px;">6.7M US techs</div>
+        </div>
+        <div style="width:156px;height:156px;border-radius:999px;background:linear-gradient(145deg, #FFE24D, #FFB402);box-shadow:0 16px 40px rgba(255,180,0,0.35);position:absolute;left:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+          <div style="color:#0B0B0C;font-family:var(--font-mono);font-size:14px;font-weight:700;">SOM · US</div>
+          <div style="color:#0B0B0C;font-size:38px;font-weight:700;line-height:42px;">$3.6B</div>
+          <div style="color:#0B0B0C;font-size:14px;font-weight:600;">2M Mfg &amp; MEP</div>
+        </div>
+      </div>
+
+      <!-- Pricing Bar -->
+      <div style="background:rgba(255,255,255,0.06);border-radius:14px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:14px;">LAND &amp; EXPAND MODEL</div>
+          <div style="color:var(--color-text);font-size:20px;margin-top:2px;">$70–$200/tech/mo SaaS + Site Automation Tier</div>
+        </div>
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:22px;font-weight:600;">$50K–$150K/site</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-row"><div>CARBYN · PEARX PITCH · NOV 2026</div><div>06 / 07</div></div>
+</div></div>
+
+<div class="artboard-wrap"><div class="slide" id="slide-07">
+  <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEWNVPQ0GSRKDF3WETJ4MH.png);background-position:50%;background-size:cover;height:1080px;left:0;opacity:0.58;position:absolute;top:0;width:1920px;"></div>
+  <div class="bg-scrim"></div>
+  <div class="header-row"><div class="header-label">06 · TEAM &amp; ADVISORS</div><div class="wordmark"><span>C</span><svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;flex-shrink:0;"><polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)"/><polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)"/></svg><span>RBYN</span></div></div>
+  <div style="left:96px;position:absolute;top:196px;width:1680px;">
+    <div style="color:var(--color-text);font-size:64px;font-weight:500;letter-spacing:-0.03em;line-height:74px;">Plant-floor operator meets defense robotics &amp; on-device AI.</div>
+    <div style="color:var(--color-deck-body);font-size:30px;line-height:38px;margin-top:14px;">Two founders united by one question: how physical work is understood and transferred between humans and machines.</div>
+  </div>
+
+  <!-- Founder Card 1: JK -->
+  <div class="glass-card" style="left:96px;top:380px;width:848px;height:292px;padding:24px;position:absolute;display:flex;flex-direction:column;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:32px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/6PT7P0EMQXF11KX6EMDYDCBG3B.png);background-position:50%;background-size:cover;border-radius:12px;width:144px;height:180px;flex-shrink:0;"></div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;font-weight:600;letter-spacing:0.08em;">CEO · INDUSTRIAL &amp; GTM</div>
+        <div style="color:var(--color-text);font-size:36px;font-weight:500;line-height:42px;">JK (Jungkeun) Hong</div>
+        <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;">Ex-McKinsey &amp; Kearney (6 yrs manufacturing ops)<br/>UC Berkeley Haas MBA · Former Santa Clara machinist</div>
+      </div>
+    </div>
+    <div style="align-items:center;background:#FFF;border-radius:8px;display:flex;gap:16px;height:48px;justify-content:center;padding:0 12px;width:800px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/74JCFABY4Q49CSS2TP7MR4ZEHH.png);background-position:50%;background-repeat:no-repeat;background-size:176px;height:48px;width:248px;"></div>
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/0SBBBZ1VEYBCJD2MQF13JKDWVW.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:40px;width:248px;"></div>
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/5XVV9YRJATKZ41BDNBCKGX5XT0.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:40px;width:248px;"></div>
+    </div>
+  </div>
+
+  <!-- Founder Card 2: Neo -->
+  <div class="glass-card" style="left:976px;top:380px;width:848px;height:292px;padding:24px;position:absolute;display:flex;flex-direction:column;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:32px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/2H025RMN8M9XZBJJ7KY8YNRNT6.png);background-position:50%;background-size:cover;border-radius:12px;width:144px;height:180px;flex-shrink:0;"></div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="color:var(--color-primary);font-family:var(--font-mono);font-size:18px;font-weight:600;letter-spacing:0.08em;">CTO · ON-DEVICE AI &amp; ROBOTICS</div>
+        <div style="color:var(--color-text);font-size:36px;font-weight:500;line-height:42px;">Neo (Dohyeon) Lee</div>
+        <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;">Korea Agency for Defense Development (autonomous field robots)<br/>POSTECH CS &amp; Math · KAIST Lab · 2 Edge-AI Patents</div>
+      </div>
+    </div>
+    <div style="align-items:center;background:#FFF;border-radius:8px;display:flex;gap:13px;height:48px;justify-content:center;padding:0 12px;width:800px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/4BNJJHXZXGX6987S6X6RBGHGDA.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:40px;width:250px;"></div>
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/5PCQPD70K1307RXF841FD9K437.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:40px;width:250px;"></div>
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/7Y2NE27AGHH3ZPCZD41F9DK457.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:40px;width:250px;"></div>
+    </div>
+  </div>
+
+  <!-- Advisors Label -->
+  <div style="left:96px;top:688px;position:absolute;color:var(--color-deck-body);font-size:18px;font-weight:500;letter-spacing:0.08em;">INVESTORS &amp; INDUSTRY ADVISORS</div>
+
+  <!-- Advisor 1 -->
+  <div class="glass-card" style="left:96px;top:724px;width:552px;height:224px;padding:24px;position:absolute;display:flex;flex-direction:column;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:24px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/0XZV5YS8E2XY84AHKKJHMJNDRR.png);background-position:50%;background-size:cover;border-radius:12px;width:104px;height:128px;flex-shrink:0;"></div>
+      <div>
+        <div style="color:var(--color-text);font-size:28px;font-weight:500;line-height:34px;">Frederic Kerrest</div>
+        <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;margin-top:8px;">Co-founder &amp; Vice Chairman, Okta<br/>Pre-Seed Investor</div>
+      </div>
+    </div>
+    <div style="align-items:center;background:#FFF;border-radius:8px;display:flex;height:36px;justify-content:center;width:504px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/6FP2GSMEXC1QV0F25ST89P8HBE.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:30px;width:160px;"></div>
+    </div>
+  </div>
+
+  <!-- Advisor 2 -->
+  <div class="glass-card" style="left:684px;top:724px;width:552px;height:224px;padding:24px;position:absolute;display:flex;flex-direction:column;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:24px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/569Q43Y4J98GDGWDBGCZD33V23.png);background-position:50%;background-size:cover;border-radius:12px;width:104px;height:128px;flex-shrink:0;"></div>
+      <div>
+        <div style="color:var(--color-text);font-size:28px;font-weight:500;line-height:34px;">Greg Christensen</div>
+        <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;margin-top:8px;">Host of CMMSradio<br/>30+ Years in Maintenance</div>
+      </div>
+    </div>
+    <div style="align-items:center;background:#000;border-radius:8px;display:flex;height:36px;justify-content:center;width:504px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/7TZ7J46BGX50BV4W9W7CK3BR1F.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:30px;width:160px;"></div>
+    </div>
+  </div>
+
+  <!-- Advisor 3 -->
+  <div class="glass-card" style="left:1272px;top:724px;width:552px;height:224px;padding:24px;position:absolute;display:flex;flex-direction:column;justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:24px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/6CC6X2Y22XPTDR8YFJMXG1BBHK.png);background-position:50%;background-size:cover;border-radius:12px;width:104px;height:128px;flex-shrink:0;"></div>
+      <div>
+        <div style="color:var(--color-text);font-size:28px;font-weight:500;line-height:34px;">Gioni Bianchini</div>
+        <div style="color:var(--color-deck-body);font-size:22px;line-height:30px;margin-top:8px;">Sales Engineering Director<br/>Cadrex Manufacturing</div>
+      </div>
+    </div>
+    <div style="align-items:center;background:#FFF;border-radius:8px;display:flex;height:36px;justify-content:center;width:504px;">
+      <div style="background-image:url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/016A5NRDCPXWR7KTN3TKPJX1V8.png);background-position:50%;background-repeat:no-repeat;background-size:contain;height:30px;width:160px;"></div>
+    </div>
+  </div>
+
+  <div class="footer-row"><div>CARBYN · PEARX PITCH · NOV 2026</div><div>07 / 07</div></div>
+</div></div>
+
+<script>
+function scaleSlides() {
+  const wraps = document.querySelectorAll('.artboard-wrap');
+  wraps.forEach(wrap => {
+    const slide = wrap.querySelector('.slide');
+    if (!slide) return;
+    const scale = wrap.clientWidth / 1920;
+    slide.style.transform = `scale(${scale})`;
+    wrap.style.height = `${1080 * scale}px`;
+  });
+}
+window.addEventListener('resize', scaleSlides);
+window.addEventListener('DOMContentLoaded', scaleSlides);
+scaleSlides();
+</script>
+</body>
+</html>
