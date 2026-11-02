@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02 12:40 PDT",
+  "updated_at": "2026-11-02 12:45 PDT",
   "links": {
     "playbook_doc": "https://docs.google.com/document/d/1Hsl95is01No1m_SWEapIpJ5n106Dd0dQY4niIytDKp0/edit",
     "drive_folder": "https://drive.google.com/drive/folders/1v0g-lKPURaRzO80tWFJSJ4K3TkMfvCBr",
@@ -11,18 +11,18 @@
     "total_raw_leaders": 854,
     "total_verified": 708,
     "enrichment_rate": 82.9,
-    "total_sent": 596,
-    "total_queued": 112,
-    "total_delivered": 591,
-    "deliverability_rate": 99.2,
-    "total_bounced": 5,
+    "total_sent": 597,
+    "total_queued": 111,
+    "total_delivered": 588,
+    "deliverability_rate": 98.5,
+    "total_bounced": 9,
     "total_replied": 4,
     "reply_rate_sent": 0.7,
     "reply_rate_del": 0.7,
-    "total_ooo": 11,
+    "total_ooo": 19,
     "total_meetings": 3,
     "meeting_rate": 0.5,
-    "total_touch2_sent": 28,
+    "total_touch2_sent": 29,
     "total_touch2_target": 28
   },
   "sectors": [
@@ -40,9 +40,9 @@
       "replied": 1,
       "reply_rate_sent": 3.3,
       "reply_rate_del": 3.3,
-      "ooo": 2,
+      "ooo": 6,
       "meetings": 1,
-      "touch2_sent": 28
+      "touch2_sent": 29
     },
     {
       "key": "1. Mechanical / HVAC / Electrical Contractor",
@@ -51,14 +51,14 @@
       "domain": "mep-contractors.carbyn.ai",
       "desc": "Therma, ACCO, CBRE GWS, Devcon, Critchfield, Marelich",
       "verified": 420,
-      "sent": 360,
-      "delivered": 357,
-      "bounced": 3,
-      "queued": 60,
+      "sent": 361,
+      "delivered": 354,
+      "bounced": 7,
+      "queued": 59,
       "replied": 3,
       "reply_rate_sent": 0.8,
       "reply_rate_del": 0.8,
-      "ooo": 6,
+      "ooo": 7,
       "meetings": 2,
       "touch2_sent": 0
     },
@@ -76,7 +76,7 @@
       "replied": 0,
       "reply_rate_sent": 0.0,
       "reply_rate_del": 0.0,
-      "ooo": 0,
+      "ooo": 3,
       "meetings": 0,
       "touch2_sent": 0
     },
@@ -207,8 +207,8 @@
       "cmms": "IBM TRIRIGA",
       "sent": true,
       "sent_date": "2026-10-20",
-      "touch2_sent": false,
-      "touch2_date": "",
+      "touch2_sent": true,
+      "touch2_date": "2026-10-27",
       "stage": "Sent",
       "reply_type": null,
       "reply_date": "",
@@ -256,9 +256,9 @@
       "touch2_sent": true,
       "touch2_date": "2026-10-27",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Tue, 20 Oct 2026",
+      "reply_snippet": "I will be attending a conference through Thursday October 22, with intermittent access to email. For urgent matters please contact the Facilities front office a",
       "meeting_info": null
     },
     {
@@ -486,9 +486,9 @@
       "touch2_sent": true,
       "touch2_date": "2026-10-27",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Tue, 20 Oct 2026",
+      "reply_snippet": "Thank you for your message. I am currently out of the office. For more immediate assistance during regular business hours (Monday\u2013Friday, 8:00 am\u20134:30 pm), plea",
       "meeting_info": null
     },
     {
@@ -579,8 +579,8 @@
       "touch2_date": "",
       "stage": "Meeting Set",
       "reply_type": "Human Reply",
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_date": "Wed, 21 Oct 2026",
+      "reply_snippet": "Yes that still works. Get Outlook for iOS From: JK <jungkeun_hong@berkeley.edu> Sent: Wednesday, 21 October 2026 10:53:42 To: Parker Chase Lucas <pclucas@stanford.edu> Cc: Neo Lee <neo@",
       "meeting_info": {
         "summary": "Parker Chase Lucas (Stanford) <> JK Hong (Carbyn)",
         "start": "2026-10-21 11:30",
@@ -674,9 +674,9 @@
       "touch2_sent": true,
       "touch2_date": "2026-10-27",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Tue, 20 Oct 2026",
+      "reply_snippet": "Hello, I will be out of the office from Monday, 10/12, through Sunday, 10/25, returning to the office on Monday, 10/26. During this time, I will have limited to",
       "meeting_info": null
     },
     {
@@ -789,9 +789,9 @@
       "touch2_sent": true,
       "touch2_date": "2026-10-27",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Tue, 20 Oct 2026",
+      "reply_snippet": "Thank you for writing. I'm out of the office and return on Friday, October 23. I'll be checking email intermittently. Best, JJ -- JJ Thorp thorpj@usfca.edu Faci",
       "meeting_info": null
     },
     {
@@ -1064,10 +1064,10 @@
       "sent_date": "2026-10-26",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Positive Reply",
-      "reply_type": "Human Reply",
-      "reply_date": "Mon, 26 Oct 2026",
-      "reply_snippet": "Hi JK, Do you have availability to come by one of our offices to discuss? We are located in either SF or Pleasanton, please let me know when you could be available and we can set up a meeting with our",
+      "stage": "Sent",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
@@ -1570,10 +1570,10 @@
       "sent_date": "2026-10-23",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "stage": "Bounced",
+      "reply_type": "Bounce",
+      "reply_date": "Fri, 23 Oct 2026",
+      "reply_snippet": "Address not found Your message wasn't delivered to michael.kistler@cbre.com because the address couldn't be found, or is unable to receive mail. The response from the remote server",
       "meeting_info": null
     },
     {
@@ -1919,10 +1919,10 @@
       "sent_date": "2026-10-22",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "stage": "Bounced",
+      "reply_type": "Bounce",
+      "reply_date": "Thu, 22 Oct 2026",
+      "reply_snippet": "Message blocked Your message to shamal.kumar@cushwake.com has been blocked. See technical details below for more information. LEARN MORE This link will take you to a third-party si",
       "meeting_info": null
     },
     {
@@ -2080,10 +2080,10 @@
       "sent_date": "2026-10-26",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "stage": "Bounced",
+      "reply_type": "Bounce",
+      "reply_date": "25 Oct 2026 19:2",
+      "reply_snippet": "The following message to <devinmorell@wndventures.com> was undeliverable. The reason for the problem: 5.1.0 - Unknown address error 550-'5.4.1 Recipient address rejected: Access de",
       "meeting_info": null
     },
     {
@@ -2103,10 +2103,10 @@
       "sent_date": "2026-10-22",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "stage": "Positive Reply",
+      "reply_type": "Human Reply",
+      "reply_date": "Thu, 22 Oct 2026",
+      "reply_snippet": "Let me see if there is broader interest internally and get back to you Thanks, Nate Bowen | MEP Manager DEVCON CONSTRUCTION INCORPORATED 690 Gibraltar Drive Milpitas, CA 95035 Phone: (408) 942-8200",
       "meeting_info": null
     },
     {
@@ -2287,10 +2287,10 @@
       "sent_date": "2026-10-22",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "stage": "Bounced",
+      "reply_type": "Bounce",
+      "reply_date": "Thu, 22 Oct 2026",
+      "reply_snippet": "Delivery has failed to these recipients or groups: jstjohn@equinix.com Your message couldn't be delivered to the recipient because you don't have permission to send to it. Ask the",
       "meeting_info": null
     },
     {
@@ -2633,9 +2633,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Fri, 23 Oct 2026",
+      "reply_snippet": "\ufeff \ufeff Hello and thank you for your message. I am currently out of the office, returning Monday 10/26. For any urgent bid matters or MDC inquiries please contact o",
       "meeting_info": null
     },
     {
@@ -3530,9 +3530,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Thu, 22 Oct 2026",
+      "reply_snippet": "\ufeff I am currently out of the office on PTO with limited access to email and will return Tuesday October 26th. If this is an emergency please contact our Service ",
       "meeting_info": null
     },
     {
@@ -3600,8 +3600,8 @@
       "touch2_date": "",
       "stage": "Meeting Set",
       "reply_type": "Human Reply",
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_date": "Thu, 22 Oct 2026",
+      "reply_snippet": "Yes, that time works. 1601 Las Plumas Ave San Jose, Ca 95133 Therma A LEGENCE Company Mark Goupil VP of Service Operations o: 408.347.3400 c: 408.594.0029 www.therma.com From: JK <jungkeun_hong@",
       "meeting_info": {
         "summary": "Therma (Mark, Doug) <> Carbyn (JK)",
         "start": "2026-10-30 10:30",
@@ -4247,9 +4247,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Fri, 23 Oct 2026",
+      "reply_snippet": "\ufeff I will be out of office until August 31",
       "meeting_info": null
     },
     {
@@ -4408,9 +4408,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Fri, 23 Oct 2026",
+      "reply_snippet": "\ufeffI will be out of office starting on 10/20 and returning on 10/27. I will have access to my email and cell phone periodically during this time so please expect ",
       "meeting_info": null
     },
     {
@@ -4592,9 +4592,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "reply_type": "OOO",
+      "reply_date": "Fri, 23 Oct 2026",
+      "reply_snippet": "I will be out of the office, Please contact Erik Clancy if you have any questions or you need assistance. Erik Ciancy erik.clancy@dole.com cell: 302 602 0815 Do",
       "meeting_info": null
     },
     {
@@ -10843,11 +10843,11 @@
       "linkedin": "https://www.linkedin.com/in/john-hutchins-6862b3b1",
       "berkeley_alum": false,
       "cmms": "CxAlloy / Procore / ACC / CMMS",
-      "sent": false,
-      "sent_date": "",
+      "sent": true,
+      "sent_date": "2026-11-02",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Queued",
+      "stage": "Sent",
       "reply_type": null,
       "reply_date": "",
       "reply_snippet": "",
@@ -15264,9 +15264,9 @@
       "touch2_sent": false,
       "touch2_date": "",
       "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Sun, 1 Nov 2026 ",
-      "reply_snippet": "Hayward Goodwin is no longer with Wisenbaker Builder Services.",
+      "reply_type": null,
+      "reply_date": "",
+      "reply_snippet": "",
       "meeting_info": null
     },
     {
