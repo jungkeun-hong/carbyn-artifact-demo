@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rustic Bakery × Carbyn · Petaluma Operations Introduction (November 2026)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Quantico:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --color-bg: #0B0B0C;
+    --color-surface: #17171A;
+    --color-text: #F4F4F2;
+    --color-muted: #8C8C8A;
+    --color-line: rgb(255 255 255 / 12%);
+    --color-glass: rgb(255 255 255 / 7%);
+    --color-glass-border: rgb(255 255 255 / 16%);
+    --color-paper: #EEEEEE;
+    --color-ink: #0B0B0C;
+    --color-primary: #FFD100;
+    --color-amber: #FF7A1A;
+    --color-red: #E5322D;
+    --color-deck-body: #D3D3D1;
+    --color-deck-white: #FFFFFF;
+    --color-deck-black: #000000;
+    --color-deck-logo-core: #FFCD11;
+    --color-deck-scrim: rgb(11 11 12 / 82%);
+    --color-deck-panel-top: oklab(28.7% 0.002 -0.007 / 82%);
+    --color-deck-panel-bottom: oklab(20.1% 0.001 -0.004 / 90%);
+    --font-deck: 'Helvetica Now Display', 'Helvetica Neue', Helvetica, 'Pretendard', -apple-system, sans-serif;
+    --font-deck-wordmark: 'Quantico', sans-serif;
+    --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #050506;
+    color: var(--color-text);
+    font-family: var(--font-deck);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 36px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .topbar {
+    width: min(1920px, 96vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--color-deck-body);
+  }
+  .topbar a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .topbar a:hover {
+    text-decoration: underline;
+  }
+
+  .artboard-wrap {
+    width: min(1920px, 96vw);
+    position: relative;
+  }
+
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-line);
+    border-radius: 16px;
+    position: relative;
+    overflow: clip;
+    transform-origin: top left;
+  }
+
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+
+  @media print {
+    html, body {
+      width: 1920px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background-color: #0B0B0C !important;
+      gap: 0 !important;
+      display: block !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .topbar {
+      display: none !important;
+    }
+    .artboard-wrap {
+      width: 1920px !important;
+      height: 1080px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      page-break-after: always !important;
+      break-after: page !important;
+    }
+    .artboard-wrap:last-of-type {
+      page-break-after: auto !important;
+      break-after: auto !important;
+    }
+    .slide {
+      transform: none !important;
+      border: none !important;
+      border-radius: 0 !important;
+      width: 1920px !important;
+      height: 1080px !important;
+    }
+  }
+</style>
+
+<style>
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+  body { margin: 0; padding: 0; background: #0B0B0C; }
+  .topbar { display: none !important; }
+  .artboard-wrap { margin: 0 !important; padding: 0 !important; page-break-after: always; break-after: page; width: 1920px !important; height: 1080px !important; }
+  .slide { transform: none !important; width: 1920px !important; height: 1080px !important; }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div>RUSTIC BAKERY × CARBYN · PETALUMA OPERATIONS 5-PAGE DECK (1920×1080)</div>
+  <div>Paper Source: <a href="https://app.paper.design/file/01M4DBM7G6CHWH4ZGFCDCDJZPV/p-O-0" target="_blank">01M4DBM7G6CHWH4ZGFCDCDJZPV / p-O-0</a></div>
+</div>
+<div class="artboard-wrap">
+<div class="slide" id="slide-01" style="width: 1920px; height: 1080px; background-color: var(--color-bg); box-sizing: border-box; display: flex; flex-direction: column; font-family: var(--font-deck); position: relative; overflow: clip;">
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEWNVND870MNJJWF0AVHMF.png); background-position: 50%; background-size: cover; box-sizing: border-box; height: 1080px; left: 0px; opacity: 0.58; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%); box-sizing: border-box; height: 1080px; left: 0px; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="align-items: center; box-sizing: border-box; display: flex; justify-content: space-between; left: 96px; position: absolute; top: 80px; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">RUSTIC BAKERY × CARBYN · PETALUMA OPERATIONS</div>
+        <div style="align-items: baseline; box-sizing: border-box; display: flex; flex-shrink: 0;">
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;">
+            <polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)" />
+            <polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)" />
+          </svg>
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">RBYN</div>
+        </div>
+      </div>
+      <div style="box-sizing: border-box; color: var(--color-text); font-family: var(--font-deck); font-size: 80px; font-weight: 500; left: 96px; letter-spacing: -0.03em; line-height: 88px; position: absolute; top: 204px; width: 1050px;">Faster line changeovers.<br />Hands-free floor SOPs.</div>
+      <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 32px; left: 96px; line-height: 44px; position: absolute; top: 410px; width: 980px;">Built for Rustic Bakery’s 50,000 sq ft Petaluma plant.<br />Two floor-ready tracks for maintenance and line crews:</div>
+      <div style="align-items: center; background-color: var(--color-deck-white); border-radius: 24px; box-sizing: border-box; display: flex; gap: 32px; height: 190px; left: 96px; padding: 16px 32px; position: absolute; top: 615px; width: 980px;">
+        <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/4C7YZ23A0VKB6S8SW6558A7GGN.png); background-position: 50%; background-repeat: no-repeat; background-size: contain; flex-shrink: 0; height: 160px; width: 350px;"></div>
+        <div style="color: var(--color-ink); font-family: var(--font-deck); font-size: 26px; line-height: 36px; font-weight: 500;">META Z87+ SAFETY GLASSES<br />Ovens, sheeters &amp; baggers<br />Hands-free voice + POV capture</div>
+      </div>
+      <div style="align-items: center; background-color: var(--color-surface); border: 1px solid var(--color-glass-border); border-radius: 28px; box-sizing: border-box; display: flex; flex-direction: column; height: 620px; justify-content: center; left: 1220px; padding: 20px; position: absolute; top: 185px; width: 604px;">
+        <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/61STBK8NFJVDM8K5QZFJESM8YG.png); background-position: 50%; background-repeat: no-repeat; background-size: contain; flex-shrink: 0; height: 580px; width: 340px;"></div>
+      </div>
+      <div style="align-items: center; background-color: var(--color-surface); border: 1px solid var(--color-glass-border); border-radius: 24px; box-sizing: border-box; display: flex; height: 96px; justify-content: space-between; left: 96px; padding: 20px 32px; position: absolute; top: 850px; width: 1728px;">
+        <div style="color: var(--color-text); font-size: 32px; line-height: 40px;">01 · Bakery Line Bottlenecks</div>
+        <div style="color: var(--color-primary); font-size: 32px; line-height: 40px;">→</div>
+        <div style="color: var(--color-text); font-size: 32px; line-height: 40px;">02 · Voice Work Orders &amp; EN/ES SOPs</div>
+        <div style="color: var(--color-primary); font-size: 32px; line-height: 40px;">→</div>
+        <div style="color: var(--color-text); font-size: 32px; line-height: 40px;">03 · Petaluma 4-Week Pilot</div>
+      </div>
+      <div style="border-top-color: var(--color-line); border-top-style: solid; border-top-width: 1px; bottom: 64px; box-sizing: border-box; display: flex; font-family: var(--font-deck); justify-content: space-between; left: 96px; padding-top: 16px; position: absolute; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">RUSTIC BAKERY × CARBYN · PETALUMA PRODUCTION FACILITY · NOV 2026</div>
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">01 / 05</div>
+      </div>
+</div>
+</div>
+<div class="artboard-wrap">
+<div class="slide" id="slide-02" style="width: 1920px; height: 1080px; background-color: var(--color-bg); box-sizing: border-box; display: flex; flex-direction: column; font-family: var(--font-deck); position: relative; overflow: clip;">
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEWNVND870MNJJWF0AVHMF.png); background-position: 50%; background-size: cover; box-sizing: border-box; height: 1080px; left: 0px; opacity: 0.58; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%); box-sizing: border-box; height: 1080px; left: 0px; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="align-items: center; box-sizing: border-box; display: flex; justify-content: space-between; left: 96px; position: absolute; top: 80px; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">RUSTIC BAKERY · 3 FLOOR OPERATIONS CHALLENGES</div>
+        <div style="align-items: baseline; box-sizing: border-box; display: flex; flex-shrink: 0;">
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;">
+            <polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)" />
+            <polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)" />
+          </svg>
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">RBYN</div>
+        </div>
+      </div>
+      <div style="color: var(--color-text); font-size: 64px; font-weight: 500; left: 96px; letter-spacing: -0.03em; line-height: 78px; position: absolute; top: 204px; width: 1600px;">Where line uptime and batch consistency get lost.</div>
+      <div style="color: var(--color-deck-body); font-size: 30px; left: 96px; line-height: 37px; position: absolute; top: 306px; width: 1600px;">Across fermented sourdough crackers, flatbreads, and seasonal cookie runs in Petaluma:</div>
+      <div style="position: absolute; left: 96px; top: 388px; width: 1728px; height: 520px; display: flex; gap: 32px; box-sizing: border-box;">
+        <div style="flex: 1; background-image: linear-gradient(in oklab 135deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%); border: 1px solid var(--color-glass-border); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="color: var(--color-primary); font-family: var(--font-mono); font-size: 18px; letter-spacing: 0.08em;">01 · SKU CHANGEOVERS &amp; SETUPS</div>
+            <div style="color: var(--color-text); font-size: 64px; font-weight: 600; line-height: 70px; letter-spacing: -0.03em;">Setup Drift</div>
+            <div style="color: var(--color-text); font-size: 32px; font-weight: 500; line-height: 40px;">Sheeter, oven &amp; packaging setups</div>
+            <div style="color: var(--color-deck-body); font-size: 24px; line-height: 34px;">Switching from sourdough flatbreads to seasonal cookies relies on veteran memory, causing scrap and startup delays.</div>
+          </div>
+          <div style="background-color: var(--color-primary); color: var(--color-ink); font-size: 22px; font-weight: 600; padding: 14px 20px; border-radius: 14px;">With Carbyn → Step-by-step POV setup checklists</div>
+        </div>
+        <div style="flex: 1; background-image: linear-gradient(in oklab 135deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%); border: 1px solid var(--color-glass-border); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="color: var(--color-primary); font-family: var(--font-mono); font-size: 18px; letter-spacing: 0.08em;">02 · UNRECORDED FLOOR REPAIRS</div>
+            <div style="color: var(--color-text); font-size: 64px; font-weight: 600; line-height: 70px; letter-spacing: -0.03em;">Paper Notes</div>
+            <div style="color: var(--color-text); font-size: 32px; font-weight: 500; line-height: 40px;">Missing PM &amp; repair history</div>
+            <div style="color: var(--color-deck-body); font-size: 24px; line-height: 34px;">Techs fix a bagger jam or conveyor bearing on the floor, but root-cause notes and parts never reach the asset log.</div>
+          </div>
+          <div style="background-color: var(--color-surface); border: 1px solid var(--color-glass-border); color: var(--color-text); font-size: 22px; font-weight: 500; padding: 14px 20px; border-radius: 14px;">With Carbyn → Speak on the floor, work order logged</div>
+        </div>
+        <div style="flex: 1; background-image: linear-gradient(in oklab 135deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%); border: 1px solid var(--color-glass-border); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="color: var(--color-primary); font-family: var(--font-mono); font-size: 18px; letter-spacing: 0.08em;">03 · BILINGUAL FLOOR TRAINING</div>
+            <div style="color: var(--color-text); font-size: 64px; font-weight: 600; line-height: 70px; letter-spacing: -0.03em;">EN ↔ ES</div>
+            <div style="color: var(--color-text); font-size: 32px; font-weight: 500; line-height: 40px;">Cross-shift operator onboarding</div>
+            <div style="color: var(--color-deck-body); font-size: 24px; line-height: 34px;">Static binders go unread across shifts. New operators shadow leads for weeks to learn sanitation and QA steps.</div>
+          </div>
+          <div style="background-color: var(--color-surface); border: 1px solid var(--color-glass-border); color: var(--color-text); font-size: 22px; font-weight: 500; padding: 14px 20px; border-radius: 14px;">With Carbyn → 1-take video to English &amp; Spanish SOPs</div>
+        </div>
+      </div>
+      <div style="border-top-color: var(--color-line); border-top-style: solid; border-top-width: 1px; bottom: 64px; box-sizing: border-box; display: flex; font-family: var(--font-deck); justify-content: space-between; left: 96px; padding-top: 16px; position: absolute; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">RUSTIC BAKERY × CARBYN · PETALUMA PRODUCTION FACILITY · NOV 2026</div>
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">02 / 05</div>
+      </div>
+</div>
+</div>
+<div class="artboard-wrap">
+<div class="slide" id="slide-03" style="width: 1920px; height: 1080px; background-color: var(--color-bg); box-sizing: border-box; display: flex; flex-direction: column; font-family: var(--font-deck); position: relative; overflow: clip;">
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEWNVND870MNJJWF0AVHMF.png); background-position: 50%; background-size: cover; box-sizing: border-box; height: 1080px; left: 0px; opacity: 0.58; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%); box-sizing: border-box; height: 1080px; left: 0px; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="align-items: center; box-sizing: border-box; display: flex; justify-content: space-between; left: 96px; position: absolute; top: 80px; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">WORKFLOW 01 · HANDS-FREE MAINTENANCE LOGGING</div>
+        <div style="align-items: baseline; box-sizing: border-box; display: flex; flex-shrink: 0;">
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;">
+            <polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)" />
+            <polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)" />
+          </svg>
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">RBYN</div>
+        </div>
+      </div>
+      <div style="color: var(--color-text); font-size: 64px; font-weight: 500; left: 96px; letter-spacing: -0.03em; line-height: 78px; position: absolute; top: 204px; width: 1728px;">Say it once on the line. Work orders write themselves.</div>
+      <div style="color: var(--color-text); font-size: 38px; left: 96px; line-height: 50px; position: absolute; top: 332px; width: 760px;">“Grease leak on Sheeter Line 2 drive bearing.<br />Create a follow-up work order and request a food-grade seal kit.”</div>
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/5711AQD4XM25H6YC7XVTXKR6CA.webp); background-position: 50%; background-size: cover; border-radius: 24px; box-sizing: border-box; height: 300px; left: 96px; position: absolute; top: 530px; width: 760px;"></div>
+      <div style="color: var(--color-deck-body); font-size: 26px; left: 96px; line-height: 38px; position: absolute; top: 866px; width: 760px;">Voice + photo on the floor → Structured work order → Manager review<br />Zero greasy gloves on keyboards after the shift.</div>
+      <div style="background-color: var(--color-deck-white); border-radius: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px; height: 518px; left: 960px; padding: 32px; position: absolute; top: 332px; width: 864px;">
+        <div style="display: flex; justify-content: space-between;">
+          <div style="color: var(--color-ink); font-size: 22px; line-height: 28px; font-weight: 600;">PETALUMA MAINTENANCE · WO #2487</div>
+          <div style="color: var(--color-ink); font-size: 22px; line-height: 28px;">Ready for review</div>
+        </div>
+        <div style="color: var(--color-ink); font-size: 38px; font-weight: 500; line-height: 46px;">Inspect &amp; replace Sheeter Line 2 drive seal</div>
+        <div style="background-color: var(--color-muted); height: 1px;"></div>
+        <div style="align-items: center; display: flex; gap: 24px;">
+          <div style="color: #000; flex-shrink: 0; font-size: 18px; line-height: 24px; width: 220px;">ASSET</div>
+          <div style="color: #000; font-size: 28px; line-height: 36px;">Petaluma Line 2 · Dough Sheeter S-02</div>
+        </div>
+        <div style="align-items: center; display: flex; gap: 24px;">
+          <div style="color: #000; flex-shrink: 0; font-size: 18px; line-height: 24px; width: 220px;">PARTS REQUESTED</div>
+          <div style="color: #000; font-size: 28px; line-height: 36px;">Food-grade bearing seal kit · Qty 1</div>
+        </div>
+        <div style="align-items: center; display: flex; gap: 24px;">
+          <div style="color: #000; flex-shrink: 0; font-size: 18px; line-height: 24px; width: 220px;">EVIDENCE</div>
+          <div style="color: #000; font-size: 28px; line-height: 36px;">Bearing photo + voice diagnostic note</div>
+        </div>
+        <div style="align-items: center; display: flex; gap: 24px;">
+          <div style="color: #000; flex-shrink: 0; font-size: 18px; line-height: 24px; width: 220px;">NEXT ACTION</div>
+          <div style="color: #000; font-size: 28px; line-height: 36px; font-weight: 500;">Assign to next planned sanitation window</div>
+        </div>
+      </div>
+      <div style="align-items: center; display: flex; gap: 32px; left: 960px; position: absolute; top: 882px; width: 864px;">
+        <div style="color: var(--color-deck-body); font-size: 22px; line-height: 28px;">CMMS WORKFLOW</div>
+        <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/185FD4V36FHT8T00WJ4P2CEHH9.png); background-position: 50%; background-repeat: no-repeat; background-size: contain; height: 30px; width: 184px;"></div>
+        <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/7FGKGRDWW82P54E72SKRNJ03B2.png); background-position: 50%; background-repeat: no-repeat; background-size: 240px; height: 43px; width: 152px;"></div>
+        <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/38HDH8BH5Q1R0V1MXADM6FYDQ9.svg); background-position: 50%; background-repeat: no-repeat; background-size: contain; height: 26px; width: 160px;"></div>
+      </div>
+      <div style="border-top-color: var(--color-line); border-top-style: solid; border-top-width: 1px; bottom: 64px; box-sizing: border-box; display: flex; font-family: var(--font-deck); justify-content: space-between; left: 96px; padding-top: 16px; position: absolute; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">RUSTIC BAKERY × CARBYN · PETALUMA PRODUCTION FACILITY · NOV 2026</div>
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">03 / 05</div>
+      </div>
+</div>
+</div>
+<div class="artboard-wrap">
+<div class="slide" id="slide-04" style="width: 1920px; height: 1080px; background-color: var(--color-bg); box-sizing: border-box; display: flex; flex-direction: column; font-family: var(--font-deck); position: relative; overflow: clip;">
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEWNVND870MNJJWF0AVHMF.png); background-position: 50%; background-size: cover; box-sizing: border-box; height: 1080px; left: 0px; opacity: 0.58; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%); box-sizing: border-box; height: 1080px; left: 0px; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="align-items: center; box-sizing: border-box; display: flex; justify-content: space-between; left: 96px; position: absolute; top: 80px; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">WORKFLOW 02 · CHANGEOVER &amp; SANITATION SOPs</div>
+        <div style="align-items: baseline; box-sizing: border-box; display: flex; flex-shrink: 0;">
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;">
+            <polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)" />
+            <polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)" />
+          </svg>
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">RBYN</div>
+        </div>
+      </div>
+      <div style="color: var(--color-text); font-size: 64px; font-weight: 500; left: 96px; letter-spacing: -0.03em; line-height: 78px; position: absolute; top: 204px; width: 1728px;">Record one changeover. Train every shift in English &amp; Spanish.</div>
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/6PE7016MMDNKQVWYD8QDX1AD5Q.jpg); background-position: 50%; background-size: cover; border-radius: 24px; box-sizing: border-box; height: 526px; left: 96px; position: absolute; top: 332px; width: 980px;"></div>
+      <div style="background-color: var(--color-deck-scrim); border: 1px solid var(--color-glass-border); border-radius: 20px; left: 128px; padding: 24px 28px; position: absolute; top: 710px; width: 916px; box-sizing: border-box;">
+        <div style="color: var(--color-deck-white); font-size: 32px; line-height: 40px;">“Carbyn, walk me through the cookie line changeover.”</div>
+      </div>
+      <div style="border-bottom: 1px solid var(--color-line); display: flex; gap: 24px; left: 1140px; padding-bottom: 28px; position: absolute; top: 332px; width: 684px;">
+        <div style="color: var(--color-primary); flex-shrink: 0; font-size: 28px; line-height: 44px; width: 56px;">01</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="color: var(--color-text); font-size: 36px; font-weight: 500; line-height: 44px;">Capture the best lead once</div>
+          <div style="color: var(--color-deck-body); font-size: 26px; line-height: 36px;">Your lead tech wears glasses during one real sheeter setup, bagger adjustment, or allergen washdown.</div>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid var(--color-line); display: flex; gap: 24px; left: 1140px; padding-bottom: 28px; position: absolute; top: 508px; width: 684px;">
+        <div style="color: var(--color-primary); flex-shrink: 0; font-size: 28px; line-height: 44px; width: 56px;">02</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="color: var(--color-text); font-size: 36px; font-weight: 500; line-height: 44px;">Auto-build bilingual SOPs</div>
+          <div style="color: var(--color-deck-body); font-size: 26px; line-height: 36px;">Carbyn turns the recording into step-by-step visual cards and audio in English and Spanish.</div>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid var(--color-line); display: flex; gap: 24px; left: 1140px; padding-bottom: 28px; position: absolute; top: 684px; width: 684px;">
+        <div style="color: var(--color-primary); flex-shrink: 0; font-size: 28px; line-height: 44px; width: 56px;">03</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="color: var(--color-text); font-size: 36px; font-weight: 500; line-height: 44px;">Guided execution at the machine</div>
+          <div style="color: var(--color-deck-body); font-size: 26px; line-height: 36px;">Operators verify preflight settings hands-free by voice or tablet right next to the line.</div>
+        </div>
+      </div>
+      <div style="align-items: center; display: flex; justify-content: space-between; left: 96px; position: absolute; top: 886px; width: 1728px;">
+        <div style="color: var(--color-deck-body); font-size: 26px; line-height: 34px;">Consistent setups across all shifts.</div>
+        <div style="color: var(--color-deck-body); font-size: 26px; line-height: 34px;">1 Capture → Review → English &amp; Spanish SOP</div>
+      </div>
+      <div style="border-top-color: var(--color-line); border-top-style: solid; border-top-width: 1px; bottom: 64px; box-sizing: border-box; display: flex; font-family: var(--font-deck); justify-content: space-between; left: 96px; padding-top: 16px; position: absolute; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">RUSTIC BAKERY × CARBYN · PETALUMA PRODUCTION FACILITY · NOV 2026</div>
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">04 / 05</div>
+      </div>
+</div>
+</div>
+<div class="artboard-wrap">
+<div class="slide" id="slide-05" style="width: 1920px; height: 1080px; background-color: var(--color-bg); box-sizing: border-box; display: flex; flex-direction: column; font-family: var(--font-deck); position: relative; overflow: clip;">
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/01M4DEMMNDGGZ4MN67ANH66T5Z.png); background-position: 50%; background-size: cover; box-sizing: border-box; height: 1080px; left: 0px; opacity: 0.72; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="background-image: linear-gradient(in oklab 90deg, var(--color-bg) 0%, var(--color-deck-scrim) 54%, #00000000 100%); box-sizing: border-box; height: 1080px; left: 0px; position: absolute; top: 0px; width: 1920px;"></div>
+      <div style="align-items: center; box-sizing: border-box; display: flex; justify-content: space-between; left: 96px; position: absolute; top: 80px; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; font-weight: 500; letter-spacing: 0.08em; line-height: 22px;">PROPOSED NEXT STEP · PETALUMA LINE PILOT</div>
+        <div style="align-items: baseline; box-sizing: border-box; display: flex; flex-shrink: 0;">
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">C</div>
+          <svg width="29" height="29" viewBox="0 0 134.8 133.4" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; flex-shrink: 0;">
+            <polygon points="67.4 0 0 133.4 32.8 133.4 67.4 64.9 101.8 133.4 134.8 133.4" fill="var(--color-deck-white)" />
+            <polygon points="67.5 81.9 48.5 120.2 86.4 120.2" fill="var(--color-deck-logo-core)" />
+          </svg>
+          <div style="box-sizing: border-box; color: var(--color-deck-white); font-family: var(--font-deck-wordmark); font-size: 42px; font-weight: 700; letter-spacing: -0.06em; line-height: 42px;">RBYN</div>
+        </div>
+      </div>
+      <div style="color: var(--color-text); font-size: 64px; font-weight: 500; left: 96px; letter-spacing: -0.03em; line-height: 78px; position: absolute; top: 204px; width: 1600px;">4-week floor pilot on 1 priority line in Petaluma.</div>
+      <div style="color: var(--color-primary); font-size: 24px; font-weight: 600; left: 96px; line-height: 29px; position: absolute; top: 436px; width: 64px;">01</div>
+      <div style="color: var(--color-text); font-size: 38px; font-weight: 500; left: 184px; line-height: 48px; position: absolute; top: 432px; width: 1200px;">Scope: Pick 1 target line (sheeter, oven, or packaging) + 3–5 core changeover &amp; PM SOPs.</div>
+      <div style="color: var(--color-primary); font-size: 24px; font-weight: 600; left: 96px; line-height: 29px; position: absolute; top: 588px; width: 64px;">02</div>
+      <div style="color: var(--color-text); font-size: 38px; font-weight: 500; left: 184px; line-height: 48px; position: absolute; top: 584px; width: 1200px;">Hardware: 2 Meta Z87+ safety glasses + shared line iPad/mobile app (zero IT lift).</div>
+      <div style="color: var(--color-primary); font-size: 24px; font-weight: 600; left: 96px; line-height: 29px; position: absolute; top: 740px; width: 64px;">03</div>
+      <div style="color: var(--color-text); font-size: 38px; font-weight: 500; left: 184px; line-height: 48px; position: absolute; top: 736px; width: 1200px;">Success KPIs: Changeover time, first-pass batch yield, and bilingual operator ramp speed.</div>
+      <div style="background-image: linear-gradient(in oklab 135deg, var(--color-deck-panel-top) 0%, var(--color-deck-panel-bottom) 100%); border: 1px solid var(--color-glass-border); border-radius: 24px; height: 408px; left: 1456px; position: absolute; top: 436px; width: 368px;"></div>
+      <div style="background-image: url(https://app.paper.design/file-assets/01M4DBM7G6CHWH4ZGFCDCDJZPV/53NHJWC3X8T5HBPH0XVTKW12ET.png); background-position: 50%; background-repeat: no-repeat; background-size: contain; height: 288px; left: 1496px; position: absolute; top: 476px; width: 288px;"></div>
+      <div style="color: var(--color-text); font-size: 28px; font-weight: 500; left: 1496px; line-height: 34px; position: absolute; top: 788px; width: 288px;">carbyn.ai</div>
+      <div style="color: var(--color-deck-body); font-size: 28px; left: 96px; line-height: 40px; position: absolute; top: 896px; width: 1728px;">jungkeun@carbyn.ai</div>
+      <div style="border-top-color: var(--color-line); border-top-style: solid; border-top-width: 1px; bottom: 64px; box-sizing: border-box; display: flex; font-family: var(--font-deck); justify-content: space-between; left: 96px; padding-top: 16px; position: absolute; width: 1728px;">
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">RUSTIC BAKERY × CARBYN · PETALUMA PRODUCTION FACILITY · NOV 2026</div>
+        <div style="box-sizing: border-box; color: var(--color-deck-body); font-family: var(--font-deck); font-size: 18px; line-height: 22px;">05 / 05</div>
+      </div>
+</div>
+</div>
+<script>
+  function fitArtboards() {
+    if (window.matchMedia('print').matches) return;
+    document.querySelectorAll('.artboard-wrap').forEach(wrap => {
+      const box = wrap.firstElementChild;
+      if (!box) return;
+      const scale = Math.min(1, wrap.clientWidth / 1920);
+      box.style.transform = `scale(${scale})`;
+      wrap.style.height = (box.offsetHeight * scale) + 'px';
+    });
+  }
+  window.addEventListener('resize', fitArtboards);
+  window.addEventListener('DOMContentLoaded', fitArtboards);
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('.artboard-wrap').forEach(wrap => {
+      const box = wrap.firstElementChild;
+      if (box) box.style.transform = 'none';
+      wrap.style.height = '1080px';
+    });
+  });
+  fitArtboards();
+</script>
+</body>
+</html>
