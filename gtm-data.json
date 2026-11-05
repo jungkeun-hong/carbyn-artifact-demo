@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04 11:31 PDT",
+  "updated_at": "2026-11-05 11:12 PDT",
   "links": {
     "playbook_doc": "https://docs.google.com/document/d/1Hsl95is01No1m_SWEapIpJ5n106Dd0dQY4niIytDKp0/edit",
     "drive_folder": "https://drive.google.com/drive/folders/1v0g-lKPURaRzO80tWFJSJ4K3TkMfvCBr",
@@ -16,13 +16,13 @@
     "total_delivered": 704,
     "deliverability_rate": 98.6,
     "total_bounced": 10,
-    "total_replied": 9,
-    "reply_rate_sent": 1.3,
-    "reply_rate_del": 1.3,
-    "total_ooo": 27,
+    "total_replied": 12,
+    "reply_rate_sent": 1.7,
+    "reply_rate_del": 1.7,
+    "total_ooo": 26,
     "total_meetings": 6,
     "meeting_rate": 0.9,
-    "total_touch2_sent": 27,
+    "total_touch2_sent": 25,
     "total_touch2_target": 28
   },
   "sectors": [
@@ -37,12 +37,12 @@
       "delivered": 29,
       "bounced": 0,
       "queued": 0,
-      "replied": 2,
-      "reply_rate_sent": 6.9,
-      "reply_rate_del": 6.9,
-      "ooo": 8,
+      "replied": 4,
+      "reply_rate_sent": 13.8,
+      "reply_rate_del": 13.8,
+      "ooo": 7,
       "meetings": 1,
-      "touch2_sent": 27
+      "touch2_sent": 25
     },
     {
       "key": "1. Mechanical / HVAC / Electrical Contractor",
@@ -91,9 +91,9 @@
       "delivered": 156,
       "bounced": 1,
       "queued": 0,
-      "replied": 0,
-      "reply_rate_sent": 0.0,
-      "reply_rate_del": 0.0,
+      "replied": 1,
+      "reply_rate_sent": 0.6,
+      "reply_rate_del": 0.6,
       "ooo": 4,
       "meetings": 0,
       "touch2_sent": 0
@@ -529,12 +529,12 @@
       "cmms": "SSUFixit (vendor unknown)",
       "sent": true,
       "sent_date": "2026-10-20",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "touch2_sent": false,
+      "touch2_date": "",
+      "stage": "Positive Reply",
+      "reply_type": "Human Reply",
+      "reply_date": "Wed, 4 Nov 2026 ",
+      "reply_snippet": "Hi. I believe I have written back already that we were not interested. Thank you. Nicole Hendry Director of Facilities Operations Sonoma State University 1801 East Cotati Avenue Rohnert Park, CA 94928",
       "meeting_info": null
     },
     {
@@ -648,12 +648,12 @@
       "cmms": "CruzFix, powered by FAMIS 360",
       "sent": true,
       "sent_date": "2026-10-20",
-      "touch2_sent": true,
-      "touch2_date": "2026-10-27",
-      "stage": "Sent",
-      "reply_type": "OOO",
-      "reply_date": "Tue, 20 Oct 2026",
-      "reply_snippet": "Hello, I will be out of the office from Monday, 10/12, through Sunday, 10/25, returning to the office on Monday, 10/26. During this time, I will have limited to",
+      "touch2_sent": false,
+      "touch2_date": "",
+      "stage": "Positive Reply",
+      "reply_type": "Human Reply",
+      "reply_date": "Thu, 5 Nov 2026 ",
+      "reply_snippet": "Hi JK, Thanks for reaching out. This is not a priority for me or my teams at this time. Thank you, Marc Sent from my iPhone On Nov 5, 2026, at 09:21, Jungkeun Hong <jungkeun_hong@berkeley.edu>",
       "meeting_info": null
     },
     {
@@ -1043,8 +1043,8 @@
       "touch2_date": "",
       "stage": "Positive Reply",
       "reply_type": "Human Reply",
-      "reply_date": "Mon, 2 Nov 2026 ",
-      "reply_snippet": "Hi, what is your availability the week of the 16th? Apologies, I have commitments and meetings the next few weeks and will be in and out of the office. Thanks, ",
+      "reply_date": "Thu, 5 Nov 2026 ",
+      "reply_snippet": "Hi, I'm unfortunately not available Thanksgiving week. How about the week of the 30th? Thanks, Marcia Marcia Lane | Project Manager, Facility Services | ACCO Engineered Systems Professional",
       "meeting_info": null
     },
     {
@@ -8812,10 +8812,10 @@
       "sent_date": "2026-10-28",
       "touch2_sent": false,
       "touch2_date": "",
-      "stage": "Sent",
-      "reply_type": null,
-      "reply_date": "",
-      "reply_snippet": "",
+      "stage": "Positive Reply",
+      "reply_type": "Human Reply",
+      "reply_date": "Wed, 4 Nov 2026 ",
+      "reply_snippet": "I'm the business development manager here, and we do not have operations in CA, but do in Texas. Are you interested in pursuing something in texas? Marcus XRI_RunsOnWater-f.png Marcus Cole Director",
       "meeting_info": null
     },
     {
